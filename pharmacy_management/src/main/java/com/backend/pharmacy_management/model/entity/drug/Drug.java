@@ -34,6 +34,8 @@ public class Drug {
     private String unit;
     @Column(name = "conversion_unit")
     private String conversionUnit;
+    @Column(name = "conversion_rate")
+    private Integer conversionRate;
     @Column(name = "wholesale_profit_rate")
     private Double wholesaleProfitRate;
     @Column(name = "retail_profit_rate")
@@ -44,7 +46,7 @@ public class Drug {
     private String drugSideEffect;
     private Boolean flag = true;
     @ManyToOne
-    @JoinColumn(name = "drug_group_id", referencedColumnName = "drug_group_id")
+    @JoinColumn(name = "drug_group_id")
     private DrugGroup drugGroup;
     @OneToMany(mappedBy = "drug")
     private List<DrugImageDetail> drugImageDetails;
