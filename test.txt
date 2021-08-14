@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Hello a Tâm TÂM
+=======
+asdasdasdasd
+>>>>>>> origin/management-report
