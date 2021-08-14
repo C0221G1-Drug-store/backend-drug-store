@@ -54,6 +54,5 @@ public class Drug {
     private List<DrugOfBill> drugOfBills;
     @OneToMany(mappedBy = "drug")
     private List<Indicative> indicatives;
-    @OneToMany(mappedBy = "drug")
-    private List<ExportBillDetail> exportBillDetails;
+
 }
