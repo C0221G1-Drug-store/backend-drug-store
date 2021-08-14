@@ -13,11 +13,11 @@ import java.util.List;
 @RequestMapping("/report")
 @CrossOrigin(origins = "http://localhost:4200/")
 public class ImportBillController {
-//    @Autowired
-//    IDetailReportService service;
-//    @GetMapping("/import-details/{startDate}/{endDate}")
-//    public ResponseEntity<List<DetailReportDto>> reportImportDetails(@PathVariable String startDate, @PathVariable String endDate) {
-//        List<DetailReportDto> reportImportDetailsList = service.reportImportDetails(startDate, endDate);
-//        return new ResponseEntity<List<DetailReportDto>>(reportImportDetailsList, HttpStatus.OK);
-//    }
+    @Autowired
+    IDetailReportService service;
+    @GetMapping("/import-details/{startDate}/{endDate}")
+    public ResponseEntity<List<DetailReportDto>> reportImportDetails(@PathVariable String startDate, @PathVariable String endDate) {
+        List<DetailReportDto> reportImportDetailsList = service.reportImportDetails(startDate, endDate);
+        return new ResponseEntity<List<DetailReportDto>>(reportImportDetailsList, HttpStatus.OK);
+    }
 }
