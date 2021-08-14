@@ -28,6 +28,7 @@ public class User {
     private String encrytedPassword;
     @Column(name = "enabled")
     private String enabled;
-//    @OneToMany(mappedBy = "user")
-//    private List<UserRole> userRoleList;
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<UserRole> userRoleList;
 }

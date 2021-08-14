@@ -23,8 +23,8 @@ public class Manufacturer {
     private String manufacturerAddress;
     private String manufacturerEmail;
     private String manufacturerPhoneNumber;
-    private String manufacturerDebts;
-    private Integer manufacturerNote ;
+    private Double manufacturerDebts;
+    private String manufacturerNote ;
     @OneToMany(mappedBy = "manufacturer")
     @JsonBackReference
     private List<ImportBill> importBills;
