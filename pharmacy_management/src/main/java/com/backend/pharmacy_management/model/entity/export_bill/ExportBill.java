@@ -23,7 +23,7 @@ public class ExportBill {
     private String exportBillIdDate;
     private String exportBillReason;
     private String exportBillIdAddress;
-    private boolean flag;
+    private Boolean flag=true;
     @ManyToOne
     @JoinColumn(name = "export_bill_type_id")
     private ExportBillType exportBillType;
