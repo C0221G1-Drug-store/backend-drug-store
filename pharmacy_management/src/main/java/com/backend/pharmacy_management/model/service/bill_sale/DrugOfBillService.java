@@ -1,7 +1,7 @@
-package com.backend.pharmacy_management.model.service;
+package com.backend.pharmacy_management.model.service.bill_sale;
 
 import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
-import com.backend.pharmacy_management.model.repository.IDrugOfBillRepository;
+import com.backend.pharmacy_management.model.repository.bill_sale.IDrugOfBillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
