@@ -6,5 +6,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ExportBillRepository extends JpaRepository<ExportBill, Long> {
+public interface ExportBillRepository extends PagingAndSortingRepository<ExportBill, Long> {
 }
