@@ -1,4 +1,4 @@
-package com.backend.pharmacy_management.model.repository;
+package com.backend.pharmacy_management.model.repository.bill_sale;
 
 import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -28,6 +28,7 @@ public class BillSale {
     private String invoiceDate;
     private String billSaleNote;
     private String billSaleType;
+    private Boolean flag = true;
     private double totalMoney;
     @ManyToOne
     @JoinColumn(name = "employee_id",nullable = false)
