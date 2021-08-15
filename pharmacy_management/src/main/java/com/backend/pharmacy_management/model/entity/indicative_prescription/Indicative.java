@@ -20,7 +20,7 @@ public class Indicative {
     private  Long totalPill;
     private  Long drinkDay;
     private  Long drinkTime;
-    private  Long amountPill;
+//    private  Long amountPill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
     @JsonManagedReference
