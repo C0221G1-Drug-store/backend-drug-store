@@ -28,17 +28,17 @@ public class ImportBill {
     private Boolean flag = true;
     @OneToOne
     @JoinColumn(name = "payment_id")
-    @JsonManagedReference
+
     private  Payment payment;
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
-    @JsonManagedReference
+
     private Manufacturer manufacturer;
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    @JsonManagedReference
+
     private Employee employee;
     @OneToMany(mappedBy = "importBill",fetch = FetchType.LAZY)
-    @JsonBackReference
+
     private List<ImportBillDrug> importBillDrugs;
 }

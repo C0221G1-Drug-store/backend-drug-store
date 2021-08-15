@@ -23,7 +23,7 @@ public class Prescription {
     private String object;     // đối tượng uống thuốc
     private int numberOfDay;  // số ngày uống
     private  String note;  //  ghi chú
-    @JsonBackReference
+
     @OneToMany(targetEntity = PrescriptionIndicative.class)
     private List<PrescriptionIndicative> prescriptionIndicatives;
 }

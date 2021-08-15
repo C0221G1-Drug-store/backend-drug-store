@@ -23,6 +23,6 @@ public class Indicative {
     private  Long amountPill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
-    @JsonManagedReference
+
     private Drug drug;
 }

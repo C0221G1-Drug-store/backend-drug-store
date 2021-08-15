@@ -23,11 +23,12 @@ public class Manufacturer {
     private String manufacturerAddress;
     private String manufacturerEmail;
     private String manufacturerPhoneNumber;
-    private String manufacturerDebts;
-    private Integer manufacturerNote ;
+    private double manufacturerDebts;
+    private String manufacturerNote ;
     @OneToMany(mappedBy = "manufacturer")
-    @JsonBackReference
     private List<ImportBill> importBills;
     @OneToMany(mappedBy = "manufacturer")
     private List<ExportBill> exportBills;
+
+
 }

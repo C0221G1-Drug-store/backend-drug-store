@@ -29,10 +29,10 @@ public class ImportBillDrug {
     Integer vat;
     @ManyToOne
     @JoinColumn(name = "import_bill_id")
-    @JsonManagedReference
+
     ImportBill importBill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
-    @JsonManagedReference
+
     Drug drug;
 }
