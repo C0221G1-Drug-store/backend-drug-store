@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DrugService implements IDugService{
+public class DrugService implements IDrugService {
     @Autowired
     private IDrugRepository iDrugRepository;
     @Override
