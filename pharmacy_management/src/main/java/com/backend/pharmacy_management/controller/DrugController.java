@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/drugs")
+@RequestMapping("/drug")
 public class DrugController {
     @Autowired
     private IDugService dugService;
