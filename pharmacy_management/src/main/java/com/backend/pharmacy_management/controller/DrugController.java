@@ -8,24 +8,30 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/drug")
 public class DrugController {
     @Autowired
     private IDugService dugService;
     @GetMapping
-    public ResponseEntity<Page<Drug>> finAllDrugs(@PageableDefault(value = 3) Pageable pageable) {
-        Page<Drug> drugs = (Page<Drug>) dugService.findAllDrugs(pageable);
-        if (drugs.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(drugs, HttpStatus.OK);
+//    public ResponseEntity<Page<Drug>> finAllDrugs(@PageableDefault(value = 3) Pageable pageable) {
+//        Page<Drug> drugs = (Page<Drug>) dugService.findAllDrugs(pageable);
+//        if (drugs.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(drugs, HttpStatus.OK);
+//    }
+    public Iterable<Drug> finAllDrugs() {
+        Iterable<Drug> drugs = (Iterable<Drug>)  dugService.findAll();
+
+        return drugs;
     }
 }
   

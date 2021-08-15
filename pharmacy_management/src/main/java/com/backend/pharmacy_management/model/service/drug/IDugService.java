@@ -6,4 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface IDugService {
     Page<Drug> findAllDrugs(Pageable pageable);
+    Iterable<Drug> findAll();
 }

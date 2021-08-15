@@ -15,4 +15,9 @@ public class DrugService implements IDugService{
     public Page<Drug> findAllDrugs(Pageable pageable) {
         return iDrugRepository.findAllDrugs(pageable);
     }
+
+    @Override
+    public Iterable<Drug> findAll() {
+        return iDrugRepository.findAll();
+    }
 }

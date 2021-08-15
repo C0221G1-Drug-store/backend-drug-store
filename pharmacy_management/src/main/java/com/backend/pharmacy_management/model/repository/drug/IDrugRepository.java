@@ -11,4 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface IDrugRepository extends PagingAndSortingRepository<Drug, Long> {
     @Query(value = "select d from Drug d where d.flag = true", nativeQuery = false)
     Page<Drug> findAllDrugs(Pageable pageable);
+
+    @Query(value = "select d from Drug d where d.flag = true", nativeQuery = false)
+    Iterable<Drug> findAll();
 }
