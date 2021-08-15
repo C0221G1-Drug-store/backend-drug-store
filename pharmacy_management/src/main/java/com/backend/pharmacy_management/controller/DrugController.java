@@ -8,10 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
@@ -19,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DrugController {
     @Autowired
     private IDrugService drugService;
-    @GetMapping
+//    @GetMapping
 //    public ResponseEntity<Page<Drug>> finAllDrugs(@PageableDefault(value = 3) Pageable pageable) {
 //        Page<Drug> drugs = (Page<Drug>) drugService.findAllDrugs(pageable);
 //        if (drugs.isEmpty()) {
@@ -27,12 +24,16 @@ public class DrugController {
 //        }
 //        return new ResponseEntity<>(drugs, HttpStatus.OK);
 //    }
-    public ResponseEntity<Page<Drug>> finAllDrugs(@PageableDefault(value = 3) Pageable pageable) {
+//    public ResponseEntity<Page<Drug>> finAllDrugs(@PageableDefault(value = 3) Pageable pageable) {
 //        Page<Drug> drugs = (Page<Drug>) drugService.findAllDrugs(pageable);
 //        if (drugs.isEmpty()) {
 //            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //        }
 //        return new ResponseEntity<>(drugs, HttpStatus.OK);
 //    }
+    @PostMapping
+    public ResponseEntity<Drug> saveDrug(@RequestBody Drug drug){
+        return new ResponseEntity<>(drugService.saveDrug(drug),HttpStatus.CREATED);
+    }
 }
   

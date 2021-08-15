@@ -20,4 +20,9 @@ public class DrugService implements IDrugService {
     public Iterable<Drug> findAll() {
         return iDrugRepository.findAll();
     }
+
+    @Override
+    public Drug saveDrug(Drug drug) {
+        return iDrugRepository.save(drug);
+    }
 }
