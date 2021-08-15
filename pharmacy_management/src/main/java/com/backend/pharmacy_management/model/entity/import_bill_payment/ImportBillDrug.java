@@ -27,6 +27,7 @@ public class ImportBillDrug {
     Integer lotNumber ;
     Date expiry ;
     Integer vat;
+    Boolean flag ;
     @ManyToOne
     @JoinColumn(name = "import_bill_id")
     @JsonManagedReference

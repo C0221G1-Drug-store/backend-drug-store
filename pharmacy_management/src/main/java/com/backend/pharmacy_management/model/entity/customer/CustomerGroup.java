@@ -1,5 +1,6 @@
 package com.backend.pharmacy_management.model.entity.customer;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,6 @@ public class CustomerGroup {
     private int id;
     private String name;
     @OneToMany(mappedBy = "customers")
+    @JsonBackReference
     private List<Customer> customers;
 }

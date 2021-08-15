@@ -20,5 +20,6 @@ public class ExportBillType {
     private Long exportBillTypeId;
     private String exportBillTypeName;
     @OneToMany(mappedBy = "exportBillType")
+    @JsonBackReference
     private Set<ExportBill> exportBills;
 }

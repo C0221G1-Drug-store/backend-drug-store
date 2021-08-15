@@ -26,13 +26,17 @@ public class ExportBill {
     private boolean flag;
     @ManyToOne
     @JoinColumn(name = "export_bill_type_id")
+    @JsonManagedReference
     private ExportBillType exportBillType;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
+    @JsonManagedReference
     private Employee employee;
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
+    @JsonManagedReference
     private Manufacturer manufacturer;
     @OneToMany(mappedBy = "exportBill")
+    @JsonBackReference
     private Set<ExportBillDetail> exportBillDetails;
 }
