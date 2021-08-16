@@ -42,6 +42,9 @@ public class Drug {
     private Double retailProfitRate;
     @Column(name = "drug_faculty", columnDefinition = "TEXT")
     private String drugFaculty;
+    private String manufacturer;
+    private String origin;
+    private String note;
     @Column(name = "drug_side_effect", columnDefinition = "TEXT")
     private String drugSideEffect;
     private Boolean flag = true;
