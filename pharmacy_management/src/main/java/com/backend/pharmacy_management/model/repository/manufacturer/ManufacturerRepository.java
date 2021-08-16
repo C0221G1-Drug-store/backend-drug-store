@@ -1,11 +1,14 @@
 package com.backend.pharmacy_management.model.repository.manufacturer;
 
+import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ManufacturerRepository extends PagingAndSortingRepository<Manufacturer, Integer> {
@@ -27,8 +30,8 @@ public interface ManufacturerRepository extends PagingAndSortingRepository<Manuf
     @Query(value = "select * from manufacturer where manufacturer_phone_number like %?1%", nativeQuery = true)
     Page<Manufacturer> findByManufacturerPhoneNumber(String phoneNumber, Pageable pageable);
 
-        @Query(value="select * from manufacturer where manufacturer_id = ?1",nativeQuery=true)
-   Manufacturer findByManufacturerId( Integer id);
+    @Query(value="select * from manufacturer where manufacturer_id = ?1",nativeQuery=true)
+    Manufacturer findByManufacturerId( Integer id);
     @Query(value = "select * from manufacturer order by manufacturer_name", nativeQuery = true)
     Page<Manufacturer> findAllSortName(Pageable pageable);
     @Query(value = "select * from manufacturer order by manufacturer_code", nativeQuery = true)
@@ -39,6 +42,5 @@ public interface ManufacturerRepository extends PagingAndSortingRepository<Manuf
     Page<Manufacturer> findAllSortNote(Pageable pageable);
     @Query(value = "select * from manufacturer order by manufacturer_phone_number", nativeQuery = true)
     Page<Manufacturer> findAllSortPhoneNumber(Pageable pageable);
-
 
 }

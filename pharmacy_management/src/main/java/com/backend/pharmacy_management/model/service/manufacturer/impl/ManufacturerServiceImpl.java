@@ -1,6 +1,8 @@
 package com.backend.pharmacy_management.model.service.manufacturer.impl;
 
+import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
+import com.backend.pharmacy_management.model.repository.manufacturer.ImportBillRepository;
 import com.backend.pharmacy_management.model.repository.manufacturer.ManufacturerRepository;
 import com.backend.pharmacy_management.model.service.manufacturer.IManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +10,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ManufacturerServiceImpl implements IManufacturerService {
     @Autowired
     ManufacturerRepository manufacturerRepository;
-
+    @Autowired
+    ImportBillRepository importBillRepository;
     @Override
     public Page<Manufacturer> findAllManufacturer(Pageable pageable) {
         return manufacturerRepository.findAllManufacturer(pageable);
@@ -84,4 +89,10 @@ public class ManufacturerServiceImpl implements IManufacturerService {
     public Page<Manufacturer> findAllSortPhoneNumber(Pageable pageable) {
         return manufacturerRepository.findAllSortPhoneNumber(pageable);
     }
+
+    @Override
+    public Page<ImportBill> findByIdManufacturer(Integer id,Pageable pageable) {
+        return importBillRepository.findAllByImportBill(id,pageable);
+    }
+
 }

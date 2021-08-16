@@ -26,7 +26,9 @@ public class Manufacturer {
     private double manufacturerDebts;
     private String manufacturerNote ;
     @OneToMany(mappedBy = "manufacturer")
+    @JsonBackReference
     private List<ImportBill> importBills;
+
     @OneToMany(mappedBy = "manufacturer")
     private List<ExportBill> exportBills;
 

@@ -1,5 +1,6 @@
 package com.backend.pharmacy_management.controller;
 
+import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.backend.pharmacy_management.model.service.manufacturer.IManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -104,6 +106,12 @@ public class ManufacturerController {
     }
     @GetMapping(value = "/show")
     public ResponseEntity<Manufacturer> showManufacturer(@RequestParam Integer id){
+
         return new ResponseEntity<>(iManufacturerService.findByManufacturerId(id), HttpStatus.OK);
     }
+    @GetMapping(value = "/shows")
+    public ResponseEntity<Page<ImportBill>> showImportBillIdManufacturer(@RequestParam Integer id,@RequestParam Integer page){
+        return new ResponseEntity<>(iManufacturerService.findByIdManufacturer(id,PageRequest.of(page,2)), HttpStatus.OK);
+    }
+
 }

@@ -1,8 +1,10 @@
 package com.backend.pharmacy_management.model.service.manufacturer;
-
+import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface IManufacturerService {
     Page<Manufacturer> findAllManufacturer(Pageable pageable);
@@ -24,4 +26,6 @@ public interface IManufacturerService {
     Page<Manufacturer> findAllSortNote(Pageable pageable);
 
     Page<Manufacturer> findAllSortPhoneNumber(Pageable pageable);
+    Page<ImportBill> findByIdManufacturer(Integer id,Pageable pageable);
+
 }

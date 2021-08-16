@@ -21,14 +21,13 @@ import java.util.List;
 public class ImportBill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long importBillId;
+    private Integer importBillId;
     private String importSystemCode;
     private String accountingVoucher;
     private LocalDateTime invoiceDate;
     private Boolean flag = true;
     @OneToOne
     @JoinColumn(name = "payment_id")
-
     private  Payment payment;
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
