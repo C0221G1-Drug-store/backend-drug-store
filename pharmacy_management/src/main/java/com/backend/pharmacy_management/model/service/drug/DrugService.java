@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DrugService implements IDrugService {
@@ -37,5 +38,15 @@ public class DrugService implements IDrugService {
     @Override
     public Drug saveDrug(Drug drug) {
         return iDrugRepository.save(drug);
+    }
+
+  
+   public void deleteDrugById(Long id) {
+        iDrugRepository.deleteDrugById(id);
+    }
+
+    @Override
+    public DrugDTO findDrugById(Long id) {
+        return iDrugRepository.findDrugById(id);
     }
 }

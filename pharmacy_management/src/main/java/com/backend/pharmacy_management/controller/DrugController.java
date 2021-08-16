@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 
 @CrossOrigin
@@ -46,6 +47,23 @@ public class DrugController {
         BeanUtils.copyProperties(drugDtoTuan,drug);
         drug.setDrugCode ((long) Math.floor(Math.random()*1000000));
         return new ResponseEntity<>(drugService.saveDrug(drug), HttpStatus.CREATED);
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<DrugDTO> deleteById(@PathVariable Long id) {
+        DrugDTO drug = drugService.findDrugById(id);
+        if (drug == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        drugService.deleteDrugById(id);
+        return new ResponseEntity<DrugDTO>(drug, HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<DrugDTO> findById(@PathVariable Long id) {
+        DrugDTO drugDTO = drugService.findDrugById(id);
+        if (drugDTO == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<DrugDTO>(drugDTO, HttpStatus.OK);
     }
 }
   
