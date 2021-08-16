@@ -21,9 +21,18 @@ public class PrescriptionController {
     private IPrescriptionService iPrescriptionService;
 
 
+//    @GetMapping(value = "prescription-list")
+//    public ResponseEntity<Page<Prescription>> showList(@RequestParam Integer page) {
+//        Page<Prescription> prescriptionList =  iPrescriptionService.getAllPrescriptionList(PageRequest.of(page,2));
+//        if (prescriptionList.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(prescriptionList, HttpStatus.OK);
+//    }
+
     @GetMapping(value = "prescription-list")
-    public ResponseEntity<Page<Prescription>> showList(@RequestParam Integer page) {
-        Page<Prescription> prescriptionList =  iPrescriptionService.getAllPrescriptionList(PageRequest.of(page,2));
+    public ResponseEntity<List<Prescription>> showList() {
+        List<Prescription> prescriptionList = (List<Prescription>) iPrescriptionService.findAll();
         if (prescriptionList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -48,7 +57,7 @@ public class PrescriptionController {
         return new ResponseEntity<>(prescriptionOptional.get(), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/prescription-create")
     public ResponseEntity savePrescription(@RequestBody Prescription prescription) {
         return new ResponseEntity<>(iPrescriptionService.save(prescription), HttpStatus.CREATED);
     }
@@ -60,7 +69,7 @@ public class PrescriptionController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 //        product.setId(productOptional.get().getId());
-        prescription.setPrescriptionId(prescriptionOptional.get().getPrescriptionId());
+//        prescription.setPrescriptionId(prescriptionOptional.get().getPrescriptionId());
         return new ResponseEntity<>(iPrescriptionService.save(prescription), HttpStatus.OK);
     }
 

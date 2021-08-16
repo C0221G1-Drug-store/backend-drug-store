@@ -1,18 +1,13 @@
 package com.backend.pharmacy_management.controller;
 
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
-import com.backend.pharmacy_management.model.entity.indicative_prescription.Prescription;
 import com.backend.pharmacy_management.model.service.IIndicativeService;
-import com.backend.pharmacy_management.model.service.IPrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "indicatives")
@@ -20,6 +15,8 @@ import java.util.Optional;
 public class IndicativeController {
     @Autowired
     private IIndicativeService iIndicativeService;
+
+
 
 
     @GetMapping(value = "indicative-list")
@@ -30,10 +27,11 @@ public class IndicativeController {
         }
         return new ResponseEntity<>(indicativeList, HttpStatus.OK);
     }
+
 //
-//    @GetMapping(value = "/categories")
-//    public ResponseEntity<List<Category>> showCategory() {
-//        List<Category> categoryList = (List<Category>) categoryService.findAll();
+//    @GetMapping(value = "/drugs")
+//    public ResponseEntity<List<Drug>> showCategory() {
+//        List<Drug> drugList = (List<Drug>) categoryService.findAll();
 //        if (categoryList.isEmpty()) {
 //            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //        }
@@ -49,10 +47,11 @@ public class IndicativeController {
 //        return new ResponseEntity<>(prescriptionOptional.get(), HttpStatus.OK);
 //    }
 //
-//    @PostMapping(value = "/create")
-//    public ResponseEntity savePrescription(@RequestBody Prescription prescription) {
-//        return new ResponseEntity<>(iPrescriptionService.save(prescription), HttpStatus.CREATED);
-//    }
+    @PostMapping(value = "/indicative-create")
+    public ResponseEntity saveIndicative(@RequestBody Indicative indicative) {
+        return new ResponseEntity<>(iIndicativeService.save(indicative), HttpStatus.CREATED);
+    }
+
 //
 //    @PutMapping("/prescriptions/{id}")
 //    public ResponseEntity<Prescription> updatePrescription(@PathVariable Long id, @RequestBody Prescription prescription) {
