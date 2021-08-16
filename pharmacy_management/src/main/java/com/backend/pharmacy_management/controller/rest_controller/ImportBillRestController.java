@@ -2,8 +2,9 @@ package com.backend.pharmacy_management.controller.rest_controller;
 
 import com.backend.pharmacy_management.model.dto.ImportBillDto;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
-import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
+import com.backend.pharmacy_management.model.entity.import_bill_payment.Payment;
 import com.backend.pharmacy_management.model.service.import_bill.IImportBillService;
+import com.backend.pharmacy_management.model.service.import_bill.IPaymentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,11 @@ import java.util.Optional;
 @RequestMapping("/api/importBills")
 public class ImportBillRestController {
     private final IImportBillService importBillService;
+    private final IPaymentService paymentService;
     @Autowired
-    public ImportBillRestController(IImportBillService importBillService) {
+    public ImportBillRestController(IImportBillService importBillService, IPaymentService paymentService) {
         this.importBillService = importBillService;
+        this.paymentService = paymentService;
     }
 
     @GetMapping
@@ -37,14 +40,16 @@ public class ImportBillRestController {
     public ResponseEntity<ImportBill> create(@Valid @RequestBody ImportBillDto importBillDto) {
         ImportBill importBill = new ImportBill();
         BeanUtils.copyProperties(importBillDto, importBill);
+        Optional<Payment> payment =  this.paymentService.findById(importBillDto.getPayment().getPaymentId());
+        importBill.setPayment(payment.get());
         this.importBillService.save(importBill);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Optional<ImportBill>> getImportBills(@PathVariable Long id) {
+    public ResponseEntity<ImportBill> getImportBills(@PathVariable Long id) {
         Optional<ImportBill> importBill = importBillService.findById(id);
-        return new ResponseEntity<>(importBill, HttpStatus.OK);
+        return new ResponseEntity<>(importBill.get(), HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")

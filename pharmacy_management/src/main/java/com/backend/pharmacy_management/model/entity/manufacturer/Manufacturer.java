@@ -3,7 +3,9 @@ package com.backend.pharmacy_management.model.entity.manufacturer;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -26,10 +28,10 @@ public class Manufacturer {
     private String manufacturerPhoneNumber;
     private Double manufacturerDebts;
     private String manufacturerNote ;
-    @OneToMany(mappedBy = "manufacturer")
+    @OneToMany(mappedBy = "manufacturer",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonManagedReference(value = "manufacturer-import_bill")
     private Set<ImportBill> importBills;
-    @OneToMany(mappedBy = "manufacturer")
+    @OneToMany(mappedBy = "manufacturer",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonManagedReference(value = "manufacturer-export_bill")
     private Set<ExportBill> exportBills;
 }
