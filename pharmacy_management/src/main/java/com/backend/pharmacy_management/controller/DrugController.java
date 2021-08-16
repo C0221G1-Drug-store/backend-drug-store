@@ -26,7 +26,7 @@ public class DrugController {
 
     @GetMapping
     public ResponseEntity<List<ListDrugDTO>> findAllDrugsPagination(@RequestParam int index) {
-        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findAllDrugsPagination(index);
+        List<ListDrugDTO> drugs = drugService.findAllDrugsPagination(index);
         if (drugs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -34,7 +34,7 @@ public class DrugController {
     }
     @GetMapping("/not-pagination")
     public ResponseEntity<List<ListDrugDTO>> findAllDrugsNotPagination() {
-        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findAllDrugsNotPagination();
+        List<ListDrugDTO> drugs = drugService.findAllDrugsNotPagination();
         if (drugs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
