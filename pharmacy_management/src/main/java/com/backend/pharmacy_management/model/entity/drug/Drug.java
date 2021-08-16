@@ -6,12 +6,12 @@ import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBi
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Data
@@ -51,17 +51,22 @@ public class Drug {
     private String note;
     @ManyToOne
     @JoinColumn(name = "drug_group_id")
+    @JsonBackReference(value = "drug_group-drug")
     private DrugGroup drugGroup;
-    @OneToMany(mappedBy = "drug")
-    @JsonBackReference
-    private List<DrugImageDetail> drugImageDetails;
-    @OneToMany(mappedBy = "drug")
-    @JsonBackReference
-    private List<DrugOfBill> drugOfBills;
-    @OneToMany(mappedBy = "drug")
-    @JsonBackReference
-    private List<Indicative> indicatives;
-    @OneToMany(mappedBy = "drug")
-    @JsonBackReference
-    private List<ExportBillDetail> exportBillDetails;
+    @OneToMany(mappedBy = "drug",fetch=FetchType.LAZY)
+    @JsonManagedReference(value = "drug_image_detail-drug")
+    private Set<DrugImageDetail> drugImageDetails;
+    @OneToMany(mappedBy = "drug",fetch=FetchType.LAZY)
+    @JsonManagedReference(value = "drug_of_bill-drug")
+    private Set<DrugOfBill> drugOfBills;
+    @OneToMany(mappedBy = "drug",fetch=FetchType.LAZY)
+    @JsonManagedReference(value = "indicatives_drug-drug")
+    private Set<Indicative> indicatives;
+    @OneToMany(mappedBy = "drug",fetch=FetchType.LAZY)
+    @JsonManagedReference(value = "export_bill_detail-drug")
+    private Set<ExportBillDetail> exportBillDetails;
+    @OneToMany(mappedBy = "drug",fetch=FetchType.LAZY)
+    @JsonManagedReference(value = "import_bill_drug-drug")
+    private Set<ImportBillDrug> importBillDrugs;
+
 }
