@@ -19,8 +19,6 @@ public interface DrugDTO {
 
     String getActiveElement();
 
-    String getDrugAmount();
-
     String getUnit();
 
     String getConversionUnit();
@@ -43,6 +41,6 @@ public interface DrugDTO {
 
     String getFlag();
 
-    String getDrugGroup();
+    String getDrugGroupId();
 }
 
