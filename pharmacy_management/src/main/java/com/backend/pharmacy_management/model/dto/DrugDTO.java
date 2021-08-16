@@ -43,6 +43,6 @@ public interface DrugDTO {
 
     String getFlag();
 
-    String getDrugGroup();
+    String getDrugGroupId();
 }
 
