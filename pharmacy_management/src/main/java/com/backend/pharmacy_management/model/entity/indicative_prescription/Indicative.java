@@ -18,6 +18,7 @@ import java.util.List;
 public class Indicative {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
     private Long indicativeId;
     private Long totalPill;
     private Long drinkDay;
@@ -31,4 +32,15 @@ public class Indicative {
     @OneToMany(mappedBy = "indicative")
     private List<Prescription> prescriptionList;
 
+=======
+    private Long  indicativeId;
+    private  Long totalPill;
+    private  Long drinkDay;
+    private  Long drinkTime;
+//    private  Long amountPill;
+    @ManyToOne
+    @JoinColumn(name = "drug_id")
+    @JsonManagedReference
+    private Drug drug;
+>>>>>>> origin
 }
