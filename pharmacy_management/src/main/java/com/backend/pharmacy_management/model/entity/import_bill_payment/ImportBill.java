@@ -4,14 +4,13 @@ import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Data
@@ -28,17 +27,18 @@ public class ImportBill {
     private Boolean flag = true;
     @OneToOne
     @JoinColumn(name = "payment_id")
-    @JsonManagedReference
+    @JsonBackReference(value = "payment-import_bill")
     private  Payment payment;
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
-    @JsonManagedReference
+    @JsonBackReference(value = "manufacturer-import_bill")
     private Manufacturer manufacturer;
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    @JsonManagedReference
+    @JsonBackReference(value = "employee-import_bill")
     private Employee employee;
     @OneToMany(mappedBy = "importBill",fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<ImportBillDrug> importBillDrugs;
+    @JsonManagedReference(value = "import_bill_drug-import_bill")
+    private Set<ImportBillDrug> importBillDrugs;
+
 }

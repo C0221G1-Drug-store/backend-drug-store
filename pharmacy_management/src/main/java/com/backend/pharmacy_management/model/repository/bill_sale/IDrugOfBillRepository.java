@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface IDrugOfBillRepository extends JpaRepository<DrugOfBill, Long> {
-    @Query(value = "select * from  drug_of_bill   where prescription_id = ? ;", nativeQuery = true)
-    List<DrugOfBill> findAllDrugOfBill(int id);
+    @Query(value = "select * from  drug_of_bill where bill_sale_id = ? ;", nativeQuery = true)
+    List<DrugOfBill> findAllDrugOfBillByBillSaleId(Long id);
 }

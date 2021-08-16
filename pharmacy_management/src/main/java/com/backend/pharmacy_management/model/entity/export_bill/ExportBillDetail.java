@@ -21,10 +21,10 @@ public class ExportBillDetail {
     private Long exportBillDetailId;
     @ManyToOne
     @JoinColumn(name = "export_bill_id")
-    @JsonManagedReference
+    @JsonBackReference(value = "export_bill_detail-export_bill")
     private ExportBill exportBill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
-    @JsonManagedReference
+    @JsonBackReference(value = "export_bill_detail-drug")
     private Drug drug;
 }

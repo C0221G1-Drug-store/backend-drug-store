@@ -16,15 +16,5 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class DrugOfBillController {
-    @Autowired
-    IDrugOfBillService iDrugOfBillService;
-    @GetMapping("/drug-of-bill/{id}")
-    public ResponseEntity<List<DrugOfBill>> showDrugOfBillList(@PathVariable("id") int id){
-        List<DrugOfBill> list = iDrugOfBillService.findAllDrugOfBill(id);
-        if (list.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(list, HttpStatus.OK);
 
-    }
 }

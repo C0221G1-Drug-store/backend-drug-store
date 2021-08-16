@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -25,20 +26,20 @@ public class BillSale {
     private Long billSaleId;
     private String billSaleCode;
     @Column(columnDefinition = "datetime")
-    private String invoiceDate;
+    private Date invoiceDate;
     private String billSaleNote;
     private String billSaleType;
     private Boolean flag = true;
     private double totalMoney;
     @ManyToOne
     @JoinColumn(name = "employee_id",nullable = false)
-    @JsonManagedReference
+    @JsonBackReference(value="employee-bill_sale")
     private Employee employee;
     @ManyToOne
     @JoinColumn(name = "customer_id",nullable = false)
-    @JsonManagedReference
+    @JsonBackReference(value="customer-bill_sale")
     private Customer customer;
-    @OneToMany(mappedBy = "billSale")
-    @JsonBackReference
-    private Set<DrugOfBill> drugOfBillSet;
+    @OneToMany(mappedBy = "billSale",fetch=FetchType.LAZY)
+    @JsonManagedReference(value="drug_of_bill-bill_sale")
+    private Set<DrugOfBill> drugOfBills;
 }
