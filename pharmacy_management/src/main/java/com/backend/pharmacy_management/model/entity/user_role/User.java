@@ -2,12 +2,13 @@ package com.backend.pharmacy_management.model.entity.user_role;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
@@ -28,6 +29,7 @@ public class User {
     private String encrytedPassword;
     @Column(name = "enabled")
     private String enabled;
-//    @OneToMany(mappedBy = "user")
-//    private List<UserRole> userRoleList;
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "app_user-user_role")
+    private Set<UserRole> userRoles;
 }

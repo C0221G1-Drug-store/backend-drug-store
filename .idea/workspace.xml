@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="db90481b-198b-433f-9fb2-067025b550d7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/controller/drug_group/DrugGroupController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/repository/drug_group/DrugGroupRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/service/drug_group/IDrugGroupService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/service/drug_group/impl/DrugGroupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/controller/ImportBillController.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/controller/ImportBillController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/bill_sale/BillSale.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/bill_sale/BillSale.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/bill_sale/DrugOfBill.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/bill_sale/DrugOfBill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/customer/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/customer/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/customer/CustomerGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/customer/CustomerGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/drug/Drug.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/drug/Drug.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/drug/DrugGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/drug/DrugGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/drug/DrugImageDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/drug/DrugImageDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/employee/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/employee/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/export_bill/ExportBill.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/export_bill/ExportBill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/export_bill/ExportBillDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/export_bill/ExportBillDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/export_bill/ExportBillType.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/export_bill/ExportBillType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/import_bill_payment/ImportBill.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/import_bill_payment/ImportBill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/import_bill_payment/ImportBillDrug.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/import_bill_payment/ImportBillDrug.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/import_bill_payment/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/import_bill_payment/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/indicative_prescription/Indicative.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/indicative_prescription/Indicative.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/indicative_prescription/Prescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/indicative_prescription/Prescription.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/indicative_prescription/PrescriptionIndicative.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/indicative_prescription/PrescriptionIndicative.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/manufacturer/Manufacturer.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/manufacturer/Manufacturer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/user_role/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/user_role/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/user_role/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/user_role/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/user_role/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/java/com/backend/pharmacy_management/model/entity/user_role/UserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pharmacy_management/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/pharmacy_management/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/pharmacy_management">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1wgE4MO7BSmhbNKLDtH1deC53BY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="db90481b-198b-433f-9fb2-067025b550d7" name="Default Changelist" comment="" />
+      <created>1628871638905</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1628871638905</updated>
+      <workItem from="1628871640351" duration="729000" />
+      <workItem from="1628933718562" duration="1395000" />
+      <workItem from="1628954070291" duration="1008000" />
+      <workItem from="1628995285838" duration="2865000" />
+      <workItem from="1629016366950" duration="599000" />
+      <workItem from="1629076242682" duration="608000" />
+      <workItem from="1629095417102" duration="594000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="859" y="411" key="#Assign_Data_Sources" timestamp="1628996458455">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="859" y="411" key="#Assign_Data_Sources/0.0.1920.1040@0.0.1920.1040" timestamp="1628996458455" />
+    <state x="440" y="94" key="#Project_Structure" timestamp="1628936704857">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1628936704857" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1628936768161">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1628936768161" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1629005997687">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1629005997687" />
+  </component>
+</project>
