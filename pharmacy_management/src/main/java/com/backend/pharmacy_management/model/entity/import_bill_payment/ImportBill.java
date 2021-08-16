@@ -28,7 +28,6 @@ public class ImportBill {
     private Boolean flag = true;
     @OneToOne
     @JoinColumn(name = "payment_id")
-    @JsonManagedReference
     private  Payment payment;
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
