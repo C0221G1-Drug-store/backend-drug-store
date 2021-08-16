@@ -15,7 +15,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "api/drugs")
 @CrossOrigin
-public class DrugRestController {
+public class  DrugRestController {
   private final   IDrugService drugService;
 
     public DrugRestController(IDrugService drugService) {

@@ -53,15 +53,15 @@ public class Drug {
     @JoinColumn(name = "drug_group_id")
     private DrugGroup drugGroup;
     @OneToMany(mappedBy = "drug")
-    @JsonBackReference
+//    @JsonBackReference
     private List<DrugImageDetail> drugImageDetails;
     @OneToMany(mappedBy = "drug")
-    @JsonBackReference
+//    @JsonBackReference
     private List<DrugOfBill> drugOfBills;
     @OneToMany(mappedBy = "drug")
-    @JsonBackReference
+//    @JsonBackReference
     private List<Indicative> indicatives;
     @OneToMany(mappedBy = "drug")
-    @JsonBackReference
+//    @JsonBackReference
     private List<ExportBillDetail> exportBillDetails;
 }

@@ -20,6 +20,6 @@ public class DrugGroup {
     private String drugGroupCode;
     private String drugGroupName;
     @OneToMany(mappedBy = "drugGroup")
-    @JsonBackReference
+//    @JsonBackReference
     private List<Drug> drugs;
 }

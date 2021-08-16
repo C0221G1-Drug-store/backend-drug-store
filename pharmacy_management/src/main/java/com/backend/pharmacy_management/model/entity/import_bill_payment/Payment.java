@@ -21,7 +21,7 @@ public class Payment {
     Integer discount ;
     String status ;
     @OneToOne(mappedBy = "payment")
-    @JsonManagedReference
+//    @JsonManagedReference
     ImportBill importBill;
 
 }

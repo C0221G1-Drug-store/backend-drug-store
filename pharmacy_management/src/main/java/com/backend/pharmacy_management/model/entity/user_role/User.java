@@ -29,6 +29,6 @@ public class User {
     @Column(name = "enabled")
     private String enabled;
     @OneToMany(mappedBy = "user")
-    @JsonBackReference
+//    @JsonBackReference
     private List<UserRole> userRoleList;
 }

@@ -19,6 +19,6 @@ public class CustomerGroup {
     private int id;
     private String name;
     @OneToMany(mappedBy = "customers")
-    @JsonBackReference
+//    @JsonBackReference
     private List<Customer> customers;
 }

@@ -23,6 +23,6 @@ public class Customer {
     private String phone;
     @ManyToOne
     @JoinColumn(name = "customer_group_id")
-    @JsonManagedReference
+//    @JsonManagedReference
     private CustomerGroup customers;
 }

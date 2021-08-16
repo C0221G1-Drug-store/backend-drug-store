@@ -28,15 +28,16 @@ public class Employee {
     private String employeePhone;
     private String employeeStartDate;
     private String employeeNote;
-    private int position;
+    private String position;
     private String accountName;
+    private boolean flag;
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference
+//    @JsonBackReference
     List<ImportBill> importBills;
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference
+//    @JsonBackReference
     List<ExportBill> exportBills;
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference
+//    @JsonBackReference
     List<BillSale> billWholesales;
 }

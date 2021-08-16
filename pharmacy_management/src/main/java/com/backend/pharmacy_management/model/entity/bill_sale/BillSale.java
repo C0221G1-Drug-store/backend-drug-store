@@ -32,13 +32,13 @@ public class BillSale {
     private double totalMoney;
     @ManyToOne
     @JoinColumn(name = "employee_id",nullable = false)
-    @JsonManagedReference
+//    @JsonManagedReference
     private Employee employee;
     @ManyToOne
     @JoinColumn(name = "customer_id",nullable = false)
-    @JsonManagedReference
+//    @JsonManagedReference
     private Customer customer;
     @OneToMany(mappedBy = "billSale")
-    @JsonBackReference
+//    @JsonBackReference
     private Set<DrugOfBill> drugOfBillSet;
 }

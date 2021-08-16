@@ -18,12 +18,12 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id",nullable = false)
-    @JsonManagedReference
+//    @JsonManagedReference
     private Long roleId;
     @Column(name = "role_name")
-    @JsonManagedReference
+//    @JsonManagedReference
     private String roleName;
     @OneToMany(mappedBy = "role")
-    @JsonBackReference
+//    @JsonBackReference
     private List<UserRole> userRoles;
 }

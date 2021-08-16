@@ -25,6 +25,6 @@ public class DrugImageDetail {
     private Boolean flag;
     @ManyToOne
     @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
-    @JsonManagedReference
+//    @JsonManagedReference
     private Drug drug;
 }

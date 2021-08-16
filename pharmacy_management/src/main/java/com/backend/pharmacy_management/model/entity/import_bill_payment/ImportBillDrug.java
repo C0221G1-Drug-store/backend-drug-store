@@ -30,10 +30,10 @@ public class ImportBillDrug {
     Boolean flag ;
     @ManyToOne
     @JoinColumn(name = "import_bill_id")
-    @JsonManagedReference
+//    @JsonManagedReference
     ImportBill importBill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
-    @JsonManagedReference
+//    @JsonManagedReference
     Drug drug;
 }
