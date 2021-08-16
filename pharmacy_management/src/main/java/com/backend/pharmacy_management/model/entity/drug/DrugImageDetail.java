@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 @Table(name="drug_image_detail")
 
@@ -25,4 +25,39 @@ public class DrugImageDetail {
     @ManyToOne
     @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
     private Drug drug;
+
+    public DrugImageDetail() {
+    }
+
+    public Long getDrugImageDetailId() {
+        return drugImageDetailId;
+    }
+
+    public void setDrugImageDetailId(Long drugImageDetailId) {
+        this.drugImageDetailId = drugImageDetailId;
+    }
+
+    public String getDrugImageDetailUrl() {
+        return drugImageDetailUrl;
+    }
+
+    public void setDrugImageDetailUrl(String drugImageDetailUrl) {
+        this.drugImageDetailUrl = drugImageDetailUrl;
+    }
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
+    }
+
+    public Drug getDrug() {
+        return drug;
+    }
+
+    public void setDrug(Drug drug) {
+        this.drug = drug;
+    }
 }

@@ -10,7 +10,7 @@ public class DrugDtoTuan {
     private String drugName;
     private String drugIngredient;
     private String activeElement;
-    private Long drugAmount;
+//    private Long drugAmount;
     private String unit;
     private String conversionUnit;
     private Integer conversionRate;
@@ -59,13 +59,13 @@ public class DrugDtoTuan {
         this.activeElement = activeElement;
     }
 
-    public Long getDrugAmount() {
-        return drugAmount;
-    }
-
-    public void setDrugAmount(Long drugAmount) {
-        this.drugAmount = drugAmount;
-    }
+//    public Long getDrugAmount() {
+//        return drugAmount;
+//    }
+//
+//    public void setDrugAmount(Long drugAmount) {
+//        this.drugAmount = drugAmount;
+//    }
 
     public String getUnit() {
         return unit;

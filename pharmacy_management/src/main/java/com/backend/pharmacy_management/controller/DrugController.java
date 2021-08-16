@@ -45,7 +45,7 @@ public class DrugController {
     public ResponseEntity<Drug> saveDrug(@Valid @RequestBody DrugDtoTuan drugDtoTuan, BindingResult bindingResult) {
         Drug drug = new Drug();
         BeanUtils.copyProperties(drugDtoTuan,drug);
-        drug.setDrugCode(String.valueOf(Math.random()*100000));
+        drug.setDrugCode ((long) Math.floor(Math.random()*1000000));
         return new ResponseEntity<>(drugService.saveDrug(drug), HttpStatus.CREATED);
     }
     @DeleteMapping("/delete/{id}")
