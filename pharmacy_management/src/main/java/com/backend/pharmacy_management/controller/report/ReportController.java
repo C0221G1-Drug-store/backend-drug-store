@@ -1,6 +1,6 @@
 package com.backend.pharmacy_management.controller.report;
 
-import com.backend.pharmacy_management.model.dto.report.ReportDto;
+import com.backend.pharmacy_management.model.dto.report.*;
 import com.backend.pharmacy_management.model.service.report.IReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +18,27 @@ public class ReportController {
     IReportService reportService;
 
     @GetMapping("/{choice}/{startDate}/{endDate}")
-    public ResponseEntity<List<ReportDto>> getList(@PathVariable String choice, @PathVariable Optional<String> startDate, @PathVariable Optional<String> endDate) {
-        List<ReportDto> reportDtoList;
+    public ResponseEntity<List> getList(@PathVariable String choice, @PathVariable Optional<String> startDate, @PathVariable Optional<String> endDate) {
         switch (choice) {
             case "importDetails":
+                List<ReportDto> reportDtoList;
                 reportDtoList = reportService.importDetails(startDate.orElse(""), endDate.orElse(""));
                 return new ResponseEntity<>(reportDtoList, HttpStatus.OK);
+            case "sellingDiarys":
+                List<ReportSellingDiary> sellingDiaryList;
+                sellingDiaryList = reportService.sellingDiarys(startDate.orElse(""), endDate.orElse(""));
+                return new ResponseEntity<>(sellingDiaryList, HttpStatus.OK);
+            case "medicinesNeedToBeImporteds":
+                List<ReportMedicinesNeedToBeImported> medicinesNeedToBeImportedList;
+                medicinesNeedToBeImportedList = reportService.medicinesNeedToBeImporteds(startDate.orElse(""), endDate.orElse(""));
+                return new ResponseEntity<>(medicinesNeedToBeImportedList, HttpStatus.OK);
+            case "theDrugIsAboutToExpires":
+                List<ReportTheDrugIsAboutToExpire> theDrugIsAboutToExpireList;
+                theDrugIsAboutToExpireList = reportService.theDrugIsAboutToExpires(startDate.orElse(""), endDate.orElse(""));
+                return new ResponseEntity<>(theDrugIsAboutToExpireList, HttpStatus.OK);
+            case "bestSellingDrugs":
+                List<ReportBestSellingDrug> bestSellingDrugList = reportService.bestSellingDrugs(startDate.orElse(""), endDate.orElse(""));
+                return new ResponseEntity<>(bestSellingDrugList, HttpStatus.OK);
         }
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

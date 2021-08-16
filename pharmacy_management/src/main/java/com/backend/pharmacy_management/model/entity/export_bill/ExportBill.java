@@ -20,9 +20,9 @@ public class ExportBill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long exportBillId;
     private String exportBillCode;
-    private String exportBillIdDate;
+    private String exportBillDate;
     private String exportBillReason;
-    private String exportBillIdAddress;
+    private String exportBillAddress;
     private boolean flag;
     @ManyToOne
     @JoinColumn(name = "export_bill_type_id")

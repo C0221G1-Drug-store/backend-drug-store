@@ -20,6 +20,7 @@ import java.util.Set;
 @Table(name = "bill_sale")
 public class BillSale {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bill_sale_id")
     private Long billSaleId;
     private String billSaleCode;
