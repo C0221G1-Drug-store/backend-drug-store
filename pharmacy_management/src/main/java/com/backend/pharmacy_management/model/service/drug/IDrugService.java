@@ -8,8 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IDrugService {
+
+    List<DrugDTO> findAllDrugs(int index);
+    Iterable<Drug> findAll();
+    Drug saveDrug(Drug drug);
+
     List<ListDrugDTO> findAllDrugsPagination(int index);
     List<ListDrugDTO> findAllDrugsNotPagination();
-    void deleteDrugById(Long id);
+
+  
+   void deleteDrugById(Long id);
     DrugDTO findDrugById(Long id);
 }

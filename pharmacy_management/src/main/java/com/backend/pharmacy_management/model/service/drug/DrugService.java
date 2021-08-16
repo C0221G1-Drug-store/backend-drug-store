@@ -26,7 +26,22 @@ public class DrugService implements IDrugService {
     }
 
     @Override
-    public void deleteDrugById(Long id) {
+    public List<DrugDTO> findAllDrugs(int index) {
+        return null;
+    }
+
+    @Override
+    public Iterable<Drug> findAll() {
+        return null;
+    }
+
+    @Override
+    public Drug saveDrug(Drug drug) {
+        return iDrugRepository.save(drug);
+    }
+
+  
+   public void deleteDrugById(Long id) {
         iDrugRepository.deleteDrugById(id);
     }
 
