@@ -1,59 +1,30 @@
-package com.backend.pharmacy_management.model.entity.drug;
+package com.backend.pharmacy_management.model.dto;
 
-import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
-import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
-import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
-import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.backend.pharmacy_management.model.entity.drug.DrugGroup;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
 
-@Entity
-@Data
-//@NoArgsConstructor
-@AllArgsConstructor
-@Table(name="drug")
-public class Drug {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "drug_id")
+public class DrugDtoTuan {
     private Long drugId;
-    private String drugCode;
+
     private String drugName;
+    private String drugIngredient;
     private String activeElement;
-    @Column(name = "drug_amout")
     private Long drugAmount;
     private String unit;
     private String conversionUnit;
     private Integer conversionRate;
     private Double wholesaleProfitRate;
     private Double retailProfitRate;
-    @Column(columnDefinition = "TEXT")
+
     private String drugFaculty;
     private String manufacturer;
     private String origin;
     private String note;
-    @Column(columnDefinition = "TEXT")
-    private String drugSideEffect;
-    private Boolean flag = true;
-//    @ManyToOne
-//    @JoinColumn(name = "drug_group_id")
-    @Column(name = "drug_group_id")
     private String drugGroup;
-    @OneToMany(mappedBy = "drug")
-    private List<DrugImageDetail> drugImageDetails;
-    @OneToMany(mappedBy = "drug")
-    private List<DrugOfBill> drugOfBills;
-    @OneToMany(mappedBy = "drug")
-    private List<Indicative> indicatives;
-    @OneToMany(mappedBy = "drug")
-    private List<ExportBillDetail> exportBillDetails;
+    private String drugSideEffect;
 
-    public Drug() {
+    public DrugDtoTuan() {
     }
 
     public Long getDrugId() {
@@ -64,20 +35,20 @@ public class Drug {
         this.drugId = drugId;
     }
 
-    public String getDrugCode() {
-        return drugCode;
-    }
-
-    public void setDrugCode(String drugCode) {
-        this.drugCode = drugCode;
-    }
-
     public String getDrugName() {
         return drugName;
     }
 
     public void setDrugName(String drugName) {
         this.drugName = drugName;
+    }
+
+    public String getDrugIngredient() {
+        return drugIngredient;
+    }
+
+    public void setDrugIngredient(String drugIngredient) {
+        this.drugIngredient = drugIngredient;
     }
 
     public String getActiveElement() {
@@ -176,51 +147,11 @@ public class Drug {
         this.drugSideEffect = drugSideEffect;
     }
 
-    public Boolean getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Boolean flag) {
-        this.flag = flag;
-    }
-
     public String getDrugGroup() {
         return drugGroup;
     }
 
     public void setDrugGroup(String drugGroup) {
         this.drugGroup = drugGroup;
-    }
-
-    public List<DrugImageDetail> getDrugImageDetails() {
-        return drugImageDetails;
-    }
-
-    public void setDrugImageDetails(List<DrugImageDetail> drugImageDetails) {
-        this.drugImageDetails = drugImageDetails;
-    }
-
-    public List<DrugOfBill> getDrugOfBills() {
-        return drugOfBills;
-    }
-
-    public void setDrugOfBills(List<DrugOfBill> drugOfBills) {
-        this.drugOfBills = drugOfBills;
-    }
-
-    public List<Indicative> getIndicatives() {
-        return indicatives;
-    }
-
-    public void setIndicatives(List<Indicative> indicatives) {
-        this.indicatives = indicatives;
-    }
-
-    public List<ExportBillDetail> getExportBillDetails() {
-        return exportBillDetails;
-    }
-
-    public void setExportBillDetails(List<ExportBillDetail> exportBillDetails) {
-        this.exportBillDetails = exportBillDetails;
     }
 }

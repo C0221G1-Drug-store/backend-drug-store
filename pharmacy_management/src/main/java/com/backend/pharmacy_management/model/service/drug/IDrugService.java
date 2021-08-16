@@ -7,6 +7,12 @@ import com.backend.pharmacy_management.model.dto.DrugDTO;
 import java.util.List;
 
 public interface IDrugService {
+
+    List<DrugDTO> findAllDrugs(int index);
+    Iterable<Drug> findAll();
+    Drug saveDrug(Drug drug);
+
     List<ListDrugDTO> findAllDrugsPagination(int index);
     List<ListDrugDTO> findAllDrugsNotPagination();
+
 }

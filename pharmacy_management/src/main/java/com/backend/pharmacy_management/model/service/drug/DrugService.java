@@ -23,4 +23,19 @@ public class DrugService implements IDrugService {
     public List<ListDrugDTO> findAllDrugsNotPagination() {
         return iDrugRepository.findAllDrugsNotPagination();
     }
+
+    @Override
+    public List<DrugDTO> findAllDrugs(int index) {
+        return null;
+    }
+
+    @Override
+    public Iterable<Drug> findAll() {
+        return null;
+    }
+
+    @Override
+    public Drug saveDrug(Drug drug) {
+        return iDrugRepository.save(drug);
+    }
 }
