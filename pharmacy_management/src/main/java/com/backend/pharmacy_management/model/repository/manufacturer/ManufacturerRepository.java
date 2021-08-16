@@ -3,6 +3,7 @@ package com.backend.pharmacy_management.model.repository.manufacturer;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

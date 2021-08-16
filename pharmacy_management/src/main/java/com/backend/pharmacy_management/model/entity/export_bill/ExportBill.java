@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
@@ -28,7 +28,7 @@ public class ExportBill {
     @JoinColumn(name = "export_bill_type_id")
     @JsonBackReference
     private ExportBillType exportBillType;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "employee_id")
     @JsonBackReference(value = "employee-export_bill")
     private Employee employee;
@@ -38,5 +38,5 @@ public class ExportBill {
     private Manufacturer manufacturer;
     @OneToMany(mappedBy = "exportBill")
     @JsonManagedReference(value = "export_bill_detail-export_bill")
-    private Set<ExportBillDetail> exportBillDetails;
+    private List<ExportBillDetail> exportBillDetails;
 }

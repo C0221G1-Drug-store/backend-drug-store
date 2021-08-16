@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -38,7 +38,7 @@ public class BillSale {
     @JoinColumn(name = "customer_id",nullable = false)
     @JsonBackReference(value="customer-bill_sale")
     private Customer customer;
-    @OneToMany(mappedBy = "billSale",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "billSale")
     @JsonManagedReference(value="drug_of_bill-bill_sale")
-    private Set<DrugOfBill> drugOfBills;
+    private List<DrugOfBill> drugOfBills;
 }

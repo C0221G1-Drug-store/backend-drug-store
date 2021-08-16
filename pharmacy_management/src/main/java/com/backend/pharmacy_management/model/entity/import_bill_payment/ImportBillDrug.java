@@ -1,4 +1,5 @@
 package com.backend.pharmacy_management.model.entity.import_bill_payment;
+
 import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
@@ -25,10 +26,10 @@ public class ImportBillDrug {
     Integer importAmount;
     Double importPrice;
     Integer discountRate;
-    Integer lotNumber ;
-    Date expiry ;
+    Integer lotNumber;
+    Date expiry;
     Integer vat;
-    Boolean flag ;
+    Boolean flag;
     @ManyToOne
     @JoinColumn(name = "import_bill_id")
     @JsonBackReference(value = "import_bill_drug-import_bill")

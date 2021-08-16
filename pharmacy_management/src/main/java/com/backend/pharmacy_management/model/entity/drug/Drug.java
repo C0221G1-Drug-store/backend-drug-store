@@ -11,7 +11,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -53,20 +53,20 @@ public class Drug {
     @JoinColumn(name = "drug_group_id")
     @JsonBackReference(value = "drug_group-drug")
     private DrugGroup drugGroup;
-    @OneToMany(mappedBy = "drug",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "drug")
     @JsonManagedReference(value = "drug_image_detail-drug")
-    private Set<DrugImageDetail> drugImageDetails;
-    @OneToMany(mappedBy = "drug",fetch=FetchType.LAZY)
+    private List<DrugImageDetail> drugImageDetails;
+    @OneToMany(mappedBy = "drug")
     @JsonManagedReference(value = "drug_of_bill-drug")
-    private Set<DrugOfBill> drugOfBills;
-    @OneToMany(mappedBy = "drug",fetch=FetchType.LAZY)
+    private List<DrugOfBill> drugOfBills;
+    @OneToMany(mappedBy = "drug")
     @JsonManagedReference(value = "indicatives_drug-drug")
-    private Set<Indicative> indicatives;
-    @OneToMany(mappedBy = "drug",fetch=FetchType.LAZY)
+    private List<Indicative> indicatives;
+    @OneToMany(mappedBy = "drug")
     @JsonManagedReference(value = "export_bill_detail-drug")
-    private Set<ExportBillDetail> exportBillDetails;
-    @OneToMany(mappedBy = "drug",fetch=FetchType.LAZY)
+    private List<ExportBillDetail> exportBillDetails;
+    @OneToMany(mappedBy = "drug")
     @JsonManagedReference(value = "import_bill_drug-drug")
-    private Set<ImportBillDrug> importBillDrugs;
+    private List<ImportBillDrug> importBillDrugs;
 
 }

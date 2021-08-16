@@ -23,12 +23,12 @@ public class ImportBillService implements IImportBillService {
 
     @Override
     public Optional<ImportBill> findById(Long id) {
-        return Optional.empty();
+        return importBillRepository.findById(id);
     }
 
     @Override
     public List<ImportBill> findAllNormal() {
-        return null;
+        return importBillRepository.getListNormals();
     }
 
     @Override
