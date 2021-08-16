@@ -18,7 +18,7 @@ public class Payment {
     Double prepayment ;
     Integer discount ;
     String status ;
-    @OneToOne(mappedBy = "payment",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "payment")
     @JsonBackReference(value = "payment-import_bill")
     ImportBill importBill;
 

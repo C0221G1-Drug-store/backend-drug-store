@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,5 +21,5 @@ public class ExportBillType {
     private String exportBillTypeName;
     @OneToMany(mappedBy = "exportBillType")
     @JsonBackReference
-    private Set<ExportBill> exportBills;
+    private List<ExportBill> exportBills;
 }

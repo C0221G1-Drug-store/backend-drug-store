@@ -40,8 +40,6 @@ public class ImportBillRestController {
     public ResponseEntity<ImportBill> create(@Valid @RequestBody ImportBillDto importBillDto) {
         ImportBill importBill = new ImportBill();
         BeanUtils.copyProperties(importBillDto, importBill);
-        Optional<Payment> payment =  this.paymentService.findById(importBillDto.getPayment().getPaymentId());
-        importBill.setPayment(payment.get());
         this.importBillService.save(importBill);
         return new ResponseEntity<>(HttpStatus.OK);
     }

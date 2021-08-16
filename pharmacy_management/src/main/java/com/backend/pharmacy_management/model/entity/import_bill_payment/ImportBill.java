@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,7 +26,7 @@ public class ImportBill {
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private LocalDateTime invoiceDate;
-    private Boolean flag = true;
+    private Boolean flag ;
     @OneToOne
     @JoinColumn(name = "payment_id")
     @JsonManagedReference(value = "payment-import_bill")
@@ -41,6 +41,6 @@ public class ImportBill {
     private Employee employee;
     @OneToMany(mappedBy = "importBill")
     @JsonManagedReference(value = "import_bill_drug-import_bill")
-    private Set<ImportBillDrug> importBillDrugs;
+    private List<ImportBillDrug> importBillDrugs;
 
 }
