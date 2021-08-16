@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
@@ -29,5 +29,5 @@ public class Customer {
     private CustomerGroup customers;
     @OneToMany(mappedBy = "customer")
     @JsonManagedReference(value = "customer-bill_sale")
-    Set<BillSale> billWholesales;
+    List<BillSale> billWholesales;
 }
