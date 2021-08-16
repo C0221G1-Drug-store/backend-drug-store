@@ -1,20 +1,20 @@
 package com.backend.pharmacy_management.controller;
 
+import com.backend.pharmacy_management.model.dto.DrugDTO;
+import com.backend.pharmacy_management.model.dto.DrugDtoTuan;
+import com.backend.pharmacy_management.model.dto.ListDrugDTO;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
-import com.backend.pharmacy_management.model.entity.drug.DrugDTO;
 import com.backend.pharmacy_management.model.service.drug.IDrugService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-<<<<<<< HEAD
-=======
 
+import javax.validation.Valid;
 import java.util.List;
->>>>>>> f7d6a41d710ac3f5ec8d92481a36f9da7ef7272d
+
 
 @CrossOrigin
 @RestController
@@ -22,34 +22,30 @@ import java.util.List;
 public class DrugController {
     @Autowired
     private IDrugService drugService;
-<<<<<<< HEAD
-//    @GetMapping
-//    public ResponseEntity<Page<Drug>> finAllDrugs(@PageableDefault(value = 3) Pageable pageable) {
-//        Page<Drug> drugs = (Page<Drug>) drugService.findAllDrugs(pageable);
-//        if (drugs.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<>(drugs, HttpStatus.OK);
-//    }
-//    public ResponseEntity<Page<Drug>> finAllDrugs(@PageableDefault(value = 3) Pageable pageable) {
-//        Page<Drug> drugs = (Page<Drug>) drugService.findAllDrugs(pageable);
-//        if (drugs.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<>(drugs, HttpStatus.OK);
-//    }
-    @PostMapping
-    public ResponseEntity<Drug> saveDrug(@RequestBody Drug drug){
-        return new ResponseEntity<>(drugService.saveDrug(drug),HttpStatus.CREATED);
-=======
+
     @GetMapping
-    public ResponseEntity<List<DrugDTO>> finAllDrugs(@RequestParam int index) {
-        List<DrugDTO> drugs = (List<DrugDTO>) drugService.findAllDrugs(index);
+    public ResponseEntity<List<ListDrugDTO>> findAllDrugsPagination(@RequestParam int index) {
+        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findAllDrugsPagination(index);
         if (drugs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(drugs, HttpStatus.OK);
->>>>>>> f7d6a41d710ac3f5ec8d92481a36f9da7ef7272d
+    }
+    @GetMapping("/not-pagination")
+    public ResponseEntity<List<ListDrugDTO>> findAllDrugsNotPagination() {
+        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findAllDrugsNotPagination();
+        if (drugs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(drugs, HttpStatus.OK);
+
+    }
+    @PostMapping
+    public ResponseEntity<Drug> saveDrug(@Valid @RequestBody DrugDtoTuan drugDtoTuan, BindingResult bindingResult) {
+        Drug drug = new Drug();
+        BeanUtils.copyProperties(drugDtoTuan,drug);
+        drug.setDrugCode(String.valueOf(Math.random()*100000));
+        return new ResponseEntity<>(drugService.saveDrug(drug), HttpStatus.CREATED);
     }
 }
   
