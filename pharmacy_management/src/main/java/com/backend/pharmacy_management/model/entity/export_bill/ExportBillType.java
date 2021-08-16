@@ -19,6 +19,8 @@ public class ExportBillType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long exportBillTypeId;
     private String exportBillTypeName;
+
     @OneToMany(mappedBy = "exportBillType")
+    @JsonBackReference(value = "type-export")
     private Set<ExportBill> exportBills;
 }

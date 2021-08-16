@@ -1,5 +1,7 @@
 package com.backend.pharmacy_management.model.entity.export_bill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

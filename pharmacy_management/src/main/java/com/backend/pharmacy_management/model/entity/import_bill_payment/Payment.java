@@ -15,13 +15,13 @@ import javax.persistence.*;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long paymentId ;
-    Double totalMoney ;
-    Double prepayment ;
-    Integer discount ;
-    String status ;
+    private Long paymentId ;
+    private Double totalMoney ;
+    private Double prepayment ;
+    private Integer discount ;
+    private String status ;
+
     @OneToOne(mappedBy = "payment")
-    @JsonManagedReference
     ImportBill importBill;
 
 }

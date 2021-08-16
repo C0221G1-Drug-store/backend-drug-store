@@ -32,8 +32,11 @@ public class Employee {
     private String accountName;
     @OneToMany(mappedBy = "employee")
     List<ImportBill> importBills;
+
     @OneToMany(mappedBy = "employee")
+    @JsonBackReference(value = "employee-export")
     List<ExportBill> exportBills;
+
     @OneToMany(mappedBy = "employee")
     List<BillSale> billWholesales;
 }

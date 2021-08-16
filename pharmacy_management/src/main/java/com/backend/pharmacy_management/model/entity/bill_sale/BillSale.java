@@ -31,9 +31,11 @@ public class BillSale {
     @ManyToOne
     @JoinColumn(name = "employee_id",nullable = false)
     private Employee employee;
+
     @ManyToOne
     @JoinColumn(name = "customer_id",nullable = false)
     private Customer customer;
+
     @OneToMany(mappedBy = "billSale")
     private Set<DrugOfBill> drugOfBillSet;
 }

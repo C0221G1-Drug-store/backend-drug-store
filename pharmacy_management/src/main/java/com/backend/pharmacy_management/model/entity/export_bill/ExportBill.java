@@ -20,19 +20,24 @@ public class ExportBill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long exportBillId;
     private String exportBillCode;
-    private String exportBillIdDate;
+    private String exportBillDate;
     private String exportBillReason;
-    private String exportBillIdAddress;
+    private String exportBillAddress;
     private Boolean flag=true;
     @ManyToOne
     @JoinColumn(name = "export_bill_type_id")
+    @JsonManagedReference(value = "type-export")
     private ExportBillType exportBillType;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
+    @JsonManagedReference(value = "employee-export")
     private Employee employee;
+
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
+
     @OneToMany(mappedBy = "exportBill")
     private Set<ExportBillDetail> exportBillDetails;
 }

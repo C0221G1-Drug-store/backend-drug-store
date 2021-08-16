@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -28,17 +29,17 @@ public class ImportBill {
     private Boolean flag = true;
     @OneToOne
     @JoinColumn(name = "payment_id")
-    @JsonManagedReference
-    private  Payment payment;
+    private Payment payment;
+
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
-    @JsonManagedReference
     private Manufacturer manufacturer;
+
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    @JsonManagedReference
     private Employee employee;
-    @OneToMany(mappedBy = "importBill",fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<ImportBillDrug> importBillDrugs;
+
+    @OneToMany(mappedBy = "importBill", fetch = FetchType.LAZY)
+    @JsonBackReference(value = "import-detail")
+    private Set<ImportBillDrug> importBillDrugs;
 }
