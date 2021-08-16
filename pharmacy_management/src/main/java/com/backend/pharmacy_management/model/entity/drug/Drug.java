@@ -22,11 +22,11 @@ public class Drug {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "drug_id")
     private Long drugId;
-    private String drugCode;
+    private Long drugCode;
     private String drugName;
     private String activeElement;
-    @Column(name = "drug_amout")
-    private Long drugAmount;
+//    @Column(name = "drug_amout")
+//    private Long drugAmount;
     private String unit;
     private String conversionUnit;
     private Integer conversionRate;
@@ -64,11 +64,11 @@ public class Drug {
         this.drugId = drugId;
     }
 
-    public String getDrugCode() {
+    public Long getDrugCode() {
         return drugCode;
     }
 
-    public void setDrugCode(String drugCode) {
+    public void setDrugCode(Long drugCode) {
         this.drugCode = drugCode;
     }
 
@@ -88,13 +88,13 @@ public class Drug {
         this.activeElement = activeElement;
     }
 
-    public Long getDrugAmount() {
-        return drugAmount;
-    }
-
-    public void setDrugAmount(Long drugAmount) {
-        this.drugAmount = drugAmount;
-    }
+//    public Long getDrugAmount() {
+//        return drugAmount;
+//    }
+//
+//    public void setDrugAmount(Long drugAmount) {
+//        this.drugAmount = drugAmount;
+//    }
 
     public String getUnit() {
         return unit;
