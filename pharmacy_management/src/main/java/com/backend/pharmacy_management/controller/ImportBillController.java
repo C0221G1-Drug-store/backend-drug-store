@@ -24,9 +24,6 @@ public class ImportBillController {
     @Autowired
     private IImportBillService importBillService;
 
-    @Autowired
-    private IDrugService drugService;
-
     @GetMapping(value = "/drug-import-bills")
     private ResponseEntity<List<ImportBillDrug>> getListDrug() {
         List<ImportBillDrug> drugs = this.importBillService.getListDrug();
@@ -57,7 +54,6 @@ public class ImportBillController {
         this.importBillService.updateDrugImportBill(exportBillDetail.getImportBillDrug().getImportBillDrugId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
     @GetMapping(value="/export-bills/code", produces = MediaType.APPLICATION_JSON_VALUE)
     private ResponseEntity<String[]> createCodeExportBill(){
         String result = this.exportBillService.createCodeExportBill();
