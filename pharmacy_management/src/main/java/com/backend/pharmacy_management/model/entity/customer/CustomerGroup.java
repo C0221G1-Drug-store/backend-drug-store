@@ -15,8 +15,8 @@ import java.util.List;
 public class CustomerGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
+    private Long customerGroupId;
+    private String customerGroupName;
     @OneToMany(mappedBy = "customers")
     private List<Customer> customers;
 }
