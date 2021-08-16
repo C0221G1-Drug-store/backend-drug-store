@@ -10,7 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -31,12 +31,12 @@ public class Employee {
     private int position;
     private String accountName;
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference
-    List<ImportBill> importBills;
+    @JsonManagedReference(value = "employee-import_bill")
+    Set<ImportBill> importBills;
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference
-    List<ExportBill> exportBills;
+    @JsonManagedReference(value = "employee-export_bill")
+    Set<ExportBill> exportBills;
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference
-    List<BillSale> billWholesales;
+    @JsonManagedReference(value = "employee-bill_sale")
+    Set<BillSale> billWholesales;
 }

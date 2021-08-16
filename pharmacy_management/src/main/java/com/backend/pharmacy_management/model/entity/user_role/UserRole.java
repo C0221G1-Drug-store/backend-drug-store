@@ -21,10 +21,10 @@ public class UserRole {
     private Long id;
     @ManyToOne
     @JoinColumn(nullable = false,name = "role_id")
-    @JsonManagedReference
+    @JsonBackReference(value = "app_role-user_role")
     private Role role;
     @ManyToOne
     @JoinColumn(nullable = false,name = "user_id")
-    @JsonManagedReference
+    @JsonBackReference(value = "app_user-user_role")
     private User user;
 }

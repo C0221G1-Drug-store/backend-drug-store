@@ -3,12 +3,13 @@ package com.backend.pharmacy_management.model.entity.manufacturer;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
@@ -26,8 +27,9 @@ public class Manufacturer {
     private Double manufacturerDebts;
     private String manufacturerNote ;
     @OneToMany(mappedBy = "manufacturer")
-    @JsonBackReference
-    private List<ImportBill> importBills;
+    @JsonManagedReference(value = "manufacturer-import_bill")
+    private Set<ImportBill> importBills;
     @OneToMany(mappedBy = "manufacturer")
-    private List<ExportBill> exportBills;
+    @JsonManagedReference(value = "manufacturer-export_bill")
+    private Set<ExportBill> exportBills;
 }

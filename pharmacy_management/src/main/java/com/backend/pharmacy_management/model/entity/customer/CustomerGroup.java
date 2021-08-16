@@ -1,12 +1,14 @@
 package com.backend.pharmacy_management.model.entity.customer;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -19,6 +21,6 @@ public class CustomerGroup {
     private int id;
     private String name;
     @OneToMany(mappedBy = "customers")
-    @JsonBackReference
+    @JsonManagedReference(value = "customer-customer_group")
     private List<Customer> customers;
 }

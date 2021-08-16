@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
@@ -18,12 +18,12 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id",nullable = false)
-    @JsonManagedReference
+    @JsonBackReference
     private Long roleId;
     @Column(name = "role_name")
-    @JsonManagedReference
+    @JsonBackReference
     private String roleName;
     @OneToMany(mappedBy = "role")
-    @JsonBackReference
-    private List<UserRole> userRoles;
+    @JsonManagedReference(value = "app_role-user_role")
+    private Set<UserRole> userRoles;
 }
