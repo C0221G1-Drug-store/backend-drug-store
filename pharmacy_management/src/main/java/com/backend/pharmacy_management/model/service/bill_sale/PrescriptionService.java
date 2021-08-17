@@ -20,4 +20,14 @@ public class PrescriptionService implements IPrescriptionService{
     public Prescription findById(int id) {
         return iPrescriptionRpository.findById(id);
     }
+
+    @Override
+    public List<Prescription> search(String fieldSearch, String valueSearch) {
+//        return null;
+        if (fieldSearch.equals("prescriptionName") ){
+            return iPrescriptionRpository.findpres("%" + valueSearch + "%");
+        }
+        return iPrescriptionRpository.findBySign("%" + valueSearch + "%");
+
+    }
 }

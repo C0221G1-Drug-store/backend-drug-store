@@ -1,18 +1,17 @@
 package com.backend.pharmacy_management.controller.bill_sale;
 
+import com.backend.pharmacy_management.model.entity.bill_sale.BillSale;
 import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Prescription;
+import com.backend.pharmacy_management.model.service.bill_sale.IBillSaleService;
 import com.backend.pharmacy_management.model.service.bill_sale.IDrugOfBillService;
 import com.backend.pharmacy_management.model.service.bill_sale.IDrugService;
 import com.backend.pharmacy_management.model.service.bill_sale.IPrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +22,8 @@ public class BillSaleController {
     IPrescriptionService iPrescriptionService;
     @Autowired
     IDrugOfBillService iDrugOfBillService;
-
+    @Autowired
+    IBillSaleService iBillSaleService;
     @Autowired
     IDrugService iDrugService;
     @GetMapping("/prescription")
@@ -59,5 +59,20 @@ public class BillSaleController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(prescription, HttpStatus.OK);
+    }
+    @PostMapping("prescription/bill")
+    public void save(@RequestBody BillSale bill) {
+        iBillSaleService.saveBill(bill);
+    }
+
+    @GetMapping("prescription/search")
+    public ResponseEntity<List<Prescription>> searchPrescription(@RequestParam String fieldSearch, @RequestParam String valueSearch){
+
+
+        List<Prescription> list = iPrescriptionService.search(fieldSearch, valueSearch);
+        if(list.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new  ResponseEntity<>(list,HttpStatus.OK);
     }
 }

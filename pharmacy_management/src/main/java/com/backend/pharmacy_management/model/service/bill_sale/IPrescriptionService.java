@@ -8,4 +8,6 @@ public interface IPrescriptionService {
     List<Prescription> findAll();
 
     Prescription findById(int id);
+
+    List<Prescription> search(String fieldSearch, String valueSearch);
 }
