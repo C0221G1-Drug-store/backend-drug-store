@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +22,10 @@ import java.util.Optional;
 @RequestMapping("/api/importBills")
 public class ImportBillRestController {
     private final IImportBillService importBillService;
-    private final IPaymentService paymentService;
+
     @Autowired
-    public ImportBillRestController(IImportBillService importBillService, IPaymentService paymentService) {
+    public ImportBillRestController(IImportBillService importBillService) {
         this.importBillService = importBillService;
-        this.paymentService = paymentService;
     }
 
     @GetMapping
@@ -41,7 +42,7 @@ public class ImportBillRestController {
         ImportBill importBill = new ImportBill();
         BeanUtils.copyProperties(importBillDto, importBill);
         this.importBillService.save(importBill);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(importBill,HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
