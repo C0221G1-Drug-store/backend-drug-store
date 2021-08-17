@@ -4,11 +4,8 @@ import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.*;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,32 +14,33 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "import_bill_drug")
 public class ImportBillDrug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ImportBillDrugId;
-    private Integer importAmount;
-    private Double importPrice;
-    private Integer discountRate;
-    private Integer lotNumber;
-    private Date expiry;
-    private Integer vat;
-    private Boolean flag = true;
-
+    Long importBillDrugId;
+    Integer importAmount;
+    Double importPrice;
+    Integer discountRate;
+    Integer lotNumber;
+    Date expiry;
+    Integer vat;
+    Boolean flag;
     @ManyToOne
     @JoinColumn(name = "import_bill_id")
-    @JsonManagedReference(value = "import-detail")
-    private ImportBill importBill;
+    ImportBill importBill;
 
     @ManyToOne
     @JoinColumn(name = "drug_id")
-    @JsonManagedReference(value = "drug-detail")
-    private Drug drug;
+    Drug drug;
 
-    @OneToOne(mappedBy = "importBillDrug")
-    private ExportBillDetail exportBillDetail;
+    @OneToOne(mappedBy = "importBillDrug", cascade = CascadeType.ALL)
+    @JsonIgnore
+    ExportBillDetail exportBillDetail;
+
+    public ImportBillDrug() {
+    }
+
 }

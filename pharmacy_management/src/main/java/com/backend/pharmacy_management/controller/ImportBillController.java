@@ -1,18 +1,25 @@
 package com.backend.pharmacy_management.controller;
 
+import com.backend.pharmacy_management.model.dto.ExportBillDetailDto;
+import com.backend.pharmacy_management.model.dto.ExportBillDto;
+import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBillType;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
 import com.backend.pharmacy_management.model.service.IDrugService;
+import com.backend.pharmacy_management.model.service.IEmployeeService;
 import com.backend.pharmacy_management.model.service.IExportBillService;
 import com.backend.pharmacy_management.model.service.IImportBillService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,6 +30,9 @@ public class ImportBillController {
 
     @Autowired
     private IImportBillService importBillService;
+
+    @Autowired
+    private IEmployeeService employeeService;
 
     @GetMapping(value = "/drug-import-bills")
     private ResponseEntity<List<ImportBillDrug>> getListDrug() {
@@ -43,21 +53,36 @@ public class ImportBillController {
     }
 
     @PostMapping(value = "/export-bills")
-    private ResponseEntity<Void> createExportBill(@RequestBody ExportBill exportBill) {
+    private ResponseEntity<ExportBill> createExportBill(@RequestBody @Valid ExportBillDto exportBillDto, BindingResult bindingResult) {
+        new ExportBillDto().validate(exportBillDto, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        ExportBill exportBill = new ExportBill();
+        BeanUtils.copyProperties(exportBillDto, exportBill);
+        exportBill.setEmployee(this.employeeService.findById(1L));
         this.exportBillService.createExportBill(exportBill);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(exportBill,HttpStatus.OK);
     }
 
     @PostMapping(value = "/export-bill-details")
-    private ResponseEntity<Void> createExportBillDetail(@RequestBody ExportBillDetail exportBillDetail) {
+    private ResponseEntity<Void> createExportBillDetail(@RequestBody @Valid ExportBillDetailDto exportBillDetailDto, BindingResult bindingResult) {
+        new ExportBillDetailDto().validate(exportBillDetailDto, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        ExportBillDetail exportBillDetail = new ExportBillDetail();
+        BeanUtils.copyProperties(exportBillDetailDto, exportBillDetail);
         this.exportBillService.createExportBillDetail(exportBillDetail);
         this.importBillService.updateDrugImportBill(exportBillDetail.getImportBillDrug().getImportBillDrugId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @GetMapping(value="/export-bills/code", produces = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<String[]> createCodeExportBill(){
+
+    @GetMapping(value = "/export-bills/code", produces = MediaType.APPLICATION_JSON_VALUE)
+    private ResponseEntity<String[]> createCodeExportBill() {
         String result = this.exportBillService.createCodeExportBill();
         String[] a = {result};
-        return new ResponseEntity<>(a,HttpStatus.OK);
+        return new ResponseEntity<>(a, HttpStatus.OK);
     }
+
 }

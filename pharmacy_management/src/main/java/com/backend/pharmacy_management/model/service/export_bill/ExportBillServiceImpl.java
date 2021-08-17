@@ -53,5 +53,10 @@ public class ExportBillServiceImpl implements IExportBillService {
         return result.toString();
     }
 
+    @Override
+    public List<ExportBill> getAll() {
+        return this.exportBillRepository.findAll();
+    }
+
 
 }

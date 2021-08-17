@@ -13,7 +13,6 @@ import java.util.List;
 @Configuration
 @ComponentScan
 public class Config extends WebMvcConfigurerAdapter {
-
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> messageConverters) {
         messageConverters.add(new MappingJackson2HttpMessageConverter());

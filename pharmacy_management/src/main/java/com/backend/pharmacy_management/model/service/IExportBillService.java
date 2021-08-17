@@ -11,4 +11,5 @@ public interface IExportBillService {
     void createExportBillDetail(ExportBillDetail exportBillDetail);
     List<ExportBillType> getListExportBillTye();
     String createCodeExportBill();
+    List<ExportBill> getAll();
 }

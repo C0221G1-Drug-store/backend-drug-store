@@ -4,21 +4,17 @@ import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.*;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name="drug")
+@Getter
+@Setter
+@Table(name = "drug")
 public class Drug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,26 +43,30 @@ public class Drug {
     @Column(name = "drug_side_effect", columnDefinition = "TEXT")
     private String drugSideEffect;
     private Boolean flag = true;
-
-//    @ManyToOne
-//    @JoinColumn(name = "drug_group_id")
-//    @JsonBackReference(value = "drug-group")
-//    private DrugGroup drugGroup;
-//
-//    @OneToMany(mappedBy = "drug")
-//    @JsonManagedReference(value = "drug-image")
-//    private Set<DrugImageDetail> drugImageDetails;
-//
-//    @OneToMany(mappedBy = "drug")
-//    @JsonBackReference(value = "drug-group-bill")
-//    private Set<DrugOfBill> drugOfBills;
-//
-//    @OneToMany(mappedBy = "drug")
-//    @JsonManagedReference(value = "drug-indicative")
-//    private Set<Indicative> indicatives;
+    private String manufacturer;
+    private String origin;
+    private String note;
+    @ManyToOne
+    @JoinColumn(name = "drug_group_id")
+    private DrugGroup drugGroup;
 
     @OneToMany(mappedBy = "drug")
-    @JsonBackReference (value = "drug-detail")
-    private Set<ImportBillDrug> importBillDrugs;
+    @JsonIgnore
+    private List<DrugImageDetail> drugImageDetails;
+
+    @OneToMany(mappedBy = "drug")
+    @JsonIgnore
+    private List<DrugOfBill> drugOfBills;
+
+    @OneToMany(mappedBy = "drug")
+    @JsonIgnore
+    private List<Indicative> indicatives;
+
+    @OneToMany(mappedBy = "drug")
+    @JsonIgnore
+    private List<ImportBillDrug> importBillDrugs;
+
+    public Drug() {
+    }
 
 }

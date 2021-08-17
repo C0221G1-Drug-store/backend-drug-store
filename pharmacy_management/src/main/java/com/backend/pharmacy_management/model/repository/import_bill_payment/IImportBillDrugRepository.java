@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface IImportBillDrugRepository extends JpaRepository<ImportBillDrug, Long> {
-    @Query(value = "select * from import_bill_drug d where d.import_amount > 0 && d.flag=1", nativeQuery = true)
+    @Query(value = "select * from import_bill_drug ibd where ibd.import_amount > 0 && ibd.flag=1", nativeQuery = true)
     List<ImportBillDrug> getAll();
 }

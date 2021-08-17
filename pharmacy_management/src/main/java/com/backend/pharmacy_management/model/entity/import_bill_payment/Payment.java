@@ -1,27 +1,26 @@
 package com.backend.pharmacy_management.model.entity.import_bill_payment;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "payment")
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long paymentId ;
-    private Double totalMoney ;
-    private Double prepayment ;
-    private Integer discount ;
-    private String status ;
-
+    Long paymentId ;
+    Double totalMoney ;
+    Double prepayment ;
+    Integer discount ;
+    String status ;
     @OneToOne(mappedBy = "payment")
     ImportBill importBill;
 
+    public Payment() {
+    }
 }

@@ -1,19 +1,17 @@
 package com.backend.pharmacy_management.model.entity.export_bill;
+
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.*;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
+
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "export_bill")
 public class ExportBill {
     @Id
@@ -23,21 +21,24 @@ public class ExportBill {
     private String exportBillDate;
     private String exportBillReason;
     private String exportBillAddress;
-    private Boolean flag=true;
+    private boolean flag;
     @ManyToOne
     @JoinColumn(name = "export_bill_type_id")
-    @JsonManagedReference(value = "type-export")
     private ExportBillType exportBillType;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "employee_id")
-    @JsonManagedReference(value = "employee-export")
     private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
-    @OneToMany(mappedBy = "exportBill")
-    private Set<ExportBillDetail> exportBillDetails;
+    @OneToMany(mappedBy = "exportBill", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<ExportBillDetail> exportBillDetails;
+
+    public ExportBill() {
+    }
+
 }
