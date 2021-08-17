@@ -20,7 +20,7 @@ public class ImportBillDto {
     private Long importBillId;
     private String importSystemCode;
     private String accountingVoucher;
-    private LocalDateTime invoiceDate;
+    private String invoiceDate;
     private Boolean flag;
     @JsonBackReference(value = "payment-import_bill")
     private  Payment payment;

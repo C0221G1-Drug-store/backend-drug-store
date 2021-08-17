@@ -2,15 +2,15 @@ package com.backend.pharmacy_management.model.entity.indicative_prescription;
 
 import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "indicative")
@@ -24,7 +24,5 @@ public class Indicative {
 //    private  Long amountPill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
-    @JsonBackReference(value = "indicatives_drug-drug")
     private Drug drug;
-
 }
