@@ -29,8 +29,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Page<User> findAllByProperty(Pageable pageable, String keyWord, String property) {
-        return null;
+    public Page<User> findAllByProperty(Pageable pageable, String keyWord, Long property) {
+        return userRepository.findAllUserByProperty(pageable,"%"+keyWord+"%",property);
     }
 
     @Override

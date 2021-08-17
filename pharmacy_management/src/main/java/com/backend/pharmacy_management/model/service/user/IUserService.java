@@ -13,7 +13,7 @@ public interface IUserService {
 
     void save(User user);
 
-    Page<User> findAllByProperty(Pageable pageable,String keyWord,String property);
+    Page<User> findAllByProperty(Pageable pageable,String keyWord,Long property);
 
     Iterable<User> findAllNoPage();
 }

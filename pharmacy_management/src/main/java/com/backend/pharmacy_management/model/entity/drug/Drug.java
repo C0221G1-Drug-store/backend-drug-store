@@ -51,17 +51,22 @@ public class Drug {
     private String note;
     @ManyToOne
     @JoinColumn(name = "drug_group_id")
+    @JsonBackReference(value = "drug_group-drug")
     private DrugGroup drugGroup;
     @OneToMany(mappedBy = "drug")
-    @JsonBackReference
+    @JsonManagedReference(value = "drug_image_detail-drug")
     private List<DrugImageDetail> drugImageDetails;
     @OneToMany(mappedBy = "drug")
-    @JsonBackReference
+    @JsonManagedReference(value = "drug_of_bill-drug")
     private List<DrugOfBill> drugOfBills;
     @OneToMany(mappedBy = "drug")
-    @JsonBackReference
+    @JsonManagedReference(value = "indicatives_drug-drug")
     private List<Indicative> indicatives;
     @OneToMany(mappedBy = "drug")
-    @JsonBackReference
+    @JsonManagedReference(value = "export_bill_detail-drug")
     private List<ExportBillDetail> exportBillDetails;
+    @OneToMany(mappedBy = "drug")
+    @JsonManagedReference(value = "import_bill_drug-drug")
+    private List<ImportBillDrug> importBillDrugs;
+
 }

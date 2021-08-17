@@ -1,14 +1,11 @@
 package com.backend.pharmacy_management.model.entity.export_bill;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -21,10 +18,10 @@ public class ExportBillDetail {
     private Long exportBillDetailId;
     @ManyToOne
     @JoinColumn(name = "export_bill_id")
-    @JsonManagedReference
+    @JsonBackReference(value = "export_bill_detail-export_bill")
     private ExportBill exportBill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
-    @JsonManagedReference
+    @JsonBackReference(value = "export_bill_detail-drug")
     private Drug drug;
 }

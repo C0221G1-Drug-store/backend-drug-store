@@ -1,13 +1,11 @@
 package com.backend.pharmacy_management.model.entity.drug;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -25,6 +23,6 @@ public class DrugImageDetail {
     private Boolean flag;
     @ManyToOne
     @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
-    @JsonManagedReference
+    @JsonBackReference(value = "drug_image_detail-drug")
     private Drug drug;
 }
