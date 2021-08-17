@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController("/Drug-of-bill")
 @CrossOrigin
 public class DrugOfBillController {
     @Autowired
@@ -27,4 +27,5 @@ public class DrugOfBillController {
         return new ResponseEntity<>(list, HttpStatus.OK);
 
     }
+
 }
