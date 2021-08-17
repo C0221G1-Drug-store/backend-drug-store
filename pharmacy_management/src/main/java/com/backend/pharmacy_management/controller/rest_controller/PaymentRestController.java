@@ -51,4 +51,5 @@ public class PaymentRestController {
         this.paymentService.save(payment);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }

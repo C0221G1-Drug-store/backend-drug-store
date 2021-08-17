@@ -12,14 +12,18 @@ import lombok.NoArgsConstructor;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImportBillDto {
     private Long importBillId;
+    @NotNull
     private String importSystemCode;
+    @NotNull
     private String accountingVoucher;
+    @NotNull
     private String invoiceDate;
     private Boolean flag;
     @JsonBackReference(value = "payment-import_bill")

@@ -9,17 +9,28 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImportBillDrugDto {
     Long importBillDrugId;
+    @NotNull
+    @Min(0)
     Integer importAmount;
+    @NotNull
+    @Min(0)
     Double importPrice;
+    @NotNull
+    @Min(0)
     Integer discountRate;
+    @NotNull
     Integer lotNumber;
+    @NotNull
     Date expiry;
+    @NotNull
     Integer vat;
     Boolean flag;
     ImportBill importBill;
