@@ -1,5 +1,6 @@
 package com.backend.pharmacy_management.model.entity.indicative_prescription;
 
+import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,4 +27,6 @@ public class Prescription {
     @JsonBackReference
     @OneToMany(targetEntity = PrescriptionIndicative.class)
     private List<PrescriptionIndicative> prescriptionIndicatives;
+    @OneToMany(targetEntity = DrugOfBill.class)
+    private List<DrugOfBill> drugOfBillList;
 }

@@ -1,5 +1,6 @@
 package com.backend.pharmacy_management.model.entity.customer;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,13 +15,15 @@ import java.util.Set;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long customerId;
     private String customerCode;
-    private String name;
-    private int age;
-    private String address;
-    private String phone;
+    private String customerName;
+    private Integer customerAge;
+    private String customerAddress;
+    private String customerPhone;
+    private boolean flag = true;
     @ManyToOne
     @JoinColumn(name = "customer_group_id")
+    @JsonManagedReference
     private CustomerGroup customers;
 }
