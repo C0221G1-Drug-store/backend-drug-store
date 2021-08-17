@@ -10,5 +10,6 @@ public interface IDrugService {
     List<ListDrugDTO> findAllDrugsPagination(int index);
     List<ListDrugDTO> findAllDrugsNotPagination();
     List<ListDrugDTO> searchDrugs(String searchTerm);
+    List<ListDrugDTO> findDrugByGroup(String drugGroupName);
     DrugDTO findDrugById(Long id);
 }

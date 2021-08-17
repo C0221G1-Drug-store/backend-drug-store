@@ -42,8 +42,7 @@ public class Drug {
     @ManyToOne
     @JoinColumn(name = "drug_group_id")
     private DrugGroup drugGroup;
-    @OneToMany(mappedBy = "drug")
-    private List<DrugImageDetail> drugImageDetails;
+    private String drugImageDetails;
     @OneToMany(mappedBy = "drug")
     private List<DrugOfBill> drugOfBills;
     @OneToMany(mappedBy = "drug")

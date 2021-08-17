@@ -30,6 +30,11 @@ public class DrugService implements IDrugService {
     }
 
     @Override
+    public List<ListDrugDTO> findDrugByGroup(String drugGroupName) {
+        return iDrugRepository.findDrugByGroup(drugGroupName);
+    }
+
+    @Override
     public DrugDTO findDrugById(Long id) {
         return iDrugRepository.findDrugById(id);
     }

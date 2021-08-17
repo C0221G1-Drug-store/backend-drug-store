@@ -42,6 +42,15 @@ public class DrugController {
         return new ResponseEntity<>(drugs, HttpStatus.OK);
     }
 
+    @GetMapping(value={"/drug-group/{drugGroupName}"})
+    public ResponseEntity<List<ListDrugDTO>> findDrugByGroup(@PathVariable String drugGroupName) {
+        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findDrugByGroup(drugGroupName);
+        if (drugs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(drugs, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<DrugDTO> findById(@PathVariable Long id) {
         DrugDTO drugDTO = drugService.findDrugById(id);
