@@ -13,9 +13,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+//@Data
 //@NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @Table(name="drug")
 public class Drug {
     @Id
@@ -44,14 +44,17 @@ public class Drug {
 //    @JoinColumn(name = "drug_group_id")
     @Column(name = "drug_group_id")
     private String drugGroup;
-    @OneToMany(mappedBy = "drug")
-    private List<DrugImageDetail> drugImageDetails;
-    @OneToMany(mappedBy = "drug")
-    private List<DrugOfBill> drugOfBills;
-    @OneToMany(mappedBy = "drug")
-    private List<Indicative> indicatives;
-    @OneToMany(mappedBy = "drug")
-    private List<ExportBillDetail> exportBillDetails;
+//    @OneToMany(targetEntity = DrugImageDetail.class, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "drug_id",referencedColumnName = "drug_id")
+//    private List<DrugImageDetail> drugImageDetails;
+    private String drugImageDetails;
+//    @OneToMany(mappedBy = "drug")
+//    private List<DrugOfBill> drugOfBills;
+//    @OneToMany(mappedBy = "drug")
+//    private List<Indicative> indicatives;
+//    @OneToMany(mappedBy = "drug")
+//    private List<ExportBillDetail> exportBillDetails;
+
 
     public Drug() {
     }
@@ -87,14 +90,6 @@ public class Drug {
     public void setActiveElement(String activeElement) {
         this.activeElement = activeElement;
     }
-
-//    public Long getDrugAmount() {
-//        return drugAmount;
-//    }
-//
-//    public void setDrugAmount(Long drugAmount) {
-//        this.drugAmount = drugAmount;
-//    }
 
     public String getUnit() {
         return unit;
@@ -192,35 +187,11 @@ public class Drug {
         this.drugGroup = drugGroup;
     }
 
-    public List<DrugImageDetail> getDrugImageDetails() {
+    public String getDrugImageDetails() {
         return drugImageDetails;
     }
 
-    public void setDrugImageDetails(List<DrugImageDetail> drugImageDetails) {
+    public void setDrugImageDetails(String drugImageDetails) {
         this.drugImageDetails = drugImageDetails;
-    }
-
-    public List<DrugOfBill> getDrugOfBills() {
-        return drugOfBills;
-    }
-
-    public void setDrugOfBills(List<DrugOfBill> drugOfBills) {
-        this.drugOfBills = drugOfBills;
-    }
-
-    public List<Indicative> getIndicatives() {
-        return indicatives;
-    }
-
-    public void setIndicatives(List<Indicative> indicatives) {
-        this.indicatives = indicatives;
-    }
-
-    public List<ExportBillDetail> getExportBillDetails() {
-        return exportBillDetails;
-    }
-
-    public void setExportBillDetails(List<ExportBillDetail> exportBillDetails) {
-        this.exportBillDetails = exportBillDetails;
     }
 }
