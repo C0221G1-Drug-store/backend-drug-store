@@ -44,7 +44,7 @@ public class ReportService implements IReportService {
 
     @Override
     public List<ReportSellingDiary> sellingDiarys(String startDate, String endDate) {
-        String sql = "select employee_code as ma_nhan_vien,employee_name as ten_nhan_vien,bill_sale_code as ma_hoa_don,invoice_date as ngay_ban,total_money as tong_tien from employee e join bill_sale bs on e.employee_id = bs.employee_id where invoice_date between ? and ? order by employee_name, employee_id;";
+        String sql = "select employee_code as ma_nhan_vien,employee_name as ten_nhan_vien,bill_sale_code as ma_hoa_don,invoice_date as ngay_ban,total_money as tong_tien from employee e join bill_sale bs on e.employee_id = bs.employee_id where invoice_date between ? and ? order by employee_name, e.employee_id;";
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, startDate, endDate);
         List<ReportSellingDiary> sellingDiarys = new ArrayList<>();
         ReportSellingDiary sellingDiary;

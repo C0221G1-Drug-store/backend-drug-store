@@ -1,16 +1,16 @@
 package com.backend.pharmacy_management.model.entity.export_bill;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "export_bill_type")
@@ -20,5 +20,6 @@ public class ExportBillType {
     private Long exportBillTypeId;
     private String exportBillTypeName;
     @OneToMany(mappedBy = "exportBillType")
-    private Set<ExportBill> exportBills;
+    @JsonBackReference
+    private List<ExportBill> exportBills;
 }
