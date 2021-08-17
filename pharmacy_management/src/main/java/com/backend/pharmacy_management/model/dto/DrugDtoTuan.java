@@ -22,7 +22,7 @@ public class DrugDtoTuan {
     private String manufacturer;
     private String origin;
     private String note;
-    private String drugGroup;
+    private DrugGroup drugGroup;
     private String drugSideEffect;
 
     public DrugDtoTuan() {
@@ -149,11 +149,11 @@ public class DrugDtoTuan {
         this.drugSideEffect = drugSideEffect;
     }
 
-    public String getDrugGroup() {
+    public DrugGroup getDrugGroup() {
         return drugGroup;
     }
 
-    public void setDrugGroup(String drugGroup) {
+    public void setDrugGroup(DrugGroup drugGroup) {
         this.drugGroup = drugGroup;
     }
 }
