@@ -38,7 +38,6 @@ public class ImportBillDrug {
     @JoinColumn(name = "drug_id")
     @JsonManagedReference
     Drug drug;
-
     @OneToOne(mappedBy = "importBillDrug")
     private ExportBillDetail exportBillDetail;
 }
