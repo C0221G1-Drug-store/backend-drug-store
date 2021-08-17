@@ -59,5 +59,14 @@ public class DrugController {
         }
         return new ResponseEntity<DrugDTO>(drugDTO, HttpStatus.OK);
     }
+
+    @GetMapping("/client/{id}")
+    public ResponseEntity<DrugDTO> findByIdClient(@PathVariable Long id) {
+        DrugDTO drugDTO = drugService.findDrugByIdClient(id);
+        if (drugDTO == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<DrugDTO>(drugDTO, HttpStatus.OK);
+    }
 }
   

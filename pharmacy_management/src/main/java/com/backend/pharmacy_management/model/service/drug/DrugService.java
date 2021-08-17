@@ -38,4 +38,9 @@ public class DrugService implements IDrugService {
     public DrugDTO findDrugById(Long id) {
         return iDrugRepository.findDrugById(id);
     }
+
+    @Override
+    public DrugDTO findDrugByIdClient(Long id) {
+        return iDrugRepository.findDrugByIdClient(id);
+    }
 }

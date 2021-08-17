@@ -12,4 +12,5 @@ public interface IDrugService {
     List<ListDrugDTO> searchDrugs(String searchTerm);
     List<ListDrugDTO> findDrugByGroup(String drugGroupName);
     DrugDTO findDrugById(Long id);
+    DrugDTO findDrugByIdClient(Long id);
 }
