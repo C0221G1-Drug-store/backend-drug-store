@@ -25,8 +25,8 @@ public class Drug {
     private Long drugCode;
     private String drugName;
     private String activeElement;
-//    @Column(name = "drug_amout")
-//    private Long drugAmount;
+    @Column(name = "drug_amount")
+    private Long drugAmount;
     private String unit;
     private String conversionUnit;
     private Integer conversionRate;
@@ -40,10 +40,9 @@ public class Drug {
     @Column(columnDefinition = "TEXT")
     private String drugSideEffect;
     private Boolean flag = true;
-//    @ManyToOne
-//    @JoinColumn(name = "drug_group_id")
-    @Column(name = "drug_group_id")
-    private String drugGroup;
+    @ManyToOne
+    @JoinColumn(name = "drug_group_id")
+    private DrugGroup drugGroup;
 //    @OneToMany(targetEntity = DrugImageDetail.class, cascade = CascadeType.ALL)
 //    @JoinColumn(name = "drug_id",referencedColumnName = "drug_id")
 //    private List<DrugImageDetail> drugImageDetails;
@@ -57,6 +56,14 @@ public class Drug {
 
 
     public Drug() {
+    }
+
+    public Long getDrugAmount() {
+        return drugAmount;
+    }
+
+    public void setDrugAmount(Long drugAmount) {
+        this.drugAmount = drugAmount;
     }
 
     public Long getDrugId() {
@@ -179,11 +186,11 @@ public class Drug {
         this.flag = flag;
     }
 
-    public String getDrugGroup() {
+    public DrugGroup getDrugGroup() {
         return drugGroup;
     }
 
-    public void setDrugGroup(String drugGroup) {
+    public void setDrugGroup(DrugGroup drugGroup) {
         this.drugGroup = drugGroup;
     }
 

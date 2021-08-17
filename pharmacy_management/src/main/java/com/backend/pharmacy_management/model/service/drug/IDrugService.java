@@ -19,4 +19,6 @@ public interface IDrugService {
   
    void deleteDrugById(Long id);
     DrugDTO findDrugById(Long id);
+    Drug findById(Long id);
+
 }
