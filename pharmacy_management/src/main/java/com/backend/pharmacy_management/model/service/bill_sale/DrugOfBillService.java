@@ -23,8 +23,6 @@ public class DrugOfBillService implements IDrugOfBillService {
         iDrugOfBillRepository.save(drugOfBill);
     }
 
-
-
     @Override
     public void remove(Long id) {
         iDrugOfBillRepository.deleteById(id);

@@ -107,4 +107,9 @@ public class BillSaleController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping(value = "/delete-drug-of-bill")
+    public ResponseEntity deleteManufacturer(@RequestParam Long id) {
+        iDrugOfBillService.remove(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
