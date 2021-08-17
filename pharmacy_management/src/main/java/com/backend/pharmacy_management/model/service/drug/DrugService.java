@@ -52,4 +52,9 @@ public class DrugService implements IDrugService {
     public DrugDTO findDrugById(Long id) {
         return iDrugRepository.findDrugById(id);
     }
+
+    @Override
+    public Drug findById(Long id) {
+        return iDrugRepository.findById(id).orElse(null);
+    }
 }

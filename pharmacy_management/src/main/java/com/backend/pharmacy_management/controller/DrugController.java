@@ -4,7 +4,9 @@ import com.backend.pharmacy_management.model.dto.DrugDTO;
 import com.backend.pharmacy_management.model.dto.DrugDtoTuan;
 import com.backend.pharmacy_management.model.dto.ListDrugDTO;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
+import com.backend.pharmacy_management.model.entity.drug.DrugGroup;
 import com.backend.pharmacy_management.model.service.drug.IDrugService;
+import com.backend.pharmacy_management.model.service.drug_group.IDrugGroupService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,8 @@ import java.util.Optional;
 public class DrugController {
     @Autowired
     private IDrugService drugService;
+    @Autowired
+    private IDrugGroupService drugGroupService;
 
     @GetMapping
     public ResponseEntity<List<ListDrugDTO>> findAllDrugsPagination(@RequestParam int index) {
@@ -41,12 +45,30 @@ public class DrugController {
         return new ResponseEntity<>(drugs, HttpStatus.OK);
 
     }
+    @GetMapping(value = "/drugGroup")
+    public ResponseEntity<List<DrugGroup>> getListDrugGroup(){
+        List<DrugGroup> listDrugGroup = drugGroupService.findAllDrugGroup();
+        if (listDrugGroup.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(listDrugGroup,HttpStatus.OK);
+    }
     @PostMapping
     public ResponseEntity<Drug> saveDrug(@Valid @RequestBody DrugDtoTuan drugDtoTuan, BindingResult bindingResult) {
         Drug drug = new Drug();
         BeanUtils.copyProperties(drugDtoTuan,drug);
         drug.setDrugCode ((long) Math.floor(Math.random()*1000000));
         return new ResponseEntity<>(drugService.saveDrug(drug), HttpStatus.CREATED);
+    }
+    @PutMapping("/{id}&{code}")
+    public ResponseEntity<Drug> updateBenhAn(@PathVariable Long id,@PathVariable Long code,@RequestBody Drug drug) {
+        Drug drug1 = drugService.findById(id);
+        if (drug1==null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        drug.setDrugId(drug1.getDrugId());
+        drug.setDrugCode(code);
+        return new ResponseEntity<>(drugService.saveDrug(drug), HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<DrugDTO> deleteById(@PathVariable Long id) {
