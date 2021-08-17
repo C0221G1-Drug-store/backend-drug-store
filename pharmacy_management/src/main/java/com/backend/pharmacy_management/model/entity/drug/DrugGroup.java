@@ -1,6 +1,6 @@
 package com.backend.pharmacy_management.model.entity.drug;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +20,6 @@ public class DrugGroup {
     private String drugGroupCode;
     private String drugGroupName;
     @OneToMany(mappedBy = "drugGroup")
-    @JsonBackReference
+    @JsonManagedReference(value = "drug_group-drug")
     private List<Drug> drugs;
 }
