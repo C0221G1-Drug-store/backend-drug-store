@@ -1,5 +1,6 @@
 package com.backend.pharmacy_management.model.entity.import_bill_payment;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,13 +16,14 @@ import javax.persistence.*;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long paymentId ;
+    Integer paymentId ;
     Double totalMoney ;
     Double prepayment ;
     Integer discount ;
     String status ;
-    @OneToOne(mappedBy = "payment")
-
+    @OneToOne
+    @JoinColumn(name = "importBill_id")
+    @JsonBackReference
     ImportBill importBill;
 
 }

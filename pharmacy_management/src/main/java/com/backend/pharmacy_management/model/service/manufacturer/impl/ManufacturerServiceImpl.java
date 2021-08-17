@@ -95,4 +95,14 @@ public class ManufacturerServiceImpl implements IManufacturerService {
         return importBillRepository.findAllByImportBill(id,pageable);
     }
 
+    @Override
+    public ImportBill findByIdImportBill(Integer id) {
+        return importBillRepository.findByIdImportBill(id);
+    }
+
+    @Override
+    public Page<ImportBill> findByDateImportBill(Integer id,String startDate, String endDate,Pageable pageable) {
+        return importBillRepository.findByDateImportBill(id,startDate,endDate,pageable);
+    }
+
 }

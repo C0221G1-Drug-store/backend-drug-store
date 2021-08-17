@@ -26,16 +26,14 @@ public class ImportBill {
     private String accountingVoucher;
     private LocalDateTime invoiceDate;
     private Boolean flag = true;
-    @OneToOne
-    @JoinColumn(name = "payment_id")
+
+    @OneToOne(mappedBy = "importBill")
     private  Payment payment;
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
-
     private Manufacturer manufacturer;
     @ManyToOne
     @JoinColumn(name = "employee_id")
-
     private Employee employee;
     @OneToMany(mappedBy = "importBill",fetch = FetchType.LAZY)
 

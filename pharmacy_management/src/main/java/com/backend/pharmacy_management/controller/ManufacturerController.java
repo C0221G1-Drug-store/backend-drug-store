@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
@@ -106,12 +107,23 @@ public class ManufacturerController {
     }
     @GetMapping(value = "/show")
     public ResponseEntity<Manufacturer> showManufacturer(@RequestParam Integer id){
-
         return new ResponseEntity<>(iManufacturerService.findByManufacturerId(id), HttpStatus.OK);
     }
-    @GetMapping(value = "/shows")
-    public ResponseEntity<Page<ImportBill>> showImportBillIdManufacturer(@RequestParam Integer id,@RequestParam Integer page){
-        return new ResponseEntity<>(iManufacturerService.findByIdManufacturer(id,PageRequest.of(page,2)), HttpStatus.OK);
+    @GetMapping(value = "/importBill/shows")
+    public ResponseEntity<Page<ImportBill>> showImportBillIdManufacturer(@RequestParam Integer id,@RequestParam Integer page,@RequestParam Optional<String> startDate,@RequestParam Optional<String> endDate){
+        String startDate1="";
+        String endDate1="";
+
+        if(startDate.isPresent() && endDate.isPresent()){
+            startDate1= startDate.get();
+            endDate1=endDate.get();
+            return new ResponseEntity<>(iManufacturerService.findByDateImportBill(id, startDate1 , endDate1,PageRequest.of(page,2)), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(iManufacturerService.findByIdManufacturer(id, PageRequest.of(page,2)), HttpStatus.OK);
+    }
+    @GetMapping(value = "/importBill")
+    public ResponseEntity<ImportBill> findByIdImportBill(@RequestParam Integer id){
+        return new ResponseEntity<>(iManufacturerService.findByIdImportBill(id), HttpStatus.OK);
     }
 
 }

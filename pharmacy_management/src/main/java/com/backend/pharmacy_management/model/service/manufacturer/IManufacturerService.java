@@ -27,5 +27,6 @@ public interface IManufacturerService {
 
     Page<Manufacturer> findAllSortPhoneNumber(Pageable pageable);
     Page<ImportBill> findByIdManufacturer(Integer id,Pageable pageable);
-
+    ImportBill findByIdImportBill(Integer id);
+    Page<ImportBill> findByDateImportBill(Integer id,String startDate, String endDate,Pageable pageable);
 }
