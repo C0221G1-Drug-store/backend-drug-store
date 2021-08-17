@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface DrugGroupRepository extends JpaRepository<DrugGroup,Long>  {
 
-    @Query(value="select * from drug_group",nativeQuery=true)
+    @Query(value="select * from drug_group where flag=1",nativeQuery=true)
     Page<DrugGroup> findAllPage(Pageable pageable);
 
     @Query(value="select * from drug_group where flag=1",nativeQuery=true)
@@ -20,6 +20,6 @@ public interface DrugGroupRepository extends JpaRepository<DrugGroup,Long>  {
 
     @Modifying
     @Transactional
-    @Query(value="update drug_group set flag=1 where drug_group_id=?",nativeQuery=true)
+    @Query(value="update drug_group set flag=0 where drug_group_id=?",nativeQuery=true)
     void delete(DrugGroup drugGroup);
 }

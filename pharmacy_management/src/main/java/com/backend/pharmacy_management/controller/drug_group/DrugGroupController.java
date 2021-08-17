@@ -60,8 +60,8 @@ public class DrugGroupController {
         if (drugGroup == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        drugGroup.setFlag(false);
         drugGroupService.delete(drugGroup);
+
         return new ResponseEntity<>(drugGroup, HttpStatus.NO_CONTENT);
     }
 }
