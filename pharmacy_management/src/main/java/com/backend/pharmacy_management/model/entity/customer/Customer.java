@@ -1,16 +1,18 @@
 package com.backend.pharmacy_management.model.entity.customer;
+
 import com.backend.pharmacy_management.model.entity.bill_sale.BillSale;
-import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
+
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "customer")
@@ -25,9 +27,9 @@ public class Customer {
     private String phone;
     @ManyToOne
     @JoinColumn(name = "customer_group_id")
-    @JsonBackReference(value = "customer-customer_group")
     private CustomerGroup customers;
     @OneToMany(mappedBy = "customer")
-    @JsonManagedReference(value = "customer-bill_sale")
+    @JsonBackReference(value = "customer-bill_sale")
     List<BillSale> billWholesales;
+
 }
