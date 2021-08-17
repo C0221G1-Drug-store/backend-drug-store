@@ -24,4 +24,8 @@ public interface IReportService {
     List<SupplierList> supplierList();
 
     List<ReportOnMedicationBeingProvided> reportOnMedicationBeingProvided();
+    List<ReportSellingDiary> sellingDiarys(String startDate, String endDate);
+    List<ReportMedicinesNeedToBeImported> medicinesNeedToBeImporteds();
+    List<ReportTheDrugIsAboutToExpire> theDrugIsAboutToExpires();
+    List<ReportBestSellingDrug> bestSellingDrugs(String startDate, String endDate);
 }

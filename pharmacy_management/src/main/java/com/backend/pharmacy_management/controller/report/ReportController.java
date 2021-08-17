@@ -20,6 +20,7 @@ public class ReportController {
     @GetMapping("/{choice}/{startDate}/{endDate}")
     public ResponseEntity<List> getList(@PathVariable String choice, @PathVariable String startDate, @PathVariable String endDate) {
         switch (choice) {
+
             case "reportImportDetails":
                 return new ResponseEntity<>(reportService.reportImportDetails(startDate, endDate), HttpStatus.OK);
             case "reportCancellationDetails":
@@ -36,6 +37,28 @@ public class ReportController {
                 return new ResponseEntity<>(reportService.supplierList(), HttpStatus.OK);
             case "reportOnMedicationBeingProvided":
                 return new ResponseEntity<>(reportService.reportOnMedicationBeingProvided(), HttpStatus.OK);
+
+
+
+
+
+
+
+
+            case "sellingDiarys":
+                List<ReportSellingDiary> sellingDiaryList = reportService.sellingDiarys(startDate, endDate);
+                return new ResponseEntity<>(sellingDiaryList, HttpStatus.OK);
+            case "medicinesNeedToBeImporteds":
+                List<ReportMedicinesNeedToBeImported> medicinesNeedToBeImportedList = reportService.medicinesNeedToBeImporteds();
+                return new ResponseEntity<>(medicinesNeedToBeImportedList, HttpStatus.OK);
+            case "theDrugIsAboutToExpires":
+                List<ReportTheDrugIsAboutToExpire> theDrugIsAboutToExpireList = reportService.theDrugIsAboutToExpires();
+                return new ResponseEntity<>(theDrugIsAboutToExpireList, HttpStatus.OK);
+            case "bestSellingDrugs":
+                List<ReportBestSellingDrug> bestSellingDrugList = reportService.bestSellingDrugs(startDate, endDate);
+                return new ResponseEntity<>(bestSellingDrugList, HttpStatus.OK);
+
+
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
