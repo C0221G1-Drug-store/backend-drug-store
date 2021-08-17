@@ -14,7 +14,26 @@ public class EmployeeController {
     private IEmployeeService employeeService;
 
     @PostMapping("/create")
-    public ResponseEntity<Employee> save(@RequestBody Employee employee) {
-        return new ResponseEntity<>(employeeService.saves(employee), HttpStatus.CREATED);
+    public void save(@RequestBody Employee employee) {
+         employeeService.save(employee);
     }
+
+//    @PostMapping("/create")
+//    public ResponseEntity<Employee> addNewEmployee(@RequestBody Employee employee) {
+//
+//        // Check provider
+//
+//        // Create vaccine
+//        vaccineService.createVaccine(createVaccineDTO);
+//
+//        Vaccine vaccine = vaccineService.searchName(createVaccineDTO.getNameVaccine());
+//
+//        storageService.createStorage((int) createVaccineDTO.getQuantity(), vaccine.getVaccineId());
+//        invoiceService.createInvoice(createVaccineDTO.getExpired(), createVaccineDTO.getUnitPrice(),
+//                (int) createVaccineDTO.getQuantity(), createVaccineDTO.getDayReceive(),
+//                provider.getProviderId(), vaccine.getVaccineId());
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//
+//        return new ResponseEntity<Void>(httpHeaders, HttpStatus.OK);
+//    }
 }

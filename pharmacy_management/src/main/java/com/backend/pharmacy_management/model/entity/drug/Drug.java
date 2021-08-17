@@ -6,15 +6,14 @@ import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBi
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="drug")
