@@ -10,9 +10,14 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ExportBillRepository extends JpaRepository<ExportBill, Long> {
-    @Query(value = "IF( cast(?1 as date) = cast(?2 as date)) then select * from export_bill where cast(export_bill.date_create as time) > cast(?1 as time) and cast(export_bill.date_create as time) < cast(?2 as time);" +
-            "elseif( cast(?3 as time) = cast(?4 as time)) then select * from export_bill where cast(export_bill.date_create as date) > cast(?3 as date) and cast(export_bill.date_create as date) < cast(?4 as date);" +
-            "    else select * from export_bill where cast(export_bill.date_create as time) > cast(?3 as time) and cast(export_bill.date_create as time) < cast(?4 as time) and cast(export_bill.date_create as date) > cast(?1 as date) and cast(export_bill.date_create as date) < cast(field2 as date);" +
-            "    end if;", nativeQuery = true)
-    Page<ExportBill> findByTimeFields(String field1, String field2 , String field3 , String field4 , long field5, Pageable pageable);
+    @Query(value = "select * from export_bill where cast(export_bill.date_create as time) > cast(?1 as time) and cast(export_bill.date_create as time) < cast(?2 as time) in (select * from export_bill where export_bill.type_export_bill_id = ?3);", nativeQuery = true)
+    Page<ExportBill> findByTimeFields(String timeCreate, String toTime, long typeId, Pageable pageable);
+
+    @Query(value = "select * from export_bill where cast(export_bill.date_create as time) > cast(?1 as time) and cast(export_bill.date_create as time) < cast(?2 as time) in (select * from export_bill where export_bill.type_export_bill_id = ?3 and export_bill.);", nativeQuery = true)
+
+    @Query(value = "select * from export_bill where cast(export_bill.date_create as date) > cast(?1 as date) and cast(export_bill.date_create as date) < cast(?2 as date) in (select * from export_bill where export_bill.type_export_bill_id = ?3);", nativeQuery = true)
+    Page<ExportBill> findByDateFields(String dateCreate, String toDate, long typeId, Pageable pageable);
+
+    @Query(value = "select * from export_bill where cast(export_bill.date_create as time) > cast(?3 as time) and cast(export_bill.date_create as time) < cast(?4 as time) and cast(export_bill.date_create as date) > cast(?1 as date) and cast(export_bill.date_create as date) < cast(?2 as date) in (select * from export_bill where export_bill.type_export_bill_id = ?5);", nativeQuery = true)
+    Page<ExportBill> findBy4Fields(String dateCreate, String toDate, String timeCreate, String toTime, long typeId, Pageable pageable);
 }

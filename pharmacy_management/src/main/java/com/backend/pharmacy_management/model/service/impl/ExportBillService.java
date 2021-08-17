@@ -23,8 +23,13 @@ public class ExportBillService implements IExportBillService {
     }
 
     @Override
-    public Page<ExportBill> findByFields(String field1, String field2, String field3, String field4, Long typeId, Pageable pageable) {
-        return this.exportBillRepository.findByTimeFields(field1, field2, field3, field4, typeId, pageable);
+    public Page<ExportBill> findByFields(String dateCreate, String toDate, String timeCreate, String toTime, long typeId, Pageable pageable) {
+        if (dateCreate == toDate && dateCreate == "2021-01-01") {
+            return this.exportBillRepository.findByTimeFields(timeCreate, toTime, typeId, pageable);
+        } else if (timeCreate == toTime && timeCreate == "00:00" ) {
+            return this.exportBillRepository.findByDateFields(dateCreate, toDate, typeId, pageable);
+        }
+        return this.exportBillRepository.findBy4Fields(dateCreate, toDate, timeCreate, toTime, typeId, pageable);
     }
 
     public void delete(long id) {
