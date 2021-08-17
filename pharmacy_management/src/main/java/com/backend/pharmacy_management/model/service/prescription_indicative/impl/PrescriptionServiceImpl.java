@@ -1,8 +1,8 @@
-package com.backend.pharmacy_management.model.service.impl;
+package com.backend.pharmacy_management.model.service.prescription_indicative.impl;
 
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Prescription;
-import com.backend.pharmacy_management.model.repository.IPrescriptionRepository;
-import com.backend.pharmacy_management.model.service.IPrescriptionService;
+import com.backend.pharmacy_management.model.repository.prescription_indicative.IPrescriptionRepository;
+import com.backend.pharmacy_management.model.service.prescription_indicative.IPrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +27,7 @@ public class PrescriptionServiceImpl implements IPrescriptionService {
 
     @Override
     public Prescription save(Prescription prescription) {
-      return   this.prescriptionRepository.save(prescription);
+        return this.prescriptionRepository.save(prescription);
     }
 
     @Override
@@ -38,5 +38,10 @@ public class PrescriptionServiceImpl implements IPrescriptionService {
     @Override
     public Page<Prescription> getAllPrescriptionList(Pageable pageable) {
         return this.prescriptionRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Prescription> searchPrescription(String prescriptionName, String prescriptionCode, String object, String symptom, Pageable pageable) {
+        return this.prescriptionRepository.findByPrescriptionFilter(prescriptionName,prescriptionCode,object,symptom,pageable);
     }
 }

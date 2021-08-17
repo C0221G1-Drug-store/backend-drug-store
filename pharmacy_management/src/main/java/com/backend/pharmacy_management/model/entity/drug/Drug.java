@@ -58,15 +58,5 @@ public class Drug {
     @OneToMany(mappedBy = "drug")
     @JsonBackReference
     private List<DrugOfBill> drugOfBills;
-<<<<<<< HEAD
-//    @OneToMany(mappedBy = "drug")
-//    private List<Indicative> indicatives;
-=======
-    @OneToMany(mappedBy = "drug")
-    @JsonBackReference
-    private List<Indicative> indicatives;
->>>>>>> origin
-    @OneToMany(mappedBy = "drug")
-    @JsonBackReference
-    private List<ExportBillDetail> exportBillDetails;
+
 }

@@ -1,4 +1,4 @@
-package com.backend.pharmacy_management.model.service;
+package com.backend.pharmacy_management.model.service.prescription_indicative;
 
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
 

@@ -1,8 +1,8 @@
-package com.backend.pharmacy_management.model.service.impl;
+package com.backend.pharmacy_management.model.service.prescription_indicative.impl;
 
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
-import com.backend.pharmacy_management.model.repository.IIndicativeRepository;
-import com.backend.pharmacy_management.model.service.IIndicativeService;
+import com.backend.pharmacy_management.model.repository.prescription_indicative.IIndicativeRepository;
+import com.backend.pharmacy_management.model.service.prescription_indicative.IIndicativeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

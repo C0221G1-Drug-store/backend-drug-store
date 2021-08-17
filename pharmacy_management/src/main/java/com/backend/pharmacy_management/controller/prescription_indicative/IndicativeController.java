@@ -1,7 +1,7 @@
-package com.backend.pharmacy_management.controller;
+package com.backend.pharmacy_management.controller.prescription_indicative;
 
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
-import com.backend.pharmacy_management.model.service.IIndicativeService;
+import com.backend.pharmacy_management.model.service.prescription_indicative.IIndicativeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
