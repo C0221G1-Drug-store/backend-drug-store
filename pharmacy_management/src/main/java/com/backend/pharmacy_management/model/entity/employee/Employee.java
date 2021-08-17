@@ -27,7 +27,7 @@ public class Employee {
     private String employeePhone;
     private String employeeStartDate;
     private String employeeNote;
-    private int position;
+    private String position;
     private String accountName;
     @JsonBackReference
     @OneToMany(mappedBy = "employee")
@@ -42,7 +42,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Long employeeId, String employeeCode, String employeeName, String employeeAddress, String employeeImage, String employeePhone, String employeeStartDate, String employeeNote, int position, String accountName) {
+    public Employee(Long employeeId, String employeeCode, String employeeName, String employeeAddress, String employeeImage, String employeePhone, String employeeStartDate, String employeeNote, String position, String accountName) {
         this.employeeId = employeeId;
         this.employeeCode = employeeCode;
         this.employeeName = employeeName;
@@ -119,11 +119,11 @@ public class Employee {
         this.employeeNote = employeeNote;
     }
 
-    public int getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 

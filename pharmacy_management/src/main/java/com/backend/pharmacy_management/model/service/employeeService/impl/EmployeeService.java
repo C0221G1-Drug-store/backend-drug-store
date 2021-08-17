@@ -22,13 +22,14 @@ public class EmployeeService implements IEmployeeService {
 //        return employeeRepository.findEmployeeByRequest(employeeName, employeeAddress, employeeCode, position, employeePhone, pageable);
 //    }
 
+//    @Override
+//    public List<Employee> searchEmployee(String employeeName) {
+//        return employeeRepository.findEmployeeByRequest(employeeName);
+//    }
+
     @Override
-    public Page<Employee> searchEmployee(String employeeName, String employeeAddress, String employeeCode,  String employeePhone, Pageable pageable) {
-        return employeeRepository.findEmployeeByRequest(employeeName, employeeAddress, employeeCode, employeePhone, pageable);
-    }
-    @Override
-    public List<Employee> search() {
-        return employeeRepository.findAll();
+    public Page<Employee> searchEmployee(String employeeName, String employeeAddress, String employeeCode, String employeePhone ,String position, Pageable pageable) {
+        return employeeRepository.findEmployeeByRequest(employeeName,employeeAddress,employeeCode,employeePhone,position,pageable);
     }
 
     @Override
@@ -36,10 +37,11 @@ public class EmployeeService implements IEmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    @Override
-    public List<Employee> showList() {
-        return employeeRepository.findAll();
-    }
+
+//    @Override
+//    public List<Employee> searchEmployee(String employeeName) {
+//        return null;
+//    }
 
 
 }

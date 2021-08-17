@@ -17,31 +17,37 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin("http://localhost:4200")
 public class EmployeeController {
     @Autowired
     IEmployeeService employeeService;
     @GetMapping("/employee")
-    public ResponseEntity<Page<Employee>>findByRequest(@RequestParam Optional<String> employeeName, @RequestParam Optional<String> employeeAddress, @RequestParam Optional<String> employeeCode, @RequestParam Optional<String> employeePhone,
+    public ResponseEntity<Page<Employee>>findEmployeeByRequest(@RequestParam Optional<String> employeeName, @RequestParam Optional<String> employeeAddress, @RequestParam Optional<String> employeeCode, @RequestParam Optional<String> employeePhone,
+                                                       @RequestParam Optional<String> position,
                                                        @RequestParam Optional<Integer> page,@RequestParam Optional<String> sortBy){
-        Pageable pageable=PageRequest.of(page.orElse(0),5,Sort.Direction.ASC,sortBy.orElse("employee_name"));
-//        String name="";
-//        if (employeeName.isPresent()){
-//            name=employeeName.get();
-//        }
-       Page<Employee> employeePage = employeeService.searchEmployee(employeeName.get(),employeeAddress.get(),employeeCode.get(),employeePhone.get(),pageable);
-
-       return new ResponseEntity<>(employeePage, HttpStatus.OK);
+        Pageable pageable=PageRequest.of(page.orElse(0),5,Sort.Direction.ASC,sortBy.orElse("employee_id"));
+        String name="";
+        if (employeeName.isPresent()){
+            name=employeeName.get();
+        }
+        String address="";
+        if (employeeAddress.isPresent()){
+            address=employeeAddress.get();
+        }
+        String code="";
+        if (employeeCode.isPresent()){
+            code=employeeCode.get();
+        }
+        String phone="";
+        if (employeePhone.isPresent()){
+            phone=employeePhone.get();
+        }
+        Page<Employee> employeePage = employeeService.searchEmployee(name,address,code,phone,position.orElse(""),pageable);
+        if (employeePage.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(employeePage, HttpStatus.OK);
     }
-//    @GetMapping("/employee/{employeeName}")
-//    public ResponseEntity<List<Employee>> findByRequest1(@PathVariable String employeeName){
-////        Page<Employee> employeePage = employeeService.searchEmployee1( employeeName.orElse("_"),page.orElse(0),sortBy.orElse("employee_id"));
-////        Pageable pageable=PageRequest.of(page,5,Sort.Direction.ASC,sortBy);
-//        List<Employee> employeeList=  employeeService.searchEmployee1(employeeName);
-//       if (employeeList.isEmpty()){
-//           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//       }
-//        return new ResponseEntity<>(employeeList,HttpStatus.OK);
-//    }
     @DeleteMapping("/employee-delete/{id}")
     public ResponseEntity<Employee>deleteEmployee(@PathVariable long id){
         employeeService.deleteEmployee(id);
