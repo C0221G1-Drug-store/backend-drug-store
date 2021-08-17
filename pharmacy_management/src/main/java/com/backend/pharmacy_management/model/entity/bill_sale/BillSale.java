@@ -2,24 +2,26 @@ package com.backend.pharmacy_management.model.entity.bill_sale;
 
 import com.backend.pharmacy_management.model.entity.customer.Customer;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
+import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
-import org.hibernate.Hibernate;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "bill_sale")
 public class BillSale {
     @Id
     @Column(name = "bill_sale_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long billSaleId;
     private String billSaleCode;
     @Column(columnDefinition = "datetime")
@@ -35,7 +37,5 @@ public class BillSale {
     @JoinColumn(name = "customer_id",nullable = false)
     private Customer customer;
     @OneToMany(mappedBy = "billSale")
-    @JsonBackReference(value="drug_of_bill-bill_sale")
-    private List<DrugOfBill> drugOfBills;
-
+    private Set<DrugOfBill> drugOfBillSet;
 }

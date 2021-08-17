@@ -1,22 +1,16 @@
-package com.backend.pharmacy_management.model.entity.manufacturer;
+package com.backend.pharmacy_management.model.dto;
 
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.List;
-@Entity
+import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "manufacturer")
-public class Manufacturer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ManufacturerDto {
     private Integer manufacturerId;
     private String manufacturerCode;
     private String manufacturerName;
@@ -25,9 +19,6 @@ public class Manufacturer {
     private String manufacturerPhoneNumber;
     private Double manufacturerDebts;
     private String manufacturerNote ;
-    @OneToMany(mappedBy = "manufacturer")
-    @JsonBackReference
-    private List<ImportBill> importBills;
-    @OneToMany(mappedBy = "manufacturer")
-    private List<ExportBill> exportBills;
+    private Set<ImportBill> importBills;
+    private Set<ExportBill> exportBills;
 }

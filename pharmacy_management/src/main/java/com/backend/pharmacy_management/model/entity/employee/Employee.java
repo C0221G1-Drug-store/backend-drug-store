@@ -5,16 +5,15 @@ import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
-import org.hibernate.Hibernate;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "employee")
@@ -32,12 +31,9 @@ public class Employee {
     private int position;
     private String accountName;
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference(value = "employee-import_bill")
     List<ImportBill> importBills;
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference(value = "employee-export_bill")
     List<ExportBill> exportBills;
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference(value = "employee-bill_sale")
     List<BillSale> billWholesales;
 }
