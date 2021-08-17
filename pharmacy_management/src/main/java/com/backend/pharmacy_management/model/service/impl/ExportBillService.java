@@ -23,8 +23,8 @@ public class ExportBillService implements IExportBillService {
     }
 
     @Override
-    public Page<ExportBill> findByFields(String field1, String field2, String field3, String field4, ExportBillType type, Pageable pageable) {
-        return null;
+    public Page<ExportBill> findByFields(String field1, String field2, String field3, String field4, Long typeId, Pageable pageable) {
+        return this.exportBillRepository.findByTimeFields(field1, field2, field3, field4, typeId, pageable);
     }
 
     public void delete(long id) {
