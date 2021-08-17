@@ -1,8 +1,7 @@
 package com.backend.pharmacy_management.controller;
 
-import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.drug.DrugGroup;
-import com.backend.pharmacy_management.model.service.drug.IDrugGroupService;
+import com.backend.pharmacy_management.model.service.client.IDrugGroupClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +12,9 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/drug-group")
-public class DrugGroupController {
+public class DrugGroupClientController {
     @Autowired
-    private IDrugGroupService drugGroupService;
+    private IDrugGroupClientService drugGroupService;
 
     @GetMapping
     public ResponseEntity<List<DrugGroup>> getAllDrugGroups() {

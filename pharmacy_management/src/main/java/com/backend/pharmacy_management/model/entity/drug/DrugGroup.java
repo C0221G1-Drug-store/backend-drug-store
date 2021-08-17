@@ -22,4 +22,5 @@ public class DrugGroup {
     @OneToMany(mappedBy = "drugGroup")
     @JsonBackReference
     private List<Drug> drugs;
+    private Boolean flag = true;
 }

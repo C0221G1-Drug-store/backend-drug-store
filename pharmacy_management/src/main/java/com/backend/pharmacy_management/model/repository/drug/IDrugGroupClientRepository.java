@@ -5,5 +5,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IDrugGroupRepository extends PagingAndSortingRepository<DrugGroup, Long> {
+public interface IDrugGroupClientRepository extends PagingAndSortingRepository<DrugGroup, Long> {
 }
