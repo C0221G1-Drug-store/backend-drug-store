@@ -1,14 +1,15 @@
 package com.backend.pharmacy_management.model.dto;
 
 import com.backend.pharmacy_management.model.entity.drug.DrugGroup;
+import com.backend.pharmacy_management.model.entity.drug.DrugImageDetail;
 
 import javax.persistence.Column;
+import java.util.List;
 
 public class DrugDtoTuan {
     private Long drugId;
 
     private String drugName;
-    private String drugIngredient;
     private String activeElement;
 //    private Long drugAmount;
     private String unit;
@@ -16,7 +17,7 @@ public class DrugDtoTuan {
     private Integer conversionRate;
     private Double wholesaleProfitRate;
     private Double retailProfitRate;
-
+    private String drugImageDetails;
     private String drugFaculty;
     private String manufacturer;
     private String origin;
@@ -25,6 +26,14 @@ public class DrugDtoTuan {
     private String drugSideEffect;
 
     public DrugDtoTuan() {
+    }
+
+    public String getDrugImageDetails() {
+        return drugImageDetails;
+    }
+
+    public void setDrugImageDetails(String drugImageDetails) {
+        this.drugImageDetails = drugImageDetails;
     }
 
     public Long getDrugId() {
@@ -43,13 +52,6 @@ public class DrugDtoTuan {
         this.drugName = drugName;
     }
 
-    public String getDrugIngredient() {
-        return drugIngredient;
-    }
-
-    public void setDrugIngredient(String drugIngredient) {
-        this.drugIngredient = drugIngredient;
-    }
 
     public String getActiveElement() {
         return activeElement;

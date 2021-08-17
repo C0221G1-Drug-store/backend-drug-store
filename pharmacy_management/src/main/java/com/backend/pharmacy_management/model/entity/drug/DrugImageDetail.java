@@ -9,9 +9,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+//@Data
 //@NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @Table(name="drug_image_detail")
 
 public class DrugImageDetail {
@@ -21,10 +21,11 @@ public class DrugImageDetail {
     private Long drugImageDetailId;
     @Column(name = "drug_image_detail_url", columnDefinition = "BLOB")
     private String drugImageDetailUrl;
-    private Boolean flag;
-    @ManyToOne
-    @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
-    private Drug drug;
+//    private Boolean flag;
+//    @ManyToOne
+//    @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
+//    private Drug drug;
+
 
     public DrugImageDetail() {
     }
@@ -43,21 +44,5 @@ public class DrugImageDetail {
 
     public void setDrugImageDetailUrl(String drugImageDetailUrl) {
         this.drugImageDetailUrl = drugImageDetailUrl;
-    }
-
-    public Boolean getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Boolean flag) {
-        this.flag = flag;
-    }
-
-    public Drug getDrug() {
-        return drug;
-    }
-
-    public void setDrug(Drug drug) {
-        this.drug = drug;
     }
 }
