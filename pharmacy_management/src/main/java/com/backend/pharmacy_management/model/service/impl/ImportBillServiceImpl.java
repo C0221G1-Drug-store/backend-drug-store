@@ -4,6 +4,9 @@ import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBi
 import com.backend.pharmacy_management.model.repository.IImportBillRepository;
 import com.backend.pharmacy_management.model.service.IImportBillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,8 +48,21 @@ public class ImportBillServiceImpl implements IImportBillService {
     }
 
     @Override
-    public List<ImportBill> searchBill(String importCode, String startDate, String endDate) {
-        return importBillRepository.searchBill("%" + importCode + "%", startDate, endDate);
+    public List<ImportBill> searchBill(String importCode, String startDate, String endDate,String sort) {
+        System.out.println(sort);
+        return importBillRepository.searchBill("%" + importCode + "%", startDate, endDate,sort);
+
+    }
+
+    @Override
+    public List<ImportBill> selName(String billCode, String startDate, String endDate, String col) {
+        return importBillRepository.searchSort("%"+billCode+"%",startDate,endDate,col);
+    }
+
+
+    @Override
+    public Page<ImportBill> getAllBill(Pageable pageable) {
+        return importBillRepository.getAllBill(pageable);
     }
 
 }
