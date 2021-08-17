@@ -20,13 +20,10 @@ public class DrugOfBillService implements IDrugOfBillService {
 
     @Override
     public void save(DrugOfBill drugOfBill) {
-         iDrugOfBillRepository.save(drugOfBill);
+        iDrugOfBillRepository.save(drugOfBill);
     }
 
-    @Override
-    public void saveList(List<DrugOfBill> drugOfBillList) {
-        iDrugOfBillRepository.saveAll(drugOfBillList);
-    }
+
 
     @Override
     public void remove(Long id) {

@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,8 +27,8 @@ public class Prescription {
     private  String note;  //  ghi chú
     @JsonManagedReference(value = "prescription-prescription_indicative")
     @OneToMany(mappedBy = "prescription")
-    private Set<PrescriptionIndicative> prescriptionIndicatives;
+    private List<PrescriptionIndicative> prescriptionIndicatives;
     @JsonManagedReference(value = "drug_of_bill-prescription_indicative")
     @OneToMany(mappedBy = "prescription")
-    private Set<DrugOfBill> drugOfBills;
+    private List<DrugOfBill> drugOfBills;
 }

@@ -68,8 +68,18 @@ public class BillSaleController {
         }
     }
 
-    @GetMapping(value = "get-bill-sale/{id}")
-    public ResponseEntity<Optional<BillSale>> getBillSale(@PathVariable Long id ){
+    @GetMapping(value = "/get-list-drug-of-bill")
+    public ResponseEntity<List<DrugOfBill>> getListDrugOfBillByBillSaleId(@RequestParam Long id) {
+        List<DrugOfBill> drugOfBillList = iDrugOfBillService.findAllDrugOfBillByBillSaleId(id);
+        if (drugOfBillList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(drugOfBillList, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "get-bill-sale")
+    public ResponseEntity<Optional<BillSale>> getBillSale(@RequestParam Long id ){
         Optional<BillSale> billSale = iBillSaleService.findBillSaleById(id);
         return new ResponseEntity<>(billSale, HttpStatus.OK);
     }
@@ -83,8 +93,18 @@ public class BillSaleController {
     }
 
     @PostMapping(value = "/create-drug-of-bill")
-    public ResponseEntity<DrugOfBill> createDrugOfBill(@Valid @RequestBody DrugOfBill drugOfBill) {
+    public ResponseEntity<DrugOfBill> createDrugOfBill(@RequestBody DrugOfBill drugOfBill) {
+        System.out.println(drugOfBill.toString());
         this.iDrugOfBillService.save(drugOfBill);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PutMapping  (value = "/update-bill-sale")
+    public ResponseEntity<BillSale> updateBillSale(@Valid @RequestBody BillSaleDto billSaleDto) {
+        BillSale billSale = new BillSale();
+        BeanUtils.copyProperties(billSaleDto, billSale);
+        this.iBillSaleService.save(billSale);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

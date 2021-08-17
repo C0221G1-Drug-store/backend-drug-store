@@ -22,15 +22,13 @@ public class DrugOfBill {
     private Long drugOfBillId;
     @ManyToOne
     @JoinColumn(name = "drug_id", nullable = false)
-    @JsonBackReference(value = "drug_of_bill-drug")
     private Drug drug;
     @ManyToOne
     @JoinColumn(name = "bill_sale_id", nullable = false)
-    @JsonBackReference(value = "drug_of_bill-bill_sale")
     private BillSale billSale;
     private int quantity;
     @ManyToOne
-    @JoinColumn(name = "prescription_id", nullable = false)
+    @JoinColumn(name = "prescription_id")
     @JsonBackReference(value = "drug_of_bill-prescription_indicative")
     private Prescription prescription;
 }

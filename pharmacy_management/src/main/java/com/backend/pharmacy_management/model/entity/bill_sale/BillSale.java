@@ -11,12 +11,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "bill_sale")
@@ -26,20 +24,98 @@ public class BillSale {
     private Long billSaleId;
     private String billSaleCode;
     @Column(columnDefinition = "datetime")
-    private Date invoiceDate;
+    private String invoiceDate;
     private String billSaleNote;
     private String billSaleType;
     private Boolean flag = true;
     private double totalMoney;
     @ManyToOne
     @JoinColumn(name = "employee_id",nullable = false)
-    @JsonBackReference(value="employee-bill_sale")
     private Employee employee;
     @ManyToOne
     @JoinColumn(name = "customer_id",nullable = false)
-    @JsonBackReference(value="customer-bill_sale")
     private Customer customer;
-    @OneToMany(mappedBy = "billSale",fetch=FetchType.LAZY)
-    @JsonManagedReference(value="drug_of_bill-bill_sale")
-    private Set<DrugOfBill> drugOfBills;
+    @OneToMany(mappedBy = "billSale")
+    @JsonBackReference(value="drug_of_bill-bill_sale")
+    private List<DrugOfBill> drugOfBills;
+
+    public Long getBillSaleId() {
+        return billSaleId;
+    }
+
+    public void setBillSaleId(Long billSaleId) {
+        this.billSaleId = billSaleId;
+    }
+
+    public String getBillSaleCode() {
+        return billSaleCode;
+    }
+
+    public void setBillSaleCode(String billSaleCode) {
+        this.billSaleCode = billSaleCode;
+    }
+
+    public String getInvoiceDate() {
+        return invoiceDate;
+    }
+
+    public void setInvoiceDate(String invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+    public String getBillSaleNote() {
+        return billSaleNote;
+    }
+
+    public void setBillSaleNote(String billSaleNote) {
+        this.billSaleNote = billSaleNote;
+    }
+
+    public String getBillSaleType() {
+        return billSaleType;
+    }
+
+    public void setBillSaleType(String billSaleType) {
+        this.billSaleType = billSaleType;
+    }
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
+    }
+
+    public double getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(double totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<DrugOfBill> getDrugOfBills() {
+        return drugOfBills;
+    }
+
+    public void setDrugOfBills(List<DrugOfBill> drugOfBills) {
+        this.drugOfBills = drugOfBills;
+    }
 }

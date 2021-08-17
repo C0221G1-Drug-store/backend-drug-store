@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,7 +20,7 @@ public class DrugGroup {
     private Long drugGroupId;
     private String drugGroupCode;
     private String drugGroupName;
-    @OneToMany(mappedBy = "drugGroup", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "drugGroup")
     @JsonManagedReference(value = "drug_group-drug")
-    private Set<Drug> drugs;
+    private List<Drug> drugs;
 }

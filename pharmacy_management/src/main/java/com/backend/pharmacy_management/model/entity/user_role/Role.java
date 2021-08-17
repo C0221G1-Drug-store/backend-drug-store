@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
@@ -25,5 +25,5 @@ public class Role {
     private String roleName;
     @OneToMany(mappedBy = "role")
     @JsonManagedReference(value = "app_role-user_role")
-    private Set<UserRole> userRoles;
+    private List<UserRole> userRoles;
 }
