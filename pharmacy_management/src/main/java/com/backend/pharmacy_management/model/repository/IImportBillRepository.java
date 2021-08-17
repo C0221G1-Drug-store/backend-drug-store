@@ -35,7 +35,7 @@ public interface IImportBillRepository extends JpaRepository<ImportBill, Long> {
     @Query(value = "select * from import_bill order by invoice_date desc", nativeQuery = true)
     Page<ImportBill> getAllBill(Pageable pageable);
 
-    @Query(value = "CALL selname(:billCode, :startDate, :endDate, :col)", nativeQuery = true)
+    @Procedure(name = "selname")
     List<ImportBill> searchSort(@Param("billCode") String billCode, @Param("startDate") String startDate,
                                 @Param("endDate") String endDate, @Param("col") String col);
 

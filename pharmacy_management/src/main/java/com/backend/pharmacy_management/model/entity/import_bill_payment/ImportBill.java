@@ -4,6 +4,7 @@ import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "import_bill")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(name = "selname",
+        procedureName = "selname",parameters = {@StoredProcedureParameter(mode = ParameterMode.IN,name = "billCode",type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN,name = "startDate",type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN,name = "endDate",type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN,name = "col",type = String.class)})
+})
 public class ImportBill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

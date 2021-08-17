@@ -70,7 +70,7 @@ public class ImportBillController {
                                                        @RequestParam(defaultValue = "") String startDate,
                                                        @RequestParam(defaultValue = "") String endDate,
                                                        @RequestParam(defaultValue = "") String col) {
-        List<ImportBill> importBills = importBillService.selName(codeBill, startDate, endDate,col);
+        List<ImportBill> importBills = importBillService.searchBill(codeBill, startDate, endDate,col);
         if (importBills.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

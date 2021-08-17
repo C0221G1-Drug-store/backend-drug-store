@@ -50,7 +50,7 @@ public class ImportBillServiceImpl implements IImportBillService {
     @Override
     public List<ImportBill> searchBill(String importCode, String startDate, String endDate,String sort) {
         System.out.println(sort);
-        return importBillRepository.searchBill("%" + importCode + "%", startDate, endDate,sort);
+        return importBillRepository.searchSort("%" + importCode + "%", startDate, endDate,sort);
 
     }
 
