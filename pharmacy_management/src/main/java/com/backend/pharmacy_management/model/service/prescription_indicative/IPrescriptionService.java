@@ -6,5 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface IPrescriptionService extends IGeneralService<Prescription> {
     Page<Prescription> getAllPrescriptionList(Pageable pageable);
-    Page<Prescription> searchPrescription(String prescriptionName, String prescriptionCode, String object , String symptom , Pageable pageable);
+
+        Page<Prescription> searchPrescription(String name, String code, String object , String symptom , Pageable pageable);
+    Prescription getPrescriptionCode(String pres);
 }

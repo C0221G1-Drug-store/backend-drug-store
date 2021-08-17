@@ -10,13 +10,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IPrescriptionRepository extends JpaRepository<Prescription,Long> {
-    @Query(value="select prescription_code,prescription_name,object,symptom,note " +
-            " from pharmacy_management.prescription " +
+    @Query(value="select *  " +
+            " from prescription " +
             " where prescription_code like %?1% " +
             " and prescription_name like %?2%" +
             " and object like %?3%" +
-            " and  symptom  like %?4%"
+            " and  symptom  like %?4% " +
+            " and flag=0 "
             ,nativeQuery = true)
     Page<Prescription> findByPrescriptionFilter(String prescriptionName, String prescriptionCode, String object , String symptom , Pageable pageable);
 
+    @Query(value="select * from prescription where prescription_code=?",nativeQuery = true)
+    Prescription getPrescriptionCode(String pres);
 }

@@ -11,13 +11,10 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "indicative")
 public class Indicative {
     @Id
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long indicativeId;
     private Long totalPill;
     private Long drinkDay;
@@ -32,6 +29,54 @@ public class Indicative {
     @JoinColumn(name = "prescription_id ", referencedColumnName = "prescriptionId")
     private  Prescription prescription;
 
+    public Indicative() {
+    }
 
+    public Long getIndicativeId() {
+        return indicativeId;
+    }
 
+    public void setIndicativeId(Long indicativeId) {
+        this.indicativeId = indicativeId;
+    }
+
+    public Long getTotalPill() {
+        return totalPill;
+    }
+
+    public void setTotalPill(Long totalPill) {
+        this.totalPill = totalPill;
+    }
+
+    public Long getDrinkDay() {
+        return drinkDay;
+    }
+
+    public void setDrinkDay(Long drinkDay) {
+        this.drinkDay = drinkDay;
+    }
+
+    public Long getDrinkTime() {
+        return drinkTime;
+    }
+
+    public void setDrinkTime(Long drinkTime) {
+        this.drinkTime = drinkTime;
+    }
+
+    public String getDrug() {
+        return drug;
+    }
+
+    public void setDrug(String drug) {
+        this.drug = drug;
+    }
+
+    public Prescription getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(Prescription prescription) {
+        this.prescription = prescription;
+    }
 }
