@@ -14,7 +14,7 @@ public interface IManufacturerService {
     Page<Manufacturer> findByManufacturerPhoneNumber( String phoneNumber,Pageable pageable);
     Manufacturer findByManufacturerId( Integer id);
     Page<Manufacturer> findByManufacturerNote( String note,Pageable pageable);
-    void saveManufacturer(Manufacturer manufacturer);
+    Manufacturer saveManufacturer(Manufacturer manufacturer);
     void deleteManufacturer(Integer id);
 
     Page<Manufacturer> findAllSortName(Pageable pageable);

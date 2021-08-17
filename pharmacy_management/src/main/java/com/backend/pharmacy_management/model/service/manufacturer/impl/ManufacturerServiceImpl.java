@@ -54,15 +54,15 @@ public class ManufacturerServiceImpl implements IManufacturerService {
     }
 
     @Override
-    public void saveManufacturer(Manufacturer manufacturer) {
-        manufacturerRepository.save(manufacturer);
+    public Manufacturer saveManufacturer(Manufacturer manufacturer) {
+      return   manufacturerRepository.save(manufacturer);
 
 
     }
 
     @Override
     public void deleteManufacturer(Integer id) {
-        manufacturerRepository.deleteById(id);
+         manufacturerRepository.deleteById(id);
     }
 
     @Override

@@ -1,19 +1,23 @@
 package com.backend.pharmacy_management.controller;
 
+import com.backend.pharmacy_management.dto.ManufacturerDto;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.backend.pharmacy_management.model.service.manufacturer.IManufacturerService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,8 +94,14 @@ public class ManufacturerController {
     }
 
     @PostMapping(value = "/create")
-    public void createManufacturer(@RequestBody Manufacturer manufacturer) {
-        iManufacturerService.saveManufacturer(manufacturer);
+    public ResponseEntity<?> createManufacturer(@Valid @RequestBody ManufacturerDto manufacturerDto, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return new ResponseEntity<>(bindingResult.getAllErrors(),HttpStatus.NOT_MODIFIED);
+        }else {
+            Manufacturer manufacturer=new Manufacturer();
+            BeanUtils.copyProperties(manufacturerDto,manufacturer);
+            return new ResponseEntity<>(iManufacturerService.saveManufacturer(manufacturer), HttpStatus.OK);
+        }
     }
 
     @DeleteMapping(value = "/delete")
@@ -100,10 +110,16 @@ public class ManufacturerController {
     }
 
     @PutMapping(value = "/update")
-    public void updateManufacturer(@RequestParam Integer id, @RequestBody Manufacturer manufacturer) {
+    public ResponseEntity<?> updateManufacturer(@RequestParam Integer id,@Valid @RequestBody ManufacturerDto manufacturerDto,BindingResult bindingResult) {
         Manufacturer mf = iManufacturerService.findByManufacturerId(id);
-        manufacturer.setManufacturerId(mf.getManufacturerId());
-        iManufacturerService.saveManufacturer(manufacturer);
+        manufacturerDto.setManufacturerId(mf.getManufacturerId());
+        if(bindingResult.hasErrors()){
+            return new ResponseEntity<>(bindingResult.getAllErrors(),HttpStatus.NOT_MODIFIED);
+        }else {
+            Manufacturer manufacturers=new Manufacturer();
+            BeanUtils.copyProperties(manufacturerDto, manufacturers );
+            return new ResponseEntity<>(iManufacturerService.saveManufacturer(manufacturers), HttpStatus.OK);
+        }
     }
     @GetMapping(value = "/show")
     public ResponseEntity<Manufacturer> showManufacturer(@RequestParam Integer id){
