@@ -42,4 +42,15 @@ public class ExportBillRESTController {
         return exportBillPage;
     }
 
+    @DeleteMapping(value = "/export-bill/delete/{idMan}")
+    public String deleteTest(@PathVariable(value = "idMan") long id) {
+        ExportBill exportBill = this.iExportBillService.findById(id);
+        if (exportBill != null) {
+            iExportBillService.delete(id);
+            return "yes";
+        }
+//        test.setFlag(true);
+        return "no";
+    }
+
 }
