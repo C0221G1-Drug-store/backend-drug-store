@@ -21,8 +21,23 @@ public class DrugService implements IDrugService {
     }
 
     @Override
+    public List<ListDrugDTO> findAllDrugsSearch(String field, String sign, String input, String index) {
+        return iDrugRepository.findAllDrugsSearch(field, sign, input, index);
+    }
+
+    @Override
+    public List<ListDrugDTO> findAllDrugsSearchNotPagination(String field, String sign, String input) {
+        return iDrugRepository.findAllDrugsSearchNotPagination(field, sign, input);
+    }
+
+    @Override
     public List<ListDrugDTO> findAllDrugsNotPagination() {
         return iDrugRepository.findAllDrugsNotPagination();
+    }
+
+    @Override
+    public List<ListDrugDTO> findAllDrugsLikePagination(String field, String input, String index) {
+        return iDrugRepository.findAllDrugsLikePagination(field, input, index);
     }
 
     @Override
