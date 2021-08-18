@@ -21,7 +21,7 @@ import java.util.List;
 public class ImportBill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer importBillId;
+    private Long importBillId;
     private String importSystemCode;
     private String accountingVoucher;
     private LocalDateTime invoiceDate;

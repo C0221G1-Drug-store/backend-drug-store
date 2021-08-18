@@ -44,7 +44,7 @@ public class ManufacturerServiceImpl implements IManufacturerService {
     }
 
     @Override
-    public Manufacturer findByManufacturerId(Integer id) {
+    public Manufacturer findByManufacturerId(Long id) {
         return manufacturerRepository.findById(id).orElse(null);
     }
 
@@ -61,8 +61,8 @@ public class ManufacturerServiceImpl implements IManufacturerService {
     }
 
     @Override
-    public void deleteManufacturer(Integer id) {
-         manufacturerRepository.deleteById(id);
+    public void deleteManufacturer(Long id) {
+         manufacturerRepository.deleteByIdManufacturer(id);
     }
 
     @Override
@@ -91,17 +91,17 @@ public class ManufacturerServiceImpl implements IManufacturerService {
     }
 
     @Override
-    public Page<ImportBill> findByIdManufacturer(Integer id,Pageable pageable) {
+    public Page<ImportBill> findByIdManufacturer(Long id,Pageable pageable) {
         return importBillRepository.findAllByImportBill(id,pageable);
     }
 
     @Override
-    public ImportBill findByIdImportBill(Integer id) {
+    public ImportBill findByIdImportBill(Long id) {
         return importBillRepository.findByIdImportBill(id);
     }
 
     @Override
-    public Page<ImportBill> findByDateImportBill(Integer id,String startDate, String endDate,Pageable pageable) {
+    public Page<ImportBill> findByDateImportBill(Long id,String startDate, String endDate,Pageable pageable) {
         return importBillRepository.findByDateImportBill(id,startDate,endDate,pageable);
     }
 

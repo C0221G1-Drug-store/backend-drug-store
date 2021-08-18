@@ -17,7 +17,7 @@ import java.util.List;
 public class Manufacturer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer manufacturerId;
+    private Long manufacturerId;
     private String manufacturerCode;
     private String manufacturerName;
     private String manufacturerAddress;
@@ -25,6 +25,7 @@ public class Manufacturer {
     private String manufacturerPhoneNumber;
     private double manufacturerDebts;
     private String manufacturerNote ;
+    private Integer flag;
     @OneToMany(mappedBy = "manufacturer")
     @JsonBackReference
     private List<ImportBill> importBills;

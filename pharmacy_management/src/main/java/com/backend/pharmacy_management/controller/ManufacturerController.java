@@ -13,12 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
+
 import org.springframework.web.bind.annotation.*;
 
 
 import javax.validation.Valid;
-import java.util.List;
+
 import java.util.Optional;
 
 @RestController
@@ -40,55 +40,55 @@ public class ManufacturerController {
 
         if (address.isPresent()) {
             address1 = address.get();
-            Page<Manufacturer> manufacturers = iManufacturerService.findByManufacturerAddress(address1, PageRequest.of(page, 2));
+            Page<Manufacturer> manufacturers = iManufacturerService.findByManufacturerAddress(address1, PageRequest.of(page, 5));
             return new ResponseEntity<>(manufacturers, HttpStatus.OK);
         } else if (name.isPresent()) {
             name1 = name.get();
-            Page<Manufacturer> manufacturers = iManufacturerService.findByManufacturerName(name1, PageRequest.of(page, 2));
+            Page<Manufacturer> manufacturers = iManufacturerService.findByManufacturerName(name1, PageRequest.of(page, 5));
             return new ResponseEntity<>(manufacturers, HttpStatus.OK);
         } else if (code.isPresent()) {
             code1 = code.get();
-            Page<Manufacturer> manufacturers = iManufacturerService.findByManufacturerCode(code1, PageRequest.of(page, 2));
+            Page<Manufacturer> manufacturers = iManufacturerService.findByManufacturerCode(code1, PageRequest.of(page, 5));
             return new ResponseEntity<>(manufacturers, HttpStatus.OK);
         } else if (note.isPresent()) {
             note1 = note.get();
-            Page<Manufacturer> manufacturers = iManufacturerService.findByManufacturerNote(note1, PageRequest.of(page, 2));
+            Page<Manufacturer> manufacturers = iManufacturerService.findByManufacturerNote(note1, PageRequest.of(page, 5));
             return new ResponseEntity<>(manufacturers, HttpStatus.OK);
         } else if (phoneNumber.isPresent()) {
             phoneNumber1 = phoneNumber.get();
-            Page<Manufacturer> manufacturers = iManufacturerService.findByManufacturerPhoneNumber(phoneNumber1, PageRequest.of(page, 2));
+            Page<Manufacturer> manufacturers = iManufacturerService.findByManufacturerPhoneNumber(phoneNumber1, PageRequest.of(page, 5));
             return new ResponseEntity<>(manufacturers, HttpStatus.OK);
         } else if (sort.isPresent()) {
             sort1 = sort.get();
             switch (sort1) {
                 case "name": {
 
-                    Page<Manufacturer> manufacturers = iManufacturerService.findAllSortName(PageRequest.of(page, 2));
+                    Page<Manufacturer> manufacturers = iManufacturerService.findAllSortName(PageRequest.of(page, 5));
                     return new ResponseEntity<>(manufacturers, HttpStatus.OK);
                 }
                 case "address": {
-                    Page<Manufacturer> manufacturers = iManufacturerService.findAllSortAddress(PageRequest.of(page, 2));
+                    Page<Manufacturer> manufacturers = iManufacturerService.findAllSortAddress(PageRequest.of(page, 5));
                     return new ResponseEntity<>(manufacturers, HttpStatus.OK);
                 }
                 case "note": {
-                    Page<Manufacturer> manufacturers = iManufacturerService.findAllSortNote(PageRequest.of(page, 2));
+                    Page<Manufacturer> manufacturers = iManufacturerService.findAllSortNote(PageRequest.of(page, 5));
                     return new ResponseEntity<>(manufacturers, HttpStatus.OK);
                 }
                 case "code": {
-                    Page<Manufacturer> manufacturers = iManufacturerService.findAllSortCode(PageRequest.of(page, 2));
+                    Page<Manufacturer> manufacturers = iManufacturerService.findAllSortCode(PageRequest.of(page, 5));
                     return new ResponseEntity<>(manufacturers, HttpStatus.OK);
                 }
                 case "phoneNumber": {
-                    Page<Manufacturer> manufacturers = iManufacturerService.findAllSortPhoneNumber(PageRequest.of(page, 2));
+                    Page<Manufacturer> manufacturers = iManufacturerService.findAllSortPhoneNumber(PageRequest.of(page, 5));
                     return new ResponseEntity<>(manufacturers, HttpStatus.OK);
                 }
                 default: {
-                    Page<Manufacturer> manufacturers = iManufacturerService.findAllManufacturer(PageRequest.of(page, 2));
+                    Page<Manufacturer> manufacturers = iManufacturerService.findAllManufacturer(PageRequest.of(page, 5));
                     return new ResponseEntity<>(manufacturers, HttpStatus.OK);
                 }
             }
         } else {
-            Page<Manufacturer> manufacturers = iManufacturerService.findAllManufacturer(PageRequest.of(page, 2));
+            Page<Manufacturer> manufacturers = iManufacturerService.findAllManufacturer(PageRequest.of(page, 5));
             return new ResponseEntity<>(manufacturers, HttpStatus.OK);
         }
     }
@@ -103,14 +103,8 @@ public class ManufacturerController {
             return new ResponseEntity<>(iManufacturerService.saveManufacturer(manufacturer), HttpStatus.OK);
         }
     }
-
-    @DeleteMapping(value = "/delete")
-    public void deleteManufacturer(@RequestParam Integer id) {
-        iManufacturerService.deleteManufacturer(id);
-    }
-
     @PutMapping(value = "/update")
-    public ResponseEntity<?> updateManufacturer(@RequestParam Integer id,@Valid @RequestBody ManufacturerDto manufacturerDto,BindingResult bindingResult) {
+    public ResponseEntity<?> updateManufacturer(@RequestParam Long id,@Valid @RequestBody ManufacturerDto manufacturerDto,BindingResult bindingResult) {
         Manufacturer mf = iManufacturerService.findByManufacturerId(id);
         manufacturerDto.setManufacturerId(mf.getManufacturerId());
         if(bindingResult.hasErrors()){
@@ -122,11 +116,11 @@ public class ManufacturerController {
         }
     }
     @GetMapping(value = "/show")
-    public ResponseEntity<Manufacturer> showManufacturer(@RequestParam Integer id){
+    public ResponseEntity<Manufacturer> showManufacturer(@RequestParam Long id){
         return new ResponseEntity<>(iManufacturerService.findByManufacturerId(id), HttpStatus.OK);
     }
     @GetMapping(value = "/importBill/shows")
-    public ResponseEntity<Page<ImportBill>> showImportBillIdManufacturer(@RequestParam Integer id,@RequestParam Integer page,@RequestParam Optional<String> startDate,@RequestParam Optional<String> endDate){
+    public ResponseEntity<Page<ImportBill>> showImportBillIdManufacturer(@RequestParam Long id,@RequestParam Integer page,@RequestParam Optional<String> startDate,@RequestParam Optional<String> endDate){
         String startDate1="";
         String endDate1="";
 
@@ -138,7 +132,7 @@ public class ManufacturerController {
         return new ResponseEntity<>(iManufacturerService.findByIdManufacturer(id, PageRequest.of(page,2)), HttpStatus.OK);
     }
     @GetMapping(value = "/importBill")
-    public ResponseEntity<ImportBill> findByIdImportBill(@RequestParam Integer id){
+    public ResponseEntity<ImportBill> findByIdImportBill(@RequestParam Long id){
         return new ResponseEntity<>(iManufacturerService.findByIdImportBill(id), HttpStatus.OK);
     }
 

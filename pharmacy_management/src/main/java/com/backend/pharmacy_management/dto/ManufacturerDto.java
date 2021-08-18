@@ -11,42 +11,32 @@ import javax.validation.constraints.Pattern;
 import java.util.List;
 
 public class ManufacturerDto {
-    private Integer manufacturerId;
+    private Long manufacturerId;
     @NotBlank(message = " Not Null")
     private String manufacturerCode;
     @NotBlank(message = " Not Null")
+    @Pattern(regexp = "^[A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ][a-zàáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+([ ][A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ][a-zàáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)+$")
     private String manufacturerName;
+    @Pattern(regexp = "^[A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ][a-zàáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+([ ][A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ][a-zàáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)+$")
     @NotBlank(message = " Not Null")
     private String manufacturerAddress;
     @NotBlank(message = " Not Null")
     @Email(message = "Enter the correct format")
     private String manufacturerEmail;
     @NotBlank(message = " Not Null")
+    @Pattern(regexp = "^\\+84[0-9]{8,9}$")
     private String manufacturerPhoneNumber;
     private double manufacturerDebts;
     @NotBlank(message = " Not Null")
     private String manufacturerNote ;
+    private Integer flag;
 
 
-    public ManufacturerDto(Integer manufacturerId, @NotBlank(message = " Not Null") String manufacturerCode, @NotBlank(message = " Not Null") String manufacturerName, @NotBlank(message = " Not Null") String manufacturerAddress, @NotBlank(message = " Not Null") @Email(message = "Enter the correct format") String manufacturerEmail, @NotBlank(message = " Not Null") String manufacturerPhoneNumber, double manufacturerDebts, @NotBlank(message = " Not Null") String manufacturerNote) {
-        this.manufacturerId = manufacturerId;
-        this.manufacturerCode = manufacturerCode;
-        this.manufacturerName = manufacturerName;
-        this.manufacturerAddress = manufacturerAddress;
-        this.manufacturerEmail = manufacturerEmail;
-        this.manufacturerPhoneNumber = manufacturerPhoneNumber;
-        this.manufacturerDebts = manufacturerDebts;
-        this.manufacturerNote = manufacturerNote;
-    }
-
-    public ManufacturerDto() {
-    }
-
-    public Integer getManufacturerId() {
+    public Long getManufacturerId() {
         return manufacturerId;
     }
 
-    public void setManufacturerId(Integer manufacturerId) {
+    public void setManufacturerId(Long manufacturerId) {
         this.manufacturerId = manufacturerId;
     }
 
@@ -106,5 +96,11 @@ public class ManufacturerDto {
         this.manufacturerNote = manufacturerNote;
     }
 
-  
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
+    }
 }
