@@ -11,7 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ManufacturerDto {
-    private Integer manufacturerId;
+    private Long manufacturerId;
     private String manufacturerCode;
     private String manufacturerName;
     private String manufacturerAddress;

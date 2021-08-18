@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ManufacturerRepository extends PagingAndSortingRepository<Manufacturer, Integer> {
+public interface ManufacturerRepository extends PagingAndSortingRepository<Manufacturer, Long> {
     @Query(value = "select * from manufacturer", nativeQuery = true)
     Page<Manufacturer> findAllManufacturer(Pageable pageable);
 

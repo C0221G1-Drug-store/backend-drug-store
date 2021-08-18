@@ -22,7 +22,7 @@ import java.util.Objects;
 public class Manufacturer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer manufacturerId;
+    private Long manufacturerId;
     private String manufacturerCode;
     private String manufacturerName;
     private String manufacturerAddress;

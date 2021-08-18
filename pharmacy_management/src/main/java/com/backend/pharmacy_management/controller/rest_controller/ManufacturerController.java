@@ -96,18 +96,18 @@ public class ManufacturerController {
     }
 
     @DeleteMapping(value = "/delete")
-    public void deleteManufacturer(@RequestParam Integer id) {
+    public void deleteManufacturer(@RequestParam Long id) {
         iManufacturerService.deleteManufacturer(id);
     }
 
     @PutMapping(value = "/update")
-    public void updateManufacturer(@RequestParam Integer id, @RequestBody Manufacturer manufacturer) {
+    public void updateManufacturer(@RequestParam Long id, @RequestBody Manufacturer manufacturer) {
         Manufacturer mf = iManufacturerService.findByManufacturerId(id);
         manufacturer.setManufacturerId(mf.getManufacturerId());
         iManufacturerService.saveManufacturer(manufacturer);
     }
     @GetMapping(value = "/show")
-    public ResponseEntity<Manufacturer> showManufacturer(@RequestParam Integer id){
+    public ResponseEntity<Manufacturer> showManufacturer(@RequestParam Long id){
         return new ResponseEntity<>(iManufacturerService.findByManufacturerId(id), HttpStatus.OK);
     }
     @GetMapping

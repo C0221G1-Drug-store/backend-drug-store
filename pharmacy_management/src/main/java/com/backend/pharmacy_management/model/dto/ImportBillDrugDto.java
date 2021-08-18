@@ -1,5 +1,6 @@
 package com.backend.pharmacy_management.model.dto;
 
+import com.backend.pharmacy_management.model.dto.validatior.DateNotInPast;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 @Data
 @NoArgsConstructor
@@ -29,7 +31,8 @@ public class ImportBillDrugDto {
     @NotNull
     Integer lotNumber;
     @NotNull
-    Date expiry;
+    @DateNotInPast
+    LocalDate expiry;
     @NotNull
     Integer vat;
     Boolean flag;

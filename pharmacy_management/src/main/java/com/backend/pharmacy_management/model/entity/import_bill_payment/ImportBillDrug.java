@@ -8,6 +8,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -25,7 +26,7 @@ public class ImportBillDrug {
     Double importPrice;
     Integer discountRate;
     Integer lotNumber;
-    Date expiry;
+    LocalDate expiry;
     Integer vat;
     Boolean flag;
     @ManyToOne

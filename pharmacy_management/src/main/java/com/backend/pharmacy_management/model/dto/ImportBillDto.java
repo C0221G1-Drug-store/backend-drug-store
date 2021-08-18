@@ -26,10 +26,7 @@ public class ImportBillDto {
     @NotNull
     private String invoiceDate;
     private Boolean flag;
-    @JsonBackReference(value = "payment-import_bill")
     private  Payment payment;
-    @JsonBackReference(value = "manufacturer-import_bill")
     private Manufacturer manufacturer;
-    @JsonBackReference(value = "employee-import_bill")
     private Employee employee;
 }

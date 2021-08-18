@@ -11,10 +11,10 @@ public interface IManufacturerService extends IGeneralService<Manufacturer> {
     Page<Manufacturer> findByManufacturerCode(String code,Pageable pageable );
     Page<Manufacturer> findByManufacturerAddress( String address,Pageable pageable);
     Page<Manufacturer> findByManufacturerPhoneNumber( String phoneNumber,Pageable pageable);
-    Manufacturer findByManufacturerId( Integer id);
+    Manufacturer findByManufacturerId( Long id);
     Page<Manufacturer> findByManufacturerNote( String note,Pageable pageable);
     void saveManufacturer(Manufacturer manufacturer);
-    void deleteManufacturer(Integer id);
+    void deleteManufacturer(Long id);
 
     Page<Manufacturer> findAllSortName(Pageable pageable);
 

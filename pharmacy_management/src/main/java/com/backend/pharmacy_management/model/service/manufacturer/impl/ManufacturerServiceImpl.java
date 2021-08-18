@@ -42,7 +42,7 @@ public class ManufacturerServiceImpl implements IManufacturerService {
     }
 
     @Override
-    public Manufacturer findByManufacturerId(Integer id) {
+    public Manufacturer findByManufacturerId(Long id) {
         return manufacturerRepository.findById(id).orElse(null);
     }
 
@@ -59,7 +59,7 @@ public class ManufacturerServiceImpl implements IManufacturerService {
     }
 
     @Override
-    public void deleteManufacturer(Integer id) {
+    public void deleteManufacturer(Long id) {
         manufacturerRepository.deleteById(id);
     }
 
@@ -95,7 +95,7 @@ public class ManufacturerServiceImpl implements IManufacturerService {
 
     @Override
     public Optional<Manufacturer> findById(Long id) {
-        return Optional.empty();
+        return this.manufacturerRepository.findById(id);
     }
 
     @Override
