@@ -4,17 +4,20 @@ import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
-import com.fasterxml.jackson.annotation.*;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Getter
-@Setter
-@Table(name = "drug")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="drug")
 public class Drug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,30 +46,17 @@ public class Drug {
     @Column(name = "drug_side_effect", columnDefinition = "TEXT")
     private String drugSideEffect;
     private Boolean flag = true;
-    private String manufacturer;
-    private String origin;
-    private String note;
     @ManyToOne
     @JoinColumn(name = "drug_group_id")
     private DrugGroup drugGroup;
-
     @OneToMany(mappedBy = "drug")
     @JsonIgnore
     private List<DrugImageDetail> drugImageDetails;
-
     @OneToMany(mappedBy = "drug")
     @JsonIgnore
     private List<DrugOfBill> drugOfBills;
-
     @OneToMany(mappedBy = "drug")
     @JsonIgnore
     private List<Indicative> indicatives;
-
-    @OneToMany(mappedBy = "drug")
-    @JsonIgnore
-    private List<ImportBillDrug> importBillDrugs;
-
-    public Drug() {
-    }
 
 }

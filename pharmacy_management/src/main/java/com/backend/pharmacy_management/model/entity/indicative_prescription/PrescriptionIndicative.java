@@ -1,12 +1,15 @@
 package com.backend.pharmacy_management.model.entity.indicative_prescription;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "prescription_indicative")
 public class PrescriptionIndicative {
     @Id

@@ -3,15 +3,20 @@ package com.backend.pharmacy_management.model.entity.employee;
 import com.backend.pharmacy_management.model.entity.bill_sale.BillSale;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
-import com.fasterxml.jackson.annotation.*;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "employee")
 public class Employee {
     @Id
@@ -26,20 +31,13 @@ public class Employee {
     private String employeeNote;
     private int position;
     private String accountName;
-
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
     List<ImportBill> importBills;
-
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
     List<ExportBill> exportBills;
-
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
     List<BillSale> billWholesales;
-
-    public Employee() {
-    }
-
 }
