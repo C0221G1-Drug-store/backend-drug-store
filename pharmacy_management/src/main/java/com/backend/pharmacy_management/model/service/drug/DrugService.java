@@ -36,12 +36,31 @@ public class DrugService implements IDrugService {
     }
 
     @Override
+<<<<<<< HEAD
     public List<ListDrugDTO> findAllDrugsLikePagination(String field, String input, String index) {
         return iDrugRepository.findAllDrugsLikePagination(field, input, index);
     }
 
     @Override
     public void deleteDrugById(Long id) {
+=======
+    public List<DrugDTO> findAllDrugs(int index) {
+        return null;
+    }
+
+    @Override
+    public Iterable<Drug> findAll() {
+        return null;
+    }
+
+    @Override
+    public Drug saveDrug(Drug drug) {
+        return iDrugRepository.save(drug);
+    }
+
+  
+   public void deleteDrugById(Long id) {
+>>>>>>> 683bfc936f0fbf0a0042a0eb4d00f0057fb37ca6
         iDrugRepository.deleteDrugById(id);
     }
 
