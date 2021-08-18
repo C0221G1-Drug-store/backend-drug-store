@@ -2,6 +2,7 @@ package com.backend.pharmacy_management.controller.bill_sale;
 
 import com.backend.pharmacy_management.model.dto.BillSaleDto;
 import com.backend.pharmacy_management.model.dto.DrugDto;
+import com.backend.pharmacy_management.model.dto.DrugOfBillDto;
 import com.backend.pharmacy_management.model.entity.bill_sale.BillSale;
 import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
 import com.backend.pharmacy_management.model.entity.customer.Customer;
@@ -93,8 +94,9 @@ public class BillSaleController {
     }
 
     @PostMapping(value = "/create-drug-of-bill")
-    public ResponseEntity<DrugOfBill> createDrugOfBill(@RequestBody DrugOfBill drugOfBill) {
-        System.out.println(drugOfBill.toString());
+    public ResponseEntity<DrugOfBill> createDrugOfBill(@RequestBody DrugOfBillDto drugOfBillDto) {
+        DrugOfBill drugOfBill = new DrugOfBill();
+        BeanUtils.copyProperties(drugOfBillDto, drugOfBill);
         this.iDrugOfBillService.save(drugOfBill);
         return new ResponseEntity<>(HttpStatus.OK);
     }
