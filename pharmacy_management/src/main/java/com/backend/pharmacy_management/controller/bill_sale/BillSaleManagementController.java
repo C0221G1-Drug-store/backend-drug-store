@@ -64,10 +64,6 @@ public class BillSaleManagementController {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        if (billList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
         return new ResponseEntity<>(billList, HttpStatus.OK);
     }
 
