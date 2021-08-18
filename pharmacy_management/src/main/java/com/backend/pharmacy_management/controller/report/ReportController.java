@@ -1,14 +1,11 @@
 package com.backend.pharmacy_management.controller.report;
-
 import com.backend.pharmacy_management.model.dto.report.*;
 import com.backend.pharmacy_management.model.service.report.IReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 
 @RestController()
 @RequestMapping("/report")
@@ -20,7 +17,6 @@ public class ReportController {
     @GetMapping("/{choice}/{startDate}/{endDate}")
     public ResponseEntity<List> getList(@PathVariable String choice, @PathVariable String startDate, @PathVariable String endDate) {
         switch (choice) {
-
             case "reportImportDetails":
                 return new ResponseEntity<>(reportService.reportImportDetails(startDate, endDate), HttpStatus.OK);
             case "reportCancellationDetails":
@@ -37,14 +33,6 @@ public class ReportController {
                 return new ResponseEntity<>(reportService.supplierList(), HttpStatus.OK);
             case "reportOnMedicationBeingProvided":
                 return new ResponseEntity<>(reportService.reportOnMedicationBeingProvided(), HttpStatus.OK);
-
-
-
-
-
-
-
-
             case "sellingDiarys":
                 List<ReportSellingDiary> sellingDiaryList = reportService.sellingDiarys(startDate, endDate);
                 return new ResponseEntity<>(sellingDiaryList, HttpStatus.OK);
@@ -57,8 +45,9 @@ public class ReportController {
             case "bestSellingDrugs":
                 List<ReportBestSellingDrug> bestSellingDrugList = reportService.bestSellingDrugs(startDate, endDate);
                 return new ResponseEntity<>(bestSellingDrugList, HttpStatus.OK);
-
-
+            case "reportDebt":
+            case "reportTurnover":
+            case "reportProfit":
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

@@ -196,4 +196,19 @@ public class ReportService implements IReportService {
         }
         return list2;
     }
+
+    @Override
+    public List<ReportDebt> reportDebt(String startDate, String endDate) {
+        return null;
+    }
+
+    @Override
+    public List<ReportTurnover> reportTurnover(String startDate, String endDate) {
+        return null;
+    }
+
+    @Override
+    public List<ReportProfit> reportProfit(String startDate, String endDate) {
+        return null;
+    }
 }
