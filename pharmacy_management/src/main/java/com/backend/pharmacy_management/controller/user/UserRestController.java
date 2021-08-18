@@ -1,8 +1,12 @@
 package com.backend.pharmacy_management.controller.user;
 
 import com.backend.pharmacy_management.model.dto.user_role.UserDto;
+import com.backend.pharmacy_management.model.dto.user_role.UserRoleDto;
 import com.backend.pharmacy_management.model.entity.user_role.Role;
 import com.backend.pharmacy_management.model.entity.user_role.User;
+import com.backend.pharmacy_management.model.entity.user_role.UserRole;
+import com.backend.pharmacy_management.model.service.user.IRoleService;
+import com.backend.pharmacy_management.model.service.user.IUserRoleService;
 import com.backend.pharmacy_management.model.service.user.IUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,13 @@ import java.util.Optional;
 public class UserRestController {
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IRoleService roleService;
+
+    @Autowired
+    private IUserRoleService userRoleService;
+
     @CrossOrigin
     @GetMapping
     public ResponseEntity<Page<User>> findAllUser(@RequestParam Integer page,
@@ -50,6 +61,7 @@ public class UserRestController {
 //        return new ResponseEntity<>(users, HttpStatus.OK);
 //    }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<User> findUserById(@PathVariable Long id) {
         Optional<User> userOptional = userService.findById(id);
@@ -59,6 +71,7 @@ public class UserRestController {
         return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @PutMapping(value= "edit/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
         Optional<User> userOptional = userService.findById(id);
@@ -69,14 +82,31 @@ public class UserRestController {
         BeanUtils.copyProperties(userDto,user);
         user.setUserId(userOptional.get().getUserId());
         userService.save(user);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
-    @PostMapping(value= "/create")
-    public ResponseEntity<Void> saveCustomer(@RequestBody UserDto userDto) {
-        User user = new User();
-        BeanUtils.copyProperties(userDto,user);
-        userService.save(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @CrossOrigin
+    @GetMapping(value= "/role")
+    public ResponseEntity<Iterable<Role>> findAllUser() {
+        Iterable<Role> roles = roleService.findAll();
+
+        if (roles == null) {
+            return new ResponseEntity<>(roles, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(roles, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PutMapping(value= "editUserRole/{id}")
+    public ResponseEntity<Void> updateUserRole(@PathVariable Long id, @RequestBody UserRoleDto userRoleDto) {
+        Optional<UserRole> userRoleOptional = userRoleService.findByIdUser(id);
+        if (!userRoleOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        UserRole userRole = new UserRole();
+        BeanUtils.copyProperties(userRoleDto,userRole);
+        userRole.setId(userRoleOptional.get().getId());
+        userRoleService.save(userRole);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
