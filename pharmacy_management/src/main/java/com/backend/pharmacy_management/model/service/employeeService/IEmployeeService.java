@@ -9,5 +9,9 @@ import java.util.List;
 public interface IEmployeeService {
     Page<Employee> searchEmployee(String employeeName, String employeeAddress , String employeeCode, String employeePhone,String position , Pageable pageable);
     void deleteEmployee(long id);
+    Page<Employee> getAll(Pageable pageable);
+    Employee findById(long id);
+
+
 
 }

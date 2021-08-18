@@ -26,31 +26,39 @@ public class EmployeeController {
                                                        @RequestParam Optional<String> position,
                                                        @RequestParam Optional<Integer> page,@RequestParam Optional<String> sortBy){
         Pageable pageable=PageRequest.of(page.orElse(0),5,Sort.Direction.ASC,sortBy.orElse("employee_id"));
-        String name="";
-        if (employeeName.isPresent()){
-            name=employeeName.get();
-        }
-        String address="";
-        if (employeeAddress.isPresent()){
-            address=employeeAddress.get();
-        }
-        String code="";
-        if (employeeCode.isPresent()){
-            code=employeeCode.get();
-        }
-        String phone="";
-        if (employeePhone.isPresent()){
-            phone=employeePhone.get();
-        }
-        Page<Employee> employeePage = employeeService.searchEmployee(name,address,code,phone,position.orElse(""),pageable);
+//        String name="";
+//        if (employeeName.isPresent()){
+//            name=employeeName.get();
+//        }
+//        String address="";
+//        if (employeeAddress.isPresent()){
+//            address=employeeAddress.get();
+//        }
+//        String code="";
+//        if (employeeCode.isPresent()){
+//            code=employeeCode.get();
+//        }
+//        String phone="";
+//        if (employeePhone.isPresent()){
+//            phone=employeePhone.get();
+//        }
+        Page<Employee> employeePage = employeeService.searchEmployee(employeeName.orElse(""),employeeAddress.orElse(""),employeeCode.orElse(""),employeePhone.orElse(""),position.orElse(""),pageable);
         if (employeePage.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(employeePage, HttpStatus.OK);
     }
-    @DeleteMapping("/employee-delete/{id}")
-    public ResponseEntity<Employee>deleteEmployee(@PathVariable long id){
+
+    @DeleteMapping("/employee-delete")
+    public ResponseEntity<Employee>deleteEmployee(@RequestParam long id){
+
+
+        Employee  employee= employeeService.findById(id);
+        if (employee == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
         employeeService.deleteEmployee(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(employee, HttpStatus.NO_CONTENT);
     }
+
 }
