@@ -3,6 +3,7 @@ package com.backend.pharmacy_management.model.entity.employee;
 import com.backend.pharmacy_management.model.entity.bill_sale.BillSale;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
+import com.backend.pharmacy_management.model.entity.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -40,4 +41,7 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     @JsonBackReference(value = "employee-bill_sale")
     List<BillSale> billWholesales;
+
+    @OneToOne(mappedBy = "employee")
+    private User user;
 }
