@@ -22,13 +22,21 @@ public class DrugImageDetail {
     @Column(name = "drug_image_detail_url", columnDefinition = "BLOB")
     private String drugImageDetailUrl;
 //    private Boolean flag;
-//    @ManyToOne
-//    @JoinColumn(name = "drug_id")
-//    private Drug drug;
+    @ManyToOne
+    @JoinColumn(name = "drug_id")
+    private Drug drug;
 
 
 
     public DrugImageDetail() {
+    }
+
+    public Drug getDrug() {
+        return drug;
+    }
+
+    public void setDrug(Drug drug) {
+        this.drug = drug;
     }
 
     public Long getDrugImageDetailId() {

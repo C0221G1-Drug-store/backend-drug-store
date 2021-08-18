@@ -45,10 +45,10 @@ public class Drug {
     @JoinColumn(name = "drug_group_id")
     private DrugGroup drugGroup;
 //    private List<String> drugImageDetails;
-//    @OneToMany(targetEntity = DrugImageDetail.class, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "drug_id_fk",referencedColumnName = "drug_id")
-//    private List<DrugImageDetail> drugImageDetails;
-    private String drugImageDetails;
+    @OneToMany(targetEntity = DrugImageDetail.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "drug_id",referencedColumnName = "drug_id")
+    private List<DrugImageDetail> drugImageDetails;
+//    private String drugImageDetails;
 //    @OneToMany(mappedBy = "drug")
 //    private List<DrugOfBill> drugOfBills;
 //    @OneToMany(mappedBy = "drug")
@@ -60,11 +60,11 @@ public class Drug {
     public Drug() {
     }
 
-    public String getDrugImageDetails() {
+    public List<DrugImageDetail> getDrugImageDetails() {
         return drugImageDetails;
     }
 
-    public void setDrugImageDetails(String drugImageDetails) {
+    public void setDrugImageDetails(List<DrugImageDetail> drugImageDetails) {
         this.drugImageDetails = drugImageDetails;
     }
 

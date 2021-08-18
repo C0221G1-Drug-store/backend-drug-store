@@ -17,7 +17,7 @@ public class DrugDtoTuan {
     private Integer conversionRate;
     private Double wholesaleProfitRate;
     private Double retailProfitRate;
-    private String drugImageDetails;
+    private List<DrugImageDetail> drugImageDetails;
     private String drugFaculty;
     private String manufacturer;
     private String origin;
@@ -28,11 +28,11 @@ public class DrugDtoTuan {
     public DrugDtoTuan() {
     }
 
-    public String getDrugImageDetails() {
+    public List<DrugImageDetail> getDrugImageDetails() {
         return drugImageDetails;
     }
 
-    public void setDrugImageDetails(String drugImageDetails) {
+    public void setDrugImageDetails(List<DrugImageDetail> drugImageDetails) {
         this.drugImageDetails = drugImageDetails;
     }
 
