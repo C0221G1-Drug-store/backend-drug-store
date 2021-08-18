@@ -5,6 +5,7 @@ import com.backend.pharmacy_management.model.dto.DrugDtoTuan;
 import com.backend.pharmacy_management.model.dto.ListDrugDTO;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.drug.DrugGroup;
+import com.backend.pharmacy_management.model.entity.drug.DrugImageDetail;
 import com.backend.pharmacy_management.model.service.drug.IDrugService;
 import com.backend.pharmacy_management.model.service.drug_group.IDrugGroupService;
 import org.springframework.beans.BeanUtils;
@@ -59,6 +60,11 @@ public class DrugController {
         BeanUtils.copyProperties(drugDtoTuan,drug);
         drug.setDrugCode ((long) Math.floor(Math.random()*1000000));
         return new ResponseEntity<>(drugService.saveDrug(drug), HttpStatus.CREATED);
+    }
+    @PostMapping(value = "/image")
+    public ResponseEntity<DrugImageDetail> saveDrugImage(@Valid @RequestBody DrugImageDetail drugImageDetail) {
+
+        return new ResponseEntity<>(drugService.saveDrugImage(drugImageDetail), HttpStatus.CREATED);
     }
     @PutMapping("/{id}&{code}")
     public ResponseEntity<Drug> updateBenhAn(@PathVariable Long id,@PathVariable Long code,@Valid @RequestBody Drug drug) {
