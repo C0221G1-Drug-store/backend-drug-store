@@ -13,4 +13,6 @@ public interface ImportBillDrugService {
 
     List<ImportBillDrug> getAllImportBillDrugByManufacuterId(Long id);
 
+    void updateImportBillDrug(Long id);
+
 }

@@ -3,6 +3,7 @@ package com.backend.pharmacy_management.model.entity.manufacturer;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,8 +27,9 @@ public class Manufacturer {
     private String manufacturerDebts;
     private Integer manufacturerNote ;
     @OneToMany(mappedBy = "manufacturer")
-    @JsonBackReference
+    @JsonIgnore
     private List<ImportBill> importBills;
     @OneToMany(mappedBy = "manufacturer")
+    @JsonIgnore
     private List<ExportBill> exportBills;
 }

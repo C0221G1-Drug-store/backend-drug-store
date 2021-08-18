@@ -1,5 +1,8 @@
 package com.backend.pharmacy_management.model.service.impl;
 
+import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
+import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
+import com.backend.pharmacy_management.model.repository.ExportBillDetailRepository;
 import com.backend.pharmacy_management.model.repository.ExportBillRepository;
 import com.backend.pharmacy_management.model.service.ExportBillService;
 import com.backend.pharmacy_management.model.service.ExportBillTypeService;
@@ -13,13 +16,25 @@ import java.util.Random;
 public class ExportBillImpl implements ExportBillService {
     @Autowired
     private ExportBillRepository exportBillRepository;
-
+    @Autowired
+    private ExportBillDetailRepository exportBillDetailRepository;
 
 
     @Override
     public List<String> getAllExportBillCode() {
         return this.exportBillRepository.getAllExportBillCode();
     }
+
+    @Override
+    public void createExportBill(ExportBill exportBill) {
+        this.exportBillRepository.save(exportBill);
+    }
+
+    @Override
+    public void createExportBillDetail(ExportBillDetail exportBillDetail) {
+        this.exportBillDetailRepository.save(exportBillDetail);
+    }
+
     @Override
     public String createExportBillRefundCode() {
         List<String> listCode = getAllExportBillCode();

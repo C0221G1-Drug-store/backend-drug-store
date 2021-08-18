@@ -27,5 +27,12 @@ public class ImportBillDrugImpl implements ImportBillDrugService {
         return this.importBillDetailRepository.getAllImportBillDrugByManufacuterId(id);
     }
 
+    @Override
+    public void updateImportBillDrug(Long id) {
+        ImportBillDrug importBillDrug = this.findDrugByid(id);
+        importBillDrug.setFlag(false);
+        this.importBillDetailRepository.save(importBillDrug);
+    }
+
 
 }

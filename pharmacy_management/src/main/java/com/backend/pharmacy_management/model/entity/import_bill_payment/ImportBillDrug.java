@@ -32,11 +32,10 @@ public class ImportBillDrug {
     private Boolean flag=true;
     @ManyToOne
     @JoinColumn(name = "import_bill_id")
-    @JsonManagedReference
+
     ImportBill importBill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
-    @JsonManagedReference
     Drug drug;
     @OneToOne(mappedBy = "importBillDrug")
     private ExportBillDetail exportBillDetail;

@@ -19,10 +19,9 @@ public interface ImportBillDrugRepository extends JpaRepository<ImportBillDrug,L
                 "on mn.manufacturer_id = imb.manufacturer_id join import_bill_drug as im\n" +
                 "on imb.import_bill_id =  im.import_bill_id  join drug \n" +
                 "on drug.drug_id = im.drug_id\n" +
-                "where mn.manufacturer_id = ?", nativeQuery = true)
+                "where mn.manufacturer_id = ? and im.flag=1", nativeQuery = true)
         List<ImportBillDrug> getAllImportBillDrugByManufacuterId(Long id);
 
         @Query(value = "select * from import_bill_drug d where d.import_amount > 0 && d.flag=1", nativeQuery = true)
         List<ImportBillDrug> getAll();
-
 }

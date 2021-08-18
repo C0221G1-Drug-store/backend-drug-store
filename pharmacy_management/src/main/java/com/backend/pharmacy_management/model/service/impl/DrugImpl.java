@@ -16,4 +16,18 @@ public class DrugImpl implements DrugService {
     public List<Drug> findAllDrug() {
         return drugRepository.findAll();
     }
+
+    @Override
+    public void updateAmountDrug(Long id, Integer amount) {
+        Drug drug = this.findById(id);
+        if(drug != null){
+            drug.setDrugAmount(drug.getDrugAmount() - amount);
+        }
+        this.drugRepository.save(drug);
+    }
+
+    @Override
+    public Drug findById(Long id) {
+        return this.drugRepository.findById(id).orElse(null);
+    }
 }
