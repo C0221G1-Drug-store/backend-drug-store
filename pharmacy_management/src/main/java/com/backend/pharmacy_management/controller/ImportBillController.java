@@ -84,5 +84,10 @@ public class ImportBillController {
         String[] a = {result};
         return new ResponseEntity<>(a, HttpStatus.OK);
     }
+    @GetMapping(value ="/employees" )
+    private ResponseEntity<Employee> getEmployee(){
+        Employee employee = this.employeeService.findById(1L);
+        return new ResponseEntity<>(employee,HttpStatus.OK);
+    }
 
 }
