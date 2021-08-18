@@ -21,7 +21,7 @@ public class Manufacturer {
     private String manufacturerEmail;
     private String manufacturerPhoneNumber;
     private String manufacturerDebts;
-    private Integer manufacturerNote ;
+    private String manufacturerNote ;
     @OneToMany(mappedBy = "manufacturer")
     @JsonIgnore
     private List<ImportBill> importBills;
