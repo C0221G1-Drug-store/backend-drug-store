@@ -1,8 +1,9 @@
 package com.backend.pharmacy_management.controller.prescription_indicative;
 
-import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
+import com.backend.pharmacy_management.model.dto.PrescriptionDto;
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Prescription;
 import com.backend.pharmacy_management.model.service.prescription_indicative.IPrescriptionService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,10 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import java.util.List;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -22,17 +22,6 @@ import java.util.Optional;
 public class PrescriptionController {
     @Autowired
     private IPrescriptionService iPrescriptionService;
-
-
-//    @GetMapping(value = "prescription-list")
-//    public ResponseEntity<Page<Prescription>> showList(@RequestParam Integer page) {
-//        Page<Prescription> prescriptionList =  iPrescriptionService.getAllPrescriptionList(PageRequest.of(page,5));
-//        if (prescriptionList.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<>(prescriptionList, HttpStatus.OK);
-//    }
-
 
     @GetMapping(value = "/prescription-list")
     public ResponseEntity<Page<Prescription>> showList(@RequestParam Optional<String> prescriptionName,
@@ -58,54 +47,12 @@ public class PrescriptionController {
         if (symptom.isPresent()) {
             sym = symptom.get();
         }
-
         Page<Prescription> prescriptionList = iPrescriptionService.searchPrescription(name, code, obj, sym,pageable);
         if (prescriptionList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(prescriptionList, HttpStatus.OK);
     }
-
-//    public ResponseEntity<Page<Prescription>> findPrescription(@PathVariable String keyWord, @PathVariable String attribute) {
-//        Page<Prescription> prescriptionPage = null;
-//        keyWord = "%" + keyWord.split(",")[0] + "%";
-//        switch (attribute) {
-//            case "name":
-//                prescriptionPage = iPrescriptionService.searchPrescription(keyWord, "%%", "%%", "%%");
-//                break;
-//            case "code":
-//                prescriptionPage = iPrescriptionService.searchPrescription("%%", keyWord, "%%", "%%");
-//                break;
-//            case "obj":
-//                prescriptionPage = iPrescriptionService.searchPrescription("%%", "%%", keyWord, "%%");
-//                break;
-//            case "sym":
-//                prescriptionPage = iPrescriptionService.searchPrescription("%%", "%%", "%%", keyWord);
-//                break;
-//            case "all":
-//                prescriptionPage = iPrescriptionService.searchPrescription(keyWord, keyWord, keyWord, keyWord);
-//                break;
-//            default:
-//                System.out.println("Find not found");
-//        }
-//        if (prescriptionPage.isEmpty()) {
-//            System.out.println("Error");
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        System.out.println("Success");
-//        return new ResponseEntity<>(prescriptionPage, HttpStatus.OK);
-//    }
-
-//
-//    @GetMapping(value = "/categories")
-//    public ResponseEntity<List<Category>> showCategory() {
-//        List<Category> categoryList = (List<Category>) categoryService.findAll();
-//        if (categoryList.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<>(categoryList, HttpStatus.OK);
-//    }
-
     @GetMapping("/prescriptions/{id}")
     public ResponseEntity<Prescription> findPrescriptionById(@PathVariable Long id) {
         Optional<Prescription> prescriptionOptional = iPrescriptionService.findById(id);
@@ -114,15 +61,16 @@ public class PrescriptionController {
         }
         return new ResponseEntity<>(prescriptionOptional.get(), HttpStatus.OK);
     }
-
     @PostMapping(value = "/prescription-create")
-    public ResponseEntity savePrescription(@RequestBody Prescription prescription) {
-
-        return new ResponseEntity<>(iPrescriptionService.save(prescription), HttpStatus.CREATED);
+    public ResponseEntity savePrescription(@Valid @RequestBody PrescriptionDto prescriptionDto , BindingResult bindingResult) {
+            if (bindingResult.hasErrors()){
+                return new ResponseEntity<>(bindingResult.getAllErrors(),HttpStatus.NOT_MODIFIED);
+            }else {
+                Prescription prescription = new Prescription();
+                BeanUtils.copyProperties(prescriptionDto,prescription);
+                return new ResponseEntity<>(iPrescriptionService.save(prescription), HttpStatus.CREATED);
+            }
     }
-
-
-
     @PutMapping("/prescriptions/{id}")
     public ResponseEntity<Prescription> updatePrescription(@PathVariable Long id, @RequestBody Prescription prescription) {
         Optional<Prescription> prescriptionOptional = iPrescriptionService.findById(id);
@@ -132,7 +80,6 @@ public class PrescriptionController {
         prescription.setPrescriptionId(prescriptionOptional.get().getPrescriptionId());
         return new ResponseEntity<>(iPrescriptionService.save(prescription), HttpStatus.OK);
     }
-
     @DeleteMapping("/prescriptions/{id}")
     public ResponseEntity<Prescription> deletePrescription(@PathVariable Long id) {
         Optional<Prescription> prescriptionOptional = iPrescriptionService.findById(id);
