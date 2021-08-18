@@ -20,6 +20,7 @@ import java.util.Objects;
 public class BillSale {
     @Id
     @Column(name = "bill_sale_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long billSaleId;
     private String billSaleCode;
     @Column(columnDefinition = "datetime")

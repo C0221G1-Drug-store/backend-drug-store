@@ -24,35 +24,28 @@ public class Drug {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "drug_id")
     private Long drugId;
-    @Column(name = "drug_code")
     private String drugCode;
-    @Column(name = "drug_name")
     private String drugName;
-    @Column(name = "active_element")
     private String activeElement;
-    @Column(name = "drug_amount")
+    @Column(name = "drug_amout")
     private Long drugAmount;
-    @Column(name = "unit")
     private String unit;
-    @Column(name = "conversion_unit")
     private String conversionUnit;
-    @Column(name = "conversion_rate")
     private Integer conversionRate;
-    @Column(name = "wholesale_profit_rate")
     private Double wholesaleProfitRate;
-    @Column(name = "retail_profit_rate")
     private Double retailProfitRate;
-    @Column(name = "drug_faculty", columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String drugFaculty;
-    @Column(name = "drug_side_effect", columnDefinition = "TEXT")
-    private String drugSideEffect;
-    private Boolean flag = true;
     private String manufacturer;
     private String origin;
     private String note;
-    @ManyToOne
-    @JoinColumn(name = "drug_group_id")
-    private DrugGroup drugGroup;
+    @Column(columnDefinition = "TEXT")
+    private String drugSideEffect;
+    private Boolean flag = true;
+    //    @ManyToOne
+//    @JoinColumn(name = "drug_group_id")
+    @Column(name = "drug_group_id")
+    private String drugGroup;
     @OneToMany(mappedBy = "drug")
     @JsonBackReference(value = "drug_image_detail-drug")
     private List<DrugImageDetail> drugImageDetails;
