@@ -23,8 +23,9 @@ public class DrugImageDetail {
     private String drugImageDetailUrl;
 //    private Boolean flag;
 //    @ManyToOne
-//    @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
+//    @JoinColumn(name = "drug_id")
 //    private Drug drug;
+
 
 
     public DrugImageDetail() {

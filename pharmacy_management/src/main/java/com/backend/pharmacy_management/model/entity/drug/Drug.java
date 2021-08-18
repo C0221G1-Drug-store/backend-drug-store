@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -43,8 +44,9 @@ public class Drug {
     @ManyToOne
     @JoinColumn(name = "drug_group_id")
     private DrugGroup drugGroup;
+//    private List<String> drugImageDetails;
 //    @OneToMany(targetEntity = DrugImageDetail.class, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "drug_id",referencedColumnName = "drug_id")
+//    @JoinColumn(name = "drug_id_fk",referencedColumnName = "drug_id")
 //    private List<DrugImageDetail> drugImageDetails;
     private String drugImageDetails;
 //    @OneToMany(mappedBy = "drug")
@@ -56,6 +58,14 @@ public class Drug {
 
 
     public Drug() {
+    }
+
+    public String getDrugImageDetails() {
+        return drugImageDetails;
+    }
+
+    public void setDrugImageDetails(String drugImageDetails) {
+        this.drugImageDetails = drugImageDetails;
     }
 
     public Long getDrugAmount() {
@@ -194,11 +204,5 @@ public class Drug {
         this.drugGroup = drugGroup;
     }
 
-    public String getDrugImageDetails() {
-        return drugImageDetails;
-    }
 
-    public void setDrugImageDetails(String drugImageDetails) {
-        this.drugImageDetails = drugImageDetails;
-    }
 }

@@ -54,15 +54,16 @@ public class DrugController {
         return new ResponseEntity<>(listDrugGroup,HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<Drug> saveDrug(@Valid @RequestBody DrugDtoTuan drugDtoTuan, BindingResult bindingResult) {
+    public ResponseEntity<Drug> saveDrug(@Valid @RequestBody DrugDtoTuan drugDtoTuan) {
         Drug drug = new Drug();
         BeanUtils.copyProperties(drugDtoTuan,drug);
         drug.setDrugCode ((long) Math.floor(Math.random()*1000000));
         return new ResponseEntity<>(drugService.saveDrug(drug), HttpStatus.CREATED);
     }
     @PutMapping("/{id}&{code}")
-    public ResponseEntity<Drug> updateBenhAn(@PathVariable Long id,@PathVariable Long code,@RequestBody Drug drug) {
+    public ResponseEntity<Drug> updateBenhAn(@PathVariable Long id,@PathVariable Long code,@Valid @RequestBody Drug drug) {
         Drug drug1 = drugService.findById(id);
+        BeanUtils.copyProperties(drug,drug);
         if (drug1==null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
