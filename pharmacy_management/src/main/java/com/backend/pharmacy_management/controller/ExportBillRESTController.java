@@ -43,14 +43,11 @@ public class ExportBillRESTController {
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<?> deleteTest(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<ExportBill> deleteTest(@PathVariable(value = "id") Long id) {
         ExportBill exportBill = this.iExportBillService.findById(id);
-//        if (exportBill != null) {
-            iExportBillService.delete(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-//        }
-//        test.setFlag(true);
-//        return new ResponseEntity<>(HttpEntity.EMPTY);
+        this.iExportBillService.delete(id);
+        return new ResponseEntity<>(exportBill, HttpStatus.OK);
+
     }
 
 }
