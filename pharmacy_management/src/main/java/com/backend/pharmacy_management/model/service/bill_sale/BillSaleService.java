@@ -5,15 +5,13 @@ import com.backend.pharmacy_management.model.repository.bill_sale.IBillSaleRepos
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class BillSaleService implements IBillSaleService {
     @Autowired
     IBillSaleRepository iBillSaleRepository;
     @Override
-    public Optional<BillSale> findBillSaleById(Long id) {
-        return iBillSaleRepository.findById(id);
+    public BillSale findBillSaleByIdCode(String id) {
+        return iBillSaleRepository.findBillSaleByIdCode(id);
     }
 
     @Override

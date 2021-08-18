@@ -14,7 +14,7 @@ public class DrugOfBillService implements IDrugOfBillService {
     IDrugOfBillRepository iDrugOfBillRepository;
 
     @Override
-    public List<DrugOfBill> findAllDrugOfBillByBillSaleId(Long id) {
+    public List<DrugOfBill> findAllDrugOfBillByBillSaleId(String id) {
         return iDrugOfBillRepository.findAllDrugOfBillByBillSaleId(id);
     }
 

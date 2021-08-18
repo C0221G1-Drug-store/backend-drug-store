@@ -69,7 +69,7 @@ public class BillSaleController {
     }
 
     @GetMapping(value = "/get-list-drug-of-bill")
-    public ResponseEntity<List<DrugOfBill>> getListDrugOfBillByBillSaleId(@RequestParam Long id) {
+    public ResponseEntity<List<DrugOfBill>> getListDrugOfBillByBillSaleId(@RequestParam String id) {
         List<DrugOfBill> drugOfBillList = iDrugOfBillService.findAllDrugOfBillByBillSaleId(id);
         if (drugOfBillList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -79,8 +79,8 @@ public class BillSaleController {
     }
 
     @GetMapping(value = "get-bill-sale")
-    public ResponseEntity<Optional<BillSale>> getBillSale(@RequestParam Long id ){
-        Optional<BillSale> billSale = iBillSaleService.findBillSaleById(id);
+    public ResponseEntity<Optional<BillSale>> getBillSale(@RequestParam String id ){
+        Optional<BillSale> billSale = Optional.ofNullable(iBillSaleService.findBillSaleByIdCode(id));
         return new ResponseEntity<>(billSale, HttpStatus.OK);
     }
 
