@@ -4,7 +4,8 @@ import com.backend.pharmacy_management.model.entity.drug.Drug;
 
 import java.util.List;
 
-public interface IDrugService {
+public interface DrugService {
+    List<Drug> findAllDrug();
     void updateAmountDrug(Long id, Integer amount);
     Drug findById(Long id);
 }

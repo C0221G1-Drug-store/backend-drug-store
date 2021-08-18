@@ -1,11 +1,13 @@
 package com.backend.pharmacy_management.model.entity.import_bill_payment;
-
 import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
-import com.fasterxml.jackson.annotation.*;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,20 +16,22 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "import_bill_drug")
 public class ImportBillDrug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long importBillDrugId;
+    Long ImportBillDrugId;
     Integer importAmount;
     Double importPrice;
     Integer discountRate;
-    Integer lotNumber;
-    Date expiry;
+    Integer lotNumber ;
+    String expiry ;
     Integer vat;
-    Boolean flag;
+    private Boolean flag=true;
+
     @ManyToOne
     @JoinColumn(name = "import_bill_id")
     ImportBill importBill;
@@ -36,11 +40,7 @@ public class ImportBillDrug {
     @JoinColumn(name = "drug_id")
     Drug drug;
 
-    @OneToOne(mappedBy = "importBillDrug", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "importBillDrug")
     @JsonIgnore
-    ExportBillDetail exportBillDetail;
-
-    public ImportBillDrug() {
-    }
-
+    private ExportBillDetail exportBillDetail;
 }

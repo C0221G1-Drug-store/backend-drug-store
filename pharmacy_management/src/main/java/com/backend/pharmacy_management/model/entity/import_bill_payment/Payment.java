@@ -1,15 +1,16 @@
 package com.backend.pharmacy_management.model.entity.import_bill_payment;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "payment")
 public class Payment {
     @Id
@@ -19,10 +20,9 @@ public class Payment {
     Double prepayment;
     Integer discount;
     String status;
+
     @OneToOne(mappedBy = "payment")
     @JsonIgnore
     ImportBill importBill;
 
-    public Payment() {
-    }
 }

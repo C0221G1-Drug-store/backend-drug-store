@@ -1,6 +1,6 @@
 package com.backend.pharmacy_management.model.entity.indicative_prescription;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,7 +20,8 @@ public class Prescription {
     private String object;     // đối tượng uống thuốc
     private int numberOfDay;  // số ngày uống
     private  String note;  //  ghi chú
-    @JsonBackReference
+
     @OneToMany(targetEntity = PrescriptionIndicative.class)
+    @JsonIgnore
     private List<PrescriptionIndicative> prescriptionIndicatives;
 }

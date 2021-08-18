@@ -1,12 +1,15 @@
 package com.backend.pharmacy_management.model.entity.customer;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
 @Entity
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "customer")
 public class Customer {
     @Id

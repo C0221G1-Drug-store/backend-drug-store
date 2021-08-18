@@ -1,15 +1,18 @@
 package com.backend.pharmacy_management.model.entity.drug;
 
-import com.fasterxml.jackson.annotation.*;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="drug_group")
 public class DrugGroup {
     @Id
@@ -20,8 +23,4 @@ public class DrugGroup {
     @OneToMany(mappedBy = "drugGroup")
     @JsonIgnore
     private List<Drug> drugs;
-
-    public DrugGroup() {
-    }
-
 }

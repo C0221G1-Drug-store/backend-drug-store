@@ -2,14 +2,18 @@ package com.backend.pharmacy_management.model.entity.manufacturer;
 
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
-import com.fasterxml.jackson.annotation.*;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 @Entity
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "manufacturer")
 public class Manufacturer {
     @Id
@@ -25,12 +29,7 @@ public class Manufacturer {
     @OneToMany(mappedBy = "manufacturer")
     @JsonIgnore
     private List<ImportBill> importBills;
-
     @OneToMany(mappedBy = "manufacturer")
     @JsonIgnore
     private List<ExportBill> exportBills;
-
-    public Manufacturer() {
-    }
-
 }
