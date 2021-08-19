@@ -1,4 +1,5 @@
 package com.backend.pharmacy_management.model.entity.user_role;
+import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,4 +30,7 @@ public class User {
     private String enabled;
     @OneToMany(mappedBy = "user")
     private List<UserRole> userRoles;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id", referencedColumnName = "employeeId")
+    private Employee employee;
 }

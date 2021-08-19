@@ -49,18 +49,6 @@ public class UserRestController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-//    @GetMapping
-//    public ResponseEntity<Page<User>> findAllUser(@RequestParam Integer page,
-//                                                  @RequestParam Integer size
-//    ) {
-//        Page<User> users = userService.findAll(PageRequest.of(page,size));
-//
-//        if (users.isEmpty()) {
-//            return new ResponseEntity<>(users, HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(users, HttpStatus.OK);
-//    }
-
     @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<User> findUserById(@PathVariable Long id) {
@@ -81,6 +69,9 @@ public class UserRestController {
         User user = new User();
         BeanUtils.copyProperties(userDto,user);
         user.setUserId(userOptional.get().getUserId());
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        String passWord = bCryptPasswordEncoder.encode(userDto.getEncrytedPassword());
+        user.setEncrytedPassword(userDto.getEncrytedPassword());
         userService.save(user);
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
@@ -109,4 +100,5 @@ public class UserRestController {
         userRoleService.save(userRole);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }

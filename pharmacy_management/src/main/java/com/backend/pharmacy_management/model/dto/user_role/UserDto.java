@@ -1,5 +1,7 @@
 package com.backend.pharmacy_management.model.dto.user_role;
 
+import com.backend.pharmacy_management.model.entity.employee.Employee;
+
 public class UserDto {
     private Long userId;
     private String userName;
@@ -7,16 +9,19 @@ public class UserDto {
     private String accountName;
     private String encrytedPassword;
     private String enabled;
+    private Employee employee;
 
     public UserDto() {
     }
 
-    public UserDto(String userName, String userCode, String accountName, String encrytedPassword, String enabled) {
+    public UserDto(Long userId, String userName, String userCode, String accountName, String encrytedPassword, String enabled, Employee employee) {
+        this.userId = userId;
         this.userName = userName;
         this.userCode = userCode;
         this.accountName = accountName;
         this.encrytedPassword = encrytedPassword;
         this.enabled = enabled;
+        this.employee = employee;
     }
 
     public Long getUserId() {
@@ -65,5 +70,13 @@ public class UserDto {
 
     public void setEnabled(String enabled) {
         this.enabled = enabled;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

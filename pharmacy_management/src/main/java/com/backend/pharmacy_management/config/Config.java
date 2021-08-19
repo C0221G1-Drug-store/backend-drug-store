@@ -17,4 +17,5 @@ public class Config extends WebMvcConfigurerAdapter {
         messageConverters.add(new MappingJackson2HttpMessageConverter());
         super.configureMessageConverters(messageConverters);
     }
+
 }

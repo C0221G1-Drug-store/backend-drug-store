@@ -20,10 +20,8 @@ public class Indicative {
     private  Long totalPill;
     private  Long drinkDay;
     private  Long drinkTime;
-//    private  Long amountPill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
     @JsonBackReference(value = "indicatives_drug-drug")
     private Drug drug;
-
 }
