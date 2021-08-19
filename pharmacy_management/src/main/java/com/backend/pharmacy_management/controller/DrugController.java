@@ -37,6 +37,30 @@ public class DrugController {
         }
         return new ResponseEntity<>(drugs, HttpStatus.OK);
     }
+    @GetMapping("/search")
+    public ResponseEntity<List<ListDrugDTO>> findAllDrugsSearch(@RequestParam String field, @RequestParam String sign, @RequestParam String input, @RequestParam String index) {
+        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findAllDrugsSearch(field, sign, input, index);
+        if (drugs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(drugs, HttpStatus.OK);
+    }
+    @GetMapping("/search-like")
+    public ResponseEntity<List<ListDrugDTO>> findAllDrugsLikePagination(@RequestParam String field, @RequestParam String input, @RequestParam String index) {
+        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findAllDrugsLikePagination(field, input, index);
+        if (drugs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(drugs, HttpStatus.OK);
+    }
+    @GetMapping("/search-not-pagination")
+    public ResponseEntity<List<ListDrugDTO>> findAllDrugsSearchNotPagination(@RequestParam String field, @RequestParam String sign, @RequestParam String input) {
+        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findAllDrugsSearchNotPagination(field, sign, input);
+        if (drugs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(drugs, HttpStatus.OK);
+    }
     @GetMapping("/not-pagination")
     public ResponseEntity<List<ListDrugDTO>> findAllDrugsNotPagination() {
         List<ListDrugDTO> drugs = drugService.findAllDrugsNotPagination();
