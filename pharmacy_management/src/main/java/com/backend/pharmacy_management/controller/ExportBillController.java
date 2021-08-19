@@ -14,7 +14,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("http://localhost:4200/")
 @RequestMapping("/api")
 public class ExportBillController {
     @Autowired
@@ -78,21 +77,21 @@ public class ExportBillController {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
-    @PostMapping(value = "/export-bill")
-    private ResponseEntity<ExportBill> createExportBill(@RequestBody @Valid ExportBillDto exportBillDto, BindingResult bindingResult) {
+    @PostMapping( value = "/export-bill")
+    public ResponseEntity<ExportBill> createExportBill(@RequestBody @Valid ExportBillDto exportBillDto, BindingResult bindingResult) {
         new ExportBillDto().validate(exportBillDto, bindingResult);
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         ExportBill exportBill = new ExportBill();
         BeanUtils.copyProperties(exportBillDto, exportBill);
-        exportBill.setEmployee(this.employeeService.findById(1L));
+        exportBill.setEmployee(this.employeeService.findById(exportBillDto.getEmployee().getEmployeeId()));
         this.exportBillService.createExportBill(exportBill);
         return new ResponseEntity<>(exportBill,HttpStatus.CREATED);
     }
 
     @PostMapping(value = "/export-bill/export-bill-detail")
-    private ResponseEntity<Void> createExportBillDetail(@RequestBody @Valid ExportBillDetailDto exportBillDetailDto, BindingResult bindingResult) {
+    public ResponseEntity<Void> createExportBillDetail(@RequestBody @Valid ExportBillDetailDto exportBillDetailDto, BindingResult bindingResult) {
         new ExportBillDetailDto().validate(exportBillDetailDto, bindingResult);
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -105,7 +104,7 @@ public class ExportBillController {
     }
 
     @GetMapping(value ="/employees" )
-    private ResponseEntity<Employee> getEmployee(){
+    public ResponseEntity<Employee> getEmployee(){
         Employee employee = this.employeeService.findById(1L);
         return new ResponseEntity<>(employee,HttpStatus.OK);
     }
