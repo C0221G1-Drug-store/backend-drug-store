@@ -18,7 +18,7 @@ public class DrugController {
     private IDrugService drugService;
     @GetMapping
     public ResponseEntity<List<ListDrugDTO>> findAllDrugsPagination(@RequestParam int index) {
-        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findAllDrugsPagination(index);
+        List<ListDrugDTO> drugs = drugService.findAllDrugsPagination(index);
         if (drugs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -26,7 +26,7 @@ public class DrugController {
     }
     @GetMapping("/not-pagination")
     public ResponseEntity<List<ListDrugDTO>> findAllDrugsNotPagination() {
-        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findAllDrugsNotPagination();
+        List<ListDrugDTO> drugs = drugService.findAllDrugsNotPagination();
         if (drugs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -35,7 +35,7 @@ public class DrugController {
 
     @GetMapping(value={"/search-drug/{searchTerm}"})
     public ResponseEntity<List<ListDrugDTO>> searchDrug(@PathVariable String searchTerm) {
-        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.searchDrugs(searchTerm);
+        List<ListDrugDTO> drugs = drugService.searchDrugs(searchTerm);
         if (drugs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -44,7 +44,7 @@ public class DrugController {
 
     @GetMapping(value={"/drug-group/{drugGroupName}"})
     public ResponseEntity<List<ListDrugDTO>> findDrugByGroup(@PathVariable String drugGroupName) {
-        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findDrugByGroup(drugGroupName);
+        List<ListDrugDTO> drugs = drugService.findDrugByGroup(drugGroupName);
         if (drugs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -57,7 +57,7 @@ public class DrugController {
         if (drugDTO == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<DrugDTO>(drugDTO, HttpStatus.OK);
+        return new ResponseEntity<>(drugDTO, HttpStatus.OK);
     }
 
     @GetMapping("/client/{id}")
@@ -66,7 +66,7 @@ public class DrugController {
         if (drugDTO == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<DrugDTO>(drugDTO, HttpStatus.OK);
+        return new ResponseEntity<>(drugDTO, HttpStatus.OK);
     }
 }
   
