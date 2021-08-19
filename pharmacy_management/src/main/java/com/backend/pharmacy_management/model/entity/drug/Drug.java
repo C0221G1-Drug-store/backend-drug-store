@@ -11,12 +11,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+//@Data
 //@NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @Table(name="drug")
 public class Drug {
     @Id
@@ -24,16 +25,12 @@ public class Drug {
     @Column(name = "drug_id")
     private Long drugId;
     @Column(name = "drug_code")
-    private String drugCode;
+    private Long drugCode;
     @Column(name = "drug_name")
     private String drugName;
     @Column(name = "active_element")
     private String activeElement;
-<<<<<<< HEAD
     @Column(name = "drug_amount")
-=======
-    @Column(name = "drug_amout")
->>>>>>> 683bfc936f0fbf0a0042a0eb4d00f0057fb37ca6
     private Long drugAmount;
     @Column(name = "unit")
     private String unit;
@@ -53,40 +50,48 @@ public class Drug {
     private String manufacturer;
     private String origin;
     private String note;
-<<<<<<< HEAD
-    @ManyToOne
-    @JoinColumn(name = "drug_group_id")
-    @JsonBackReference(value = "drug_group-drug")
-    private DrugGroup drugGroup;
-=======
     @Column(columnDefinition = "TEXT")
     private String drugSideEffect;
     private Boolean flag = true;
-//    @ManyToOne
-//    @JoinColumn(name = "drug_group_id")
-    @Column(name = "drug_group_id")
-    private String drugGroup;
->>>>>>> 683bfc936f0fbf0a0042a0eb4d00f0057fb37ca6
     @OneToMany(mappedBy = "drug")
-    @JsonManagedReference(value = "drug_image_detail-drug")
+    @JsonManagedReference(value = "drug_image_detail_drug")
     private List<DrugImageDetail> drugImageDetails;
     @OneToMany(mappedBy = "drug")
-    @JsonManagedReference(value = "drug_of_bill-drug")
+    @JsonManagedReference(value = "drug_of_bill_drug")
     private List<DrugOfBill> drugOfBills;
     @OneToMany(mappedBy = "drug")
-    @JsonManagedReference(value = "indicatives_drug-drug")
+    @JsonManagedReference(value = "indicatives_drug_drug")
     private List<Indicative> indicatives;
     @OneToMany(mappedBy = "drug")
-    @JsonManagedReference(value = "export_bill_detail-drug")
+    @JsonManagedReference(value = "export_bill_detail_drug")
     private List<ExportBillDetail> exportBillDetails;
-<<<<<<< HEAD
     @OneToMany(mappedBy = "drug")
     @JsonManagedReference(value = "import_bill_drug-drug")
     private List<ImportBillDrug> importBillDrugs;
-
-=======
+    @ManyToOne
+    @JoinColumn(name = "drug_group_id")
+    private DrugGroup drugGroup;
+    @OneToMany(targetEntity = DrugImageDetail.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "drug_id",referencedColumnName = "drug_id")
+    private List<DrugImageDetail> drugImageDetails;
 
     public Drug() {
+    }
+
+    public List<DrugImageDetail> getDrugImageDetails() {
+        return drugImageDetails;
+    }
+
+    public void setDrugImageDetails(List<DrugImageDetail> drugImageDetails) {
+        this.drugImageDetails = drugImageDetails;
+    }
+
+    public Long getDrugAmount() {
+        return drugAmount;
+    }
+
+    public void setDrugAmount(Long drugAmount) {
+        this.drugAmount = drugAmount;
     }
 
     public Long getDrugId() {
@@ -97,11 +102,11 @@ public class Drug {
         this.drugId = drugId;
     }
 
-    public String getDrugCode() {
+    public Long getDrugCode() {
         return drugCode;
     }
 
-    public void setDrugCode(String drugCode) {
+    public void setDrugCode(Long drugCode) {
         this.drugCode = drugCode;
     }
 
@@ -119,14 +124,6 @@ public class Drug {
 
     public void setActiveElement(String activeElement) {
         this.activeElement = activeElement;
-    }
-
-    public Long getDrugAmount() {
-        return drugAmount;
-    }
-
-    public void setDrugAmount(Long drugAmount) {
-        this.drugAmount = drugAmount;
     }
 
     public String getUnit() {
@@ -217,16 +214,12 @@ public class Drug {
         this.flag = flag;
     }
 
-    public String getDrugGroup() {
+    public DrugGroup getDrugGroup() {
         return drugGroup;
     }
 
-    public void setDrugGroup(String drugGroup) {
+    public void setDrugGroup(DrugGroup drugGroup) {
         this.drugGroup = drugGroup;
-    }
-
-    public List<DrugImageDetail> getDrugImageDetails() {
-        return drugImageDetails;
     }
 
     public void setDrugImageDetails(List<DrugImageDetail> drugImageDetails) {
@@ -256,5 +249,5 @@ public class Drug {
     public void setExportBillDetails(List<ExportBillDetail> exportBillDetails) {
         this.exportBillDetails = exportBillDetails;
     }
->>>>>>> 683bfc936f0fbf0a0042a0eb4d00f0057fb37ca6
+
 }

@@ -9,9 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Table(name="drug_group")
 public class DrugGroup {
     @Id
@@ -22,4 +20,39 @@ public class DrugGroup {
     @OneToMany(mappedBy = "drugGroup")
     @JsonManagedReference(value = "drug_group-drug")
     private List<Drug> drugs;
+
+    public DrugGroup() {
+    }
+
+    public Long getDrugGroupId() {
+        return drugGroupId;
+    }
+
+    public void setDrugGroupId(Long drugGroupId) {
+        this.drugGroupId = drugGroupId;
+    }
+
+    public String getDrugGroupCode() {
+        return drugGroupCode;
+    }
+
+    public void setDrugGroupCode(String drugGroupCode) {
+        this.drugGroupCode = drugGroupCode;
+    }
+
+    public String getDrugGroupName() {
+        return drugGroupName;
+    }
+
+    public void setDrugGroupName(String drugGroupName) {
+        this.drugGroupName = drugGroupName;
+    }
+
+    public List<Drug> getDrugs() {
+        return drugs;
+    }
+
+    public void setDrugs(List<Drug> drugs) {
+        this.drugs = drugs;
+    }
 }
