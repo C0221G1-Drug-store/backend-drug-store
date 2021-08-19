@@ -1,12 +1,14 @@
 package com.backend.pharmacy_management.model.service.impl;
 
+import com.backend.pharmacy_management.model.dto.ImportBillDto;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.repository.IImportBillRepository;
 import com.backend.pharmacy_management.model.service.IImportBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +18,6 @@ import java.util.Optional;
 public class ImportBillServiceImpl implements IImportBillService {
     @Autowired
     IImportBillRepository importBillRepository;
-
-    @Override
-    public List<ImportBill> findAll() {
-        return importBillRepository.findAll();
-    }
 
     @Override
     public Optional<ImportBill> findById(Long id) {
@@ -33,36 +30,44 @@ public class ImportBillServiceImpl implements IImportBillService {
     }
 
     @Override
-    public List<ImportBill> getAllImportBill(int index) {
-        return importBillRepository.getAllImportBill(index);
+    public List<ImportBillDto> getImportBillDto(int index) {
+        return importBillRepository.getImportBillDto(index);
     }
 
     @Override
-    public List<ImportBill> getAllImportBillNotPagination() {
-        return importBillRepository.getAllImportBillNotPaging();
+    public List<ImportBillDto> getImportBillDtoNotPaging() {
+        return importBillRepository.getImportBillDtoNotPaging();
     }
 
     @Override
-    public List<ImportBill> search(String importCode) {
-        return importBillRepository.search("%" + importCode + "%");
+    public List<ImportBillDto> searchAndSort(String billCode, String startDate, String endDate, String col) {
+        return importBillRepository.searchAndSort(billCode, startDate, endDate, col);
+    }
+//test
+    @Override
+    public Page<ImportBill> getPageImportBillDto(Pageable pageable) {
+        return importBillRepository.getPageImportBillDto(pageable);
     }
 
     @Override
-    public List<ImportBill> searchBill(String importCode, String startDate, String endDate,String sort) {
-        System.out.println(sort);
-        return importBillRepository.searchSort("%" + importCode + "%", startDate, endDate,sort);
-
+    public Page<ImportBillDto> searchAndSortPaging(String billCode, String startDate, String endDate, String col, int pageable) {
+        List<ImportBillDto>importBillDtoList = importBillRepository.searchAndSortPaging(billCode, startDate,endDate,col);
+        Pageable pageable1 = PageRequest.of(pageable, 5);
+        int start = (int) pageable1.getOffset();
+        int end = Math.min((start + pageable1.getPageSize()), importBillDtoList.size());
+        Page<ImportBillDto> pages = new PageImpl<ImportBillDto>(importBillDtoList.subList(start, end), pageable1, importBillDtoList.size());
+        return pages;
     }
 
     @Override
-    public List<ImportBill> selName(String billCode, String startDate, String endDate, String col) {
-        return importBillRepository.searchSort("%"+billCode+"%",startDate,endDate,col);
+    public Page<ImportBillDto> getAllBill(int pageable) {
+        List<ImportBillDto>importBillDtoList = importBillRepository.getAllBill();
+        Pageable pageable1 = PageRequest.of(pageable, 5);
+        int start = (int) pageable1.getOffset();
+        int end = Math.min((start + pageable1.getPageSize()), importBillDtoList.size());
+        Page<ImportBillDto> pages = new PageImpl<ImportBillDto>(importBillDtoList.subList(start, end), pageable1, importBillDtoList.size());
+        return pages;
     }
 
-
-    @Override
-    public Page<ImportBill> getAllBill(Pageable pageable) {
-        return importBillRepository.getAllBill(pageable);
-    }
 
 }

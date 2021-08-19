@@ -1,12 +1,11 @@
 package com.backend.pharmacy_management.model.repository;
 
+import com.backend.pharmacy_management.model.dto.ImportBillDto;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.query.Procedure;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -14,30 +13,45 @@ import java.util.List;
 
 @Repository
 public interface IImportBillRepository extends JpaRepository<ImportBill, Long> {
-//    @Query(value = "select *" +
-//            " from import_bill " +
-//            "limit ?1,5;", nativeQuery = true)
-//    List<ImportBill>getAllImportBill(int index);
+    @Query(value = "select import_bill.import_bill_id as billId,import_bill.import_system_code as systemCode," +
+            "import_bill.accounting_voucher as accountingVoucher," +
+            "import_bill.invoice_date as invoiceDate, " +
+            "payment.total_money as totalMoney, (payment.total_money-payment.prepayment) as ownBill, manufacturer.manufacturer_name as manufacturerName, " +
+            "manufacturer.manufacturer_address as manufacturerAddress " +
+            "from import_bill " +
+            "left join manufacturer on manufacturer.manufacturer_id = import_bill.manufacturer_id " +
+            "left join payment on payment.payment_id = import_bill.payment_id " +
+            "order by invoiceDate desc limit ?1,5", nativeQuery = true)
+    List<ImportBillDto> getImportBillDto(int index);
 
-    @Query(value = "select * from import_bill order by invoice_date desc limit ?1,5;", nativeQuery = true)
-    List<ImportBill> getAllImportBill(int index);
+    @Query(value = "select import_bill.import_bill_id as billId,import_bill.import_system_code as systemCode," +
+            "import_bill.accounting_voucher as accountingVoucher," +
+            "import_bill.invoice_date as invoiceDate, " +
+            "payment.total_money as totalMoney, (payment.total_money-payment.prepayment) as ownBill, manufacturer.manufacturer_name as manufacturerName, " +
+            "manufacturer.manufacturer_address as manufacturerAddress " +
+            "from import_bill " +
+            "left join manufacturer on manufacturer.manufacturer_id = import_bill.manufacturer_id " +
+            "left join payment on payment.payment_id = import_bill.payment_id", nativeQuery = true)
+    List<ImportBillDto> getImportBillDtoNotPaging();
 
-    @Query(value = "select *" +
-            " from import_bill ", nativeQuery = true)
-    List<ImportBill> getAllImportBillNotPaging();
+    @Query(value = "{call selname2(:billCode, :startDate, :endDate, :col)}", nativeQuery = true)
+    List<ImportBillDto> searchAndSort(@Param("billCode") String billCode, @Param("startDate") String startDate,
+                                      @Param("endDate") String endDate, @Param("col") String col);
+    @Query(value = "select * from import_bill left join manufacturer on manufacturer.manufacturer_id = import_bill.manufacturer_id left join payment on payment.payment_id = import_bill.payment_id order by import_bill.invoice_date desc", nativeQuery = true)
+    Page<ImportBill> getPageImportBillDto(Pageable pageable);
 
-    @Query(value = "select * from import_bill where import_system_code like :importCode", nativeQuery = true)
-    List<ImportBill> search(@Param("importCode") String importCode);
+    @Query(value = "{call selname2(:billCode, :startDate, :endDate, :col)}", nativeQuery = true)
+    List<ImportBillDto> searchAndSortPaging(@Param("billCode") String billCode, @Param("startDate") String startDate,
+                                      @Param("endDate") String endDate, @Param("col") String col);
 
-    @Query(value = "select * from import_bill where (import_system_code like :importCode) and (invoice_date between :startDate  and :endDate) order by :sort desc ", nativeQuery = true)
-    List<ImportBill> searchBill(@Param("importCode") String importCode, @Param("startDate") String startDate, @Param("endDate") String endDate, @Param("sort") String sort);
-
-    @Query(value = "select * from import_bill order by invoice_date desc", nativeQuery = true)
-    Page<ImportBill> getAllBill(Pageable pageable);
-
-    @Procedure(name = "selname")
-    List<ImportBill> searchSort(@Param("billCode") String billCode, @Param("startDate") String startDate,
-                                @Param("endDate") String endDate, @Param("col") String col);
-
-
+    @Query(value = "select import_bill.import_bill_id as billId,import_bill.import_system_code as systemCode," +
+            "import_bill.accounting_voucher as accountingVoucher," +
+            "import_bill.invoice_date as invoiceDate, " +
+            "payment.total_money as totalMoney, (payment.total_money-payment.prepayment) as ownBill, manufacturer.manufacturer_name as manufacturerName, " +
+            "manufacturer.manufacturer_address as manufacturerAddress " +
+            "from import_bill " +
+            "left join manufacturer on manufacturer.manufacturer_id = import_bill.manufacturer_id " +
+            "left join payment on payment.payment_id = import_bill.payment_id " +
+            "order by invoiceDate desc", nativeQuery = true)
+    List<ImportBillDto> getAllBill();
 }

@@ -1,18 +1,16 @@
 package com.backend.pharmacy_management.model.entity.drug;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="drug_image_detail")
+@Table(name = "drug_image_detail")
 
 public class DrugImageDetail {
     @Id
@@ -23,6 +21,6 @@ public class DrugImageDetail {
     private String drugImageDetailUrl;
     private Boolean flag;
     @ManyToOne
-    @JoinColumn(name = "drug_id",referencedColumnName = "drug_id")
+    @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
     private Drug drug;
 }
