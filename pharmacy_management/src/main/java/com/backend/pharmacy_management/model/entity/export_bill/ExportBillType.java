@@ -1,12 +1,11 @@
 package com.backend.pharmacy_management.model.entity.export_bill;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+
 import java.util.Set;
 
 @Entity

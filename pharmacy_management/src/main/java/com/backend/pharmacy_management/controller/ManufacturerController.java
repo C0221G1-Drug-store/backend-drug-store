@@ -14,16 +14,18 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.validation.BindingResult;
 
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 
 import javax.validation.Valid;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "manufacturer")
-@CrossOrigin
+@CrossOrigin(value = "http://localhost:4200/")
 public class ManufacturerController {
     @Autowired
     IManufacturerService iManufacturerService;
@@ -94,17 +96,18 @@ public class ManufacturerController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<?> createManufacturer(@Valid @RequestBody ManufacturerDto manufacturerDto, BindingResult bindingResult) {
+    public ResponseEntity<List<ObjectError>> createManufacturer(@Valid @RequestBody ManufacturerDto manufacturerDto, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return new ResponseEntity<>(bindingResult.getAllErrors(),HttpStatus.NOT_MODIFIED);
         }else {
             Manufacturer manufacturer=new Manufacturer();
             BeanUtils.copyProperties(manufacturerDto,manufacturer);
-            return new ResponseEntity<>(iManufacturerService.saveManufacturer(manufacturer), HttpStatus.OK);
+            iManufacturerService.saveManufacturer(manufacturer);
+            return new ResponseEntity<>( HttpStatus.OK);
         }
     }
     @PutMapping(value = "/update")
-    public ResponseEntity<?> updateManufacturer(@RequestParam Long id,@Valid @RequestBody ManufacturerDto manufacturerDto,BindingResult bindingResult) {
+    public ResponseEntity<List<ObjectError>> updateManufacturer(@RequestParam Long id, @Valid @RequestBody ManufacturerDto manufacturerDto, BindingResult bindingResult) {
         Manufacturer mf = iManufacturerService.findByManufacturerId(id);
         manufacturerDto.setManufacturerId(mf.getManufacturerId());
         if(bindingResult.hasErrors()){
@@ -112,7 +115,8 @@ public class ManufacturerController {
         }else {
             Manufacturer manufacturers=new Manufacturer();
             BeanUtils.copyProperties(manufacturerDto, manufacturers );
-            return new ResponseEntity<>(iManufacturerService.saveManufacturer(manufacturers), HttpStatus.OK);
+            iManufacturerService.saveManufacturer(manufacturers);
+            return new ResponseEntity<>( HttpStatus.OK);
         }
     }
     @GetMapping(value = "/show")

@@ -1,6 +1,6 @@
 package com.backend.pharmacy_management.model.entity.indicative_prescription;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
