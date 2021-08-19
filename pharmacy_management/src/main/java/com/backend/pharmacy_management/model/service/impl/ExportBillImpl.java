@@ -5,10 +5,11 @@ import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail
 import com.backend.pharmacy_management.model.repository.ExportBillDetailRepository;
 import com.backend.pharmacy_management.model.repository.ExportBillRepository;
 import com.backend.pharmacy_management.model.service.ExportBillService;
-import com.backend.pharmacy_management.model.service.ExportBillTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
@@ -19,6 +20,10 @@ public class ExportBillImpl implements ExportBillService {
     @Autowired
     private ExportBillDetailRepository exportBillDetailRepository;
 
+    private Random rand = SecureRandom.getInstanceStrong();
+
+    public ExportBillImpl() throws NoSuchAlgorithmException {
+    }
 
     @Override
     public List<String> getAllExportBillCode() {
@@ -38,12 +43,11 @@ public class ExportBillImpl implements ExportBillService {
     @Override
     public String createExportBillRefundCode() {
         List<String> listCode = getAllExportBillCode();
-        StringBuffer stringCode;
-        Random random = new Random();
+        StringBuilder stringCode;
         do {
-            stringCode = new StringBuffer("HDXT");
+            stringCode = new StringBuilder("HDXT");
             for(int i = 0; i < 5; i++) {
-                stringCode.append(random.nextInt(9));
+                stringCode.append(rand.nextInt(9));
             }
         }while (listCode.contains(stringCode.toString()));
         return stringCode.toString();
@@ -53,11 +57,10 @@ public class ExportBillImpl implements ExportBillService {
     public String createExportBillDestroyCode() {
         List<String> listCode = getAllExportBillCode();
         StringBuilder result ;
-        Random ran = new Random();
         do {
             result = new StringBuilder("HDXH");
             for (int i = 0; i < 5; i++) {
-                result.append(ran.nextInt(9));
+                result.append(rand.nextInt(9));
             }
         } while (!listCode.isEmpty() && listCode.contains(result.toString()));
         return result.toString();

@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 
@@ -30,6 +29,5 @@ public class ExportBillDetailDto implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-
     }
 }

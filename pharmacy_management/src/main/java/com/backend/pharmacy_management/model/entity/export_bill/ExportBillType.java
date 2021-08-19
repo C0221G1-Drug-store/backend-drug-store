@@ -1,4 +1,4 @@
-package com.backend.pharmacy_management.model.entity.export_bill;;
+package com.backend.pharmacy_management.model.entity.export_bill;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,5 +20,4 @@ public class ExportBillType {
     @OneToMany(mappedBy = "exportBillType")
     @JsonIgnore
     private Set<ExportBill> exportBills;
-
 }
