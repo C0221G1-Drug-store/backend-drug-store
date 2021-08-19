@@ -1,30 +1,39 @@
 package com.backend.pharmacy_management.model.dto;
 
 import com.backend.pharmacy_management.model.entity.drug.DrugGroup;
+import com.backend.pharmacy_management.model.entity.drug.DrugImageDetail;
 
 import javax.persistence.Column;
+import java.util.List;
 
 public class DrugDtoTuan {
     private Long drugId;
 
     private String drugName;
-    private String drugIngredient;
     private String activeElement;
-    private Long drugAmount;
+//    private Long drugAmount;
     private String unit;
     private String conversionUnit;
     private Integer conversionRate;
     private Double wholesaleProfitRate;
     private Double retailProfitRate;
-
+    private List<DrugImageDetail> drugImageDetails;
     private String drugFaculty;
     private String manufacturer;
     private String origin;
     private String note;
-    private String drugGroup;
+    private DrugGroup drugGroup;
     private String drugSideEffect;
 
     public DrugDtoTuan() {
+    }
+
+    public List<DrugImageDetail> getDrugImageDetails() {
+        return drugImageDetails;
+    }
+
+    public void setDrugImageDetails(List<DrugImageDetail> drugImageDetails) {
+        this.drugImageDetails = drugImageDetails;
     }
 
     public Long getDrugId() {
@@ -43,13 +52,6 @@ public class DrugDtoTuan {
         this.drugName = drugName;
     }
 
-    public String getDrugIngredient() {
-        return drugIngredient;
-    }
-
-    public void setDrugIngredient(String drugIngredient) {
-        this.drugIngredient = drugIngredient;
-    }
 
     public String getActiveElement() {
         return activeElement;
@@ -59,13 +61,13 @@ public class DrugDtoTuan {
         this.activeElement = activeElement;
     }
 
-    public Long getDrugAmount() {
-        return drugAmount;
-    }
-
-    public void setDrugAmount(Long drugAmount) {
-        this.drugAmount = drugAmount;
-    }
+//    public Long getDrugAmount() {
+//        return drugAmount;
+//    }
+//
+//    public void setDrugAmount(Long drugAmount) {
+//        this.drugAmount = drugAmount;
+//    }
 
     public String getUnit() {
         return unit;
@@ -147,11 +149,11 @@ public class DrugDtoTuan {
         this.drugSideEffect = drugSideEffect;
     }
 
-    public String getDrugGroup() {
+    public DrugGroup getDrugGroup() {
         return drugGroup;
     }
 
-    public void setDrugGroup(String drugGroup) {
+    public void setDrugGroup(DrugGroup drugGroup) {
         this.drugGroup = drugGroup;
     }
 }
