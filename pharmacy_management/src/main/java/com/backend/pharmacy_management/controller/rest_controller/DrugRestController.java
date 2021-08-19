@@ -26,7 +26,7 @@ public class DrugRestController {
     public ResponseEntity<List<Drug>> getAll() {
         List<Drug> drugs = drugService.findAllNormal();
         if (drugs.isEmpty()) {
-            return new ResponseEntity<List<Drug>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(drugs, HttpStatus.OK);
     }

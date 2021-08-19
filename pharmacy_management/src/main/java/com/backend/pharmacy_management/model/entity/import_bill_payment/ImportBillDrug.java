@@ -1,16 +1,11 @@
 package com.backend.pharmacy_management.model.entity.import_bill_payment;
 
 import com.backend.pharmacy_management.model.entity.drug.Drug;
-import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Objects;
+
 
 @Entity
 @Getter

@@ -1,13 +1,10 @@
 package com.backend.pharmacy_management.model.entity.user_role;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
+
 
 @Entity
 @Getter

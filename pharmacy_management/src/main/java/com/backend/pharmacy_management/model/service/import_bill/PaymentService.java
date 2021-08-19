@@ -18,7 +18,7 @@ public class PaymentService implements IPaymentService{
 
     @Override
     public Page<Payment> findAllWithKeyWord(Pageable pageable, String keyword) {
-        return null;
+        return paymentRepository.findAll(pageable);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class PaymentService implements IPaymentService{
 
     @Override
     public List<Payment> findAllNormal() {
-        return null;
+        return paymentRepository.findAll();
     }
 
     @Override

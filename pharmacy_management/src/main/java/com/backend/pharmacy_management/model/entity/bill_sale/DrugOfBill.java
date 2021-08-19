@@ -2,12 +2,9 @@ package com.backend.pharmacy_management.model.entity.bill_sale;
 
 import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Prescription;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
-import java.util.Objects;
+
 
 @Entity
 @Getter

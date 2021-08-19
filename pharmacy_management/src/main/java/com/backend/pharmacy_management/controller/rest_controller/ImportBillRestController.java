@@ -41,7 +41,7 @@ public class ImportBillRestController {
     public ResponseEntity<List<ImportBill>> getAll() {
         List<ImportBill> importBills = importBillService.findAllNormal();
         if (importBills.isEmpty()) {
-            return new ResponseEntity<List<ImportBill>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(importBills, HttpStatus.OK);
     }

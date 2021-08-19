@@ -18,7 +18,7 @@ public class ImportBillDrugService implements IImportBillDrugService{
 
     @Override
     public Page<ImportBillDrug> findAllWithKeyWord(Pageable pageable, String keyword) {
-        return null;
+        return iImportBillDrugRepository.findAll(pageable);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ImportBillDrugService implements IImportBillDrugService{
 
     @Override
     public List<ImportBillDrug> findAllNormal() {
-        return null;
+        return iImportBillDrugRepository.findAll();
     }
 
     @Override
@@ -38,6 +38,6 @@ public class ImportBillDrugService implements IImportBillDrugService{
 
     @Override
     public void remove(Long id) {
-
+        iImportBillDrugRepository.deleteById(id);
     }
 }

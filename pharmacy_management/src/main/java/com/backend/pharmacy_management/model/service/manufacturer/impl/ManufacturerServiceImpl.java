@@ -105,11 +105,11 @@ public class ManufacturerServiceImpl implements IManufacturerService {
 
     @Override
     public void save(Manufacturer manufacturer) {
-
+        manufacturerRepository.save(manufacturer);
     }
 
     @Override
     public void remove(Long id) {
-
+        manufacturerRepository.deleteById(id);
     }
 }

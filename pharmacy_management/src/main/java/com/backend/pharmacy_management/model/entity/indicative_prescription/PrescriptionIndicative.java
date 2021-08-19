@@ -1,11 +1,8 @@
 package com.backend.pharmacy_management.model.entity.indicative_prescription;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Getter

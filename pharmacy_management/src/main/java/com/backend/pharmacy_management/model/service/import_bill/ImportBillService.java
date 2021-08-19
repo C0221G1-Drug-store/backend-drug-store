@@ -18,7 +18,7 @@ public class ImportBillService implements IImportBillService {
 
     @Override
     public Page<ImportBill> findAllWithKeyWord(Pageable pageable, String keyword) {
-        return null;
+        return importBillRepository.findAll(pageable);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class ImportBillService implements IImportBillService {
 
     @Override
     public void remove(Long id) {
-
+        importBillRepository.deleteById(id);
     }
 }

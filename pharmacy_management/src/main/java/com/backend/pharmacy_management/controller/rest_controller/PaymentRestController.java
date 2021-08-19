@@ -25,7 +25,7 @@ public class PaymentRestController {
     public ResponseEntity<List<Payment>> getAll() {
         List<Payment> payments = paymentService.findAllNormal();
         if (payments.isEmpty()) {
-            return new ResponseEntity<List<Payment>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }

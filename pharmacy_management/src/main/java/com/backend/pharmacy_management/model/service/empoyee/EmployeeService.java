@@ -18,7 +18,7 @@ public class EmployeeService implements IEmployeeService{
 
     @Override
     public Page<Employee> findAllWithKeyWord(Pageable pageable, String keyword) {
-        return null;
+        return employeeRepository.findAll(pageable);
     }
 
     @Override
@@ -28,16 +28,16 @@ public class EmployeeService implements IEmployeeService{
 
     @Override
     public List<Employee> findAllNormal() {
-        return null;
+        return employeeRepository.findAll();
     }
 
     @Override
     public void save(Employee employee) {
-
+        employeeRepository.save(employee);
     }
 
     @Override
     public void remove(Long id) {
-
+        employeeRepository.deleteById(id);
     }
 }

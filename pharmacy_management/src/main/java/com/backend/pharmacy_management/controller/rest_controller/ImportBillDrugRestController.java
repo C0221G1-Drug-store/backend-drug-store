@@ -33,7 +33,7 @@ public class ImportBillDrugRestController {
     public ResponseEntity<List<ImportBillDrug>> getAll() {
         List<ImportBillDrug> importBillDrugs = importBillDrugService.findAllNormal();
         if (importBillDrugs.isEmpty()) {
-            return new ResponseEntity<List<ImportBillDrug>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(importBillDrugs, HttpStatus.OK);
     }

@@ -19,7 +19,7 @@ public class DrugService implements IDrugService{
 
     @Override
     public Page<Drug> findAllWithKeyWord(Pageable pageable, String keyword) {
-        return null;
+        return drugRepository.findAll(pageable);
     }
 
     @Override
@@ -34,11 +34,11 @@ public class DrugService implements IDrugService{
 
     @Override
     public void save(Drug drug) {
-
+        drugRepository.save(drug);
     }
 
     @Override
     public void remove(Long id) {
-
+        drugRepository.deleteById(id);
     }
 }
