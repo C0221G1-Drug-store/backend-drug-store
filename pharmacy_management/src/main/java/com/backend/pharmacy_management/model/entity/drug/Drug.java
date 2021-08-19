@@ -4,20 +4,19 @@ import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+
 
 import javax.persistence.*;
-import java.util.ArrayList;
+
 import java.util.List;
 
+
+
+
 @Entity
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 @Table(name="drug")
 public class Drug {
     @Id
@@ -44,18 +43,12 @@ public class Drug {
     private Double retailProfitRate;
     @Column(name = "drug_faculty", columnDefinition = "TEXT")
     private String drugFaculty;
-    @Column(name = "drug_side_effect", columnDefinition = "TEXT")
-    private String drugSideEffect;
-    private Boolean flag = true;
     private String manufacturer;
     private String origin;
     private String note;
     @Column(columnDefinition = "TEXT")
     private String drugSideEffect;
     private Boolean flag = true;
-    @OneToMany(mappedBy = "drug")
-    @JsonManagedReference(value = "drug_image_detail_drug")
-    private List<DrugImageDetail> drugImageDetails;
     @OneToMany(mappedBy = "drug")
     @JsonManagedReference(value = "drug_of_bill_drug")
     private List<DrugOfBill> drugOfBills;
@@ -66,7 +59,7 @@ public class Drug {
     @JsonManagedReference(value = "export_bill_detail_drug")
     private List<ExportBillDetail> exportBillDetails;
     @OneToMany(mappedBy = "drug")
-    @JsonManagedReference(value = "import_bill_drug-drug")
+    @JsonManagedReference(value = "import_bill_drug_drug")
     private List<ImportBillDrug> importBillDrugs;
     @ManyToOne
     @JoinColumn(name = "drug_group_id")
@@ -76,6 +69,7 @@ public class Drug {
     private List<DrugImageDetail> drugImageDetails;
 
     public Drug() {
+//        constructor empty
     }
 
     public List<DrugImageDetail> getDrugImageDetails() {
@@ -222,10 +216,6 @@ public class Drug {
         this.drugGroup = drugGroup;
     }
 
-    public void setDrugImageDetails(List<DrugImageDetail> drugImageDetails) {
-        this.drugImageDetails = drugImageDetails;
-    }
-
     public List<DrugOfBill> getDrugOfBills() {
         return drugOfBills;
     }
@@ -249,5 +239,4 @@ public class Drug {
     public void setExportBillDetails(List<ExportBillDetail> exportBillDetails) {
         this.exportBillDetails = exportBillDetails;
     }
-
 }

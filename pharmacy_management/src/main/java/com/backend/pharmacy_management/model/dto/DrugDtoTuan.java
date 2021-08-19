@@ -3,7 +3,7 @@ package com.backend.pharmacy_management.model.dto;
 import com.backend.pharmacy_management.model.entity.drug.DrugGroup;
 import com.backend.pharmacy_management.model.entity.drug.DrugImageDetail;
 
-import javax.persistence.Column;
+
 import java.util.List;
 
 public class DrugDtoTuan {
@@ -11,7 +11,7 @@ public class DrugDtoTuan {
 
     private String drugName;
     private String activeElement;
-//    private Long drugAmount;
+
     private String unit;
     private String conversionUnit;
     private Integer conversionRate;
@@ -26,6 +26,7 @@ public class DrugDtoTuan {
     private String drugSideEffect;
 
     public DrugDtoTuan() {
+//        constructor empty
     }
 
     public List<DrugImageDetail> getDrugImageDetails() {
