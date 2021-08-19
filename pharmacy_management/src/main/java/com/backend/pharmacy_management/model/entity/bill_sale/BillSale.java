@@ -36,5 +36,5 @@ public class BillSale {
     @JoinColumn(name = "customer_id",nullable = false)
     private Customer customer;
     @OneToMany(mappedBy = "billSale")
-    private Set<DrugOfBill> drugOfBillSet;
+    private List<DrugOfBill> drugOfBillList;
 }

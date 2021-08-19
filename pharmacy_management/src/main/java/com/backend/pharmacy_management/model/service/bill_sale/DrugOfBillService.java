@@ -13,7 +13,7 @@ public class DrugOfBillService implements IDrugOfBillService {
     @Autowired
     IDrugOfBillRepository iDrugOfBillRepository;
     @Override
-    public List<DrugOfBill> findAllDrugOfBill(int id) {
+    public List<DrugOfBill> findAllDrugOfBill(Long id) {
         return iDrugOfBillRepository.findAllDrugOfBill(id);
     }
 }

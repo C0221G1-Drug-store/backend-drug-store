@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController("/Drug-of-bill")
-@CrossOrigin
+@RestController
 public class DrugOfBillController {
     @Autowired
     IDrugOfBillService iDrugOfBillService;
     @GetMapping("/drug-of-bill/{id}")
-    public ResponseEntity<List<DrugOfBill>> showDrugOfBillList(@PathVariable("id") int id){
+    public ResponseEntity<List<DrugOfBill>> showDrugOfBillList(@PathVariable("id") Long id){
         List<DrugOfBill> list = iDrugOfBillService.findAllDrugOfBill(id);
         if (list.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

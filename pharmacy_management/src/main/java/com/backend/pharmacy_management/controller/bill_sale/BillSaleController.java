@@ -1,5 +1,6 @@
 package com.backend.pharmacy_management.controller.bill_sale;
 
+
 import com.backend.pharmacy_management.model.entity.bill_sale.BillSale;
 import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
@@ -8,6 +9,7 @@ import com.backend.pharmacy_management.model.service.bill_sale.IBillSaleService;
 import com.backend.pharmacy_management.model.service.bill_sale.IDrugOfBillService;
 import com.backend.pharmacy_management.model.service.bill_sale.IDrugService;
 import com.backend.pharmacy_management.model.service.bill_sale.IPrescriptionService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 public class BillSaleController {
     @Autowired
     IPrescriptionService iPrescriptionService;
@@ -44,7 +45,7 @@ public class BillSaleController {
     }
 
     @GetMapping("/drug-of-bill/{id}")
-    public ResponseEntity<List<DrugOfBill>> showDrugOfBillList(@PathVariable("id") int id){
+    public ResponseEntity<List<DrugOfBill>> showDrugOfBillList(@PathVariable("id") Long id){
         List<DrugOfBill> list = iDrugOfBillService.findAllDrugOfBill(id);
         if (list.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -61,8 +62,8 @@ public class BillSaleController {
         return new ResponseEntity<>(prescription, HttpStatus.OK);
     }
     @PostMapping("prescription/bill")
-    public void save(@RequestBody BillSale bill) {
-        iBillSaleService.saveBill(bill);
+    public void save(@RequestBody BillSale billSale) {
+        iBillSaleService.saveBill(billSale);
     }
 
     @GetMapping("prescription/search")
@@ -75,4 +76,5 @@ public class BillSaleController {
         }
         return new  ResponseEntity<>(list,HttpStatus.OK);
     }
+
 }
