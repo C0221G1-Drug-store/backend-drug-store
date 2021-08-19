@@ -47,7 +47,7 @@ public interface IDrugRepository extends PagingAndSortingRepository<Drug, Long> 
             "d.wholesale_profit_rate as wholesaleProfitRate, d.retail_profit_rate as retailProfitRate, d.drug_faculty as drugFaculty, d.manufacturer as manufacturer, d.origin as origin,\n" +
             "d.note as note, d.drug_group_id as drugGroupId, d.flag as flag, d.drug_side_effect as drugSideEffect\n" +
             "from drug d \n" +
-            "where d.flag = 1 and d.drug_id = ?1 and ibd.flag = 1;", nativeQuery = true)
+            "where d.flag = 1 and d.drug_id = ?1 ", nativeQuery = true)
     DrugDTO findDrugById(Long id);
 
     @Modifying
