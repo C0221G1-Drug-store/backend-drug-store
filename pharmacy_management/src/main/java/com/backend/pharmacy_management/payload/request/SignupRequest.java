@@ -13,6 +13,9 @@ public class SignupRequest {
     @Size(min = 5, max = 20)
     private String accountName;
 
+    @NotBlank
+    private String email;
+
     @Size(max = 50)
     private String userCode;
     private Boolean isEnabled;
@@ -22,6 +25,14 @@ public class SignupRequest {
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getUsername() {
         return username;

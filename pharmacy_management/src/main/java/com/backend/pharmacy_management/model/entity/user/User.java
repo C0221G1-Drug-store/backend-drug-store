@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(	name = "users",
+@Table(name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
         })
@@ -29,6 +29,9 @@ public class User {
     @NotBlank
     @Size(max = 20, min = 5)
     private String accountName;
+
+    @NotBlank
+    private String email;
 
     private Boolean isEnabled;
 
@@ -54,15 +57,21 @@ public class User {
         this.password = password;
     }
 
-    public User(Long id, String userName, String userCode, String accountName,
-                Boolean isEnabled, String password, Set<Role> roles) {
-        this.id = id;
-        this.userName = userName;
-        this.userCode = userCode;
-        this.accountName = accountName;
-        this.isEnabled = isEnabled;
-        this.password = password;
-        this.roles = roles;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public Long getId() {

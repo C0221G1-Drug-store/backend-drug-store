@@ -48,9 +48,10 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    final String ERORR_MSG = "Error: Role is not found.";
+
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        System.out.println(loginRequest.toString());
+    public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -66,12 +67,12 @@ public class AuthController {
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getAccountname(),
+                userDetails.getEmail(),
                 roles));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        System.out.println(signUpRequest.toString());
+    public ResponseEntity<MessageResponse> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUserName(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
@@ -83,7 +84,8 @@ public class AuthController {
         User user = new User(signUpRequest.getUsername(),
                 encoder.encode(signUpRequest.getPassword()));
         user.setAccountName(signUpRequest.getAccountName());
-        String newUserCode = this.id_KH_0001();
+        user.setEmail(signUpRequest.getEmail());
+        String newUserCode = this.autoIncrement();
         user.setUserCode(newUserCode);
         user.setEnabled(true);
         Set<String> strRoles = signUpRequest.getRole();
@@ -91,26 +93,26 @@ public class AuthController {
 
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    .orElseThrow(() -> new RuntimeException(ERORR_MSG));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RuntimeException(ERORR_MSG));
                         roles.add(adminRole);
 
                         break;
                     case "mod":
                         Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RuntimeException(ERORR_MSG));
                         roles.add(modRole);
 
                         break;
                     default:
                         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RuntimeException(ERORR_MSG));
                         roles.add(userRole);
                 }
             });
@@ -122,17 +124,17 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    public String id_KH_0001(){
-        String ma = "KH-";
+    public String autoIncrement(){
+        String code = "KH-";
         String regex = "^KH-[0-9]{4}$";
         int total = this.userRepository.totalOfRecordKH();
         String id = "";
         while (true){
-            id = ma + (total +1);
+            id = code + (total +1);
             if (id.matches(regex)){
                 break;
             }
-            ma += 0;
+            code += 0;
             id = "";
         }
         return id;

@@ -20,6 +20,8 @@ public class UserDetailsImpl implements UserDetails {
 
     private String accountname;
 
+    private String email;
+
     private String usercode;
 
     private Boolean isEnabled;
@@ -29,16 +31,19 @@ public class UserDetailsImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String accountname, String usercode,
-                           Boolean isEnabled, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(Long id, String username, String accountname,
+                           String email, String usercode, Boolean isEnabled,
+                           String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.accountname = accountname;
+        this.email = email;
         this.usercode = usercode;
         this.isEnabled = isEnabled;
         this.password = password;
         this.authorities = authorities;
     }
+
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
@@ -48,6 +53,7 @@ public class UserDetailsImpl implements UserDetails {
                 user.getId(),
                 user.getUserName(),
                 user.getAccountName(),
+                user.getEmail(),
                 user.getUserCode(),
                 user.getEnabled(),
                 user.getPassword(),
@@ -89,6 +95,14 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setUsername(String username) {
