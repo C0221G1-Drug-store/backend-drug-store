@@ -11,7 +11,7 @@ import com.backend.pharmacy_management.model.service.drug.IDrugService;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.drug.DrugGroup;
 import com.backend.pharmacy_management.model.entity.drug.DrugImageDetail;
-import com.backend.pharmacy_management.model.service.drug.IDrugService;
+
 import com.backend.pharmacy_management.model.service.drug_group.IDrugGroupService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
-@CrossOrigin
+
+@CrossOrigin (origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/drug")
 public class DrugController {
@@ -41,23 +41,22 @@ public class DrugController {
     }
     @GetMapping("/search")
     public ResponseEntity<List<ListDrugDTO>> findAllDrugsSearch(@RequestParam String field, @RequestParam String sign, @RequestParam String input, @RequestParam String index) {
-        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findAllDrugsSearch(field, sign, input, index);
+        if (!field.equals("") && sign.equals("like") && !input.equals("")) {
+            input = '%' + input + '%';
+        }
+        List<ListDrugDTO> drugs = drugService.findAllDrugsSearch(field, sign, input, index);
         if (drugs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(drugs, HttpStatus.OK);
     }
-    @GetMapping("/search-like")
-    public ResponseEntity<List<ListDrugDTO>> findAllDrugsLikePagination(@RequestParam String field, @RequestParam String input, @RequestParam String index) {
-        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findAllDrugsLikePagination(field, input, index);
-        if (drugs.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(drugs, HttpStatus.OK);
-    }
+
     @GetMapping("/search-not-pagination")
     public ResponseEntity<List<ListDrugDTO>> findAllDrugsSearchNotPagination(@RequestParam String field, @RequestParam String sign, @RequestParam String input) {
-        List<ListDrugDTO> drugs = (List<ListDrugDTO>) drugService.findAllDrugsSearchNotPagination(field, sign, input);
+        if (!field.equals("") && sign.equals("like") && !input.equals("")) {
+            input = '%' + input + '%';
+        }
+        List<ListDrugDTO> drugs = drugService.findAllDrugsSearchNotPagination(field, sign, input);
         if (drugs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -109,7 +108,7 @@ public class DrugController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         drugService.deleteDrugById(id);
-        return new ResponseEntity<DrugDTO>(drug, HttpStatus.OK);
+        return new ResponseEntity<>(drug, HttpStatus.OK);
     }
     @GetMapping("/{id}")
     public ResponseEntity<DrugDTO> findById(@PathVariable Long id) {
@@ -117,7 +116,7 @@ public class DrugController {
         if (drugDTO == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<DrugDTO>(drugDTO, HttpStatus.OK);
+        return new ResponseEntity<>(drugDTO, HttpStatus.OK);
     }
 }
   

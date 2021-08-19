@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class DrugService implements IDrugService {
@@ -38,11 +38,6 @@ public class DrugService implements IDrugService {
     @Override
     public List<ListDrugDTO> findAllDrugsNotPagination() {
         return iDrugRepository.findAllDrugsNotPagination();
-    }
-
-    @Override
-    public List<ListDrugDTO> findAllDrugsLikePagination(String field, String input, String index) {
-        return iDrugRepository.findAllDrugsLikePagination(field, input, index);
     }
 
     @Override
