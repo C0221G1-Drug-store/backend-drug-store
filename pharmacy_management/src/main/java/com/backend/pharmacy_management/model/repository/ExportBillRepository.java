@@ -5,10 +5,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface ExportBillRepository extends JpaRepository<ExportBill, Long> {
+import java.util.List;
+
+public interface ExportBillRepository extends JpaRepository<ExportBill,Long> {
+    @Query(value = "select export_bill_code from export_bill",nativeQuery  = true)
+    List<String> getAllExportBillCode();
+
+    //List
     @Query(value = "select * from export_bill where cast(export_bill.date_bill as time) > cast(?1 as time) and cast(export_bill.date_bill as time) < cast(?2 as time) ORDER BY ?#{#pageable}",
             countQuery = "select count(*) from export_bill where cast(export_bill.date_bill as time) > cast(?1 as time) and cast(export_bill.date_bill as time) < cast(?2 as time)",
             nativeQuery = true)
@@ -63,5 +67,4 @@ public interface ExportBillRepository extends JpaRepository<ExportBill, Long> {
             countQuery = "select count(*) from export_bill where export_bill.bill_type_id like ?1;",
             nativeQuery = true)
     Page<ExportBill> findByType2(long typeId, Pageable pageable);
-
 }

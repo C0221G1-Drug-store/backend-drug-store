@@ -4,6 +4,7 @@ import com.backend.pharmacy_management.model.entity.bill_sale.BillSale;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,9 +32,12 @@ public class Employee {
     private int position;
     private String accountName;
     @OneToMany(mappedBy = "employee")
+    @JsonIgnore
     List<ImportBill> importBills;
     @OneToMany(mappedBy = "employee")
+    @JsonIgnore
     List<ExportBill> exportBills;
     @OneToMany(mappedBy = "employee")
+    @JsonIgnore
     List<BillSale> billWholesales;
 }

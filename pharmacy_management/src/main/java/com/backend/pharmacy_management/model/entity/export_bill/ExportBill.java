@@ -2,6 +2,7 @@ package com.backend.pharmacy_management.model.entity.export_bill;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,10 +21,10 @@ public class ExportBill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long exportBillId;
     private String exportBillCode;
-    private String exportBillIdDate;
+    private String exportBillDate;
     private String exportBillReason;
-    private String exportBillIdAddress;
-    private boolean flag;
+    private String exportBillAddress;
+    private Boolean flag=true;
     @ManyToOne
     @JoinColumn(name = "export_bill_type_id")
     private ExportBillType exportBillType;
@@ -34,5 +35,8 @@ public class ExportBill {
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
     @OneToMany(mappedBy = "exportBill")
-    private Set<ExportBillDetail> exportBillDetails;
+    @JsonIgnore
+    private List<ExportBillDetail> exportBillDetails;
+
+
 }
