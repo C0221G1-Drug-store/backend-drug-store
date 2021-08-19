@@ -1,15 +1,11 @@
 package com.backend.pharmacy_management.model.entity.drug;
-
+import javax.persistence.*;
 import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-
-
-import javax.persistence.*;
 
 import java.util.List;
 
@@ -29,8 +25,6 @@ public class Drug {
     private String drugName;
     @Column(name = "active_element")
     private String activeElement;
-    @Column(name = "drug_amount")
-    private Long drugAmount;
     @Column(name = "unit")
     private String unit;
     @Column(name = "conversion_unit")
@@ -49,6 +43,7 @@ public class Drug {
     @Column(columnDefinition = "TEXT")
     private String drugSideEffect;
     private Boolean flag = true;
+
     @OneToMany(mappedBy = "drug")
     @JsonManagedReference(value = "drug_of_bill_drug")
     private List<DrugOfBill> drugOfBills;
@@ -61,15 +56,18 @@ public class Drug {
     @OneToMany(mappedBy = "drug")
     @JsonManagedReference(value = "import_bill_drug_drug")
     private List<ImportBillDrug> importBillDrugs;
+
     @ManyToOne
     @JoinColumn(name = "drug_group_id")
     private DrugGroup drugGroup;
     @OneToMany(targetEntity = DrugImageDetail.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "drug_id",referencedColumnName = "drug_id")
+    @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
     private List<DrugImageDetail> drugImageDetails;
 
     public Drug() {
+
 //        constructor empty
+
     }
 
     public List<DrugImageDetail> getDrugImageDetails() {
@@ -78,14 +76,6 @@ public class Drug {
 
     public void setDrugImageDetails(List<DrugImageDetail> drugImageDetails) {
         this.drugImageDetails = drugImageDetails;
-    }
-
-    public Long getDrugAmount() {
-        return drugAmount;
-    }
-
-    public void setDrugAmount(Long drugAmount) {
-        this.drugAmount = drugAmount;
     }
 
     public Long getDrugId() {
@@ -239,4 +229,5 @@ public class Drug {
     public void setExportBillDetails(List<ExportBillDetail> exportBillDetails) {
         this.exportBillDetails = exportBillDetails;
     }
+
 }

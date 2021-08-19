@@ -1,17 +1,13 @@
 package com.backend.pharmacy_management.model.dto;
-
 import com.backend.pharmacy_management.model.entity.drug.DrugGroup;
 import com.backend.pharmacy_management.model.entity.drug.DrugImageDetail;
-
-
 import java.util.List;
 
-public class DrugDtoTuan {
+public class CreateDrugDto {
     private Long drugId;
 
     private String drugName;
     private String activeElement;
-
     private String unit;
     private String conversionUnit;
     private Integer conversionRate;
@@ -25,8 +21,8 @@ public class DrugDtoTuan {
     private DrugGroup drugGroup;
     private String drugSideEffect;
 
-    public DrugDtoTuan() {
-//        constructor empty
+    public CreateDrugDto() {
+//        contructor
     }
 
     public List<DrugImageDetail> getDrugImageDetails() {
@@ -53,7 +49,6 @@ public class DrugDtoTuan {
         this.drugName = drugName;
     }
 
-
     public String getActiveElement() {
         return activeElement;
     }
@@ -61,14 +56,6 @@ public class DrugDtoTuan {
     public void setActiveElement(String activeElement) {
         this.activeElement = activeElement;
     }
-
-//    public Long getDrugAmount() {
-//        return drugAmount;
-//    }
-//
-//    public void setDrugAmount(Long drugAmount) {
-//        this.drugAmount = drugAmount;
-//    }
 
     public String getUnit() {
         return unit;

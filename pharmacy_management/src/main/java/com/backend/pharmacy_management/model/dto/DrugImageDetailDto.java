@@ -1,30 +1,18 @@
-package com.backend.pharmacy_management.model.entity.drug;
+package com.backend.pharmacy_management.model.dto;
 
-import javax.persistence.*;
+import com.backend.pharmacy_management.model.entity.drug.Drug;
 
-@Entity
-@Table(name = "drug_image_detail")
-public class DrugImageDetail {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "drug_image_detail_id")
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+public class DrugImageDetailDto {
     private Long drugImageDetailId;
-    @Column(name = "drug_image_detail_url")
     private String drugImageDetailUrl;
-    @ManyToOne
-    @JoinColumn(name = "drug_id")
     private Drug drug;
 
-    public DrugImageDetail() {
+    public DrugImageDetailDto() {
         //contructor
-    }
-
-    public Drug getDrug() {
-        return drug;
-    }
-
-    public void setDrug(Drug drug) {
-        this.drug = drug;
     }
 
     public Long getDrugImageDetailId() {
@@ -41,5 +29,13 @@ public class DrugImageDetail {
 
     public void setDrugImageDetailUrl(String drugImageDetailUrl) {
         this.drugImageDetailUrl = drugImageDetailUrl;
+    }
+
+    public Drug getDrug() {
+        return drug;
+    }
+
+    public void setDrug(Drug drug) {
+        this.drug = drug;
     }
 }

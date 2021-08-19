@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class DrugService implements IDrugService {
     @Autowired
@@ -28,6 +27,9 @@ public class DrugService implements IDrugService {
     @Override
     public List<ListDrugDTO> findAllDrugsSearch(String field, String sign, String input, String index) {
         return iDrugRepository.findAllDrugsSearch(field, sign, input, index);
+    }
+    public Drug saveDrug(Drug drug) {
+        return iDrugRepository.save(drug);
     }
 
     @Override
@@ -60,8 +62,4 @@ public class DrugService implements IDrugService {
         return iDrugImageDetailRepository.save(drugImageDetail);
     }
 
-    @Override
-    public Drug saveDrug(Drug drug) {
-        return null;
-    }
 }

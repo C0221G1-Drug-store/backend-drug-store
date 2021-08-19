@@ -1,7 +1,8 @@
 package com.backend.pharmacy_management.controller;
 
 import com.backend.pharmacy_management.model.dto.DrugDTO;
-import com.backend.pharmacy_management.model.dto.DrugDtoTuan;
+import com.backend.pharmacy_management.model.dto.CreateDrugDto;
+import com.backend.pharmacy_management.model.dto.DrugImageDetailDto;
 import com.backend.pharmacy_management.model.dto.ListDrugDTO;
 
 import com.backend.pharmacy_management.model.service.drug.IDrugService;
@@ -79,21 +80,23 @@ public class DrugController {
         return new ResponseEntity<>(listDrugGroup,HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<Drug> saveDrug(@Valid @RequestBody DrugDtoTuan drugDtoTuan) {
+    public ResponseEntity<Drug> saveDrug(@Valid @RequestBody CreateDrugDto createDrugDto) {
         Drug drug = new Drug();
-        BeanUtils.copyProperties(drugDtoTuan,drug);
+        BeanUtils.copyProperties(createDrugDto,drug);
         drug.setDrugCode ((long) Math.floor(Math.random()*1000000));
         return new ResponseEntity<>(drugService.saveDrug(drug), HttpStatus.CREATED);
     }
     @PostMapping(value = "/image")
-    public ResponseEntity<DrugImageDetail> saveDrugImage(@Valid @RequestBody DrugImageDetail drugImageDetail) {
-
+    public ResponseEntity<DrugImageDetail> saveDrugImage(@Valid @RequestBody DrugImageDetailDto drugImageDetailDto) {
+        DrugImageDetail drugImageDetail = new DrugImageDetail();
+        BeanUtils.copyProperties(drugImageDetailDto,drugImageDetail);
         return new ResponseEntity<>(drugService.saveDrugImage(drugImageDetail), HttpStatus.CREATED);
     }
     @PutMapping("/{id}&{code}")
-    public ResponseEntity<Drug> updateBenhAn(@PathVariable Long id,@PathVariable Long code,@Valid @RequestBody Drug drug) {
+    public ResponseEntity<Drug> updateDrug(@PathVariable Long id,@PathVariable Long code,@Valid @RequestBody CreateDrugDto createDrugDto) {
         Drug drug1 = drugService.findById(id);
-        BeanUtils.copyProperties(drug,drug);
+        Drug drug = new Drug();
+        BeanUtils.copyProperties(createDrugDto,drug);
         if (drug1==null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
