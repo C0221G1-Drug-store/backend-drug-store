@@ -22,6 +22,7 @@ public class DrugGroup {
     private List<Drug> drugs;
 
     public DrugGroup() {
+        //contructor
     }
 
     public Long getDrugGroupId() {

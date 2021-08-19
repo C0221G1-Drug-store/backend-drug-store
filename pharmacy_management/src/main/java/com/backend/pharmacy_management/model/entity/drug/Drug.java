@@ -1,23 +1,10 @@
 package com.backend.pharmacy_management.model.entity.drug;
 
-import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
-import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
-import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
-import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-@Table(name="drug")
+@Table(name = "drug")
 public class Drug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +13,6 @@ public class Drug {
     private Long drugCode;
     private String drugName;
     private String activeElement;
-    @Column(name = "drug_amount")
-    private Long drugAmount;
     private String unit;
     private String conversionUnit;
     private Integer conversionRate;
@@ -41,23 +26,16 @@ public class Drug {
     @Column(columnDefinition = "TEXT")
     private String drugSideEffect;
     private Boolean flag = true;
+
     @ManyToOne
     @JoinColumn(name = "drug_group_id")
     private DrugGroup drugGroup;
-//    private List<String> drugImageDetails;
     @OneToMany(targetEntity = DrugImageDetail.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "drug_id",referencedColumnName = "drug_id")
+    @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
     private List<DrugImageDetail> drugImageDetails;
-//    private String drugImageDetails;
-//    @OneToMany(mappedBy = "drug")
-//    private List<DrugOfBill> drugOfBills;
-//    @OneToMany(mappedBy = "drug")
-//    private List<Indicative> indicatives;
-//    @OneToMany(mappedBy = "drug")
-//    private List<ExportBillDetail> exportBillDetails;
-
 
     public Drug() {
+        //contructor
     }
 
     public List<DrugImageDetail> getDrugImageDetails() {
@@ -66,14 +44,6 @@ public class Drug {
 
     public void setDrugImageDetails(List<DrugImageDetail> drugImageDetails) {
         this.drugImageDetails = drugImageDetails;
-    }
-
-    public Long getDrugAmount() {
-        return drugAmount;
-    }
-
-    public void setDrugAmount(Long drugAmount) {
-        this.drugAmount = drugAmount;
     }
 
     public Long getDrugId() {
@@ -203,6 +173,5 @@ public class Drug {
     public void setDrugGroup(DrugGroup drugGroup) {
         this.drugGroup = drugGroup;
     }
-
 
 }
