@@ -4,12 +4,12 @@ import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.fasterxml.jackson.annotation.*;
 import lombok.*;
-import org.hibernate.Hibernate;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
+
 import java.util.List;
 
 @Entity

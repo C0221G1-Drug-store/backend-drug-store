@@ -1,14 +1,12 @@
 package com.backend.pharmacy_management.controller.bill_sale;
 
 import com.backend.pharmacy_management.model.dto.BillSaleDto;
-import com.backend.pharmacy_management.model.dto.DrugDto;
 import com.backend.pharmacy_management.model.dto.DrugOfBillDto;
 import com.backend.pharmacy_management.model.entity.bill_sale.BillSale;
 import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
 import com.backend.pharmacy_management.model.entity.customer.Customer;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
-import com.backend.pharmacy_management.model.repository.employee.IEmployeeRepository;
 import com.backend.pharmacy_management.model.service.bill_sale.IBillSaleService;
 import com.backend.pharmacy_management.model.service.bill_sale.IDrugOfBillService;
 import com.backend.pharmacy_management.model.service.customer.ICustomerService;
@@ -25,7 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin()
+@CrossOrigin(value = "http://localhost:4200/")
 @RequestMapping(value = "bill-sale")
 public class BillSaleController {
     @Autowired
@@ -79,6 +77,12 @@ public class BillSaleController {
         }
     }
 
+    @GetMapping(value = "/find-drug-by-id")
+    public ResponseEntity<Optional<Drug>> findDrugById(@RequestParam Long id) {
+        Optional<Drug> drug = iDrugService.findById(id);
+        return new ResponseEntity<>(drug, HttpStatus.OK);
+    }
+
     @GetMapping(value = "get-bill-sale")
     public ResponseEntity<Optional<BillSale>> getBillSale(@RequestParam String id ){
         Optional<BillSale> billSale = Optional.ofNullable(iBillSaleService.findBillSaleByIdCode(id));
@@ -101,17 +105,10 @@ public class BillSaleController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping  (value = "/update-bill-sale")
-    public ResponseEntity<BillSale> updateBillSale(@Valid @RequestBody BillSaleDto billSaleDto) {
-        BillSale billSale = new BillSale();
-        BeanUtils.copyProperties(billSaleDto, billSale);
-        this.iBillSaleService.save(billSale);
+    @PutMapping(value = "/update-drug")
+    public ResponseEntity<Drug> updateDrug(@RequestBody Drug drug) {
+        this.iDrugService.save(drug);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/delete-drug-of-bill")
-    public ResponseEntity deleteManufacturer(@RequestParam Long id) {
-        iDrugOfBillService.remove(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 }

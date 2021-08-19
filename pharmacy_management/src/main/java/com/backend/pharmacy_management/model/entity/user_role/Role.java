@@ -1,6 +1,4 @@
 package com.backend.pharmacy_management.model.entity.user_role;
-import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
-import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
