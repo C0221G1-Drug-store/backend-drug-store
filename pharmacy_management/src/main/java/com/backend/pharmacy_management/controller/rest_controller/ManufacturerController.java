@@ -1,14 +1,14 @@
 package com.backend.pharmacy_management.controller.rest_controller;
 
-import com.backend.pharmacy_management.model.entity.drug.Drug;
+import com.backend.pharmacy_management.model.dto.ManufacturerDto;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.backend.pharmacy_management.model.service.manufacturer.IManufacturerService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api/manufacturer")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200/", maxAge = 3600)
 public class ManufacturerController {
     @Autowired
     IManufacturerService iManufacturerService;
@@ -90,7 +90,9 @@ public class ManufacturerController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<Manufacturer> createManufacturer(@RequestBody Manufacturer manufacturer) {
+    public ResponseEntity<Manufacturer> createManufacturer(@RequestBody ManufacturerDto manufacturerDto) {
+        Manufacturer manufacturer = new Manufacturer();
+        BeanUtils.copyProperties(manufacturerDto, manufacturer);
         iManufacturerService.saveManufacturer(manufacturer);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -101,9 +103,10 @@ public class ManufacturerController {
     }
 
     @PutMapping(value = "/update")
-    public void updateManufacturer(@RequestParam Long id, @RequestBody Manufacturer manufacturer) {
-        Manufacturer mf = iManufacturerService.findByManufacturerId(id);
-        manufacturer.setManufacturerId(mf.getManufacturerId());
+    public void updateManufacturer(@RequestParam Long id, @RequestBody ManufacturerDto manufacturerDto) {
+        Manufacturer manufacturer = iManufacturerService.findByManufacturerId(id);
+        BeanUtils.copyProperties(manufacturerDto, manufacturer);
+        manufacturer.setManufacturerId(id);
         iManufacturerService.saveManufacturer(manufacturer);
     }
     @GetMapping(value = "/show")

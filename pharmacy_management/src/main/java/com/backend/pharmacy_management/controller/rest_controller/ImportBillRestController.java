@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200/", maxAge = 3600)
 @RequestMapping("/api/importBills")
 public class ImportBillRestController {
     private final IImportBillService importBillService;
@@ -65,7 +65,8 @@ public class ImportBillRestController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<ImportBill> getImportBills(@PathVariable Long id) {
         Optional<ImportBill> importBill = importBillService.findById(id);
-        return new ResponseEntity<>(importBill.get(), HttpStatus.OK);
+
+        return  importBill.map(importBillValue -> new ResponseEntity<>(importBillValue, HttpStatus.OK)).orElseGet(() ->  new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
     @PutMapping(value = "/{id}")

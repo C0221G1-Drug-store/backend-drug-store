@@ -6,9 +6,6 @@ import javax.validation.ConstraintValidatorContext;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
@@ -30,12 +27,7 @@ class DatePastValidator implements ConstraintValidator<DateNotInPast, LocalDate>
 
     @Override
     public boolean isValid(LocalDate value, ConstraintValidatorContext context) {
-        try {
             LocalDate current = LocalDate.now();
             return (value.isEqual(current) || value.isAfter(current)) ;
-        }catch(DateTimeParseException ex) {
-            ex.printStackTrace();
-        }
-        return false;
     }
 }
