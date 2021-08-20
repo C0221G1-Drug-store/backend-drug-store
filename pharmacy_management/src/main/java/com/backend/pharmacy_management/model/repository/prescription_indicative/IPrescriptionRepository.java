@@ -1,5 +1,4 @@
 package com.backend.pharmacy_management.model.repository.prescription_indicative;
-
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Prescription;
 
 import org.springframework.data.domain.Page;

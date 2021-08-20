@@ -1,5 +1,4 @@
 package com.backend.pharmacy_management.controller.prescription_indicative;
-
 import com.backend.pharmacy_management.model.dto.PrescriptionDto;
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Prescription;
 import com.backend.pharmacy_management.model.service.prescription_indicative.IPrescriptionService;
@@ -13,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -47,47 +47,61 @@ public class PrescriptionController {
         if (symptom.isPresent()) {
             sym = symptom.get();
         }
-        Page<Prescription> prescriptionList = iPrescriptionService.searchPrescription(name, code, obj, sym,pageable);
+        Page<Prescription> prescriptionList = iPrescriptionService.searchPrescription(name, code, obj, sym, pageable);
         if (prescriptionList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(prescriptionList, HttpStatus.OK);
     }
+
     @GetMapping("/prescriptions/{id}")
     public ResponseEntity<Prescription> findPrescriptionById(@PathVariable Long id) {
-        Optional<Prescription> prescriptionOptional = iPrescriptionService.findById(id);
-        if (!prescriptionOptional.isPresent()) {
+        Prescription prescription = iPrescriptionService.findById(id);
+        if (prescription==null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(prescriptionOptional.get(), HttpStatus.OK);
+        return new ResponseEntity<>(prescription, HttpStatus.OK);
     }
+
     @PostMapping(value = "/prescription-create")
-    public ResponseEntity savePrescription(@Valid @RequestBody PrescriptionDto prescriptionDto , BindingResult bindingResult) {
-            if (bindingResult.hasErrors()){
-                return new ResponseEntity<>(bindingResult.getAllErrors(),HttpStatus.NOT_MODIFIED);
-            }else {
-                Prescription prescription = new Prescription();
-                BeanUtils.copyProperties(prescriptionDto,prescription);
-                return new ResponseEntity<>(iPrescriptionService.save(prescription), HttpStatus.CREATED);
-            }
+    public ResponseEntity<Prescription> savePrescription(@Valid @RequestBody PrescriptionDto prescriptionDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        } else {
+            Prescription prescription = new Prescription();
+            BeanUtils.copyProperties(prescriptionDto, prescription);
+            return new ResponseEntity<>(iPrescriptionService.save(prescription), HttpStatus.CREATED);
+        }
     }
+
     @PutMapping("/prescriptions/{id}")
-    public ResponseEntity<Prescription> updatePrescription(@PathVariable Long id, @RequestBody Prescription prescription) {
-        Optional<Prescription> prescriptionOptional = iPrescriptionService.findById(id);
-        if (!prescriptionOptional.isPresent()) {
+    public ResponseEntity<Prescription> updatePrescription(@Valid @PathVariable Long id, @RequestBody PrescriptionDto prescriptionDto, BindingResult bindingResult) {
+
+
+        Prescription prescription1 = iPrescriptionService.findById(id);
+        if (prescription1==null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        prescription.setPrescriptionId(prescriptionOptional.get().getPrescriptionId());
+        Prescription prescription = new Prescription();
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        prescriptionDto.setPrescriptionId(prescription1.getPrescriptionId());
+        BeanUtils.copyProperties(prescriptionDto,prescription);
+
         return new ResponseEntity<>(iPrescriptionService.save(prescription), HttpStatus.OK);
+
     }
+
+
     @DeleteMapping("/prescriptions/{id}")
     public ResponseEntity<Prescription> deletePrescription(@PathVariable Long id) {
-        Optional<Prescription> prescriptionOptional = iPrescriptionService.findById(id);
-        if (!prescriptionOptional.isPresent()) {
+        Prescription prescription = iPrescriptionService.findById(id);
+        if (prescription==null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        prescriptionOptional.get().setFlag(true);
-        iPrescriptionService.save(prescriptionOptional.get());
-        return new ResponseEntity<>(prescriptionOptional.get(), HttpStatus.NO_CONTENT);
+        prescription.setFlag(true);
+        iPrescriptionService.save(prescription);
+        return new ResponseEntity<>(prescription, HttpStatus.NO_CONTENT);
     }
 }

@@ -15,16 +15,14 @@ import java.util.List;
 public class IndicativeController {
     @Autowired
     private IIndicativeService iIndicativeService;
-    @GetMapping(value = "indicative-list")
-    public ResponseEntity<List<Indicative>> showList() {
-        List<Indicative> indicativeList = (List<Indicative>) iIndicativeService.findAll();
+
+    @GetMapping(value = "/indicative-list/{id}")
+    public ResponseEntity<List<Indicative>> showList(@PathVariable Long id) {
+        List<Indicative> indicativeList = (List<Indicative>) iIndicativeService.findAllIndicative(id);
         if (indicativeList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(indicativeList, HttpStatus.OK);
     }
-    @PostMapping(value = "/indicative-create")
-    public ResponseEntity saveIndicative(@RequestBody Indicative indicative) {
-        return new ResponseEntity<>(iIndicativeService.save(indicative), HttpStatus.CREATED);
-    }
+
 }
