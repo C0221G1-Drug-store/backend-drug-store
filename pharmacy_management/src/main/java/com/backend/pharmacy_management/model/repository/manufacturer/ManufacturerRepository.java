@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 
 @Repository
@@ -43,5 +44,7 @@ public interface ManufacturerRepository extends PagingAndSortingRepository<Manuf
     Page<Manufacturer> findAllSortPhoneNumber(Pageable pageable);
     @Query(value= "update manufacturer set flag = 0 WHERE manufacturer_id = ?1 ", nativeQuery = true)
     void deleteByIdManufacturer(Long id);
+    @Query(value= "select * from manufacturer where flag = 1", nativeQuery = true)
+    List<Manufacturer> findAll();
 
 }

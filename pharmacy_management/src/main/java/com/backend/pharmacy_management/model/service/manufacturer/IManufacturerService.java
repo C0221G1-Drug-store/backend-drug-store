@@ -4,6 +4,7 @@ import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 
 
 public interface IManufacturerService {
@@ -29,4 +30,5 @@ public interface IManufacturerService {
     Page<ImportBill> findByIdManufacturer(Long id,Pageable pageable);
     ImportBill findByIdImportBill(Long id);
     Page<ImportBill> findByDateImportBill(Long id,String startDate, String endDate,Pageable pageable);
+    List<Manufacturer> getAll();
 }

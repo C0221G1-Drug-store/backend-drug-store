@@ -95,4 +95,5 @@ public class ManufacturerDto {
     public void setFlag(Integer flag) {
         this.flag = flag;
     }
+
 }

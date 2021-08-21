@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "import_bill_drug")
-public class ImportBillDrug {
+public  class  ImportBillDrug  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long importBillDrugId;

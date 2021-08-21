@@ -33,5 +33,4 @@ public class Manufacturer {
     @OneToMany(mappedBy = "manufacturer")
     private List<ExportBill> exportBills;
 
-
 }

@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class ManufacturerServiceImpl implements IManufacturerService {
@@ -102,6 +104,11 @@ public class ManufacturerServiceImpl implements IManufacturerService {
     @Override
     public Page<ImportBill> findByDateImportBill(Long id,String startDate, String endDate,Pageable pageable) {
         return importBillRepository.findByDateImportBill(id,startDate,endDate,pageable);
+    }
+
+    @Override
+    public List<Manufacturer> getAll() {
+        return (List<Manufacturer>) manufacturerRepository.findAll();
     }
 
 }

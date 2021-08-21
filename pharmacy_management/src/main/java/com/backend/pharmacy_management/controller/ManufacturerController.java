@@ -97,47 +97,88 @@ public class ManufacturerController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<List<ObjectError>> createManufacturer(@Valid @RequestBody ManufacturerDto manufacturerDto, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
-            return new ResponseEntity<>(bindingResult.getAllErrors(),HttpStatus.NOT_MODIFIED);
-        }else {
-            Manufacturer manufacturer=new Manufacturer();
-            BeanUtils.copyProperties(manufacturerDto,manufacturer);
+        List<Manufacturer> manufacturers = iManufacturerService.getAll();
+        for (int i = 0; i < manufacturers.size(); i++) {
+            if (manufacturerDto.getManufacturerEmail().equals(manufacturers.get(i).getManufacturerEmail()) && manufacturerDto.getManufacturerCode().equals(manufacturers.get(i).getManufacturerCode())) {
+                return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.NOT_FOUND);
+            }
+        }
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.NOT_MODIFIED);
+
+        } else {
+            Manufacturer manufacturer = new Manufacturer();
+            BeanUtils.copyProperties(manufacturerDto, manufacturer);
             iManufacturerService.saveManufacturer(manufacturer);
-            return new ResponseEntity<>( HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
     }
+
     @PutMapping(value = "/update")
     public ResponseEntity<List<ObjectError>> updateManufacturer(@RequestParam Long id, @Valid @RequestBody ManufacturerDto manufacturerDto, BindingResult bindingResult) {
+
+
+        List<Manufacturer> manufacturers = iManufacturerService.getAll();
+        for (int i = 0; i < manufacturers.size(); i++) {
+            if (!id.equals(manufacturers.get(i).getManufacturerId()) && (manufacturerDto.getManufacturerEmail().equals(manufacturers.get(i).getManufacturerEmail()) || manufacturerDto.getManufacturerCode().equals(manufacturers.get(i).getManufacturerCode()))) {
+                return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.NOT_MODIFIED);
+            }
+
+        }
         Manufacturer mf = iManufacturerService.findByManufacturerId(id);
         manufacturerDto.setManufacturerId(mf.getManufacturerId());
-        if(bindingResult.hasErrors()){
-            return new ResponseEntity<>(bindingResult.getAllErrors(),HttpStatus.NOT_MODIFIED);
-        }else {
-            Manufacturer manufacturers=new Manufacturer();
-            BeanUtils.copyProperties(manufacturerDto, manufacturers );
-            iManufacturerService.saveManufacturer(manufacturers);
-            return new ResponseEntity<>( HttpStatus.OK);
+
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.NOT_MODIFIED);
+        } else {
+            Manufacturer manufacturer = new Manufacturer();
+            BeanUtils.copyProperties(manufacturerDto, manufacturer);
+            iManufacturerService.saveManufacturer(manufacturer);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
     }
+
     @GetMapping(value = "/show")
-    public ResponseEntity<Manufacturer> showManufacturer(@RequestParam Long id){
+    public ResponseEntity<Manufacturer> showManufacturer(@RequestParam Long id) {
         return new ResponseEntity<>(iManufacturerService.findByManufacturerId(id), HttpStatus.OK);
     }
-    @GetMapping(value = "/importBill/shows")
-    public ResponseEntity<Page<ImportBill>> showImportBillIdManufacturer(@RequestParam Long id,@RequestParam Integer page,@RequestParam Optional<String> startDate,@RequestParam Optional<String> endDate){
-        String startDate1="";
-        String endDate1="";
 
-        if(startDate.isPresent() && endDate.isPresent()){
-            startDate1= startDate.get();
-            endDate1=endDate.get();
-            return new ResponseEntity<>(iManufacturerService.findByDateImportBill(id, startDate1 , endDate1,PageRequest.of(page,2)), HttpStatus.OK);
+    @GetMapping(value = "/importBill/shows")
+    public ResponseEntity<Page<ImportBill>> showImportBillIdManufacturer(@RequestParam Long id, @RequestParam Integer page, @RequestParam Optional<String> startDate, @RequestParam Optional<String> endDate) {
+        String startDate1 = "";
+        String endDate1 = "";
+
+        if (startDate.isPresent() && endDate.isPresent()) {
+            startDate1 = startDate.get();
+            endDate1 = endDate.get();
+            return new ResponseEntity<>(iManufacturerService.findByDateImportBill(id, startDate1, endDate1, PageRequest.of(page, 2)), HttpStatus.OK);
         }
-        return new ResponseEntity<>(iManufacturerService.findByIdManufacturer(id, PageRequest.of(page,2)), HttpStatus.OK);
+        return new ResponseEntity<>(iManufacturerService.findByIdManufacturer(id, PageRequest.of(page, 2)), HttpStatus.OK);
     }
+
     @GetMapping(value = "/importBill")
-    public ResponseEntity<ImportBill> findByIdImportBill(@RequestParam Long id){
+    public ResponseEntity<ImportBill> findByIdImportBill(@RequestParam Long id) {
         return new ResponseEntity<>(iManufacturerService.findByIdImportBill(id), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getAll")
+    public ResponseEntity<List<Manufacturer>> getAll() {
+        return new ResponseEntity<>(iManufacturerService.getAll(), HttpStatus.OK
+        );
+    }
+
+    @PutMapping(value = "/delete")
+    public ResponseEntity<List<ObjectError>> deleteManufacturer(@RequestParam Long id, @Valid @RequestBody ManufacturerDto manufacturerDto, BindingResult bindingResult) {
+        Manufacturer mf = iManufacturerService.findByManufacturerId(id);
+        manufacturerDto.setManufacturerId(mf.getManufacturerId());
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.NOT_MODIFIED);
+        } else {
+            Manufacturer manufacturer = new Manufacturer();
+            BeanUtils.copyProperties(manufacturerDto, manufacturer);
+            iManufacturerService.saveManufacturer(manufacturer);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 
 }
