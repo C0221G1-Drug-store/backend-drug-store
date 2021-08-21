@@ -44,6 +44,7 @@ public class DrugController {
         if (!field.equals("") && sign.equals("like") && !input.equals("")) {
             input = '%' + input + '%';
         }
+
         List<ListDrugDTO> drugs = drugService.findAllDrugsSearch(field, sign, input, index);
         if (drugs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -56,6 +57,7 @@ public class DrugController {
         if (!field.equals("") && sign.equals("like") && !input.equals("")) {
             input = '%' + input + '%';
         }
+
         List<ListDrugDTO> drugs = drugService.findAllDrugsSearchNotPagination(field, sign, input);
         if (drugs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

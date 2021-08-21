@@ -23,6 +23,7 @@ public class DrugService implements IDrugService {
     @Override
     public List<ListDrugDTO> findAllDrugsPagination(int index) {
         return iDrugRepository.findAllDrugsPagination(index);
+
     }
 
     @Override
