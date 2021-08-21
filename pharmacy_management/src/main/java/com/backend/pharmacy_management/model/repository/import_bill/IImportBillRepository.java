@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface IImportBillRepository extends JpaRepository<ImportBill,Long> {
     @Query(value = "select * from import_bill", nativeQuery = true)
-    public List<ImportBill> getListNormals();
+     List<ImportBill> getListNormals();
 }

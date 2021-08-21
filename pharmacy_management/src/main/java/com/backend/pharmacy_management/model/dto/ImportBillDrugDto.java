@@ -31,6 +31,8 @@ public class ImportBillDrugDto {
     @NotNull
     Integer vat;
     Boolean flag;
+    @NotNull
     ImportBill importBill;
+    @NotNull
     Drug drug;
 }
