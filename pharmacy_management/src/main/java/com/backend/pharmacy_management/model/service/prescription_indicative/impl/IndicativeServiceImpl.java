@@ -13,6 +13,7 @@ public class IndicativeServiceImpl implements IIndicativeService {
         return this.iIndicativeRepository.findAll();
     }
     public Iterable<Indicative> findAllIndicative(Long id) {
+
         return this.iIndicativeRepository.findAllIndicative(id);
     }
 

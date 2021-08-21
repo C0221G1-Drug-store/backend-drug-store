@@ -22,7 +22,8 @@ public class PrescriptionServiceImpl implements IPrescriptionService {
 
     @Override
     public Prescription findById(Long id) {
-        return this.prescriptionRepository.findById(id).orElse(null);
+        Prescription prescription=this.prescriptionRepository.findById(id).orElse(null);
+        return prescription;
     }
 
     @Override

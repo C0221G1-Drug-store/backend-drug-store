@@ -15,7 +15,6 @@ import java.util.List;
 public class IndicativeController {
     @Autowired
     private IIndicativeService iIndicativeService;
-
     @GetMapping(value = "/indicative-list/{id}")
     public ResponseEntity<List<Indicative>> showList(@PathVariable Long id) {
         List<Indicative> indicativeList = (List<Indicative>) iIndicativeService.findAllIndicative(id);

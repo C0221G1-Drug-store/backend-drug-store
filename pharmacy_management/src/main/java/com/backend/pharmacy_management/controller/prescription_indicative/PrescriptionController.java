@@ -31,23 +31,8 @@ public class PrescriptionController {
                                                        @RequestParam Optional<Integer> page,
                                                        @RequestParam Optional<String> sortBy) {
         Pageable pageable = PageRequest.of(page.orElse(0), 5, Sort.Direction.ASC, sortBy.orElse("prescription_id"));
-        String name = "";
-        if (prescriptionName.isPresent()) {
-            name = prescriptionName.get();
-        }
-        String code = "";
-        if (prescriptionCode.isPresent()) {
-            code = prescriptionCode.get();
-        }
-        String obj = "";
-        if (object.isPresent()) {
-            obj = object.get();
-        }
-        String sym = "";
-        if (symptom.isPresent()) {
-            sym = symptom.get();
-        }
-        Page<Prescription> prescriptionList = iPrescriptionService.searchPrescription(name, code, obj, sym, pageable);
+
+        Page<Prescription> prescriptionList = iPrescriptionService.searchPrescription(prescriptionName.orElse(""), prescriptionCode.orElse(""), object.orElse(""), symptom.orElse(""), pageable);
         if (prescriptionList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -74,27 +59,24 @@ public class PrescriptionController {
         }
     }
 
-    @PutMapping("/prescriptions/{id}")
-    public ResponseEntity<Prescription> updatePrescription(@Valid @PathVariable Long id, @RequestBody PrescriptionDto prescriptionDto, BindingResult bindingResult) {
+    @PutMapping("/prescription-edit/{id}")
+    public ResponseEntity<Prescription> updatePrescription( @PathVariable Long id, @RequestBody @Valid PrescriptionDto prescriptionDto, BindingResult bindingResult) {
 
-
-        Prescription prescription1 = iPrescriptionService.findById(id);
-        if (prescription1==null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        Prescription prescription = new Prescription();
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        prescriptionDto.setPrescriptionId(prescription1.getPrescriptionId());
-        BeanUtils.copyProperties(prescriptionDto,prescription);
-
-        return new ResponseEntity<>(iPrescriptionService.save(prescription), HttpStatus.OK);
+       else {
+            Prescription prescription1 = iPrescriptionService.findById(id);
+            Prescription prescription = new Prescription();
+            prescriptionDto.setPrescriptionId(prescription1.getPrescriptionId());
+            BeanUtils.copyProperties(prescriptionDto,prescription);
+            return new ResponseEntity<>(iPrescriptionService.save(prescription), HttpStatus.OK);
+        }
 
     }
 
 
-    @DeleteMapping("/prescriptions/{id}")
+    @DeleteMapping("/prescription-delete/{id}")
     public ResponseEntity<Prescription> deletePrescription(@PathVariable Long id) {
         Prescription prescription = iPrescriptionService.findById(id);
         if (prescription==null) {
