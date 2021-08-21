@@ -1,35 +1,36 @@
 package com.backend.pharmacy_management.model.entity.import_bill_payment;
-import com.backend.pharmacy_management.model.entity.drug.Drug;
 
+import com.backend.pharmacy_management.model.entity.drug.Drug;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
-import java.util.Date;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "import_bill_drug")
-public  class  ImportBillDrug  {
+public class ImportBillDrug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long importBillDrugId;
     Integer importAmount;
     Double importPrice;
     Integer discountRate;
-    Integer lotNumber ;
-    Date expiry ;
+    Integer lotNumber;
+    LocalDate expiry;
     Integer vat;
+    Boolean flag;
     @ManyToOne
     @JoinColumn(name = "import_bill_id")
-
     ImportBill importBill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
-
     Drug drug;
 }

@@ -1,16 +1,19 @@
 package com.backend.pharmacy_management.model.entity.export_bill;
+
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
-import java.util.Set;
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "export_bill")
@@ -25,13 +28,15 @@ public class ExportBill {
     private boolean flag;
     @ManyToOne
     @JoinColumn(name = "export_bill_type_id")
+    @JsonBackReference
     private ExportBillType exportBillType;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
     @OneToMany(mappedBy = "exportBill")
-    private Set<ExportBillDetail> exportBillDetails;
+    @JsonBackReference(value = "export_bill_detail-export_bill")
+    private List<ExportBillDetail> exportBillDetails;
 }

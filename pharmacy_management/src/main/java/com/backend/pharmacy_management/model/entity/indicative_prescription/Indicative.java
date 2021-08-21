@@ -1,15 +1,16 @@
 package com.backend.pharmacy_management.model.entity.indicative_prescription;
 
 import com.backend.pharmacy_management.model.entity.drug.Drug;
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "indicative")
@@ -20,9 +21,7 @@ public class Indicative {
     private  Long totalPill;
     private  Long drinkDay;
     private  Long drinkTime;
-    private  Long amountPill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
-
     private Drug drug;
 }

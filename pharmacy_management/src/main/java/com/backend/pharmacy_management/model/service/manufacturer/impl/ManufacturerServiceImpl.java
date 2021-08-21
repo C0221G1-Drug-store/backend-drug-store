@@ -1,5 +1,6 @@
 package com.backend.pharmacy_management.model.service.manufacturer.impl;
 
+
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.backend.pharmacy_management.model.repository.manufacturer.ImportBillRepository;
@@ -10,8 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ManufacturerServiceImpl implements IManufacturerService {
@@ -19,6 +21,7 @@ public class ManufacturerServiceImpl implements IManufacturerService {
     ManufacturerRepository manufacturerRepository;
     @Autowired
     ImportBillRepository importBillRepository;
+
     @Override
     public Page<Manufacturer> findAllManufacturer(Pageable pageable) {
         return manufacturerRepository.findAllManufacturer(pageable);
@@ -59,6 +62,7 @@ public class ManufacturerServiceImpl implements IManufacturerService {
       return   manufacturerRepository.save(manufacturer);
 
 
+
     }
 
     @Override
@@ -92,7 +96,9 @@ public class ManufacturerServiceImpl implements IManufacturerService {
     }
 
     @Override
+
     public Page<ImportBill> findByIdManufacturer(Long id,Pageable pageable) {
+
         return importBillRepository.findAllByImportBill(id,pageable);
     }
 
@@ -111,4 +117,12 @@ public class ManufacturerServiceImpl implements IManufacturerService {
         return (List<Manufacturer>) manufacturerRepository.findAll();
     }
 
+    @Override
+    public Optional<Manufacturer> findByIdM(Long id) {
+        return manufacturerRepository.findById(id);
+    }
+
+    public Page<Manufacturer> findAllWithKeyWord(Pageable pageable, String keyword) {
+        return null;
+    }
 }

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface IManufacturerService {
@@ -31,4 +32,5 @@ public interface IManufacturerService {
     ImportBill findByIdImportBill(Long id);
     Page<ImportBill> findByDateImportBill(Long id,String startDate, String endDate,Pageable pageable);
     List<Manufacturer> getAll();
+    Optional<Manufacturer> findByIdM(Long id);
 }

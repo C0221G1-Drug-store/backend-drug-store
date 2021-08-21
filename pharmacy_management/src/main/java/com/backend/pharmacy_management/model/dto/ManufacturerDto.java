@@ -1,4 +1,4 @@
-package com.backend.pharmacy_management.dto;
+package com.backend.pharmacy_management.model.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;

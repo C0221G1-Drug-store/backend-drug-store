@@ -2,16 +2,18 @@ package com.backend.pharmacy_management.model.entity.bill_sale;
 
 import com.backend.pharmacy_management.model.entity.customer.Customer;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "bill_sale")
@@ -24,6 +26,7 @@ public class BillSale {
     private String invoiceDate;
     private String billSaleNote;
     private String billSaleType;
+    private Boolean flag = true;
     private double totalMoney;
     @ManyToOne
     @JoinColumn(name = "employee_id",nullable = false)
@@ -32,5 +35,7 @@ public class BillSale {
     @JoinColumn(name = "customer_id",nullable = false)
     private Customer customer;
     @OneToMany(mappedBy = "billSale")
-    private Set<DrugOfBill> drugOfBillSet;
+    @JsonBackReference(value="drug_of_bill-bill_sale")
+    private List<DrugOfBill> drugOfBills;
+
 }

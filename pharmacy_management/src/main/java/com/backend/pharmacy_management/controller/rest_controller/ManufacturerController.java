@@ -1,6 +1,6 @@
-package com.backend.pharmacy_management.controller;
+package com.backend.pharmacy_management.controller.rest_controller;
 
-import com.backend.pharmacy_management.dto.ManufacturerDto;
+import com.backend.pharmacy_management.model.dto.ManufacturerDto;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.backend.pharmacy_management.model.service.manufacturer.IManufacturerService;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "manufacturer")
+@RequestMapping(value = "api/manufacturer")
 @CrossOrigin(value = "http://localhost:4200/")
 public class ManufacturerController {
     @Autowired

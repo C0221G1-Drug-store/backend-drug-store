@@ -4,13 +4,19 @@ import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
+
+
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "manufacturer")
@@ -23,14 +29,14 @@ public class Manufacturer {
     private String manufacturerAddress;
     private String manufacturerEmail;
     private String manufacturerPhoneNumber;
-    private double manufacturerDebts;
+    private Double manufacturerDebts;
     private String manufacturerNote ;
     private Integer flag;
     @OneToMany(mappedBy = "manufacturer")
-    @JsonBackReference
+    @JsonBackReference(value = "manufacturer-import_bill")
+    @Fetch(value= FetchMode.SELECT)
     private List<ImportBill> importBills;
-
     @OneToMany(mappedBy = "manufacturer")
+    @JsonBackReference(value = "manufacturer-export_bill")
     private List<ExportBill> exportBills;
-
 }
