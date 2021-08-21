@@ -18,7 +18,14 @@ configurations {
 repositories {
     mavenCentral()
 }
-
+sonarqube {
+    properties {
+        property "sonar.host.url", " http://18.222.153.92:9000/"
+        property "sonar.login", "f4570cffe1dd5bf39ecbeed0ef04eef921709b5a"
+        property "sonar.projectName", "C0221G1_ReviewCode_MinhND"
+        property "sonar.projectKey", "C0221G1_ReviewCode_MinhND"
+    }
+}
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -31,14 +38,6 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-sonarqube {
-    properties {
-        property 'sonar.host.url', 'http://18.222.153.92:9000'
-        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
-        property 'sonar.projectKey', 'C0221G1_ReviewCode_HoangNV'
-        property 'sonar.projectName', 'C0221G1_ReviewCode_HoangNV'
-    }
 }
 test {
     useJUnitPlatform()

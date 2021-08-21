@@ -3,9 +3,10 @@ package com.backend.pharmacy_management.model.entity.manufacturer;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -30,6 +31,7 @@ public class Manufacturer {
     private String manufacturerPhoneNumber;
     private Double manufacturerDebts;
     private String manufacturerNote ;
+    private Integer flag;
     @OneToMany(mappedBy = "manufacturer")
     @JsonBackReference(value = "manufacturer-import_bill")
     @Fetch(value= FetchMode.SELECT)

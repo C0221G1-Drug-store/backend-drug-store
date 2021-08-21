@@ -1,11 +1,14 @@
 package com.backend.pharmacy_management.model.service.manufacturer;
-
+import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
-import com.backend.pharmacy_management.model.service.IGeneralService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface IManufacturerService extends IGeneralService<Manufacturer> {
+import java.util.List;
+import java.util.Optional;
+
+
+public interface IManufacturerService {
     Page<Manufacturer> findAllManufacturer(Pageable pageable);
     Page<Manufacturer> findByManufacturerName( String name,Pageable pageable);
     Page<Manufacturer> findByManufacturerCode(String code,Pageable pageable );
@@ -13,7 +16,7 @@ public interface IManufacturerService extends IGeneralService<Manufacturer> {
     Page<Manufacturer> findByManufacturerPhoneNumber( String phoneNumber,Pageable pageable);
     Manufacturer findByManufacturerId( Long id);
     Page<Manufacturer> findByManufacturerNote( String note,Pageable pageable);
-    void saveManufacturer(Manufacturer manufacturer);
+    Manufacturer saveManufacturer(Manufacturer manufacturer);
     void deleteManufacturer(Long id);
 
     Page<Manufacturer> findAllSortName(Pageable pageable);
@@ -25,5 +28,9 @@ public interface IManufacturerService extends IGeneralService<Manufacturer> {
     Page<Manufacturer> findAllSortNote(Pageable pageable);
 
     Page<Manufacturer> findAllSortPhoneNumber(Pageable pageable);
-
+    Page<ImportBill> findByIdManufacturer(Long id,Pageable pageable);
+    ImportBill findByIdImportBill(Long id);
+    Page<ImportBill> findByDateImportBill(Long id,String startDate, String endDate,Pageable pageable);
+    List<Manufacturer> getAll();
+    Optional<Manufacturer> findByIdM(Long id);
 }

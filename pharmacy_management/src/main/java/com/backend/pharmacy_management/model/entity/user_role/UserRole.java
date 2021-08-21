@@ -1,8 +1,10 @@
 package com.backend.pharmacy_management.model.entity.user_role;
 
 
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 

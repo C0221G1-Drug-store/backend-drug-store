@@ -49,7 +49,7 @@ public class ImportBillRestController {
     @PostMapping(value= "", consumes={"application/json"})
     public ResponseEntity<ImportBill> create(@Valid @RequestBody ImportBillDto importBillDto) {
         Optional<Employee> employee = employeeService.findById(importBillDto.getEmployee().getEmployeeId());
-        Optional<Manufacturer> manufacturer = manufacturerService.findById(importBillDto.getManufacturer().getManufacturerId());
+        Optional<Manufacturer> manufacturer = manufacturerService.findByIdM(importBillDto.getManufacturer().getManufacturerId());
         Optional<Payment> payment = paymentService.findById(importBillDto.getPayment().getPaymentId());
         if (payment.isPresent() && manufacturer.isPresent() && employee.isPresent()) {
             ImportBill importBill = new ImportBill();

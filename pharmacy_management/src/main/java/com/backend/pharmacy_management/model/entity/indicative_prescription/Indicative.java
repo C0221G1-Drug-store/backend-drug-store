@@ -1,7 +1,10 @@
 package com.backend.pharmacy_management.model.entity.indicative_prescription;
 
 import com.backend.pharmacy_management.model.entity.drug.Drug;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
