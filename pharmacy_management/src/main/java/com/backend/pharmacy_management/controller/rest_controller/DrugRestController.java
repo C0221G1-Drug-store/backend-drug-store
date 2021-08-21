@@ -54,26 +54,5 @@ public class DrugRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public static void main(String[] args) {
-        int t = 1;
-        for (int i = 1; i <= 5; i++) {
-            for (int k = 1; k <= t; k++) {
-                System.out.print(" ");
-            }
-
-            for (int j = 1; j <= 5; j++){
-                if(j >= i){
-                    System.out.print(j);
-                    System.out.print(" ");
-                }
-
-            }
-            for (int m = 1; m <= i; m++) {
-                System.out.print(" ");
-            }
-            t++;
-            System.out.println();
-        }
-    }
 }
 
