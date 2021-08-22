@@ -19,15 +19,24 @@ public class DrugService implements IDrugService {
     private IDrugImageDetailRepository iDrugImageDetailRepository;
 
 
-    @Override
-    public Drug saveDrug(Drug drug) {
-        return iDrugRepository.save(drug);
+
+
+    public List<ListDrugDTO> findAllDrugsPagination(int index) {
+        return iDrugRepository.findAllDrugsPagination(index);
+
     }
 
     @Override
-    public List<ListDrugDTO> findAllDrugsPagination(int index) {
-        return iDrugRepository.findAllDrugsPagination(index);
+    public List<ListDrugDTO> findAllDrugsSearch(String field, String sign, String input, String index) {
+        return iDrugRepository.findAllDrugsSearch(field, sign, input, index);
     }
+
+    @Override
+    public List<ListDrugDTO> findAllDrugsSearchNotPagination(String field, String sign, String input) {
+        return iDrugRepository.findAllDrugsSearchNotPagination(field, sign, input);
+    }
+
+
 
     @Override
     public List<ListDrugDTO> findAllDrugsNotPagination() {
@@ -65,5 +74,10 @@ public class DrugService implements IDrugService {
     @Override
     public DrugImageDetail saveDrugImage(DrugImageDetail drugImageDetail) {
         return iDrugImageDetailRepository.save(drugImageDetail);
+    }
+
+    @Override
+    public Drug saveDrug(Drug drug) {
+        return iDrugRepository.save(drug);
     }
 }

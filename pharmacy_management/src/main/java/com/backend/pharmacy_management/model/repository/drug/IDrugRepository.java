@@ -25,6 +25,10 @@ public interface IDrugRepository extends PagingAndSortingRepository<Drug, Long> 
             "where d.flag = 1 " +
             "group by d.drug_id limit ?1,5;", nativeQuery = true)
     List<ListDrugDTO> findAllDrugsPagination(int index);
+    @Query(value = "call drug_search_patination (:field,:sign,:input,:index)", nativeQuery = true)
+    List<ListDrugDTO> findAllDrugsSearch(String field, String sign, String input, String index);
+    @Query(value = "call drug_search_not_patination (:field,:sign,:input)", nativeQuery = true)
+    List<ListDrugDTO> findAllDrugsSearchNotPagination(String field, String sign, String input);
 
     @Query(value = "select ((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.wholesale_profit_rate/100))*ibd.import_amount))/(sum(ibd.import_amount))) as wholesalePrice,\n" +
             "((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.retail_profit_rate/100))*ibd.import_amount)/d.drug_amount)/d.conversion_rate) as retailPrice,\n" +
