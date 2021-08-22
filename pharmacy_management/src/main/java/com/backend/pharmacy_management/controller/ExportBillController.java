@@ -22,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -42,6 +43,7 @@ public class ExportBillController {
 
     @Autowired
     private EmployeeService employeeService;
+
 
     @GetMapping("/export-bill-type")
     public ResponseEntity<List<ExportBillType>> getAllExportBillType(){
@@ -113,34 +115,33 @@ public class ExportBillController {
     }
 
     //List
-    @GetMapping("")
+    @GetMapping("/export-bill")
     public ResponseEntity<Page<ExportBill>> getExportBill(@PageableDefault(size = 10) Pageable pageable) {
         Page<ExportBill> exportBillPage = this.exportBillService.findAll(pageable);
         return new ResponseEntity<>(exportBillPage, HttpStatus.OK);
     }
 
-    @GetMapping(value = "find/{id}")
+    @GetMapping(value = "/export-bill/find/{id}")
     public ResponseEntity<ExportBill> getExportBillById(@PathVariable(value = "id") Long id){
         ExportBill exportBill = this.exportBillService.findById(id);
         return new ResponseEntity<>(exportBill, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/find/{dateCreate}/{toDate}/{timeCreate}/{toTime}/{type}")
+    @GetMapping(value = "/export-bill/find/{dateCreate}/{toDate}/{timeCreate}/{toTime}/{type}")
     public ResponseEntity<Page<ExportBill>> getExportBillByFields(@PageableDefault(size = 10) Pageable pageable,
                                                                   @PathVariable(value = "dateCreate") String dateCreate,
                                                                   @PathVariable(value = "toDate") String toDate,
                                                                   @PathVariable(value = "timeCreate") String timeCreate,
                                                                   @PathVariable(value = "toTime") String toTime,
-                                                                  @PathVariable(value = "type") Long typeId) {
+                                                                  @PathVariable(value = "type") Long typeId) throws ParseException {
         Page<ExportBill> exportBillPage = this.exportBillService.findByFields(dateCreate, toDate, timeCreate, toTime, typeId, pageable);
         return new ResponseEntity<>(exportBillPage, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @GetMapping(value = "/export-bill/delete/{id}")
     public ResponseEntity<ExportBill> deleteTest(@PathVariable(value = "id") Long id) {
         ExportBill exportBill = this.exportBillService.findById(id);
         this.exportBillService.delete(id);
         return new ResponseEntity<>(exportBill, HttpStatus.OK);
-
     }
 }
