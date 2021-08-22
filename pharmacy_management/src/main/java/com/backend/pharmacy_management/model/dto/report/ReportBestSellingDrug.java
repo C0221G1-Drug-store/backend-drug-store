@@ -4,16 +4,16 @@ public class ReportBestSellingDrug {
     private String maThuoc;
     private String nhomThuoc;
     private String tenThuoc;
-    private Double soLuongBan;
+    private String soLuongBan;
 
-    public ReportBestSellingDrug(String maThuoc, String nhomThuoc, String tenThuoc, Double soLuongBan) {
+    public ReportBestSellingDrug() {
+    }
+
+    public ReportBestSellingDrug(String maThuoc, String nhomThuoc, String tenThuoc, String soLuongBan) {
         this.maThuoc = maThuoc;
         this.nhomThuoc = nhomThuoc;
         this.tenThuoc = tenThuoc;
         this.soLuongBan = soLuongBan;
-    }
-
-    public ReportBestSellingDrug() {
     }
 
     public String getMaThuoc() {
@@ -40,11 +40,11 @@ public class ReportBestSellingDrug {
         this.tenThuoc = tenThuoc;
     }
 
-    public Double getSoLuongBan() {
+    public String getSoLuongBan() {
         return soLuongBan;
     }
 
-    public void setSoLuongBan(Double soLuongBan) {
+    public void setSoLuongBan(String soLuongBan) {
         this.soLuongBan = soLuongBan;
     }
 }
