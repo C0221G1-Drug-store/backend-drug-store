@@ -29,9 +29,12 @@ public class Employee {
     private int position;
     private String accountName;
     @OneToMany(mappedBy = "employee")
+    @JsonBackReference
     List<ImportBill> importBills;
     @OneToMany(mappedBy = "employee")
+    @JsonBackReference
     List<ExportBill> exportBills;
     @OneToMany(mappedBy = "employee")
+    @JsonBackReference
     List<BillSale> billWholesales;
 }

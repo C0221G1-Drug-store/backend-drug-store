@@ -1,5 +1,10 @@
 package com.backend.pharmacy_management.model.entity.bill_sale;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
+<<<<<<< HEAD
+=======
+import com.backend.pharmacy_management.model.entity.indicative_prescription.Prescription;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+>>>>>>> client
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,4 +28,7 @@ public class DrugOfBill {
     @JoinColumn(name = "bill_sale_id", nullable = false)
     private BillSale billSale;
     private int quantity;
+    @ManyToOne
+    @JoinColumn(name = "prescription_id", nullable = false)
+    private Prescription prescription;
 }
