@@ -1,11 +1,11 @@
-package com.backend.pharmacy_management.model.service.drug;
+package com.backend.pharmacy_management.model.service.client;
 
 import com.backend.pharmacy_management.model.dto.ListDrugDTO;
 import com.backend.pharmacy_management.model.dto.DrugDTO;
 
 import java.util.List;
 
-public interface IDrugService {
+public interface IDrugClientService {
     List<ListDrugDTO> findAllDrugsPagination(int index);
     List<ListDrugDTO> findAllDrugsNotPagination();
     List<ListDrugDTO> searchDrugs(String searchTerm);

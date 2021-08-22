@@ -1,45 +1,45 @@
-package com.backend.pharmacy_management.model.service.drug;
+package com.backend.pharmacy_management.model.service.client;
 
 import com.backend.pharmacy_management.model.dto.ListDrugDTO;
 import com.backend.pharmacy_management.model.dto.DrugDTO;
-import com.backend.pharmacy_management.model.repository.drug.IDrugRepository;
+import com.backend.pharmacy_management.model.repository.drug.IDrugClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DrugService implements IDrugService {
+public class DrugClientService implements IDrugClientService {
     @Autowired
-    private IDrugRepository iDrugRepository;
+    private IDrugClientRepository iDrugClientRepository;
 
     @Override
     public List<ListDrugDTO> findAllDrugsPagination(int index) {
-        return iDrugRepository.findAllDrugsPagination(index);
+        return iDrugClientRepository.findAllDrugsPagination(index);
     }
 
     @Override
     public List<ListDrugDTO> findAllDrugsNotPagination() {
-        return iDrugRepository.findAllDrugsNotPagination();
+        return iDrugClientRepository.findAllDrugsNotPagination();
     }
 
     @Override
     public List<ListDrugDTO> searchDrugs(String searchTerm) {
-        return iDrugRepository.searchDrugs(searchTerm);
+        return iDrugClientRepository.searchDrugs(searchTerm);
     }
 
     @Override
     public List<ListDrugDTO> findDrugByGroup(String drugGroupName) {
-        return iDrugRepository.findDrugByGroup(drugGroupName);
+        return iDrugClientRepository.findDrugByGroup(drugGroupName);
     }
 
     @Override
     public DrugDTO findDrugById(Long id) {
-        return iDrugRepository.findDrugById(id);
+        return iDrugClientRepository.findDrugById(id);
     }
 
     @Override
     public DrugDTO findDrugByIdClient(Long id) {
-        return iDrugRepository.findDrugByIdClient(id);
+        return iDrugClientRepository.findDrugByIdClient(id);
     }
 }

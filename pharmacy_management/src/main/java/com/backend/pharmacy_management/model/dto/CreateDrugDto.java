@@ -1,41 +1,59 @@
-package com.backend.pharmacy_management.model.entity.drug;
+package com.backend.pharmacy_management.model.dto;
 
-import javax.persistence.*;
+import com.backend.pharmacy_management.model.entity.drug.DrugGroup;
+import com.backend.pharmacy_management.model.entity.drug.DrugImageDetail;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
-@Entity
-@Table(name = "drug")
-public class Drug {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "drug_id")
+public class CreateDrugDto implements Validator {
     private Long drugId;
-    private Long drugCode;
+    @NotBlank
+    @Size(max = 25)
     private String drugName;
+    @NotBlank
+    @Size(max = 50)
     private String activeElement;
+    @NotBlank
     private String unit;
+    @NotBlank
     private String conversionUnit;
+    @NotNull
+    @Min(value = 1)
+    @NumberFormat(pattern = "^[1-9]\\d*$")
     private Integer conversionRate;
+    @NotNull
+    @Min(0)
+    @NumberFormat(pattern = "^\\d*\\.?\\d*$")
     private Double wholesaleProfitRate;
+    @Min(0)
+    @NumberFormat(pattern = "/^\\d*\\.?\\d*$/")
     private Double retailProfitRate;
-    @Column(columnDefinition = "TEXT")
-    private String drugFaculty;
-    private String manufacturer;
-    private String origin;
-    private String note;
-    @Column(columnDefinition = "TEXT")
-    private String drugSideEffect;
-    private Boolean flag = true;
-
-    @ManyToOne
-    @JoinColumn(name = "drug_group_id")
-    private DrugGroup drugGroup;
-    @OneToMany(targetEntity = DrugImageDetail.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
+//    @NotNull
     private List<DrugImageDetail> drugImageDetails;
+    @NotBlank
+    @Size(max = 50)
+    private String drugFaculty;
+    @Size(max = 25)
+    private String manufacturer;
+    @NotBlank
+    private String origin;
+    @Size(max = 250)
+    private String note;
+    @NotNull
+    private DrugGroup drugGroup;
+    @NotBlank
+    @Size(max = 50)
+    private String drugSideEffect;
 
-    public Drug() {
-        //contructor
+    public CreateDrugDto() {
+//        contructor
     }
 
     public List<DrugImageDetail> getDrugImageDetails() {
@@ -52,14 +70,6 @@ public class Drug {
 
     public void setDrugId(Long drugId) {
         this.drugId = drugId;
-    }
-
-    public Long getDrugCode() {
-        return drugCode;
-    }
-
-    public void setDrugCode(Long drugCode) {
-        this.drugCode = drugCode;
     }
 
     public String getDrugName() {
@@ -158,14 +168,6 @@ public class Drug {
         this.drugSideEffect = drugSideEffect;
     }
 
-    public Boolean getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Boolean flag) {
-        this.flag = flag;
-    }
-
     public DrugGroup getDrugGroup() {
         return drugGroup;
     }
@@ -173,14 +175,16 @@ public class Drug {
     public void setDrugGroup(DrugGroup drugGroup) {
         this.drugGroup = drugGroup;
     }
-    @Column(name = "drug_amount")
-    private Long drugAmount;
 
-    public Long getDrugAmount() {
-        return drugAmount;
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
     }
 
-    public void setDrugAmount(Long drugAmount) {
-        this.drugAmount = drugAmount;
+    @Override
+    public void validate(Object target, Errors errors) {
+//        CreateDrugDto createDrugDto = (CreateDrugDto) target;
+//        Double wholesaleProfitRate = createDrugDto.getWholesaleProfitRate();
+//        ValidationUtils.rejectIfEmpty(errors,"wholesaleProfitRate","");
     }
 }
