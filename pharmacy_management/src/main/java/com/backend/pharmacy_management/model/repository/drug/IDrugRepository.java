@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface IDrugRepository extends PagingAndSortingRepository<Drug, Long> {
     @Query(value = "select ((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.wholesale_profit_rate/100))*ibd.import_amount))/(sum(ibd.import_amount))) as wholesalePrice,\n" +
-            "((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.retail_profit_rate/100))*ibd.import_amount)/d.drug_amount)/d.conversion_rate) as retailPrice,\n" +
+            "((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.retail_profit_rate/100))*ibd.import_amount)/(sum(ibd.import_amount)))/d.conversion_rate) as retailPrice,\n" +
             " (sum(ibd.discount_rate*ibd.import_amount))/(sum(ibd.import_amount)) as discountRate, (sum(ibd.vat*ibd.import_amount))/(sum(ibd.import_amount)) as vat, \n" +
             " (sum(ibd.import_price*ibd.import_amount))/(sum(ibd.import_amount)) as importPrice, d.drug_id as drugId, d.drug_code as drugCode, d.drug_name as drugName, d.active_element as activeElement, d.drug_amount as drugAmount, d.unit as unit, d.conversion_unit as conversionUnit, d.conversion_rate as conversionRate,\n" +
             "d.wholesale_profit_rate as wholesaleProfitRate, d.retail_profit_rate as retailProfitRate, d.drug_faculty as drugFaculty, d.manufacturer as manufacturer, d.origin as origin,\n" +
@@ -32,7 +32,7 @@ public interface IDrugRepository extends PagingAndSortingRepository<Drug, Long> 
     List<ListDrugDTO> findAllDrugsSearchNotPagination(String field, String sign, String input);
 
     @Query(value = "select ((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.wholesale_profit_rate/100))*ibd.import_amount))/(sum(ibd.import_amount))) as wholesalePrice,\n" +
-            "((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.retail_profit_rate/100))*ibd.import_amount)/d.drug_amount)/d.conversion_rate) as retailPrice,\n" +
+            "((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.retail_profit_rate/100))*ibd.import_amount)/(sum(ibd.import_amount)))/d.conversion_rate) as retailPrice,\n" +
             " (sum(ibd.discount_rate*ibd.import_amount))/(sum(ibd.import_amount)) as discountRate, (sum(ibd.vat*ibd.import_amount))/(sum(ibd.import_amount)) as vat, \n" +
             " (sum(ibd.import_price*ibd.import_amount))/(sum(ibd.import_amount)) as importPrice, d.drug_id as drugId, d.drug_code as drugCode, d.drug_name as drugName, d.active_element as activeElement, d.drug_amount as drugAmount, d.unit as unit, d.conversion_unit as conversionUnit, d.conversion_rate as conversionRate,\n" +
             "d.wholesale_profit_rate as wholesaleProfitRate, d.retail_profit_rate as retailProfitRate, d.drug_faculty as drugFaculty, d.manufacturer as manufacturer, d.origin as origin,\n" +
