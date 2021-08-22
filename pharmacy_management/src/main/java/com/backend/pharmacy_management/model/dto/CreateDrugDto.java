@@ -1,24 +1,53 @@
 package com.backend.pharmacy_management.model.dto;
 import com.backend.pharmacy_management.model.entity.drug.DrugGroup;
 import com.backend.pharmacy_management.model.entity.drug.DrugImageDetail;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
+
+
+import javax.validation.constraints.*;
 import java.util.List;
 
-public class CreateDrugDto {
+public class CreateDrugDto implements Validator {
     private Long drugId;
-
+    @NotBlank
+    @Size(max = 25)
     private String drugName;
+    @NotBlank
+    @Size(max = 50)
     private String activeElement;
+    @NotBlank
     private String unit;
+    @NotBlank
     private String conversionUnit;
+    @NotNull
+    @Min(value = 1)
+    @NumberFormat(pattern = "^[1-9]\\d*$")
     private Integer conversionRate;
+    @NotNull
+    @Min(0)
+    @NumberFormat(pattern = "^\\d*\\.?\\d*$")
     private Double wholesaleProfitRate;
+    @Min(0)
+    @NumberFormat(pattern = "/^\\d*\\.?\\d*$/")
     private Double retailProfitRate;
+//    @NotNull
     private List<DrugImageDetail> drugImageDetails;
+    @NotBlank
+    @Size(max = 50)
     private String drugFaculty;
+    @Size(max = 25)
     private String manufacturer;
+    @NotBlank
     private String origin;
+    @Size(max = 250)
     private String note;
+    @NotNull
     private DrugGroup drugGroup;
+    @NotBlank
+    @Size(max = 50)
     private String drugSideEffect;
 
     public CreateDrugDto() {
@@ -143,5 +172,17 @@ public class CreateDrugDto {
 
     public void setDrugGroup(DrugGroup drugGroup) {
         this.drugGroup = drugGroup;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+//        CreateDrugDto createDrugDto = (CreateDrugDto) target;
+//        Double wholesaleProfitRate = createDrugDto.getWholesaleProfitRate();
+//        ValidationUtils.rejectIfEmpty(errors,"wholesaleProfitRate","");
     }
 }

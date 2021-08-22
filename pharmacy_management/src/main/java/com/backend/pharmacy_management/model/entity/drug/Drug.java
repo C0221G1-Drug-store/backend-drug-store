@@ -1,41 +1,24 @@
 package com.backend.pharmacy_management.model.entity.drug;
+
 import javax.persistence.*;
-import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
-import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
-import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
-import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.util.List;
 
-
-
-
 @Entity
-@Table(name="drug")
+@Table(name = "drug")
 public class Drug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "drug_id")
     private Long drugId;
-    @Column(name = "drug_code")
     private Long drugCode;
-    @Column(name = "drug_name")
     private String drugName;
-    @Column(name = "active_element")
     private String activeElement;
-    @Column(name = "unit")
     private String unit;
-    @Column(name = "conversion_unit")
     private String conversionUnit;
-    @Column(name = "conversion_rate")
     private Integer conversionRate;
-    @Column(name = "wholesale_profit_rate")
     private Double wholesaleProfitRate;
-    @Column(name = "retail_profit_rate")
     private Double retailProfitRate;
-    @Column(name = "drug_faculty", columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String drugFaculty;
     private String manufacturer;
     private String origin;
@@ -43,19 +26,6 @@ public class Drug {
     @Column(columnDefinition = "TEXT")
     private String drugSideEffect;
     private Boolean flag = true;
-
-    @OneToMany(mappedBy = "drug")
-    @JsonManagedReference(value = "drug_of_bill_drug")
-    private List<DrugOfBill> drugOfBills;
-    @OneToMany(mappedBy = "drug")
-    @JsonManagedReference(value = "indicatives_drug_drug")
-    private List<Indicative> indicatives;
-    @OneToMany(mappedBy = "drug")
-    @JsonManagedReference(value = "export_bill_detail_drug")
-    private List<ExportBillDetail> exportBillDetails;
-    @OneToMany(mappedBy = "drug")
-    @JsonManagedReference(value = "import_bill_drug_drug")
-    private List<ImportBillDrug> importBillDrugs;
 
     @ManyToOne
     @JoinColumn(name = "drug_group_id")
@@ -65,9 +35,7 @@ public class Drug {
     private List<DrugImageDetail> drugImageDetails;
 
     public Drug() {
-
-//        constructor empty
-
+        //contructor
     }
 
     public List<DrugImageDetail> getDrugImageDetails() {
@@ -205,29 +173,14 @@ public class Drug {
     public void setDrugGroup(DrugGroup drugGroup) {
         this.drugGroup = drugGroup;
     }
+    @Column(name = "drug_amount")
+    private Long drugAmount;
 
-    public List<DrugOfBill> getDrugOfBills() {
-        return drugOfBills;
+    public Long getDrugAmount() {
+        return drugAmount;
     }
 
-    public void setDrugOfBills(List<DrugOfBill> drugOfBills) {
-        this.drugOfBills = drugOfBills;
+    public void setDrugAmount(Long drugAmount) {
+        this.drugAmount = drugAmount;
     }
-
-    public List<Indicative> getIndicatives() {
-        return indicatives;
-    }
-
-    public void setIndicatives(List<Indicative> indicatives) {
-        this.indicatives = indicatives;
-    }
-
-    public List<ExportBillDetail> getExportBillDetails() {
-        return exportBillDetails;
-    }
-
-    public void setExportBillDetails(List<ExportBillDetail> exportBillDetails) {
-        this.exportBillDetails = exportBillDetails;
-    }
-
 }
