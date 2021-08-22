@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface IReportService {
     List<ReportImportDetails> reportImportDetails(String startDate, String endDate);
-
     List<ReportCancellationDetails> reportCancellationDetails(String startDate, String endDate);
 
     List<ReportRefundExportDetails> reportRefundExportDetails(String startDate, String endDate);
@@ -14,11 +13,8 @@ public interface IReportService {
     List<ReportRetailDetails> reportRetailDetails(String startDate, String endDate);
 
     List<ReportWholesaleDetails> reportWholesaleDetails(String startDate, String endDate);
-
     List<ReportDetailsSoldByOrder> reportDetailsSoldByOrder(String startDate, String endDate);
-
     List<SupplierList> supplierList();
-
     List<ReportOnMedicationBeingProvided> reportOnMedicationBeingProvided();
 
     List<ReportSellingDiary> sellingDiarys(String startDate, String endDate);

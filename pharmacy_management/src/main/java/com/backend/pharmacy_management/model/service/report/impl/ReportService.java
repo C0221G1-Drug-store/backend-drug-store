@@ -199,6 +199,7 @@ public class ReportService implements IReportService {
         return list1;
     }
 
+
     @Override
     public List<ReportDebt> reportDebt(String startDate, String endDate) {
         String a = "select sum(manufacturer_debts) as tong_no , invoice_date as ngay_nhap from manufacturer m join import_bill ib on m.manufacturer_id = ib.manufacturer_id where invoice_date between  ? and  ?  group by invoice_date;";
