@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Random;
 
@@ -54,16 +56,17 @@ public class ExportBillImpl implements ExportBillService {
     }
 
     //List
+    @Override
     public Page<ExportBill> findAll(Pageable pageable) {
         return this.exportBillRepository.findAll(pageable);
     }
-
+    @Override
     public ExportBill findById(long id) {
         return this.exportBillRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Page<ExportBill> findByFields(String dateCreate, String toDate, String timeCreate, String toTime, Long idType, Pageable pageable) {
+    public Page<ExportBill> findByFields(String dateCreate, String toDate, String timeCreate, String toTime, Long idType, Pageable pageable) throws ParseException {
         long typeId = idType;
         if (typeId == 0){
             if (dateCreate.equals(toDate) && dateCreate.equals("2021-01-01")) {
@@ -94,8 +97,9 @@ public class ExportBillImpl implements ExportBillService {
         }
     }
 
+    @Override
     public void delete(long id) {
-        this.exportBillRepository.deleteById(id);
+        this.exportBillRepository.deleteExportBillById(id);
     }
 
 }
