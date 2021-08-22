@@ -35,5 +35,5 @@ public interface IReportService {
 
     List<ReportProfit> reportProfit(String startDate, String endDate);
 
-
+    List<StatisticalChart> getStatisticalChart(String startDate, String endDate);
 }

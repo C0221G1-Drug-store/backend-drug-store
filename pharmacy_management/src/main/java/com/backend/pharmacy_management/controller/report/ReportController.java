@@ -1,10 +1,11 @@
 package com.backend.pharmacy_management.controller.report;
-import com.backend.pharmacy_management.model.dto.report.*;
+
 import com.backend.pharmacy_management.model.service.report.IReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController()
@@ -34,21 +35,27 @@ public class ReportController {
             case "reportOnMedicationBeingProvided":
                 return new ResponseEntity<>(reportService.reportOnMedicationBeingProvided(), HttpStatus.OK);
             case "sellingDiarys":
-                List<ReportSellingDiary> sellingDiaryList = reportService.sellingDiarys(startDate, endDate);
-                return new ResponseEntity<>(sellingDiaryList, HttpStatus.OK);
+                return new ResponseEntity<>(reportService.sellingDiarys(startDate, endDate), HttpStatus.OK);
             case "medicinesNeedToBeImporteds":
-                List<ReportMedicinesNeedToBeImported> medicinesNeedToBeImportedList = reportService.medicinesNeedToBeImporteds();
-                return new ResponseEntity<>(medicinesNeedToBeImportedList, HttpStatus.OK);
+                return new ResponseEntity<>(reportService.medicinesNeedToBeImporteds(), HttpStatus.OK);
             case "theDrugIsAboutToExpires":
-                List<ReportTheDrugIsAboutToExpire> theDrugIsAboutToExpireList = reportService.theDrugIsAboutToExpires();
-                return new ResponseEntity<>(theDrugIsAboutToExpireList, HttpStatus.OK);
+                return new ResponseEntity<>(reportService.theDrugIsAboutToExpires(), HttpStatus.OK);
             case "bestSellingDrugs":
-                List<ReportBestSellingDrug> bestSellingDrugList = reportService.bestSellingDrugs(startDate, endDate);
-                return new ResponseEntity<>(bestSellingDrugList, HttpStatus.OK);
+                return new ResponseEntity<>(reportService.bestSellingDrugs(startDate, endDate), HttpStatus.OK);
             case "reportDebt":
+                return new ResponseEntity<>(reportService.reportDebt(startDate, endDate), HttpStatus.OK);
             case "reportTurnover":
+                return new ResponseEntity<>(reportService.reportTurnover(startDate, endDate), HttpStatus.OK);
             case "reportProfit":
+                return new ResponseEntity<>(reportService.reportProfit(startDate, endDate), HttpStatus.OK);
+            default:
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/chart/{startDate}/{endDate}")
+    public ResponseEntity<List> getChart( @PathVariable String startDate, @PathVariable String endDate) {
+        List a = reportService.getStatisticalChart(startDate, endDate);
+        return new ResponseEntity<>(a, HttpStatus.OK);
     }
 }
