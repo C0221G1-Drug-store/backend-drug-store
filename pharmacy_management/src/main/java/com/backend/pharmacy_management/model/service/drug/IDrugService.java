@@ -10,13 +10,12 @@ import java.util.List;
 
 public interface IDrugService {
     Drug saveDrug(Drug drug);
+//    void saveDrug(Drug drug);
     List<ListDrugDTO> findAllDrugsPagination(int index);
-    List<ListDrugDTO> findAllDrugsSearch(String field, String sign, String input, String index);
-    List<ListDrugDTO> findAllDrugsSearchNotPagination(String field, String sign, String input);
     List<ListDrugDTO> findAllDrugsNotPagination();
     void deleteDrugById(Long id);
     DrugDTO findDrugById(Long id);
     Drug findById(Long id);
+//    void saveDrugImage(DrugImageDetail drugImageDetail);
     DrugImageDetail saveDrugImage(DrugImageDetail drugImageDetail);
-
 }
