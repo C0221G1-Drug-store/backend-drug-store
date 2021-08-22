@@ -2,8 +2,16 @@ plugins {
     id 'org.springframework.boot' version '2.5.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id "org.sonarqube" version "3.0"
 }
-
+sonarqube {
+    properties {
+        property 'sonar.host.url', 'http://18.222.153.92:9000'
+        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
+        property 'sonar.projectKey', 'C021G1_ReviewCode_TanNA'
+        property 'sonar.projectName', 'C0221G1_ReviewCode_TanNA'
+    }
+}
 group = 'com.backend'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
