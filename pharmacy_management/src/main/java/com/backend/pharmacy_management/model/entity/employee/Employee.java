@@ -1,20 +1,14 @@
 package com.backend.pharmacy_management.model.entity.employee;
-
 import com.backend.pharmacy_management.model.entity.bill_sale.BillSale;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import javax.persistence.*;
 import java.util.List;
-
-
 @Entity
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "employee")
 public class Employee {
     @Id
@@ -38,22 +32,6 @@ public class Employee {
     @JsonBackReference
     @OneToMany(mappedBy = "employee")
     List<BillSale> billWholesales;
-
-    public Employee() {
-    }
-
-    public Employee(Long employeeId, String employeeCode, String employeeName, String employeeAddress, String employeeImage, String employeePhone, String employeeStartDate, String employeeNote, String position, String accountName) {
-        this.employeeId = employeeId;
-        this.employeeCode = employeeCode;
-        this.employeeName = employeeName;
-        this.employeeAddress = employeeAddress;
-        this.employeeImage = employeeImage;
-        this.employeePhone = employeePhone;
-        this.employeeStartDate = employeeStartDate;
-        this.employeeNote = employeeNote;
-        this.position = position;
-        this.accountName = accountName;
-    }
 
     public Long getEmployeeId() {
         return employeeId;

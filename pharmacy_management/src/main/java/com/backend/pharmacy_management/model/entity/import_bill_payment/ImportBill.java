@@ -1,5 +1,4 @@
 package com.backend.pharmacy_management.model.entity.import_bill_payment;
-
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -7,9 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
