@@ -99,7 +99,7 @@ public class ManufacturerController {
     public ResponseEntity<List<ObjectError>> createManufacturer(@Valid @RequestBody ManufacturerDto manufacturerDto, BindingResult bindingResult) {
         List<Manufacturer> manufacturers = iManufacturerService.getAll();
         for (int i = 0; i < manufacturers.size(); i++) {
-            if (manufacturerDto.getManufacturerEmail().equals(manufacturers.get(i).getManufacturerEmail()) && manufacturerDto.getManufacturerCode().equals(manufacturers.get(i).getManufacturerCode())) {
+            if (manufacturerDto.getManufacturerEmail().equals(manufacturers.get(i).getManufacturerEmail()) || manufacturerDto.getManufacturerCode().equals(manufacturers.get(i).getManufacturerCode())) {
                 return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.NOT_FOUND);
             }
         }
@@ -151,7 +151,7 @@ public class ManufacturerController {
         if (startDate.isPresent() && endDate.isPresent()) {
             startDate1 = startDate.get();
             endDate1 = endDate.get();
-            return new ResponseEntity<>(iManufacturerService.findByDateImportBill(id, startDate1, endDate1, PageRequest.of(page, 2)), HttpStatus.OK);
+            return new ResponseEntity<>(iManufacturerService.findByDateImportBill(id, startDate1, endDate1, PageRequest.of(page, 5)), HttpStatus.OK);
         }
         return new ResponseEntity<>(iManufacturerService.findByIdManufacturer(id, PageRequest.of(page, 2)), HttpStatus.OK);
     }
