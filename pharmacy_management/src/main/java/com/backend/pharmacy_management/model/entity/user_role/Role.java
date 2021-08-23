@@ -1,5 +1,4 @@
 package com.backend.pharmacy_management.model.entity.user_role;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

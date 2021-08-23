@@ -24,6 +24,7 @@ public class DrugImpl implements DrugService {
             drug.setDrugAmount(drug.getDrugAmount() - amount);
             this.drugRepository.save(drug);
         }
+
     }
 
     @Override

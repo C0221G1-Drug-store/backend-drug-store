@@ -5,7 +5,6 @@ import com.backend.pharmacy_management.model.entity.employee.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.Set;
 
