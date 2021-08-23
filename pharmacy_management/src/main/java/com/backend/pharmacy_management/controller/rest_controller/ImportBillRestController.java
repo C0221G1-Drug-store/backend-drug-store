@@ -1,6 +1,7 @@
 package com.backend.pharmacy_management.controller.rest_controller;
 
 import com.backend.pharmacy_management.model.dto.ImportBillDto;
+import com.backend.pharmacy_management.model.dto.ListImportDto;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.Payment;
@@ -11,6 +12,8 @@ import com.backend.pharmacy_management.model.service.import_bill.IPaymentService
 import com.backend.pharmacy_management.model.service.manufacturer.IManufacturerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +24,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/", maxAge = 3600)
-@RequestMapping("/api/importBills")
+@RequestMapping("/api/import-bills")
 public class ImportBillRestController {
     private final IImportBillService importBillService;
     private final IPaymentService paymentService;
@@ -76,5 +79,65 @@ public class ImportBillRestController {
         importBill.setImportBillId(id);
         this.importBillService.save(importBill);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ImportBill> deleteBill(@PathVariable Long id) {
+        Optional<ImportBill> importBillOptional = importBillService.findById(id);
+        if (!importBillOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        importBillService.deleteImportBill(id);
+        return new ResponseEntity<>(importBillOptional.get(), HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/list-bills")
+    public ResponseEntity<List<ListImportDto>> getListImportDto(@RequestParam int index) {
+        List<ListImportDto> importBills = importBillService.getListImportDto(index);
+        if (importBills.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(importBills, HttpStatus.OK);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<Page<ImportBill>> getListBill(@RequestParam Integer page) {
+        Page<ImportBill> listPatient = importBillService.getPageListImportDto(PageRequest.of(page, 5));
+        return new ResponseEntity<>(listPatient, HttpStatus.OK);
+    }
+
+    @GetMapping("/search-sort-page")
+    public ResponseEntity<Page<ListImportDto>> searchAndSortBill(@RequestParam(defaultValue = "") String codeBill,
+                                                                 @RequestParam(defaultValue = "") String startDate,
+                                                                 @RequestParam(defaultValue = "") String endDate,
+                                                                 @RequestParam(defaultValue = "") String col,
+                                                                 @RequestParam int page) {
+        Page<ListImportDto> importBillDtoPage = importBillService.searchAndSortPaging(codeBill, startDate, endDate, col, page);
+        if (importBillDtoPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(importBillDtoPage, HttpStatus.OK);
+    }
+
+    @GetMapping("/list-bill-page")
+    public ResponseEntity<Page<ListImportDto>> searchListPage(@RequestParam int page) {
+        Page<ListImportDto> importBillDtoPage = importBillService.getAllBill(page);
+        if (importBillDtoPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(importBillDtoPage, HttpStatus.OK);
+    }
+
+    @GetMapping("/search-sort-page-bill")
+    public ResponseEntity<Page<ListImportDto>> searchAndSortPagingBill(@RequestParam(defaultValue = "") String codeBill,
+                                                                       @RequestParam(defaultValue = "") String startDate,
+                                                                       @RequestParam(defaultValue = "") String endDate,
+                                                                       @RequestParam(defaultValue = "") String col,
+                                                                       @RequestParam(defaultValue = "") String sort,
+                                                                       @RequestParam int page) {
+        Page<ListImportDto> importBillDtoPage = importBillService.searchAndPaging(codeBill, startDate, endDate, col,sort, page);
+        if (importBillDtoPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(importBillDtoPage, HttpStatus.OK);
     }
 }

@@ -8,7 +8,6 @@ plugins {
 group = 'com.backend'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
-
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -22,8 +21,8 @@ sonarqube {
     properties {
         property "sonar.host.url", " http://18.222.153.92:9000/"
         property "sonar.login", "f4570cffe1dd5bf39ecbeed0ef04eef921709b5a"
-        property "sonar.projectName", "C0221G1_ReviewCode_MinhND"
-        property "sonar.projectKey", "C0221G1_ReviewCode_MinhND"
+        property "sonar.projectName", "C0221G1_ReviewCode_HoangNV"
+        property "sonar.projectKey", "C0221G1_ReviewCode_HoangNV"
     }
 }
 dependencies {
@@ -39,6 +38,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
+
 test {
     useJUnitPlatform()
 }

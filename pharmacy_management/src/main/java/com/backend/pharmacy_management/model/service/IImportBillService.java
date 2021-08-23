@@ -1,8 +1,7 @@
-package com.backend.pharmacy_management.model.service.import_bill;
+package com.backend.pharmacy_management.model.service;
 
 import com.backend.pharmacy_management.model.dto.ListImportDto;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
-import com.backend.pharmacy_management.model.service.IGeneralService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
