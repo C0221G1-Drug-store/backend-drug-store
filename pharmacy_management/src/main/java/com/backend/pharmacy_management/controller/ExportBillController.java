@@ -83,11 +83,12 @@ public class ExportBillController {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
     @PostMapping(value = "/export-bill")
-    private ResponseEntity<ExportBill> createExportBill(@RequestBody @Valid ExportBillDto exportBillDto, BindingResult bindingResult) {
+    public ResponseEntity<ExportBill> createExportBill(@RequestBody @Valid ExportBillDto exportBillDto, BindingResult bindingResult) {
         new ExportBillDto().validate(exportBillDto, bindingResult);
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
+        int[] b = new int[3];
         ExportBill exportBill = new ExportBill();
         BeanUtils.copyProperties(exportBillDto, exportBill);
         exportBill.setEmployee(this.employeeService.findById(1L));
@@ -96,10 +97,10 @@ public class ExportBillController {
     }
 
     @PostMapping(value = "/export-bill/export-bill-detail")
-    private ResponseEntity<Void> createExportBillDetail(@RequestBody @Valid ExportBillDetailDto exportBillDetailDto, BindingResult bindingResult) {
+    public ResponseEntity<Void> createExportBillDetail(@RequestBody @Valid ExportBillDetailDto exportBillDetailDto, BindingResult bindingResult) {
         new ExportBillDetailDto().validate(exportBillDetailDto, bindingResult);
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
         ExportBillDetail exportBillDetail = new ExportBillDetail();
         BeanUtils.copyProperties(exportBillDetailDto, exportBillDetail);
@@ -109,7 +110,7 @@ public class ExportBillController {
     }
 
     @GetMapping(value ="/employees")
-    private ResponseEntity<Employee> getEmployee(){
+    public ResponseEntity<Employee> getEmployee(){
         Employee employee = this.employeeService.findById(1L);
         return new ResponseEntity<>(employee,HttpStatus.OK);
     }

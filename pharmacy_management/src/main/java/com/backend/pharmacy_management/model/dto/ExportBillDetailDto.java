@@ -19,9 +19,6 @@ public class ExportBillDetailDto implements Validator {
     @NotNull
     private ImportBillDrug importBillDrug;
 
-    public ExportBillDetailDto() {
-    }
-
     @Override
     public boolean supports(Class<?> clazz) {
         return false;
@@ -29,5 +26,6 @@ public class ExportBillDetailDto implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
+        // Do nothing
     }
 }

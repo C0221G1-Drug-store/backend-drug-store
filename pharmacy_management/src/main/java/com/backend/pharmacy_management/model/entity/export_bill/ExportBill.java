@@ -26,12 +26,15 @@ public class ExportBill {
     @ManyToOne
     @JoinColumn(name = "export_bill_type_id")
     private ExportBillType exportBillType;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
+
     @OneToMany(mappedBy = "exportBill")
     @JsonIgnore
     private List<ExportBillDetail> exportBillDetails;

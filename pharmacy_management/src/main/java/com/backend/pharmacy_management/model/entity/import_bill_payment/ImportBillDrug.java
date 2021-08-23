@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class ImportBillDrug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long ImportBillDrugId;
+    Long importBillDrugId;
     Integer importAmount;
     Double importPrice;
     Integer discountRate;

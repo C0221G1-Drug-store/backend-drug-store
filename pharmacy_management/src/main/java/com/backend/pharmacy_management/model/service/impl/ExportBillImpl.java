@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -20,9 +22,10 @@ public class ExportBillImpl implements ExportBillService {
     @Autowired
     private ExportBillDetailRepository exportBillDetailRepository;
 
-    private Random rand = SecureRandom.getInstanceStrong();
+    private final Random rand = SecureRandom.getInstanceStrong();
 
     public ExportBillImpl() throws NoSuchAlgorithmException {
+        // Do nothing
     }
 
     @Override
@@ -32,6 +35,8 @@ public class ExportBillImpl implements ExportBillService {
 
     @Override
     public void createExportBill(ExportBill exportBill) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        exportBill.setExportBillDate(dateFormat.format(new Date()));
         this.exportBillRepository.save(exportBill);
     }
 
