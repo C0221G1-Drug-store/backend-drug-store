@@ -169,9 +169,10 @@ public class ManufacturerController {
 
     @PutMapping(value = "/delete")
     public ResponseEntity<List<ObjectError>> deleteManufacturer(@RequestParam Long id, @Valid @RequestBody ManufacturerDto manufacturerDto, BindingResult bindingResult) {
+
         Manufacturer mf = iManufacturerService.findByManufacturerId(id);
         manufacturerDto.setManufacturerId(mf.getManufacturerId());
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || mf.getFlag()==0) {
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.NOT_MODIFIED);
         } else {
             Manufacturer manufacturer = new Manufacturer();
