@@ -26,7 +26,7 @@ public class ImportBillController {
         if (!importBillOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        importBillService.remove(id);
+        importBillService.deleteImportBill(id);
         return new ResponseEntity<>(importBillOptional.get(), HttpStatus.NO_CONTENT);
     }
 
@@ -61,6 +61,20 @@ public class ImportBillController {
     @GetMapping("/list-bill-page")
     public ResponseEntity<Page<ImportBillDto>> searchListPage(@RequestParam int page) {
         Page<ImportBillDto> importBillDtoPage = importBillService.getAllBill(page);
+        if (importBillDtoPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(importBillDtoPage, HttpStatus.OK);
+    }
+
+    @GetMapping("/search-sort-page-bill")
+    public ResponseEntity<Page<ImportBillDto>> searchAndSortPagingBill(@RequestParam(defaultValue = "") String codeBill,
+                                                                 @RequestParam(defaultValue = "") String startDate,
+                                                                 @RequestParam(defaultValue = "") String endDate,
+                                                                 @RequestParam(defaultValue = "") String col,
+                                                                 @RequestParam(defaultValue = "") String sort,
+                                                                 @RequestParam int page) {
+        Page<ImportBillDto> importBillDtoPage = importBillService.searchAndPaging(codeBill, startDate, endDate, col,sort, page);
         if (importBillDtoPage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

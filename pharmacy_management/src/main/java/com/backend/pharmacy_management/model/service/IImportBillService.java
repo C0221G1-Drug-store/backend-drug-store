@@ -10,13 +10,11 @@ import java.util.List;
 public interface IImportBillService extends IGeneralService<ImportBill> {
     List<ImportBillDto> getImportBillDto(int index);
 
-    List<ImportBillDto> getImportBillDtoNotPaging();
-
-    List<ImportBillDto> searchAndSort(String billCode, String startDate, String endDate, String col);
-
-//    test
     Page<ImportBill> getPageImportBillDto(Pageable pageable);
 
     Page<ImportBillDto> searchAndSortPaging(String billCode, String startDate, String endDate, String col, int pageable);
+    Page<ImportBillDto> searchAndPaging(String billCode, String startDate, String endDate, String col,String sort, int pageable);
+
     Page<ImportBillDto> getAllBill(int pageable);
+    void deleteImportBill(Long id);
 }

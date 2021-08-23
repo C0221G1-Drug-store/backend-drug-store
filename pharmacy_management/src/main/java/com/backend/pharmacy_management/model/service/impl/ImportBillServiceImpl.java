@@ -33,17 +33,6 @@ public class ImportBillServiceImpl implements IImportBillService {
     public List<ImportBillDto> getImportBillDto(int index) {
         return importBillRepository.getImportBillDto(index);
     }
-
-    @Override
-    public List<ImportBillDto> getImportBillDtoNotPaging() {
-        return importBillRepository.getImportBillDtoNotPaging();
-    }
-
-    @Override
-    public List<ImportBillDto> searchAndSort(String billCode, String startDate, String endDate, String col) {
-        return importBillRepository.searchAndSort(billCode, startDate, endDate, col);
-    }
-//test
     @Override
     public Page<ImportBill> getPageImportBillDto(Pageable pageable) {
         return importBillRepository.getPageImportBillDto(pageable);
@@ -60,6 +49,16 @@ public class ImportBillServiceImpl implements IImportBillService {
     }
 
     @Override
+    public Page<ImportBillDto> searchAndPaging(String billCode, String startDate, String endDate, String col,String sort, int pageable) {
+        List<ImportBillDto>importBillDtoList = importBillRepository.searchAndPaging(billCode, startDate,endDate,col,sort);
+        Pageable pageable1 = PageRequest.of(pageable, 5);
+        int start = (int) pageable1.getOffset();
+        int end = Math.min((start + pageable1.getPageSize()), importBillDtoList.size());
+        Page<ImportBillDto> pages = new PageImpl<ImportBillDto>(importBillDtoList.subList(start, end), pageable1, importBillDtoList.size());
+        return pages;
+    }
+
+    @Override
     public Page<ImportBillDto> getAllBill(int pageable) {
         List<ImportBillDto>importBillDtoList = importBillRepository.getAllBill();
         Pageable pageable1 = PageRequest.of(pageable, 5);
@@ -67,6 +66,11 @@ public class ImportBillServiceImpl implements IImportBillService {
         int end = Math.min((start + pageable1.getPageSize()), importBillDtoList.size());
         Page<ImportBillDto> pages = new PageImpl<ImportBillDto>(importBillDtoList.subList(start, end), pageable1, importBillDtoList.size());
         return pages;
+    }
+
+    @Override
+    public void deleteImportBill(Long id) {
+        importBillRepository.deleteImportBill(id);
     }
 
 
