@@ -31,9 +31,10 @@ public class UserRestController {
     public ResponseEntity<Page<User>> findAllUser(@RequestParam Integer page,
                                                   @RequestParam Integer size,
                                                   @RequestParam String keyWord,
-                                                  @RequestParam Long property
+                                                  @RequestParam Long property,
+                                                  @RequestParam Integer roleId
                                                   ) {
-        Page<User> users = userService.findAllByProperty(PageRequest.of(page,size),keyWord,property);
+        Page<User> users = userService.findAllByProperty(PageRequest.of(page,size),keyWord,property,roleId);
 
         if (users.isEmpty()) {
             return new ResponseEntity<>(users, HttpStatus.OK);
@@ -84,19 +85,5 @@ public class UserRestController {
         }
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
-
-//    @CrossOrigin
-//    @PutMapping(value= "editUserRole/{id}")
-//    public ResponseEntity<Void> updateUserRole(@PathVariable Long id, @RequestBody UserRoleDto userRoleDto) {
-//        Optional<UserRole> userRoleOptional = userRoleService.findByIdUser(id);
-//        if (!userRoleOptional.isPresent()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        UserRole userRole = new UserRole();
-//        BeanUtils.copyProperties(userRoleDto,userRole);
-//        userRole.setId(userRoleOptional.get().getId());
-//        userRoleService.save(userRole);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
 
 }

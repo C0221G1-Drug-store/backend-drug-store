@@ -16,7 +16,7 @@ public interface IUserService {
 
     void save(User user);
 
-    Page<User> findAllByProperty(Pageable pageable,String keyWord,Long property);
+    Page<User> findAllByProperty(Pageable pageable,String keyWord,Long property,Integer roleId);
 
     Iterable<User> findAllNoPage();
 
