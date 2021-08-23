@@ -2,15 +2,17 @@ package com.backend.pharmacy_management.model.entity.indicative_prescription;
 
 import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "prescription")
@@ -24,9 +26,10 @@ public class Prescription {
     private String object;     // đối tượng uống thuốc
     private int numberOfDay;  // số ngày uống
     private  String note;  //  ghi chú
-    @JsonBackReference
-    @OneToMany(targetEntity = PrescriptionIndicative.class)
+    @JsonBackReference(value = "prescription-prescription_indicative")
+    @OneToMany(mappedBy = "prescription")
     private List<PrescriptionIndicative> prescriptionIndicatives;
-    @OneToMany(targetEntity = DrugOfBill.class)
-    private List<DrugOfBill> drugOfBillList;
+    @JsonBackReference(value = "drug_of_bill-prescription_indicative")
+    @OneToMany(mappedBy = "prescription")
+    private List<DrugOfBill> drugOfBills;
 }
