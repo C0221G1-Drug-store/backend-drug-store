@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface IDrugOfBillRepository extends JpaRepository<DrugOfBill, Long> {
     @Query(value = "select * from  drug_of_bill   where prescription_id = ? ;", nativeQuery = true)
-    List<DrugOfBill> findAllDrugOfBill(Long id);
+    List<DrugOfBill> findAllDrugOfBill(int id);
 }

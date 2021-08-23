@@ -5,5 +5,6 @@ import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
 import java.util.List;
 
 public interface IDrugOfBillService {
-    List<DrugOfBill> findAllDrugOfBill(Long id);
+    List<DrugOfBill> findAllDrugOfBill(int id);
+    void save(DrugOfBill drugOfBill);
 }

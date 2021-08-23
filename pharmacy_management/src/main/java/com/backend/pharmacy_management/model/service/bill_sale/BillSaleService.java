@@ -14,4 +14,9 @@ public class BillSaleService implements IBillSaleService {
     public void saveBill(BillSale bill) {
         iBillSaleRepository.save(bill);
     }
+
+    @Override
+    public BillSale findBIll() {
+        return iBillSaleRepository.findBIllNew();
+    }
 }
