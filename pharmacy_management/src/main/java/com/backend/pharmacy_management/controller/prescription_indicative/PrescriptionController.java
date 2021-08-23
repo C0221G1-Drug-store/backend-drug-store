@@ -1,4 +1,5 @@
 package com.backend.pharmacy_management.controller.prescription_indicative;
+
 import com.backend.pharmacy_management.model.dto.PrescriptionDto;
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Prescription;
 import com.backend.pharmacy_management.model.service.prescription_indicative.IPrescriptionService;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -22,6 +24,15 @@ import java.util.Optional;
 public class PrescriptionController {
     @Autowired
     private IPrescriptionService iPrescriptionService;
+
+    @GetMapping(value = "/list")
+    public ResponseEntity<List<Prescription>> getList() {
+        List<Prescription> prescriptionList = (List<Prescription>) this.iPrescriptionService.findAll();
+        if (prescriptionList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(prescriptionList, HttpStatus.OK);
+    }
 
     @GetMapping(value = "/prescription-list")
     public ResponseEntity<Page<Prescription>> showList(@RequestParam Optional<String> prescriptionName,
@@ -42,7 +53,7 @@ public class PrescriptionController {
     @GetMapping("/prescriptions/{id}")
     public ResponseEntity<Prescription> findPrescriptionById(@PathVariable Long id) {
         Prescription prescription = iPrescriptionService.findById(id);
-        if (prescription==null) {
+        if (prescription == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(prescription, HttpStatus.OK);
@@ -60,16 +71,15 @@ public class PrescriptionController {
     }
 
     @PutMapping("/prescription-edit/{id}")
-    public ResponseEntity<Prescription> updatePrescription( @PathVariable Long id, @RequestBody @Valid PrescriptionDto prescriptionDto, BindingResult bindingResult) {
+    public ResponseEntity<Prescription> updatePrescription(@PathVariable Long id, @Valid @RequestBody PrescriptionDto prescriptionDto, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-       else {
+        } else {
             Prescription prescription1 = iPrescriptionService.findById(id);
             Prescription prescription = new Prescription();
             prescriptionDto.setPrescriptionId(prescription1.getPrescriptionId());
-            BeanUtils.copyProperties(prescriptionDto,prescription);
+            BeanUtils.copyProperties(prescriptionDto, prescription);
             return new ResponseEntity<>(iPrescriptionService.save(prescription), HttpStatus.OK);
         }
 
@@ -79,7 +89,7 @@ public class PrescriptionController {
     @DeleteMapping("/prescription-delete/{id}")
     public ResponseEntity<Prescription> deletePrescription(@PathVariable Long id) {
         Prescription prescription = iPrescriptionService.findById(id);
-        if (prescription==null) {
+        if (prescription == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         prescription.setFlag(true);

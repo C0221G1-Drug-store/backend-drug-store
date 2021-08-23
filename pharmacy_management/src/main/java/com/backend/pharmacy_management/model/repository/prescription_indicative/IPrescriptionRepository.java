@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 public interface IPrescriptionRepository extends JpaRepository<Prescription,Long> {
     @Query(value="select *" +
             " from prescription" +
-            " where prescription_code like %?1%" +
-            " and prescription_name like %?2%" +
+            " where prescription_name like %?1%" +
+            " and prescription_code like %?2%" +
             " and object like %?3%" +
             " and  symptom like %?4%" +
             " and flag=0"

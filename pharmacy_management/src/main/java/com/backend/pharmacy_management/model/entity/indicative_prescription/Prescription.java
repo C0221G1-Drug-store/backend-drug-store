@@ -12,6 +12,7 @@ public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long prescriptionId;
+    @Column(unique = true)
     private String prescriptionCode;
     private String prescriptionName;
     private String symptom;

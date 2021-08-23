@@ -31,6 +31,7 @@ public class PrescriptionServiceImpl implements IPrescriptionService {
         this.prescriptionRepository.save(prescription);
         for (int i = 0; i <prescription.getIndicatives().size() ; i++) {
             prescription.getIndicatives().get(i).setPrescription(prescription);
+            prescription.getIndicatives().get(i).setTotalPill( (prescription.getIndicatives().get(i).getDrinkDay())*(prescription.getIndicatives().get(i).getDrinkTime()));
             this.iIndicativeRepository.save(prescription.getIndicatives().get(i));
         }
         return prescription;
@@ -54,7 +55,8 @@ public class PrescriptionServiceImpl implements IPrescriptionService {
 
     @Override
     public Page<Prescription> searchPrescription(String prescriptionName, String prescriptionCode, String object, String symptom, Pageable pageable) {
-        return this.prescriptionRepository.findByPrescriptionFilter(prescriptionName,prescriptionCode,object,symptom,pageable);
+       Page<Prescription>  prescriptionPage =this.prescriptionRepository.findByPrescriptionFilter(prescriptionName,prescriptionCode,object,symptom,pageable);
+        return prescriptionPage;
 
     }
 }
