@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IDrugOfBillService {
     List<DrugOfBill> findAllDrugOfBill(int id);
+    void save(DrugOfBill drugOfBill);
 }

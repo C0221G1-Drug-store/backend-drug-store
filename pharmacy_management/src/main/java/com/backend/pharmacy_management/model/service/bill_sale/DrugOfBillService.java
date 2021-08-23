@@ -16,4 +16,9 @@ public class DrugOfBillService implements IDrugOfBillService {
     public List<DrugOfBill> findAllDrugOfBill(int id) {
         return iDrugOfBillRepository.findAllDrugOfBill(id);
     }
+
+    @Override
+    public void save(DrugOfBill drugOfBill) {
+        iDrugOfBillRepository.save(drugOfBill);
+    }
 }
