@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends PagingAndSortingRepository<User,Long> {
-    @Query(value="select * from app_user inner join user_role on app_user.user_id = user_role.user_id inner join app_role on app_role.role_id = user_role.role_id where (:para2 = 1 AND user_name like :para1) OR (:para2 = 3 AND account_name like :para1) OR (:para2 = 2 AND user_code like :para1) OR (:para2 = 4 AND app_role.role_name like :para1) OR (:para2 = 0)",nativeQuery=true)
+    @Query(value="select * from app_user inner join user_role on app_user.user_id = user_role.user_id inner join app_role on app_role.role_id = user_role.role_id where (:para2 = 1 AND user_name like :para1) OR (:para2 = 3 AND account_name like :para1) OR (:para2 = 2 AND user_code like :para1) OR (:para2 = 4 AND app_role.role_name like :para1) OR (:para2 = 0) order by account_name,user_name,user_code,app_role.role_name",nativeQuery=true)
     Page<User> findAllUserByProperty(Pageable pageable, @Param("para1") String keyWord, @Param("para2") Long property);
+
+    User findByAccountName(String username);
+
 }

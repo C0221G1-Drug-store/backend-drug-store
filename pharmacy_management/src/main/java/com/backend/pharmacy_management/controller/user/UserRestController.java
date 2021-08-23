@@ -17,9 +17,12 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -59,21 +62,27 @@ public class UserRestController {
         return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
     }
 
-    @CrossOrigin
-    @PutMapping(value= "edit/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
-        Optional<User> userOptional = userService.findById(id);
-        if (!userOptional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        User user = new User();
-        BeanUtils.copyProperties(userDto,user);
-        user.setUserId(userOptional.get().getUserId());
+//    @CrossOrigin
+//    @PutMapping(value= "edit/{id}")
+//    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+//        Optional<User> userOptional = userService.findById(id);
+//        if (!userOptional.isPresent()) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        User user = new User();
+//        BeanUtils.copyProperties(userDto,user);
+//        user.setUserId(userOptional.get().getUserId());
 //        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 //        String passWord = bCryptPasswordEncoder.encode(userDto.getEncrytedPassword());
-        user.setEncrytedPassword(userDto.getEncrytedPassword());
-        userService.save(user);
-        return new ResponseEntity<>(user,HttpStatus.OK);
+//        user.setEncrytedPassword(userDto.getEncrytedPassword());
+//        userService.save(user);
+//        return new ResponseEntity<>(user,HttpStatus.OK);
+//    }
+
+    @CrossOrigin
+    @PutMapping(value= "edit/{id}")
+    public Map<String,Object> updateUser(@PathVariable Long id, @Valid @RequestBody UserDto userDto, BindingResult bindingResult) {
+       return userService.update(userDto,bindingResult,id);
     }
 
     @CrossOrigin
