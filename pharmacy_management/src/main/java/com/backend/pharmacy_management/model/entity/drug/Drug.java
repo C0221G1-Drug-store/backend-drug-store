@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -46,9 +47,6 @@ public class Drug {
     @OneToMany(mappedBy = "drug")
     @JsonBackReference(value = "indicatives_drug-drug")
     private List<Indicative> indicatives;
-    @OneToMany(mappedBy = "drug")
-    @JsonBackReference(value = "export_bill_detail-drug")
-    private List<ExportBillDetail> exportBillDetails;
     @OneToMany(mappedBy = "drug")
     @JsonBackReference(value = "import_bill_drug-drug")
     private List<ImportBillDrug> importBillDrugs;

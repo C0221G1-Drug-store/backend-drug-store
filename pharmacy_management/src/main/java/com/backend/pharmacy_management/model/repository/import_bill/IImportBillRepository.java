@@ -19,4 +19,6 @@ public interface IImportBillRepository extends JpaRepository<ImportBill,Long> {
     ImportBill findByIdImportBill(Long id);
     @Query(value="select * from import_bill join manufacturer on manufacturer.manufacturer_id=import_bill.manufacturer_id where  manufacturer.manufacturer_id = ?1 and import_bill.invoice_date between ?2 and ?3", nativeQuery = true)
     Page<ImportBill> findByDateImportBill(Long id, String startDate, String endDate,Pageable pageable);
+    @Query(value = "select * from import_bill where manufacture_id = ?1",nativeQuery = true)
+    List<ImportBill> findByIdManufacturer(Long id);
 }

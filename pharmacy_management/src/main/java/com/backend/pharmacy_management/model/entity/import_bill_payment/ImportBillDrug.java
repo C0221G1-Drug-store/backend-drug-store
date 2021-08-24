@@ -1,6 +1,8 @@
 package com.backend.pharmacy_management.model.entity.import_bill_payment;
 
 import com.backend.pharmacy_management.model.entity.drug.Drug;
+import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,11 +28,14 @@ public class ImportBillDrug {
     Integer lotNumber;
     LocalDate expiry;
     Integer vat;
-    Boolean flag;
+    Boolean flag = true;
     @ManyToOne
     @JoinColumn(name = "import_bill_id")
     ImportBill importBill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
     Drug drug;
+    @OneToOne(mappedBy = "importBillDrug")
+    @JsonIgnore
+    private ExportBillDetail exportBillDetail;
 }

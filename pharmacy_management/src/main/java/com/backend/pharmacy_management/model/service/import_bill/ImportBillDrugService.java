@@ -40,4 +40,26 @@ public class ImportBillDrugService implements IImportBillDrugService{
     public void remove(Long id) {
         iImportBillDrugRepository.deleteById(id);
     }
+    @Override
+    public List<ImportBillDrug> findAllImportBill() {
+        return this.iImportBillDrugRepository.getAll();
+    }
+
+    @Override
+    public ImportBillDrug findDrugByid(Long id) {
+        return this.iImportBillDrugRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<ImportBillDrug> getAllImportBillDrugByManufacuterId(Long id) {
+        return this.iImportBillDrugRepository.getAllImportBillDrugByManufacuterId(id);
+    }
+
+    @Override
+    public void updateImportBillDrug(Long id) {
+        ImportBillDrug importBillDrug = this.findDrugByid(id);
+        importBillDrug.setFlag(false);
+        this.iImportBillDrugRepository.save(importBillDrug);
+    }
+
 }
