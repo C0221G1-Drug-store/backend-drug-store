@@ -1,5 +1,6 @@
 package com.backend.pharmacy_management.controller;
 
+import com.backend.pharmacy_management.model.dto.DrugCartDTO;
 import com.backend.pharmacy_management.model.dto.DrugDTO;
 import com.backend.pharmacy_management.model.dto.ListDrugDTO;
 import com.backend.pharmacy_management.model.service.client.IDrugClientService;
@@ -68,6 +69,15 @@ public class DrugClientController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(drugDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/cart/{id}")
+    public ResponseEntity<DrugCartDTO> findCartDrugById(@PathVariable Long id) {
+        DrugCartDTO drugCartDTO = drugService.findDrugCartById(id);
+        if (drugCartDTO == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(drugCartDTO, HttpStatus.OK);
     }
 }
   
