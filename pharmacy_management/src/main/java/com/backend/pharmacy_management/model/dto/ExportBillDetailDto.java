@@ -28,7 +28,6 @@ public class ExportBillDetailDto implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-
         // Không validate custom
     }
 }

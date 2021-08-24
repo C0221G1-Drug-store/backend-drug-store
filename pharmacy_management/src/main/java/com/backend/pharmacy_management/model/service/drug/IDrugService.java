@@ -1,8 +1,8 @@
 package com.backend.pharmacy_management.model.service.drug;
 
+import com.backend.pharmacy_management.model.dto.DrugDTO;
 import com.backend.pharmacy_management.model.dto.ListDrugDTO;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
-import com.backend.pharmacy_management.model.dto.DrugDTO;
 import com.backend.pharmacy_management.model.entity.drug.DrugImageDetail;
 import com.backend.pharmacy_management.model.service.IGeneralService;
 

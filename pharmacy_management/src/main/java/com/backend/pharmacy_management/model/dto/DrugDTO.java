@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-
 public interface DrugDTO {
     String getDrugId();
 
@@ -43,4 +42,3 @@ public interface DrugDTO {
 
     String getDrugGroupId();
 }
-
