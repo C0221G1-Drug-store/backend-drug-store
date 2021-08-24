@@ -20,12 +20,15 @@ import java.util.List;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long customerId;
     private String customerCode;
-    private String name;
-    private int age;
-    private String address;
-    private String phone;
+    private String customerName;
+    private Integer customerAge;
+    private String customerAddress;
+    private String customerPhone;
+    private String customerNote;
+    private Boolean flag;
+
     @ManyToOne
     @JoinColumn(name = "customer_group_id")
     private CustomerGroup customerGroup;
