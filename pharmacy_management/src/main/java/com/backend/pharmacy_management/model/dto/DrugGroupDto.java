@@ -1,31 +1,38 @@
-package com.backend.pharmacy_management.model.entity.drug;
+package com.backend.pharmacy_management.model.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
-
-@Entity(name="drug_group")
-@Table
-public class DrugGroup {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class DrugGroupDto {
     private Long drugGroupId;
-    @Column(unique = true)
+    @NotBlank
+    @Pattern(regexp = "^(NT)[0-9]{3}$")
     private String drugGroupCode;
+    @NotBlank
+    @Size(max = 30)
     private String drugGroupName;
-    private boolean flag;
-//    @OneToMany(mappedBy = "drugGroup", fetch=FetchType.LAZY)
-//    @JsonManagedReference(value = "drug_group-drug")
-//    private Set<Drug> drugs;
+    private boolean flag = true;
 
-    public Long getDrugGroupId() {
-        return drugGroupId;
+    public DrugGroupDto() {
+    }
+
+    public DrugGroupDto(Long drugGroupId, String drugGroupCode, String drugGroupName, boolean flag) {
+        this.drugGroupId = drugGroupId;
+        this.drugGroupCode = drugGroupCode;
+        this.drugGroupName = drugGroupName;
+        this.flag = flag;
     }
 
     public void setDrugGroupId(Long drugGroupId) {
         this.drugGroupId = drugGroupId;
+    }
+
+    public Long getDrugGroupId() {
+        return drugGroupId;
     }
 
     public String getDrugGroupCode() {

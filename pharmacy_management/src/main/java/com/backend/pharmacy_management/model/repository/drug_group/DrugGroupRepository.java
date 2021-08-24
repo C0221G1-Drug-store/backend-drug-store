@@ -15,8 +15,11 @@ public interface DrugGroupRepository extends JpaRepository<DrugGroup,Long>  {
     @Query(value="select * from drug_group where flag=1",nativeQuery=true)
     Page<DrugGroup> findAllPage(Pageable pageable);
 
-    @Query(value="select * from drug_group where flag=1",nativeQuery=true)
+    @Query(value="select * from drug_group",nativeQuery=true)
     List<DrugGroup> findAll();
+
+    @Query(value="select * from drug_group where flag=1",nativeQuery=true)
+    List<DrugGroup> findAllCode();
 
     @Modifying
     @Transactional

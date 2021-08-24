@@ -40,4 +40,9 @@ public class DrugGroupService implements IDrugGroupService {
     public Page<DrugGroup> findAllPage(Pageable pageable) {
         return drugGroupRepository.findAllPage(pageable);
     }
+
+    @Override
+    public List<DrugGroup> findAllCode() {
+        return drugGroupRepository.findAllCode();
+    }
 }

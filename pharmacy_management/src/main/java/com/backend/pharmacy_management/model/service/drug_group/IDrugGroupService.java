@@ -16,4 +16,5 @@ public interface IDrugGroupService {
     void delete(DrugGroup drugGroup);
 
     Page<DrugGroup> findAllPage(Pageable pageable);
+    List<DrugGroup> findAllCode();
 }
