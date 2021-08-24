@@ -3,6 +3,7 @@ package com.backend.pharmacy_management.model.entity.bill_sale;
 import com.backend.pharmacy_management.model.entity.customer.Customer;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,7 +30,7 @@ public class BillSale {
     private double totalMoney;
     @ManyToOne
     @JoinColumn(name = "employee_id",nullable = false)
-    @JsonBackReference(value="employee-bill_sale")
+    @JsonIgnore
     private Employee employee;
     @ManyToOne
     @JoinColumn(name = "customer_id",nullable = false)

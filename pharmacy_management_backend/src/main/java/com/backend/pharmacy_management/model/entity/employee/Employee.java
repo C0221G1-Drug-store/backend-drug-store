@@ -4,6 +4,7 @@ import com.backend.pharmacy_management.model.entity.bill_sale.BillSale;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.entity.user_role.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "employee")
@@ -29,18 +29,107 @@ public class Employee {
     private String employeePhone;
     private String employeeStartDate;
     private String employeeNote;
-    private int position;
+    private String position;
     private String accountName;
+    @JsonBackReference
     @OneToMany(mappedBy = "employee")
-    @JsonManagedReference(value = "employee-import_bill")
     List<ImportBill> importBills;
+//    @JsonBackReference
     @OneToMany(mappedBy = "employee")
-    @JsonManagedReference(value = "employee-export_bill")
     List<ExportBill> exportBills;
+//    @JsonBackReference
     @OneToMany(mappedBy = "employee")
-    @JsonManagedReference(value = "employee-bill_sale")
     List<BillSale> billWholesales;
+
     @OneToOne(mappedBy = "employee")
     @JsonIgnore
     private User user;
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getEmployeeCode() {
+        return employeeCode;
+    }
+
+    public void setEmployeeCode(String employeeCode) {
+        this.employeeCode = employeeCode;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public String getEmployeeAddress() {
+        return employeeAddress;
+    }
+
+    public void setEmployeeAddress(String employeeAddress) {
+        this.employeeAddress = employeeAddress;
+    }
+
+    public String getEmployeeImage() {
+        return employeeImage;
+    }
+
+    public void setEmployeeImage(String employeeImage) {
+        this.employeeImage = employeeImage;
+    }
+
+    public String getEmployeePhone() {
+        return employeePhone;
+    }
+
+    public void setEmployeePhone(String employeePhone) {
+        this.employeePhone = employeePhone;
+    }
+
+    public String getEmployeeStartDate() {
+        return employeeStartDate;
+    }
+
+    public void setEmployeeStartDate(String employeeStartDate) {
+        this.employeeStartDate = employeeStartDate;
+    }
+
+    public String getEmployeeNote() {
+        return employeeNote;
+    }
+
+    public void setEmployeeNote(String employeeNote) {
+        this.employeeNote = employeeNote;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

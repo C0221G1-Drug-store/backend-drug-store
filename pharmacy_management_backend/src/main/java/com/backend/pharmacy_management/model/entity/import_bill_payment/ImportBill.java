@@ -4,6 +4,7 @@ import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,7 +40,7 @@ public class ImportBill {
     private Manufacturer manufacturer;
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    @JsonBackReference(value = "employee-import_bill")
+    @JsonIgnore
     private Employee employee;
     @OneToMany(mappedBy = "importBill")
     @JsonManagedReference(value = "import_bill_drug-import_bill")

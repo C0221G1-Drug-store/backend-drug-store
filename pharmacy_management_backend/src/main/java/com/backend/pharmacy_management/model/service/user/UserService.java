@@ -1,7 +1,10 @@
 package com.backend.pharmacy_management.model.service.user;
 
 import com.backend.pharmacy_management.model.dto.user_role.UserDto;
+import com.backend.pharmacy_management.model.entity.employee.Employee;
+import com.backend.pharmacy_management.model.entity.user_role.Role;
 import com.backend.pharmacy_management.model.entity.user_role.User;
+import com.backend.pharmacy_management.model.repository.employee.EmployeeRepository;
 import com.backend.pharmacy_management.model.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +18,9 @@ import java.util.*;
 public class UserService implements IUserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Override
     public Page<User> findAll(Pageable pageable) {
@@ -45,6 +51,7 @@ public class UserService implements IUserService {
     public Map<String, Object> update( UserDto putData, BindingResult bindingResult, Long id) {
         Map<String, Object> result = new HashMap<>();
         User user = userRepository.findById(id).orElse(null);
+        Employee employee = employeeRepository.findById(user.getEmployee().getEmployeeId()).orElse(null);
         try {
             //VALIDATE DATA;
             List<String> errors = new ArrayList<>();
@@ -86,6 +93,17 @@ public class UserService implements IUserService {
         user.setPassword(putData.getPassword());
         user.setRoles(putData.getRoles());
         userRepository.save(user);
+        employee.setAccountName(putData.getAccountName());
+        for (Role role:putData.getRoles()) {
+            if (role.getId()==1){
+                employee.setPosition("Người dùng");
+            } else if (role.getId()==2){
+                employee.setPosition("Nhân Viên");
+            } else if (role.getId()==3){
+                employee.setPosition("Quản Lý");
+            }
+        }
+        employeeRepository.save(employee);
         result.put("status", true);
         result.put("msg", "Cập nhật tài khoản thành công!!!");
         result.put("account",user);
