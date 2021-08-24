@@ -23,7 +23,7 @@ public interface IDrugRepository extends PagingAndSortingRepository<Drug, Long> 
             "from drug d \n" +
             "left join drug_group dg on d.drug_group_id = dg.drug_group_id\n" +
             "left join import_bill_drug ibd on d.drug_id = ibd.drug_id\n" +
-            "where d.flag = 1 " +
+            "where d.flag = 1 and ibd.flag = 1 " +
             "group by d.drug_id order by d.drug_name limit ?1,5;", nativeQuery = true)
     List<ListDrugDTO> findAllDrugsPagination(int index);
     @Query(value = "call drug_search_patination (:field,:sign,:input,:index)", nativeQuery = true)
@@ -40,7 +40,7 @@ public interface IDrugRepository extends PagingAndSortingRepository<Drug, Long> 
             "from drug d \n" +
             "left join drug_group dg on d.drug_group_id = dg.drug_group_id\n" +
             "left join import_bill_drug ibd on d.drug_id = ibd.drug_id\n" +
-            "where d.flag = 1 " +
+            "where d.flag = 1 and ibd.flag = 1 " +
             "group by d.drug_id order by d.drug_name;", nativeQuery = true)
     List<ListDrugDTO> findAllDrugsNotPagination();
 

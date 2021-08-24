@@ -40,7 +40,7 @@ public class CreateDrugDto implements Validator {
     private String drugFaculty;
     @Size(max = 25)
     private String manufacturer;
-    @NotBlank
+//    @NotBlank
     private String origin;
     @Size(max = 250)
     private String note;
