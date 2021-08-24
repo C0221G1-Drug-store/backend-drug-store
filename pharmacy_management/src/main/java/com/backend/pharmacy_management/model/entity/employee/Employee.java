@@ -29,7 +29,7 @@ public class Employee {
     private String employeePhone;
     private String employeeStartDate;
     private String employeeNote;
-    private int position;
+    private String position;
     private String accountName;
     @OneToMany(mappedBy = "employee")
     @JsonBackReference(value = "employee-import_bill")
