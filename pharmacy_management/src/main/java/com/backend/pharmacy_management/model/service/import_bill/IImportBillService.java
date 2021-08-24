@@ -1,3 +1,4 @@
+
 package com.backend.pharmacy_management.model.service.import_bill;
 
 import com.backend.pharmacy_management.model.dto.ListImportDto;
@@ -18,3 +19,4 @@ public interface IImportBillService extends IGeneralService<ImportBill> {
     Page<ListImportDto> getAllBill(int pageable);
     void deleteImportBill(Long id);
 }
+

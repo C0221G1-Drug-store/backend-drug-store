@@ -2,6 +2,7 @@
 Trang da o day
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 tssst
 qqqqq
 hậu
@@ -11,3 +12,7 @@ thuy
 asdasdasdasd
 >>>>>>> origin
 >>>>>>> origin/HauDT
+=======
+asdasdasdasd
+>>>>>>> client
+>>>>>>> origin/client

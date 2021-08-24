@@ -1,3 +1,4 @@
+
 package com.backend.pharmacy_management.model.repository.manufacturer;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import org.springframework.data.domain.Page;
@@ -37,6 +38,19 @@ public interface ManufacturerRepository extends PagingAndSortingRepository<Manuf
     void deleteByIdManufacturer(Long id);
     @Query(value= "select * from manufacturer where flag = 1", nativeQuery = true)
     List<Manufacturer> findAll();
+    @Query(value = "select * " +
+            "from pharmacy_management.manufacturer " +
+            "where (manufacturer_code like ?) " +
+            "or (manufacturer_name like ?) " +
+            "or (manufacturer_address like ?) " +
+            "or (manufacturer_phone_number like ?) ", nativeQuery = true)
+    Page<Manufacturer> findAllManufacturerByKey(String code, String name, String address, String phone, Pageable pageable);
 
-
+    @Query(value = "select * " +
+            "from pharmacy_management.manufacturer " +
+            "where (manufacturer_code like ?) " +
+            "and (manufacturer_name like ?) " +
+            "and (manufacturer_address like ?) " +
+            "and (manufacturer_phone_number like ?) ", nativeQuery = true)
+    Page<Manufacturer> findManufacturerByKey(String code, String name, String address, String phone, Pageable pageable);
 }

@@ -1,3 +1,4 @@
+
 package com.backend.pharmacy_management.model.service.bill_sale;
 
 
@@ -25,3 +26,4 @@ public class BillSaleService implements IBillSaleService {
         iBillSaleRepository.deleteById(id);
     }
 }
+

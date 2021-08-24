@@ -1,3 +1,4 @@
+
 package com.backend.pharmacy_management.model.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -97,3 +98,4 @@ public class ManufacturerDto {
     }
 
 }
+

@@ -1,3 +1,4 @@
+
 package com.backend.pharmacy_management.model.repository.import_bill;
 
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
@@ -21,3 +22,4 @@ public interface IImportBillDrugRepository extends JpaRepository<ImportBillDrug,
     List<ImportBillDrug> getAll();
 
 }
+

@@ -1,3 +1,4 @@
+
 package com.backend.pharmacy_management.model.repository.import_bill;
 
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
@@ -22,3 +23,4 @@ public interface IImportBillRepository extends JpaRepository<ImportBill,Long> {
     @Query(value = "select * from import_bill where manufacture_id = ?1",nativeQuery = true)
     List<ImportBill> findByIdManufacturer(Long id);
 }
+

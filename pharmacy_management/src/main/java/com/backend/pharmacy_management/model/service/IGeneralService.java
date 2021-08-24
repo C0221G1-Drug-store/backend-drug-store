@@ -1,3 +1,4 @@
+
 package com.backend.pharmacy_management.model.service;
 
 import org.springframework.data.domain.Page;
@@ -18,4 +19,3 @@ public interface IGeneralService<T> {
     void remove(Long id);
 
 }
-

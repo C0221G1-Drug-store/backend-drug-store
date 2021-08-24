@@ -1,3 +1,4 @@
+
 package com.backend.pharmacy_management.model.dto;
 
 public interface ListDrugDTO {
