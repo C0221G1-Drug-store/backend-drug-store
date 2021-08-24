@@ -2,7 +2,6 @@ package com.backend.pharmacy_management.model.entity.drug;
 
 
 import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
-import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Indicative;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -55,6 +54,7 @@ public class Drug {
     private DrugGroup drugGroup;
     @OneToMany(targetEntity = DrugImageDetail.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
+    @JsonBackReference(value = "drug_image_detail-drug")
     private List<DrugImageDetail> drugImageDetails;
 
 }

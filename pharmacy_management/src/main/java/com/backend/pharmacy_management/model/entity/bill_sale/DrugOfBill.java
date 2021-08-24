@@ -29,6 +29,6 @@ public class DrugOfBill {
     private BillSale billSale;
     private int quantity;
     @ManyToOne
-    @JoinColumn(name = "prescription_id", nullable = false)
+    @JoinColumn(name = "prescription_id")
     private Prescription prescription;
 }

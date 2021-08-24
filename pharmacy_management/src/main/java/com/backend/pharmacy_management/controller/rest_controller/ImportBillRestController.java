@@ -6,7 +6,7 @@ import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.Payment;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
-import com.backend.pharmacy_management.model.service.empoyee.IEmployeeService;
+import com.backend.pharmacy_management.model.service.employee.IEmployeeService;
 import com.backend.pharmacy_management.model.service.import_bill.IImportBillService;
 import com.backend.pharmacy_management.model.service.import_bill.IPaymentService;
 import com.backend.pharmacy_management.model.service.manufacturer.IManufacturerService;

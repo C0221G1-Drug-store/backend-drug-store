@@ -19,8 +19,8 @@ public class DrugOfBillController {
     @Autowired
     IDrugOfBillService iDrugOfBillService;
     @GetMapping("/drug-of-bill/{id}")
-    public ResponseEntity<List<DrugOfBill>> showDrugOfBillList(@PathVariable("id") int id){
-        List<DrugOfBill> list = iDrugOfBillService.findAllDrugOfBill(id);
+    public ResponseEntity<List<DrugOfBill>> showDrugOfBillList(@PathVariable("id") String id){
+        List<DrugOfBill> list = iDrugOfBillService.findAllDrugOfBillByBillSaleId(id);
         if (list.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

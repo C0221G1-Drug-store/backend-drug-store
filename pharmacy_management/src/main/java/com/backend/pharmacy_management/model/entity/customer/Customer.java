@@ -28,7 +28,7 @@ public class Customer {
     private String phone;
     @ManyToOne
     @JoinColumn(name = "customer_group_id")
-    private CustomerGroup customers;
+    private CustomerGroup customerGroup;
     @OneToMany(mappedBy = "customer")
     @JsonBackReference(value = "customer-bill_sale")
     List<BillSale> billWholesales;

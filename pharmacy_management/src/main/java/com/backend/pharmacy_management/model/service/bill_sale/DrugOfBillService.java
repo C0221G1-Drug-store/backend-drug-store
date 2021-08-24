@@ -12,8 +12,19 @@ import java.util.List;
 public class DrugOfBillService implements IDrugOfBillService {
     @Autowired
     IDrugOfBillRepository iDrugOfBillRepository;
+
     @Override
-    public List<DrugOfBill> findAllDrugOfBill(int id) {
-        return iDrugOfBillRepository.findAllDrugOfBill(id);
+    public List<DrugOfBill> findAllDrugOfBillByBillSaleId(String id) {
+        return iDrugOfBillRepository.findAllDrugOfBillByBillSaleId(id);
+    }
+
+    @Override
+    public void save(DrugOfBill drugOfBill) {
+        iDrugOfBillRepository.save(drugOfBill);
+    }
+
+    @Override
+    public void remove(Long id) {
+        iDrugOfBillRepository.deleteById(id);
     }
 }

@@ -74,6 +74,15 @@ public class DrugController {
         return new ResponseEntity<>(drugs, HttpStatus.OK);
 
     }
+    @GetMapping("/get-normal")
+    public ResponseEntity<List<Drug>> findAllDrugsNormal() {
+        List<Drug> drugs = drugService.findAllNormal();
+        if (drugs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(drugs, HttpStatus.OK);
+
+    }
     @GetMapping(value = "/drugGroup")
     public ResponseEntity<List<DrugGroup>> getListDrugGroup(){
         List<DrugGroup> listDrugGroup = drugGroupService.findAll();

@@ -1,6 +1,5 @@
 package com.backend.pharmacy_management.model.entity.export_bill;
 
-import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -20,7 +20,7 @@ public class CustomerGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToMany(mappedBy = "customers")
+    @OneToMany(mappedBy = "customerGroup")
     @JsonBackReference(value = "customer-customer_group")
     private List<Customer> customers;
 }
