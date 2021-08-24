@@ -17,16 +17,16 @@ import java.util.List;
 public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long prescriptionId;  // id đơn thuốc
-    private String prescriptionCode;  // mã code
-    private String prescriptionName;   // tên đơn thuốc
-    private String symptom;    // triệu chứng
-    private String object;     // đối tượng uống thuốc
-    private int numberOfDay;  // số ngày uống
-    private  String note;  //  ghi chú
+    private Long prescriptionId;
+    @Column(unique = true)
+    private String prescriptionCode;
+    private String prescriptionName;
+    private String symptom;
+    private String object;
+    private int numberOfDay;
+    private  String note;
+    private  boolean flag;
     @JsonBackReference
-    @OneToMany(targetEntity = PrescriptionIndicative.class)
-    private List<PrescriptionIndicative> prescriptionIndicatives;
-    @OneToMany(targetEntity = DrugOfBill.class)
-    private List<DrugOfBill> drugOfBillList;
+    @OneToMany(mappedBy = "prescription")
+    private List<Indicative> indicatives;
 }

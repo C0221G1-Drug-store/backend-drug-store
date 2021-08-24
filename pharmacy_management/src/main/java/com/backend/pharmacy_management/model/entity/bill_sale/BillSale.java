@@ -40,5 +40,5 @@ public class BillSale {
     private Customer customer;
     @OneToMany(mappedBy = "billSale")
     @JsonBackReference
-    private Set<DrugOfBill> drugOfBillSet;
+    private Set<Indicative> indicativeSet;
 }
