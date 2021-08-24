@@ -5,7 +5,6 @@ import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail
 import com.backend.pharmacy_management.model.repository.ExportBillDetailRepository;
 import com.backend.pharmacy_management.model.repository.ExportBillRepository;
 import com.backend.pharmacy_management.model.service.ExportBillService;
-import com.backend.pharmacy_management.model.service.ExportBillTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
@@ -13,17 +12,25 @@ import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
 @Service
 public class ExportBillImpl implements ExportBillService {
+    private Random rand = SecureRandom.getInstanceStrong();
+
+
     @Autowired
     private ExportBillRepository exportBillRepository;
     @Autowired
     private ExportBillDetailRepository exportBillDetailRepository;
+
+    public ExportBillImpl() throws NoSuchAlgorithmException {
+
+        // chú thích
+    }
 
 
     @Override
@@ -40,16 +47,13 @@ public class ExportBillImpl implements ExportBillService {
     public void createExportBillDetail(ExportBillDetail exportBillDetail) {
         this.exportBillDetailRepository.save(exportBillDetail);
     }
-
     @Override
     public String createExportBillRefundCode() {
         List<String> listCode = getAllExportBillCode();
-        StringBuffer stringCode;
-        Random random = new Random();
+        StringBuilder stringCode =new StringBuilder("HDXT");
         do {
-            stringCode = new StringBuffer("HDXT");
             for(int i = 0; i < 5; i++) {
-                stringCode.append(random.nextInt(9));
+                stringCode.append(rand.nextInt(9));
             }
         }while (listCode.contains(stringCode.toString()));
         return stringCode.toString();

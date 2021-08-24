@@ -18,7 +18,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,7 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("http://localhost:4200/")
 @RequestMapping("/api")
 public class ExportBillController {
     @Autowired
@@ -46,74 +45,75 @@ public class ExportBillController {
     @Autowired
     private EmployeeService employeeService;
 
-//    @GetMapping("/export-bill-type")
-//    public ResponseEntity<List<ExportBillType>> getAllExportBillType(){
-//        return new ResponseEntity<>(this.exportBillTypeService.findAllExportBillType(), HttpStatus.OK);
-//    }
-//    @GetMapping("/manufacturer")
-//    public ResponseEntity<List<Manufacturer>> getAllManufacturer(){
-//        return new ResponseEntity<>(this.manufacturerService.findAllManufacturer(), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/importBillDrug")
-//    public ResponseEntity<List<ImportBillDrug>> getAllImportBillDrug(){
-//        return new ResponseEntity<>(this.importBillDrugService.findAllImportBill(), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/drug")
-//    public ResponseEntity<List<Drug>> getAllDrug(){
-//        return new ResponseEntity<>(this.drugService.findAllDrug(), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/importBillDrug/{importBillDrugId}")
-//    public ResponseEntity<ImportBillDrug> getDrugById(@PathVariable("importBillDrugId") Long id){
-//        return new ResponseEntity<>(this.importBillDrugService.findDrugByid(id),HttpStatus.OK);
-//    }
-//
-//
-//    @GetMapping("/importBillDrug/manufacturer/{manufacturerId}")
-//    public ResponseEntity<List<ImportBillDrug>> getAllImportByManufacturerId(@PathVariable("manufacturerId") Long id){
-//        return new ResponseEntity<>(this.importBillDrugService.getAllImportBillDrugByManufacuterId(id),HttpStatus.OK);
-//    }
-//
-//    @GetMapping(value="/export-bill/createCode" , produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<String[]> createExportBillRefundCode() {
-//        String stringCode = this.exportBillService.createExportBillRefundCode();
-//        String[] response = {stringCode};
-//        return new ResponseEntity<>(response,HttpStatus.OK);
-//    }
-//
-//    @PostMapping(value = "/export-bill")
-//    private ResponseEntity<ExportBill> createExportBill(@RequestBody @Valid ExportBillDto exportBillDto, BindingResult bindingResult) {
-//        new ExportBillDto().validate(exportBillDto, bindingResult);
-//        if (bindingResult.hasErrors()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        ExportBill exportBill = new ExportBill();
-//        BeanUtils.copyProperties(exportBillDto, exportBill);
-//        exportBill.setEmployee(this.employeeService.findById(1L));
-//        this.exportBillService.createExportBill(exportBill);
-//        return new ResponseEntity<>(exportBill,HttpStatus.CREATED);
-//    }
-//
-//    @PostMapping(value = "/export-bill/export-bill-detail")
-//    private ResponseEntity<Void> createExportBillDetail(@RequestBody @Valid ExportBillDetailDto exportBillDetailDto, BindingResult bindingResult) {
-//        new ExportBillDetailDto().validate(exportBillDetailDto, bindingResult);
-//        if (bindingResult.hasErrors()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        ExportBillDetail exportBillDetail = new ExportBillDetail();
-//        BeanUtils.copyProperties(exportBillDetailDto, exportBillDetail);
-//        this.exportBillService.createExportBillDetail(exportBillDetail);
-//        this.importBillDrugService.updateImportBillDrug(exportBillDetail.getImportBillDrug().getImportBillDrugId());
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @GetMapping(value ="/employees" )
-//    private ResponseEntity<Employee> getEmployee(){
-//        Employee employee = this.employeeService.findById(1L);
-//        return new ResponseEntity<>(employee,HttpStatus.OK);
-//    }
+
+    @GetMapping("/export-bill-type")
+    public ResponseEntity<List<ExportBillType>> getAllExportBillType(){
+        return new ResponseEntity<>(this.exportBillTypeService.findAllExportBillType(), HttpStatus.OK);
+    }
+    @GetMapping("/manufacturer")
+    public ResponseEntity<List<Manufacturer>> getAllManufacturer(){
+        return new ResponseEntity<>(this.manufacturerService.findAllManufacturer(), HttpStatus.OK);
+    }
+
+    @GetMapping("/importBillDrug")
+    public ResponseEntity<List<ImportBillDrug>> getAllImportBillDrug(){
+        return new ResponseEntity<>(this.importBillDrugService.findAllImportBill(), HttpStatus.OK);
+    }
+
+    @GetMapping("/drug")
+    public ResponseEntity<List<Drug>> getAllDrug(){
+        return new ResponseEntity<>(this.drugService.findAllDrug(), HttpStatus.OK);
+    }
+
+    @GetMapping("/importBillDrug/{importBillDrugId}")
+    public ResponseEntity<ImportBillDrug> getDrugById(@PathVariable("importBillDrugId") Long id){
+        return new ResponseEntity<>(this.importBillDrugService.findDrugByid(id),HttpStatus.OK);
+    }
+
+
+    @GetMapping("/importBillDrug/manufacturer/{manufacturerId}")
+    public ResponseEntity<List<ImportBillDrug>> getAllImportByManufacturerId(@PathVariable("manufacturerId") Long id){
+        return new ResponseEntity<>(this.importBillDrugService.getAllImportBillDrugByManufacuterId(id),HttpStatus.OK);
+    }
+
+    @GetMapping(value="/export-bill/createCode" , produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String[]> createExportBillRefundCode() {
+        String stringCode = this.exportBillService.createExportBillRefundCode();
+        String[] response = {stringCode};
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    @PostMapping( value = "/export-bill")
+    public ResponseEntity<ExportBill> createExportBill(@RequestBody @Valid ExportBillDto exportBillDto, BindingResult bindingResult) {
+        new ExportBillDto().validate(exportBillDto, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        ExportBill exportBill = new ExportBill();
+        BeanUtils.copyProperties(exportBillDto, exportBill);
+        exportBill.setEmployee(this.employeeService.findById(exportBillDto.getEmployee().getEmployeeId()));
+        this.exportBillService.createExportBill(exportBill);
+        return new ResponseEntity<>(exportBill,HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/export-bill/export-bill-detail")
+    public ResponseEntity<Void> createExportBillDetail(@RequestBody @Valid ExportBillDetailDto exportBillDetailDto, BindingResult bindingResult) {
+        new ExportBillDetailDto().validate(exportBillDetailDto, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        ExportBillDetail exportBillDetail = new ExportBillDetail();
+        BeanUtils.copyProperties(exportBillDetailDto, exportBillDetail);
+        this.exportBillService.createExportBillDetail(exportBillDetail);
+        this.importBillDrugService.updateImportBillDrug(exportBillDetail.getImportBillDrug().getImportBillDrugId());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value ="/employees" )
+    public ResponseEntity<Employee> getEmployee(){
+        Employee employee = this.employeeService.findById(1L);
+        return new ResponseEntity<>(employee,HttpStatus.OK);
+    }
 
     //List
     @GetMapping("/export-bill")

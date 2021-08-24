@@ -22,8 +22,9 @@ public class DrugImpl implements DrugService {
         Drug drug = this.findById(id);
         if(drug != null){
             drug.setDrugAmount(drug.getDrugAmount() - amount);
+            this.drugRepository.save(drug);
         }
-        this.drugRepository.save(drug);
+
     }
 
     @Override
