@@ -28,4 +28,9 @@ public class DrugOfBillService implements IDrugOfBillService {
     public void remove(Long id) {
         iDrugOfBillRepository.deleteById(id);
     }
+
+    @Override
+    public List<DrugOfBill> findAllDrugOfBill(Long id) {
+        return iDrugOfBillRepository.findAllDrugOfBill(id);
+    }
 }

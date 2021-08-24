@@ -18,13 +18,6 @@ import java.util.List;
 public class DrugOfBillController {
     @Autowired
     IDrugOfBillService iDrugOfBillService;
-    @GetMapping("/drug-of-bill/{id}")
-    public ResponseEntity<List<DrugOfBill>> showDrugOfBillList(@PathVariable("id") String id){
-        List<DrugOfBill> list = iDrugOfBillService.findAllDrugOfBillByBillSaleId(id);
-        if (list.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(list, HttpStatus.OK);
 
-    }
+
 }

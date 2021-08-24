@@ -20,4 +20,5 @@ public interface IDrugService extends IGeneralService<Drug> {
 //    void saveDrugImage(DrugImageDetail drugImageDetail);
     DrugImageDetail saveDrugImage(DrugImageDetail drugImageDetail);
 
+    List<Drug> findAll();
 }

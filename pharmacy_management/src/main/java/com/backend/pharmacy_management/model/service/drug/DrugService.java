@@ -98,6 +98,11 @@ public class DrugService implements IDrugService {
     }
 
     @Override
+    public List<Drug> findAll() {
+        return this.iDrugRepository.findAll();
+    }
+
+    @Override
     public Drug saveDrug(Drug drug) {
         return iDrugRepository.save(drug);
     }
