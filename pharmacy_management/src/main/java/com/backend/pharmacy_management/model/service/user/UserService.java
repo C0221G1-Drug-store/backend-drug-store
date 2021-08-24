@@ -5,9 +5,8 @@ import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.user_role.Role;
 import com.backend.pharmacy_management.model.entity.user_role.User;
 
-import com.backend.pharmacy_management.model.repository.employeeRepository.EmployeeRepository;
 
-
+import com.backend.pharmacy_management.model.repository.employee.IEmployeeRepository;
 import com.backend.pharmacy_management.model.repository.userRepository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +22,7 @@ public class UserService implements IUserService {
     private UserRepository userRepository;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private IEmployeeRepository employeeRepository;
 
     @Override
     public Page<User> findAll(Pageable pageable) {
