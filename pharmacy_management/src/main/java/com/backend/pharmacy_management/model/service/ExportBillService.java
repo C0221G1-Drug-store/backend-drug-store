@@ -16,6 +16,8 @@ public interface ExportBillService {
 
     //List
     Page<ExportBill> findAll(Pageable pageable);
+    ExportBillDetail findBillDetail(long id);
+    List<ExportBillDetail> findAllBillDetail();
     ExportBill findById(long id);
     Page<ExportBill> findByFields(String field1, String field2, String field3, String field4, Long typeId, Pageable pageable) throws ParseException;
     void delete(long id);

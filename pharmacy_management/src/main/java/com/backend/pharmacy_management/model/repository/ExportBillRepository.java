@@ -19,6 +19,12 @@ public interface ExportBillRepository extends JpaRepository<ExportBill,Long> {
             nativeQuery = true)
     Page<ExportBill> getAllExportBill(Pageable pageable);
 
+    @Query(value = "select * from export_bill_detail", nativeQuery = true)
+    List<ExportBillDetail> getAllExportBillDetail();
+
+    @Query(value = "select * from export_bill_detail where export_bill_detail_id = ?1", nativeQuery = true)
+    ExportBillDetail getExportBillDetail(long id);
+
     @Query(value = "select * from export_bill where flag = true and export_bill_id = ?1", nativeQuery = true)
     ExportBill getExportBillById(long id);
 
@@ -40,15 +46,25 @@ public interface ExportBillRepository extends JpaRepository<ExportBill,Long> {
             nativeQuery = true)
     Page<ExportBill> findByDateFields1(String dateCreate, String toDate, Pageable pageable);
 
-    @Query(value = "select * from export_bill where cast(export_bill.export_bill_date as date) > cast(?1 as date) and cast(export_bill.export_bill_date as date) < cast(?2 as date) in (select * from export_bill where and cast(export_bill.export_bill_date as time) = cast(?3 as time) ORDER BY ?#{#pageable}",
+    @Query(value = "select * from export_bill where cast(export_bill.export_bill_date as date) > cast(?1 as date) and cast(export_bill.export_bill_date as date) < cast(?2 as date) and cast(export_bill.export_bill_date as time) = cast(?3 as time) ORDER BY ?#{#pageable}",
             countQuery = "select count(*) from export_bill where cast(export_bill.export_bill_date as date) > cast(?1 as date) and cast(export_bill.export_bill_date as date) < cast(?2 as date) in (select * from export_bill where cast(export_bill.export_bill_date as time) = cast(?3 as time))",
             nativeQuery = true)
     Page<ExportBill> findByDateFieldsWith1Time1(String dateCreate, String toDate, String timeCreate, Pageable pageable);
+
+    @Query(value = "select * from export_bill where cast(export_bill.export_bill_date as date) = cast(?1 as date) and cast(export_bill.export_bill_date as time) = cast(?2 as time) ORDER BY ?#{#pageable}",
+            countQuery = "select count(*) export_bill where cast(export_bill.export_bill_date as date) = cast(?1 as date) and cast(export_bill.export_bill_date as time) = cast(?2 as time)",
+            nativeQuery = true)
+    Page<ExportBill> findBy1Date1Time(String dateCreate, String timeCreate, Pageable pageable);
 
     @Query(value = "select * from export_bill where cast(export_bill.export_bill_date as time) > cast(?3 as time) and cast(export_bill.export_bill_date as time) < cast(?4 as time) and cast(export_bill.export_bill_date as date) > cast(?1 as date) and cast(export_bill.export_bill_date as date) < cast(?2 as date) ORDER BY ?#{#pageable}",
             countQuery = "select count(*) from export_bill where cast(export_bill.export_bill_date as time) > cast(?3 as time) and cast(export_bill.export_bill_date as time) < cast(?4 as time) and cast(export_bill.export_bill_date as date) > cast(?1 as date) and cast(export_bill.export_bill_date as date) < cast(?2 as date)",
             nativeQuery = true)
     Page<ExportBill> findBy4Fields1(String dateCreate, String toDate, String timeCreate, String toTime, Pageable pageable);
+
+    @Query(value = "select * from export_bill where cast(export_bill.export_bill_date as date) = cast(?1 as date) and cast(export_bill.export_bill_date as time) = cast(?2 as time) and export_bill.export_bill_type_id = ?3 ORDER BY ?#{#pageable}",
+            countQuery = "select count(*) export_bill where cast(export_bill.export_bill_date as date) = cast(?1 as date) and cast(export_bill.export_bill_date as time) = cast(?2 as time)",
+            nativeQuery = true)
+    Page<ExportBill> findBy1Date1Time2(String dateCreate, String timeCreate, long typeId, Pageable pageable);
 
     @Query(value = "select * from export_bill where cast(export_bill.export_bill_date as time) > cast(?1 as time) and cast(export_bill.export_bill_date as time) < cast(?2 as time) and export_bill.export_bill_type_id = ?3) ORDER BY ?#{#pageable}",
             countQuery = "select count(*) from export_bill where cast(export_bill.export_bill_date as time) > cast(?1 as time) and cast(export_bill.export_bill_date as time) < cast(?2 as time) in (select export_bill_type_id from export_bill where export_bill.export_bill_type_id = ?3)",

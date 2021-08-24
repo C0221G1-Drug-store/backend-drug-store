@@ -10,6 +10,7 @@ import com.backend.pharmacy_management.model.entity.export_bill.ExportBillType;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.backend.pharmacy_management.model.service.*;
+import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -143,5 +144,17 @@ public class ExportBillController {
         ExportBill exportBill = this.exportBillService.findById(id);
         this.exportBillService.delete(id);
         return new ResponseEntity<>(exportBill, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/export-bill-detail/find/{id}")
+    public ResponseEntity<ExportBillDetail> findBillDetail(@PathVariable(value = "id") Long id) {
+        ExportBillDetail exportBillDetail = this.exportBillService.findBillDetail(id);
+        return new ResponseEntity<>(exportBillDetail, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/export-bill-detail")
+    public ResponseEntity<List<ExportBillDetail>> findAllBillDetail() {
+        List<ExportBillDetail> exportBillDetailList = this.exportBillService.findAllBillDetail();
+        return new ResponseEntity<>(exportBillDetailList, HttpStatus.OK);
     }
 }
