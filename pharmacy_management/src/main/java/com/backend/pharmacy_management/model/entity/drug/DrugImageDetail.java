@@ -19,10 +19,10 @@ public class DrugImageDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "drug_image_detail_id")
     private Long drugImageDetailId;
-    @Column(name = "drug_image_detail_url", columnDefinition = "BLOB")
+    @Column(name = "drug_image_detail_url")
     private String drugImageDetailUrl;
-    private Boolean flag;
     @ManyToOne
-    @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
+    @JoinColumn(name = "drug_id")
     private Drug drug;
+
 }

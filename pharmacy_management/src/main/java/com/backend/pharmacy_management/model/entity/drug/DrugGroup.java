@@ -25,4 +25,5 @@ public class DrugGroup {
     @OneToMany(mappedBy = "drugGroup")
     @JsonBackReference(value = "drug_group-drug")
     private List<Drug> drugs;
+
 }
