@@ -1,1 +1,13 @@
+<<<<<<< HEAD
 Trang da o day
+=======
+<<<<<<< HEAD
+tssst
+qqqqq
+hậu
+cương
+thuy
+=======
+asdasdasdasd
+>>>>>>> origin
+>>>>>>> origin/HauDT
