@@ -6,5 +6,7 @@ public interface IEmployeeService {
     Page<Employee> searchEmployee(String employeeName, String employeeAddress , String employeeCode, String employeePhone,String position , Pageable pageable);
     void deleteEmployee(long id);
     Employee findById(long id);
-    Page<Employee>searchEmployee(String keyWord, Pageable pageable);
+    Employee saves(Employee employee);
+    Employee findEmployee(Long id);
+    Employee updateEmployee(Employee employee);
 }
