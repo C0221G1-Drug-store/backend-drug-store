@@ -34,6 +34,7 @@ public class Drug {
     @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
     private List<DrugImageDetail> drugImageDetails;
 
+
     public Drug() {
         //contructor
     }
@@ -173,14 +174,5 @@ public class Drug {
     public void setDrugGroup(DrugGroup drugGroup) {
         this.drugGroup = drugGroup;
     }
-    @Column(name = "drug_amount")
-    private Long drugAmount;
 
-    public Long getDrugAmount() {
-        return drugAmount;
-    }
-
-    public void setDrugAmount(Long drugAmount) {
-        this.drugAmount = drugAmount;
-    }
 }
