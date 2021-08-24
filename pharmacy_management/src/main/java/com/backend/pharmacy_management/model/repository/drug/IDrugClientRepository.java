@@ -1,8 +1,9 @@
 package com.backend.pharmacy_management.model.repository.drug;
 
+import com.backend.pharmacy_management.model.dto.DrugCartDTO;
+import com.backend.pharmacy_management.model.dto.DrugDTO;
 import com.backend.pharmacy_management.model.dto.ListDrugDTO;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
-import com.backend.pharmacy_management.model.dto.DrugDTO;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -81,4 +82,17 @@ public interface IDrugClientRepository extends PagingAndSortingRepository<Drug, 
             "where d.flag = 1 && d.drug_id = ?1 " +
             "group by d.drug_id;", nativeQuery = true)
     DrugDTO findDrugByIdClient(Long id);
+
+    @Query(value = "select ((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.wholesale_profit_rate/100))*ibd.import_amount))/(sum(ibd.import_amount))) as wholesalePrice,\n" +
+            "d.drug_id as drugId,  " +
+            "d.drug_name as drugName,  " +
+            "(sum(ibd.import_amount)) as drugAmount,\n" +
+            "di.drug_image_detail_url as drugImageDetails \n" +
+            "from drug d \n" +
+            "left join drug_group dg on d.drug_group_id = dg.drug_group_id\n" +
+            "left join import_bill_drug ibd on d.drug_id = ibd.drug_id\n" +
+            "join drug_image_detail di on d.drug_id = di.drug_id\n" +
+            "where d.flag = 1 && d.drug_id = ?1 " +
+            "group by d.drug_id;", nativeQuery = true)
+    DrugCartDTO findDrugCartById(Long id);
 }

@@ -1,7 +1,8 @@
 package com.backend.pharmacy_management.model.service.client;
 
-import com.backend.pharmacy_management.model.dto.ListDrugDTO;
+import com.backend.pharmacy_management.model.dto.DrugCartDTO;
 import com.backend.pharmacy_management.model.dto.DrugDTO;
+import com.backend.pharmacy_management.model.dto.ListDrugDTO;
 import com.backend.pharmacy_management.model.repository.drug.IDrugClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,10 @@ public class DrugClientService implements IDrugClientService {
     @Override
     public DrugDTO findDrugByIdClient(Long id) {
         return iDrugClientRepository.findDrugByIdClient(id);
+    }
+
+    @Override
+    public DrugCartDTO findDrugCartById(Long id) {
+        return iDrugClientRepository.findDrugCartById(id);
     }
 }
