@@ -4,6 +4,7 @@ package com.backend.pharmacy_management.model.entity.user;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
@@ -31,6 +32,7 @@ public class User {
     private String accountName;
 
     @NotBlank
+    @Email
     private String email;
 
     private Boolean isEnabled;

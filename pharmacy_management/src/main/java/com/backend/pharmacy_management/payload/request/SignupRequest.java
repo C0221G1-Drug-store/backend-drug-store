@@ -1,5 +1,6 @@
 package com.backend.pharmacy_management.payload.request;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Set;
@@ -14,6 +15,7 @@ public class SignupRequest {
     private String accountName;
 
     @NotBlank
+    @Email
     private String email;
 
     @Size(max = 50)

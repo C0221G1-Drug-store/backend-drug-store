@@ -101,6 +101,8 @@ public class UserDetailsImpl implements UserDetails {
         return email;
     }
 
+
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -150,4 +152,5 @@ public class UserDetailsImpl implements UserDetails {
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
+
 }
