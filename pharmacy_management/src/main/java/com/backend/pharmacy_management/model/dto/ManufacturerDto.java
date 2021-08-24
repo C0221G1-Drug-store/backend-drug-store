@@ -16,7 +16,7 @@ public class ManufacturerDto {
     @Email(message = "Enter the correct format")
     private String manufacturerEmail;
     @NotBlank(message = " Not Null")
-    @Pattern(regexp = "^\\+84[0-9]{8,9}$")
+    @Pattern(regexp = "^\\+84[0-9]{8,9}|0[0-9]{8,9}$")
     private String manufacturerPhoneNumber;
     private double manufacturerDebts;
     @NotBlank(message = " Not Null")
