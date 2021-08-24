@@ -2,11 +2,12 @@ package com.backend.pharmacy_management.controller.securityController;
 
 
 
-import com.backend.pharmacy_management.model.entity.user.ERole;
-import com.backend.pharmacy_management.model.entity.user.Role;
-import com.backend.pharmacy_management.model.entity.user.User;
-import com.backend.pharmacy_management.model.repository.userReposiroty.RoleRepository;
-import com.backend.pharmacy_management.model.repository.userReposiroty.UserRepository;
+import com.backend.pharmacy_management.model.entity.user_role.ERole;
+import com.backend.pharmacy_management.model.entity.user_role.Role;
+import com.backend.pharmacy_management.model.entity.user_role.User;
+
+import com.backend.pharmacy_management.model.repository.userRepository.RoleRepository;
+import com.backend.pharmacy_management.model.repository.userRepository.UserRepository;
 import com.backend.pharmacy_management.model.service.userDetailServiceImpl.UserDetailsImpl;
 import com.backend.pharmacy_management.payload.reponse.JwtResponse;
 import com.backend.pharmacy_management.payload.reponse.MessageResponse;
@@ -16,7 +17,6 @@ import com.backend.pharmacy_management.security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
-
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -74,6 +74,8 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
+        System.out.println(userDetails.getEnabled());
+
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
@@ -99,7 +101,7 @@ public class AuthController {
         user.setEmail(signUpRequest.getEmail());
         String newUserCode = this.autoIncrement();
         user.setUserCode(newUserCode);
-        user.setEnabled(true);
+        user.setEnabled(false);
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
@@ -136,6 +138,35 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
+    @GetMapping("email/send/{name}/{email}")
+    public void sendEmail(@PathVariable Optional<String> name,
+                          @PathVariable Optional<String> email) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dayPlusAWeek = LocalDate.now();
+        String day = formatter.format(dayPlusAWeek);
+
+        String sendEmail = email.orElse("");
+        SimpleMailMessage message = new SimpleMailMessage();
+
+        message.setTo(sendEmail);
+        message.setSubject("Xác thực tài khoản của C0221G1_Pharmacy!!!");
+        message.setText("Chào " + name.orElse("") + "\n"
+                + "Vui lòng xác nhận đăng ký tài khoản. " + "\n"
+               + "Click đường để hoàn thành đăng ký : http://localhost:8080/api/auth/email/success/"+sendEmail);
+
+        this.emailSender.send(message);
+    }
+
+    @GetMapping("email/success/{email}")
+    public String accuracyEmail(@PathVariable Optional<String> email){
+        String getEmail = email.orElse("");
+        User user = this.userRepository.findUser(getEmail);
+        user.setEnabled(true);
+        this.userRepository.save(user);
+        return "redirect:/successEmail";
+    }
+
+
 
     public String autoIncrement(){
         String code = "KH-";
@@ -152,4 +183,6 @@ public class AuthController {
         }
         return id;
     }
+
+
 }

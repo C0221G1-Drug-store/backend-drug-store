@@ -1,7 +1,8 @@
 package com.backend.pharmacy_management.model.service.userDetailServiceImpl;
 
-import com.backend.pharmacy_management.model.entity.user.User;
-import com.backend.pharmacy_management.model.repository.userReposiroty.UserRepository;
+import com.backend.pharmacy_management.model.entity.user_role.User;
+
+import com.backend.pharmacy_management.model.repository.userRepository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

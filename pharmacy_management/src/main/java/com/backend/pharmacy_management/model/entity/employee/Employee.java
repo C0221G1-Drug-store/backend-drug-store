@@ -3,15 +3,13 @@ package com.backend.pharmacy_management.model.entity.employee;
 import com.backend.pharmacy_management.model.entity.bill_sale.BillSale;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
-import com.backend.pharmacy_management.model.entity.user.User;
+import com.backend.pharmacy_management.model.entity.user_role.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -30,18 +28,20 @@ public class Employee {
     private String employeePhone;
     private String employeeStartDate;
     private String employeeNote;
-    private int position;
+    private String position;
     private String accountName;
+    @JsonBackReference
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference(value = "employee-import_bill")
     List<ImportBill> importBills;
+    //    @JsonBackReference
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference(value = "employee-export_bill")
     List<ExportBill> exportBills;
+    //    @JsonBackReference
     @OneToMany(mappedBy = "employee")
-    @JsonBackReference(value = "employee-bill_sale")
     List<BillSale> billWholesales;
 
     @OneToOne(mappedBy = "employee")
+    @JsonIgnore
     private User user;
+
 }

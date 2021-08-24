@@ -94,5 +94,4 @@ public class JwtResponse {
     public void setRoles(List<String> roles) {
         this.roles = roles;
     }
-
 }

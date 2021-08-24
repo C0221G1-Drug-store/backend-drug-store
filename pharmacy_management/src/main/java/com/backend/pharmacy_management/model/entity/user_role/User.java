@@ -1,4 +1,4 @@
-package com.backend.pharmacy_management.model.entity.user;
+package com.backend.pharmacy_management.model.entity.user_role;
 
 
 import com.backend.pharmacy_management.model.entity.employee.Employee;

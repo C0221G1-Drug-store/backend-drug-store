@@ -1,6 +1,6 @@
 package com.backend.pharmacy_management.model.service.userDetailServiceImpl;
 
-import com.backend.pharmacy_management.model.entity.user.User;
+import com.backend.pharmacy_management.model.entity.user_role.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -152,5 +152,4 @@ public class UserDetailsImpl implements UserDetails {
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
-
 }

@@ -1,8 +1,7 @@
-package com.backend.pharmacy_management.model.repository.userReposiroty;
+package com.backend.pharmacy_management.model.repository.userRepository;
 
-import com.backend.pharmacy_management.model.entity.user.ERole;
-import com.backend.pharmacy_management.model.entity.user.Role;
-
+import com.backend.pharmacy_management.model.entity.user_role.ERole;
+import com.backend.pharmacy_management.model.entity.user_role.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
