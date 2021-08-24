@@ -37,48 +37,31 @@ public class BillSaleManagementController {
 
     ) {
 
-        Page<BillSale> billList = null;
-        String searchValue1 ;
-        String searchValue2 ;
-        String searchValue3 ;
-        String searchValue4 ;
-        String searchValue5 ;
-        String sort ;
+        Page<BillSale> billList;
 
-        if (search1.isEmpty() || search2.isEmpty() || search3.isEmpty() || search4.isEmpty() || search5.isEmpty() || search6.isEmpty()) {
-
-            searchValue1 = search1;
-            searchValue2 = search2;
-            searchValue3 = search3;
-            searchValue4 = search4;
-            searchValue5 = search5;
-            sort = search6;
-
-            switch (sort) {
+            switch (search6) {
                 case "":
-                    billList = billSaleManagementService.findBillBySearchPage(searchValue1, searchValue2, searchValue3, searchValue4, searchValue5, PageRequest.of(page, 5));
+                    billList = billSaleManagementService.findBillBySearchPage(search1, search2, search3, search4, search5,PageRequest.of(page,5));
                     break;
                 case "1":
-                    billList = billSaleManagementService.findBillBySearchPage1(searchValue1, searchValue2, searchValue3, searchValue4, searchValue5, PageRequest.of(page, 5));
+                    billList = billSaleManagementService.findBillBySearchPage1(search1, search2, search3, search4, search5,PageRequest.of(page,5));
                     break;
                 case "2":
-                    billList = billSaleManagementService.findBillBySearchPage2(searchValue1, searchValue2, searchValue3, searchValue4, searchValue5, PageRequest.of(page, 5));
+                    billList = billSaleManagementService.findBillBySearchPage2(search1, search2, search3, search4, search5,PageRequest.of(page,5));
                     break;
                 case "3":
-                    billList = billSaleManagementService.findBillBySearchPage3(searchValue1, searchValue2, searchValue3, searchValue4, searchValue5, PageRequest.of(page, 5));
+                    billList = billSaleManagementService.findBillBySearchPage3(search1, search2, search3, search4, search5,PageRequest.of(page,5));
                     break;
                 case "4":
-                    billList = billSaleManagementService.findBillBySearchPage4(searchValue1, searchValue2, searchValue3, searchValue4, searchValue5, PageRequest.of(page, 5));
+                    billList = billSaleManagementService.findBillBySearchPage4(search1, search2, search3, search4, search5,PageRequest.of(page,5));
                     break;
                 case "5":
-                    billList = billSaleManagementService.findBillBySearchPage5(searchValue1, searchValue2, searchValue3, searchValue4, searchValue5, PageRequest.of(page, 5));
+                    billList = billSaleManagementService.findBillBySearchPage5(search1, search2, search3, search4, search5,PageRequest.of(page,5));
                     break;
 
                 default:
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-        }
-
         return new ResponseEntity<>(billList, HttpStatus.OK);
     }
 
