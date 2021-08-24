@@ -33,6 +33,7 @@ public class Drug {
     private Integer conversionRate;
     private Double wholesaleProfitRate;
     private Double retailProfitRate;
+    private String drugFaculty;
     @Column(columnDefinition = "TEXT")
     private String drugSideEffect;
     private Boolean flag = true;

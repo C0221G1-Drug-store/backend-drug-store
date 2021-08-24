@@ -76,7 +76,7 @@ public class DrugController {
     }
     @GetMapping(value = "/drugGroup")
     public ResponseEntity<List<DrugGroup>> getListDrugGroup(){
-        List<DrugGroup> listDrugGroup = drugGroupService.findAllDrugGroup();
+        List<DrugGroup> listDrugGroup = drugGroupService.findAll();
         if (listDrugGroup.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -87,8 +87,10 @@ public class DrugController {
         if (bindingResult.hasErrors()){
             return new ResponseEntity<>(bindingResult.getAllErrors(),HttpStatus.NOT_MODIFIED);
         }
+
         Drug drug = new Drug();
         BeanUtils.copyProperties(createDrugDto,drug);
+        System.out.println(drug.getDrugFaculty());
         drug.setDrugCode ((long) Math.floor(Math.random()*1000000));
         return new ResponseEntity<>(drugService.saveDrug(drug), HttpStatus.CREATED);
     }

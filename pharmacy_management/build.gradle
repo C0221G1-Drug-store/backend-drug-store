@@ -5,6 +5,7 @@ plugins {
     id "org.sonarqube" version "3.0"
 }
 
+
 group = 'com.backend'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
@@ -13,7 +14,6 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
-
 repositories {
     mavenCentral()
 }
