@@ -34,4 +34,6 @@ public interface IManufacturerService {
     Page<ImportBill> findByDateImportBill(Long id,String startDate, String endDate,Pageable pageable);
     List<Manufacturer> getAll();
     Optional<Manufacturer> findByIdM(Long id);
+
+
 }

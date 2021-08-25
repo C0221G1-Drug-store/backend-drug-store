@@ -61,7 +61,7 @@ public class ReportService implements IReportService {
 
     @Override
     public List<ReportRetailDetails> reportRetailDetails(String startDate, String endDate) {
-        String sql = "Select bill_sale_code as ma_hoa_don, invoice_date as ngay_ban, total_money as tong_tien FROM `bill_sale` WHERE (bill_sale_code like 'HDBL%') and  (invoice_date between ? and ?) and flag =1;";
+        String sql = "select bill_sale_code as ma_hoa_don, invoice_date as ngay_ban, total_money as tong_tien FROM `bill_sale` WHERE (bill_sale_code like 'HDBL%') and  (invoice_date between ? and ?) and flag =1;";
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, startDate, endDate);
         List<ReportRetailDetails> list = new ArrayList<>();
         ReportRetailDetails r;
@@ -74,7 +74,7 @@ public class ReportService implements IReportService {
 
     @Override
     public List<ReportWholesaleDetails> reportWholesaleDetails(String startDate, String endDate) {
-        String sql = "Select bill_sale_code as ma_hoa_don, invoice_date as ngay_ban, total_money as tong_tien,  customer_name as ten_khach_hang FROM `bill_sale` bs join customer c on bs.customer_id=c.customer_id WHERE (bill_sale_code like 'HDBS%') and  (invoice_date between ? and ?) and flag =1;";
+        String sql = "select bill_sale_code as ma_hoa_don, invoice_date as ngay_ban, total_money as tong_tien,  `name` as ten_khach_hang FROM `bill_sale` bs join customer c on bs.customer_id=c.id WHERE (bill_sale_code like 'HDBS%') and  (invoice_date between ? and ? ) and flag =1;";
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, startDate, endDate);
         List<ReportWholesaleDetails> list = new ArrayList<>();
         ReportWholesaleDetails r;
@@ -87,7 +87,7 @@ public class ReportService implements IReportService {
 
     @Override
     public List<ReportDetailsSoldByOrder> reportDetailsSoldByOrder(String startDate, String endDate) {
-        String sql = "Select bill_sale_code as ma_hoa_don,invoice_date as ngay_ban, total_money as tong_tien,customer_name as ten_khach_hang FROM `bill_sale` bs join customer c on bs.customer_id=c.customer_id WHERE (bill_sale_code like 'HDBD%') and  (invoice_date between ? and ?) and flag =1;";
+        String sql = "select bill_sale_code as ma_hoa_don,invoice_date as ngay_ban, total_money as tong_tien,`name` as ten_khach_hang FROM `bill_sale` bs join customer c on bs.customer_id=c.id WHERE (bill_sale_code like 'HDBD%') and  (invoice_date between ? and ?) and flag =1;";
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, startDate, endDate);
         List<ReportDetailsSoldByOrder> list = new ArrayList<>();
         ReportDetailsSoldByOrder r;
@@ -146,15 +146,14 @@ public class ReportService implements IReportService {
 
     @Override
     public List<ReportMedicinesNeedToBeImported> medicinesNeedToBeImporteds() {
-        String sql = "select drug_code as ma_thuoc, drug_name as ten_thuoc from drug where drug_amout<5 group by drug_code;";
+        String sql = "select drug_code as ma_thuoc, drug_name as ten_thuoc ,round(sum(ibd.import_amount*ibd.import_amount)/sum(ibd.import_amount),0) as so_luong from drug d join import_bill_drug ibd on d.drug_id = ibd.drug_id group by drug_code;";
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
         List<ReportMedicinesNeedToBeImported> medicinesNeedToBeImporteds = new ArrayList<>();
-        ReportMedicinesNeedToBeImported medicinesNeedToBeImported;
         for (Map<String, Object> row : rows) {
-            medicinesNeedToBeImported = new ReportMedicinesNeedToBeImported();
-            medicinesNeedToBeImported.setMaThuoc((String) row.get("ma_thuoc"));
-            medicinesNeedToBeImported.setTenThuoc((String) row.get("ten_thuoc"));
-            medicinesNeedToBeImporteds.add(medicinesNeedToBeImported);
+            Double check = Double.valueOf(row.get("so_luong").toString());
+            if (check < 5) {
+                medicinesNeedToBeImporteds.add(new ReportMedicinesNeedToBeImported(row.get("ma_thuoc").toString(), row.get("ten_thuoc").toString(), check.toString()));
+            }
         }
         return medicinesNeedToBeImporteds;
     }
@@ -167,8 +166,8 @@ public class ReportService implements IReportService {
         ReportTheDrugIsAboutToExpire theDrugIsAboutToExpire;
         for (Map<String, Object> row : rows) {
             theDrugIsAboutToExpire = new ReportTheDrugIsAboutToExpire();
-            theDrugIsAboutToExpire.setMaThuoc((String) row.get("ma_thuoc"));
-            theDrugIsAboutToExpire.setTenThuoc((String) row.get("ten_thuoc"));
+            theDrugIsAboutToExpire.setMaThuoc(row.get("ma_thuoc").toString());
+            theDrugIsAboutToExpire.setTenThuoc(row.get("ten_thuoc").toString());
             theDrugIsAboutToExpire.setNgayHetHan(formatDate(row.get("ngay_het_han").toString()));
             theDrugIsAboutToExpires.add(theDrugIsAboutToExpire);
         }
@@ -198,6 +197,7 @@ public class ReportService implements IReportService {
         }
         return list1;
     }
+
 
     @Override
     public List<ReportDebt> reportDebt(String startDate, String endDate) {
@@ -256,11 +256,6 @@ public class ReportService implements IReportService {
         String sqlProfit = "select sum(dob.quantity * ibd.import_price * d.retail_profit_rate *100) as profit, invoice_date as date_sale from drug d join import_bill_drug ibd on d.drug_id = ibd.drug_id join drug_of_bill dob on d.drug_id = dob.drug_id join bill_sale bs on dob.bill_sale_id = bs.bill_sale_id where bs.invoice_date between ? and ? group by invoice_date order by invoice_date;";
         String sqlSaleBill = "select sum(total_money) as sale_money, invoice_date as date_sale from bill_sale where (bill_sale_code like 'HDBL%' or bill_sale_code like 'HDBS%' or bill_sale_code like 'HDBD%') and (invoice_date between ? and ?) group by invoice_date order by invoice_date;";
         String sqlCancelBill = "select sum(total_money) as cancel_money, invoice_date as date_sale from bill_sale where (bill_sale_code like 'HDNT%') and (invoice_date between ? and ?) group by invoice_date order by invoice_date ;";
-//        sqlProfit = "select sum(dob.quantity * ibd.import_price * d.retail_profit_rate *100) as profit, date_format( invoice_date,'%Y-%m') as date_sale from drug d join import_bill_drug ibd on d.drug_id = ibd.drug_id join drug_of_bill dob on d.drug_id = dob.drug_id join bill_sale bs on dob.bill_sale_id = bs.bill_sale_id where invoice_date between ? and ? group by date_format( invoice_date,'%m-%Y') order by date_format( invoice_date,'%m-%Y');";
-//        sqlSaleBill = "select sum(total_money) as sale_money,  date_format( invoice_date,'%Y-%m') as date_sale from bill_sale where (bill_sale_code like 'HDBL%' or bill_sale_code like 'HDBS%' or bill_sale_code like 'HDBD%') and ( invoice_date between ? and ?) group by date_format( invoice_date,'%m-%Y') order by date_format( invoice_date,'%m-%Y');";
-//        sqlCancelBill = "select sum(total_money) as cancel_money, date_format( invoice_date,'%Y-%m') as date_sale from bill_sale where (bill_sale_code like 'HDNT%') and ( invoice_date between ? and ?) group by date_format( invoice_date,'%m-%Y') order by date_format( invoice_date,'%m-%Y');";
-
-
         List<Map<String, Object>> profitSql = jdbcTemplate.queryForList(sqlProfit, startDate, endDate);
         List<Map<String, Object>> saleBills = jdbcTemplate.queryForList(sqlSaleBill, startDate, endDate);
         List<Map<String, Object>> cancelBills = jdbcTemplate.queryForList(sqlCancelBill, startDate, endDate);

@@ -5,6 +5,7 @@ import com.backend.pharmacy_management.model.entity.export_bill.ExportBill;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBill;
 import com.backend.pharmacy_management.model.entity.user_role.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,6 +43,7 @@ public class Employee {
     @JsonBackReference(value = "employee-bill_sale")
     List<BillSale> billWholesales;
     @OneToOne(mappedBy = "employee")
+    @JsonIgnore
     private User user;
 
 }
