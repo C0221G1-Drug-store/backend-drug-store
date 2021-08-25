@@ -97,7 +97,7 @@ public class UserService implements IUserService {
         if (user.getEmployee()!=null){
             Employee employee = employeeRepository.findById(user.getEmployee().getEmployeeId()).orElse(null);
             if (employee!=null){
-                employee.setAccountName(putData.getAccountName());
+                employee.setAccountName(putData.getUserName());
                 for (Role role:putData.getRoles()) {
                     if (role.getId()==1){
                         employee.setPosition("Người dùng");

@@ -106,4 +106,14 @@ public class DrugService implements IDrugService {
     public Drug saveDrug(Drug drug) {
         return iDrugRepository.save(drug);
     }
+
+    @Override
+    public List<ListDrugDTO> findAllDrugsGetPrice(){
+        return  this.iDrugRepository.findAllDrugsGetPrice();
+    }
+
+    @Override
+    public List<ListDrugDTO> findAllDrugsOfListGetPrice(String id) {
+        return this.iDrugRepository.findAllDrugsOfListGetPrice(id);
+    }
 }

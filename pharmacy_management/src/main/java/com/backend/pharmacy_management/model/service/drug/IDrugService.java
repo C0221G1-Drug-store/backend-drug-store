@@ -21,4 +21,6 @@ public interface IDrugService extends IGeneralService<Drug> {
     DrugImageDetail saveDrugImage(DrugImageDetail drugImageDetail);
 
     List<Drug> findAll();
+    public List<ListDrugDTO> findAllDrugsGetPrice();
+    List<ListDrugDTO> findAllDrugsOfListGetPrice(String id);
 }
