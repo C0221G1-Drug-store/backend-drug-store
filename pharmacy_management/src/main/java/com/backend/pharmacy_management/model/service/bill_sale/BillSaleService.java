@@ -1,4 +1,6 @@
+
 package com.backend.pharmacy_management.model.service.bill_sale;
+
 
 import com.backend.pharmacy_management.model.entity.bill_sale.BillSale;
 import com.backend.pharmacy_management.model.repository.bill_sale.IBillSaleRepository;
@@ -23,4 +25,10 @@ public class BillSaleService implements IBillSaleService {
     public void remove(Long id) {
         iBillSaleRepository.deleteById(id);
     }
+
+    @Override
+    public BillSale findBIll() {
+        return this.iBillSaleRepository.findBIllNew();
+    }
 }
+

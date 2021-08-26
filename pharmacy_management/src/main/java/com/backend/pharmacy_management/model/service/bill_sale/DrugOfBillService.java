@@ -1,3 +1,4 @@
+
 package com.backend.pharmacy_management.model.service.bill_sale;
 
 import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
@@ -26,5 +27,10 @@ public class DrugOfBillService implements IDrugOfBillService {
     @Override
     public void remove(Long id) {
         iDrugOfBillRepository.deleteById(id);
+    }
+
+    @Override
+    public List<DrugOfBill> findAllDrugOfBill(Long id) {
+        return iDrugOfBillRepository.findAllDrugOfBill(id);
     }
 }

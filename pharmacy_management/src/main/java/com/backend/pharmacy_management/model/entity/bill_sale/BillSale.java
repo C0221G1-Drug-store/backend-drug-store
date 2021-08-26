@@ -1,15 +1,19 @@
 package com.backend.pharmacy_management.model.entity.bill_sale;
+
 import com.backend.pharmacy_management.model.entity.customer.Customer;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "bill_sale")

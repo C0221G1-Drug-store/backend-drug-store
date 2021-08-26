@@ -1,16 +1,16 @@
 package com.backend.pharmacy_management.model.entity.indicative_prescription;
-
-import com.backend.pharmacy_management.model.entity.bill_sale.DrugOfBill;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "prescription")
@@ -18,16 +18,16 @@ public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long prescriptionId;
+    @Column(unique = true)
     private String prescriptionCode;
     private String prescriptionName;
     private String symptom;
     private String object;
     private int numberOfDay;
     private  String note;
-    @JsonManagedReference(value = "prescription-prescription_indicative")
+    private  boolean flag;
+    @JsonBackReference
     @OneToMany(mappedBy = "prescription")
-    private List<PrescriptionIndicative> prescriptionIndicatives;
-    @JsonManagedReference(value = "drug_of_bill-prescription_indicative")
-    @OneToMany(mappedBy = "prescription")
-    private List<DrugOfBill> drugOfBills;
+    private List<Indicative> indicatives;
+
 }

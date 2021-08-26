@@ -1,13 +1,26 @@
 package com.backend.pharmacy_management.model.service.drug;
 
+import com.backend.pharmacy_management.model.dto.ListDrugDTO;
 import com.backend.pharmacy_management.model.entity.drug.Drug;
+import com.backend.pharmacy_management.model.dto.DrugDTO;
+import com.backend.pharmacy_management.model.entity.drug.DrugImageDetail;
+import com.backend.pharmacy_management.model.service.IGeneralService;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface IDrugService  {
-    Optional<Drug> findById(Long id);
-    List<Drug> findAllNormal();
-    void save(Drug drug);
-    void remove(Long id);
+public interface IDrugService extends IGeneralService<Drug> {
+    Drug saveDrug(Drug drug);
+//    void saveDrug(Drug drug);
+    List<ListDrugDTO> findAllDrugsPagination(int index);
+    List<ListDrugDTO> findAllDrugsSearch(String field, String sign, String input, String index);
+    List<ListDrugDTO> findAllDrugsSearchNotPagination(String field, String sign, String input);
+    List<ListDrugDTO> findAllDrugsNotPagination();
+    void deleteDrugById(Long id);
+    DrugDTO findDrugById(Long id);
+//    void saveDrugImage(DrugImageDetail drugImageDetail);
+    DrugImageDetail saveDrugImage(DrugImageDetail drugImageDetail);
+
+    List<Drug> findAll();
+    public List<ListDrugDTO> findAllDrugsGetPrice();
+    List<ListDrugDTO> findAllDrugsOfListGetPrice(String id);
 }
