@@ -9,4 +9,5 @@ public interface IDrugOfBillService {
     List<DrugOfBill> findAllDrugOfBillByBillSaleId(String id);
     void save(DrugOfBill drugOfBill);
     void remove(Long id);
+    List<DrugOfBill> findAllDrugOfBill(Long id);
 }

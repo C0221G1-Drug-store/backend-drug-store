@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface IIndicativeRepository extends JpaRepository<Indicative, Long> {
     @Query(value="select * from indicative where prescription_id=?",nativeQuery = true)
     Iterable<Indicative> findAllIndicative(Long id);
+
+
 }

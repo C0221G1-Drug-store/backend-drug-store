@@ -141,5 +141,28 @@ public class DrugController {
         }
         return new ResponseEntity<DrugDTO>(drugDTO, HttpStatus.OK);
     }
+
+    //Edit-fixbug
+    @GetMapping("/get-price-drug")
+    public ResponseEntity<List<ListDrugDTO>> findAllDrugsGetPrice() {
+        List<ListDrugDTO> drugs = drugService.findAllDrugsGetPrice();
+        if (drugs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(drugs, HttpStatus.OK);
+
+    }
+
+        @GetMapping("/list-drug-price/{id}")
+    public ResponseEntity<List<ListDrugDTO>> findAllDrugOfListGetPrice(@PathVariable String id) {
+        List<ListDrugDTO> drugs = drugService.findAllDrugsOfListGetPrice(id);
+        if (drugs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(drugs, HttpStatus.OK);
+
+    }
+
+
 }
   

@@ -22,13 +22,83 @@ public class CustomerService implements ICustomerService{
         return iCustomerRepository.findAll();
     }
 
-    @Override
-    public void save(Customer customer) {
-        iCustomerRepository.save(customer);
-    }
 
     @Override
     public void remove(Long id) {
         iCustomerRepository.deleteById(id);
+    }
+
+
+
+
+
+    @Override
+    public List<Customer> getAllCustomer() {
+        return this.iCustomerRepository.getAllCustomer();
+    }
+
+    @Override
+    public List<Customer> getCustomerPagination(int index) {
+        return this.iCustomerRepository.getCustomerPagination(index);
+    }
+
+    @Override
+    public Customer findCustomerById(Long id) {
+        return this.iCustomerRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(Customer customer) {
+        this.iCustomerRepository.save(customer);
+    }
+
+    @Override
+    public List<Customer> findCustomerBySearch( String keyWord) {
+        return this.iCustomerRepository.findCustomerBySearch(keyWord);
+    }
+
+    @Override
+    public List<Customer> findCustomerByCustomerCode(int index,String keyWord) {
+        return this.iCustomerRepository.findCustomerByCustomerCode(index,keyWord);
+    }
+
+    @Override
+    public List<Customer> findCustomerByCustomerGroup(int index,String keyWord) {
+        return this.iCustomerRepository.findCustomerByCustomerGroup(index,keyWord);
+    }
+
+    @Override
+    public List<Customer> findCustomerByCustomerName(int index,String keyWord) {
+        return this.iCustomerRepository.findCustomerByCustomerName(index,keyWord);
+    }
+
+    @Override
+    public List<Customer> findCustomerByCustomerAddress(int index,String keyWord) {
+        return this.iCustomerRepository.findCustomerByCustomerAddress(index,keyWord);
+    }
+
+    @Override
+    public List<Customer> findCustomerByCustomerPhone(int index,String keyWord) {
+        return this.iCustomerRepository.findCustomerByCustomerPhone(index,keyWord);
+    }
+
+    @Override
+    public Integer findNumberOfRecordCustomerCode(String keyWord) {
+        return this.iCustomerRepository.findNumberOfRecordCustomerCode(keyWord);
+    }
+
+    @Override
+    public Integer findNumberOfRecordCustomerName(String keyWord) {
+        return this.iCustomerRepository.findNumberOfRecordCustomerName(keyWord);
+    }
+
+    @Override
+    public Integer findNumberOfRecordCustomerAddress(String keyWord) {
+        return this.iCustomerRepository.findNumberOfRecordCustomerAddress(keyWord);
+    }
+
+    @Override
+    public Integer findNumberOfRecordCustomerPhone(String keyWord) {
+        return this.iCustomerRepository.findNumberOfRecordCustomerPhone(keyWord);
     }
 }

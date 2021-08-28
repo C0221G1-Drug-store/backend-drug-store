@@ -22,7 +22,7 @@ public interface IDrugRepository extends JpaRepository<Drug, Long> {
             "from drug d \n" +
             "left join drug_group dg on d.drug_group_id = dg.drug_group_id\n" +
             "left join import_bill_drug ibd on d.drug_id = ibd.drug_id\n" +
-            "where d.flag = 1 " +
+            "where d.flag = 1 and dg.flag = 1 " +
             "group by d.drug_id order by d.drug_name limit ?1,5;", nativeQuery = true)
     List<ListDrugDTO> findAllDrugsPagination(int index);
     @Query(value = "call drug_search_patination (:field,:sign,:input,:index)", nativeQuery = true)
@@ -39,7 +39,7 @@ public interface IDrugRepository extends JpaRepository<Drug, Long> {
             "from drug d \n" +
             "left join drug_group dg on d.drug_group_id = dg.drug_group_id\n" +
             "left join import_bill_drug ibd on d.drug_id = ibd.drug_id\n" +
-            "where d.flag = 1 " +
+            "where d.flag = 1 and dg.flag = 1 " +
             "group by d.drug_id order by d.drug_name;", nativeQuery = true)
     List<ListDrugDTO> findAllDrugsNotPagination();
 
@@ -64,5 +64,51 @@ public interface IDrugRepository extends JpaRepository<Drug, Long> {
                     String conversionUnit,Integer conversionRate,Double wholesaleProfitRate,
                     Double retailProfitRate,String drugFaculty,String manufacturer,String origin,
                     String note,Boolean flag,String drugSideEffect);
+
+
+    //Đức
+    @Query(value = "select ((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.wholesale_profit_rate/100))*ibd.import_amount))/(sum(ibd.import_amount))) as wholesalePrice,\n" +
+            "((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.retail_profit_rate/100))*ibd.import_amount)/(sum(ibd.import_amount)))/d.conversion_rate) as retailPrice,\n" +
+            " (sum(ibd.discount_rate*ibd.import_amount))/(sum(ibd.import_amount)) as discountRate, (sum(ibd.vat*ibd.import_amount))/(sum(ibd.import_amount)) as vat, \n" +
+            " (sum(ibd.import_price*ibd.import_amount))/(sum(ibd.import_amount)) as importPrice, d.drug_id as drugId, d.drug_code as drugCode, d.drug_name as drugName, d.active_element as activeElement, (sum(ibd.import_amount*ibd.import_amount))/(sum(ibd.import_amount)) as drugAmount, d.unit as unit, d.conversion_unit as conversionUnit, d.conversion_rate as conversionRate,\n" +
+            "d.wholesale_profit_rate as wholesaleProfitRate, d.retail_profit_rate as retailProfitRate, d.drug_faculty as drugFaculty, d.manufacturer as manufacturer, d.origin as origin,\n" +
+            "d.note as note, d.drug_side_effect as drugSideEffect " +
+            "from drug d \n" +
+            "left join drug_group dg on d.drug_group_id = dg.drug_group_id\n" +
+            "left join import_bill_drug ibd on d.drug_id = ibd.drug_id\n" +
+            "where d.flag = 1 " +
+            "group by d.drug_id order by d.drug_name;", nativeQuery = true)
+    List<ListDrugDTO> findAllDrugsGetPrice();
+
+    @Query(value = "select ((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.wholesale_profit_rate/100))*ibd.import_amount))/(sum(ibd.import_amount))) as wholesalePrice,\n" +
+            "            ((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.retail_profit_rate/100))*ibd.import_amount)/(sum(ibd.import_amount)))/d.conversion_rate) as retailPrice,\n" +
+            "            (sum(ibd.discount_rate*ibd.import_amount))/(sum(ibd.import_amount)) as discountRate, (sum(ibd.vat*ibd.import_amount))/(sum(ibd.import_amount)) as vat,\n" +
+            "            (sum(ibd.import_price*ibd.import_amount))/(sum(ibd.import_amount)) as importPrice, d.drug_id as drugId, d.drug_code as drugCode, d.drug_name as drugName, d.active_element as activeElement, (sum(ibd.import_amount*ibd.import_amount))/(sum(ibd.import_amount)) as drugAmount, d.unit as unit, d.conversion_unit as conversionUnit, dob.quantity  as conversionRate,\n" +
+            "            d.wholesale_profit_rate as wholesaleProfitRate, d.retail_profit_rate as retailProfitRate, d.drug_faculty as drugFaculty, d.manufacturer as manufacturer, d.origin as origin,\n" +
+            "            d.note as note, d.drug_side_effect as drugSideEffect\n" +
+            "            from drug d\n" +
+            "            left join drug_group dg on d.drug_group_id = dg.drug_group_id\n" +
+            "            left join import_bill_drug ibd on d.drug_id = ibd.drug_id\n" +
+            "            left join drug_of_bill dob on d.drug_id = dob.drug_id\n" +
+            "            left join bill_sale bs on bs.bill_sale_id = dob.bill_sale_id\n" +
+            "\t\t\twhere concat(bs.bill_sale_code, bs.bill_sale_id) = ?1\n" +
+            "            group by dob.drug_of_bill_id;",nativeQuery = true)
+    List<ListDrugDTO> findAllDrugsOfListGetPrice(String id);
+
+
+    @Query(value = "select ((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.wholesale_profit_rate/100))*ibd.import_amount))/(sum(ibd.import_amount))) as wholesalePrice,\n" +
+            "            ((sum((ibd.import_price*(1-ibd.discount_rate/100)*(1+ibd.vat/100)*(1+d.retail_profit_rate/100))*ibd.import_amount)/(sum(ibd.import_amount)))/d.conversion_rate) as retailPrice,\n" +
+            "             (sum(ibd.discount_rate*ibd.import_amount))/(sum(ibd.import_amount)) as discountRate, (sum(ibd.vat*ibd.import_amount))/(sum(ibd.import_amount)) as vat,\n" +
+            "             (sum(ibd.import_price*ibd.import_amount))/(sum(ibd.import_amount)) as importPrice, d.drug_id as drugId, d.drug_code as drugCode, d.drug_name as drugName, d.active_element as activeElement, (sum(ibd.import_amount*ibd.import_amount))/(sum(ibd.import_amount)) as drugAmount, d.unit as unit, d.conversion_unit as conversionUnit, d.conversion_rate as conversionRate,\n" +
+            "            d.wholesale_profit_rate as wholesaleProfitRate, d.retail_profit_rate as retailProfitRate, d.drug_faculty as drugFaculty, d.manufacturer as manufacturer, d.origin as origin,\n" +
+            "            d.note as note, d.drug_side_effect as drugSideEffect" +
+            "            from drug d \n" +
+            "            left join drug_group dg on d.drug_group_id = dg.drug_group_id\n" +
+            "            left join import_bill_drug ibd on d.drug_id = ibd.drug_id\n" +
+            "            where d.drug_id = ? \n" +
+            "            group by d.drug_id order by d.drug_name;",nativeQuery = true)
+    ListDrugDTO findDrugByIdGetPrice(String id);
+
+
 
 }

@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PrescriptionServiceImpl implements IPrescriptionService {
     @Autowired
@@ -51,6 +53,14 @@ public class PrescriptionServiceImpl implements IPrescriptionService {
     public Prescription getPrescriptionCode(String pres) {
         return this.prescriptionRepository.getPrescriptionCode(pres);
 
+    }
+
+    @Override
+    public List<Prescription> search(String fieldSearch, String valueSearch) {
+        if (fieldSearch.equals("name") ){
+            return prescriptionRepository.findpres("%" + valueSearch + "%");
+        }
+        return prescriptionRepository.findBySign("%" + valueSearch + "%");
     }
 
     @Override

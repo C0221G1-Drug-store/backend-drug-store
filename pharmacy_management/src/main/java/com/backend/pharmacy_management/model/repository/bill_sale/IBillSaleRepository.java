@@ -11,4 +11,10 @@ public interface IBillSaleRepository extends JpaRepository<BillSale,Long> {
     @Query(value = "select * from bill_sale where concat(bill_sale_code, bill_sale_id) = ?", nativeQuery = true)
     BillSale findBillSaleByIdCode(String id);
 
+
+    //TamLN
+    @Query(value = "select * from bill_sale \n" +
+            "where bill_sale_id =  (select max(bill_sale_id) as maxId \n" +
+            "from bill_sale)", nativeQuery = true)
+    BillSale findBIllNew();
 }

@@ -6,4 +6,6 @@ public interface IBillSaleService {
     BillSale findBillSaleByIdCode(String id);
     void save(BillSale billSale);
     void remove(Long id);
+
+    BillSale findBIll();
 }

@@ -31,7 +31,7 @@ public class ImportBillDrugDto {
     LocalDate expiry;
     @NotNull
     Integer vat;
-    Boolean flag;
+    boolean flag = true;
     @NotNull
     ImportBill importBill;
     @NotNull

@@ -25,5 +25,10 @@ public class BillSaleService implements IBillSaleService {
     public void remove(Long id) {
         iBillSaleRepository.deleteById(id);
     }
+
+    @Override
+    public BillSale findBIll() {
+        return this.iBillSaleRepository.findBIllNew();
+    }
 }
 

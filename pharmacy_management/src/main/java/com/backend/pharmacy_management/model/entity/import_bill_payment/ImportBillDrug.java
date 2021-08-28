@@ -28,7 +28,7 @@ public class ImportBillDrug {
     Integer lotNumber;
     LocalDate expiry;
     Integer vat;
-    Boolean flag = true;
+    boolean flag = true;
     @ManyToOne
     @JoinColumn(name = "import_bill_id")
     ImportBill importBill;

@@ -16,11 +16,12 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name="customer_group")
 public class CustomerGroup {
-    @Id
+     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
+    private Long customerGroupId;
+    private String customerGroupName;
+
     @OneToMany(mappedBy = "customerGroup")
-    @JsonBackReference(value = "customer-customer_group")
+    @JsonBackReference
     private List<Customer> customers;
 }

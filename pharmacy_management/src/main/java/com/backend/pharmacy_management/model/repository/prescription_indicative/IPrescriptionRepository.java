@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface IPrescriptionRepository extends JpaRepository<Prescription,Long> {
     @Query(value="select *" +
@@ -20,4 +22,12 @@ public interface IPrescriptionRepository extends JpaRepository<Prescription,Long
 
     @Query(value="select * from prescription where prescription_code=?",nativeQuery = true)
     Prescription getPrescriptionCode(String pres);
+
+    @Query(value = "select * from prescription where prescription_id = ?;", nativeQuery = true)
+    Prescription findPresById(Long id);
+    @Query(value = "select * from prescription where prescription_name like ?", nativeQuery = true)
+    List<Prescription> findpres(String valueSearch);
+
+    @Query(value = "select * from prescription where symptom like ?", nativeQuery = true)
+    List<Prescription> findBySign(String s);
 }

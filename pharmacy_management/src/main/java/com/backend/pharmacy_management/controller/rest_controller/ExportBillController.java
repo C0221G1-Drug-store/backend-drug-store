@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("http://localhost:4200/")
@@ -44,6 +45,11 @@ public class ExportBillController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @GetMapping(value = "/manufacturer/{manufacturerId}")
+    public ResponseEntity<Optional<Manufacturer>> getManufacturerByID(@PathVariable("manufacturerId") Long id){
+        return new ResponseEntity<>(this.manufacturerService.findByIdM(id),HttpStatus.OK);
+    }
 
 
     @GetMapping(value = "/export-bill-type")

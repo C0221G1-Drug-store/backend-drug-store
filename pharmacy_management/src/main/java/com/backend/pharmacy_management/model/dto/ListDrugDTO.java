@@ -40,4 +40,5 @@ public interface ListDrugDTO {
     String getVat();
     String getWholesalePrice();
     String getRetailPrice();
+    String getDrugImageDetails();
 }
