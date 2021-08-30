@@ -2,14 +2,15 @@ package com.backend.pharmacy_management.model.entity.import_bill_payment;
 
 import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.export_bill.ExportBillDetail;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
-import org.hibernate.Hibernate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Objects;
+import java.time.LocalDate;
+
 
 @Entity
 @Getter
@@ -25,13 +26,16 @@ public class ImportBillDrug {
     Double importPrice;
     Integer discountRate;
     Integer lotNumber;
-    Date expiry;
+    LocalDate expiry;
     Integer vat;
-    Boolean flag;
+    boolean flag = true;
     @ManyToOne
     @JoinColumn(name = "import_bill_id")
     ImportBill importBill;
     @ManyToOne
     @JoinColumn(name = "drug_id")
     Drug drug;
+    @OneToOne(mappedBy = "importBillDrug")
+    @JsonIgnore
+    private ExportBillDetail exportBillDetail;
 }

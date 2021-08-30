@@ -3,13 +3,13 @@ package com.backend.pharmacy_management.model.entity.export_bill;
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
-import org.hibernate.Hibernate;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -22,9 +22,9 @@ public class ExportBill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long exportBillId;
     private String exportBillCode;
-    private String exportBillIdDate;
+    private String exportBillDate;
     private String exportBillReason;
-    private String exportBillIdAddress;
+    private String exportBillAddress;
     private boolean flag;
     @ManyToOne
     @JoinColumn(name = "export_bill_type_id")

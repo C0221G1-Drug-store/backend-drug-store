@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200/", maxAge = 3600)
 @RequestMapping("/api/payments")
 public class PaymentRestController {
     private final IPaymentService paymentService;
@@ -25,7 +25,7 @@ public class PaymentRestController {
     public ResponseEntity<List<Payment>> getAll() {
         List<Payment> payments = paymentService.findAllNormal();
         if (payments.isEmpty()) {
-            return new ResponseEntity<List<Payment>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }
@@ -41,7 +41,7 @@ public class PaymentRestController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Payment> getPayments(@PathVariable Long id) {
         Optional<Payment> payment = paymentService.findById(id);
-        return new ResponseEntity<>(payment.get(), HttpStatus.OK);
+        return payment.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
     @PutMapping(value = "/{id}")
@@ -51,4 +51,5 @@ public class PaymentRestController {
         this.paymentService.save(payment);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }

@@ -1,3 +1,4 @@
+
 package com.backend.pharmacy_management.model.service.import_bill;
 
 import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
@@ -18,7 +19,7 @@ public class ImportBillDrugService implements IImportBillDrugService{
 
     @Override
     public Page<ImportBillDrug> findAllWithKeyWord(Pageable pageable, String keyword) {
-        return null;
+        return iImportBillDrugRepository.findAll(pageable);
     }
 
     @Override
@@ -28,7 +29,7 @@ public class ImportBillDrugService implements IImportBillDrugService{
 
     @Override
     public List<ImportBillDrug> findAllNormal() {
-        return null;
+        return iImportBillDrugRepository.findAll();
     }
 
     @Override
@@ -38,6 +39,28 @@ public class ImportBillDrugService implements IImportBillDrugService{
 
     @Override
     public void remove(Long id) {
-
+        iImportBillDrugRepository.deleteById(id);
     }
+    @Override
+    public List<ImportBillDrug> findAllImportBill() {
+        return this.iImportBillDrugRepository.getAll();
+    }
+
+    @Override
+    public ImportBillDrug findDrugByid(Long id) {
+        return this.iImportBillDrugRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<ImportBillDrug> getAllImportBillDrugByManufacuterId(Long id) {
+        return this.iImportBillDrugRepository.getAllImportBillDrugByManufacuterId(id);
+    }
+
+    @Override
+    public void updateImportBillDrug(Long id) {
+        ImportBillDrug importBillDrug = this.findDrugByid(id);
+        importBillDrug.setFlag(false);
+        this.iImportBillDrugRepository.save(importBillDrug);
+    }
+
 }

@@ -1,12 +1,12 @@
 package com.backend.pharmacy_management.model.entity.export_bill;
 
-import com.backend.pharmacy_management.model.entity.drug.Drug;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.*;
-import org.hibernate.Hibernate;
+import com.backend.pharmacy_management.model.entity.import_bill_payment.ImportBillDrug;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -21,8 +21,9 @@ public class ExportBillDetail {
     @ManyToOne
     @JoinColumn(name = "export_bill_id")
     private ExportBill exportBill;
-    @ManyToOne
-    @JoinColumn(name = "drug_id")
-    private Drug drug;
+
+    @OneToOne
+    @JoinColumn(name = "import_bill_drug_id")
+    private ImportBillDrug importBillDrug;
 
 }

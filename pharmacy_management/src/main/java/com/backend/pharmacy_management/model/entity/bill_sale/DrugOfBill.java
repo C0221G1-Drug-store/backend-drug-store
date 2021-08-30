@@ -2,12 +2,13 @@ package com.backend.pharmacy_management.model.entity.bill_sale;
 
 import com.backend.pharmacy_management.model.entity.drug.Drug;
 import com.backend.pharmacy_management.model.entity.indicative_prescription.Prescription;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.*;
-import org.hibernate.Hibernate;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Objects;
+
 
 @Entity
 @Getter
@@ -28,6 +29,6 @@ public class DrugOfBill {
     private BillSale billSale;
     private int quantity;
     @ManyToOne
-    @JoinColumn(name = "prescription_id", nullable = false)
+    @JoinColumn(name = "prescription_id")
     private Prescription prescription;
 }
