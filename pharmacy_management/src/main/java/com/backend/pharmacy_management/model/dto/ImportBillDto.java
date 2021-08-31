@@ -1,31 +1,33 @@
+
 package com.backend.pharmacy_management.model.dto;
 
 import com.backend.pharmacy_management.model.entity.employee.Employee;
 import com.backend.pharmacy_management.model.entity.import_bill_payment.Payment;
 import com.backend.pharmacy_management.model.entity.manufacturer.Manufacturer;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImportBillDto {
     private Long importBillId;
+    @NotNull
+    @Pattern(regexp = "^HD[\\w]+",message = "import system code must start with HD ")
     private String importSystemCode;
+    @NotNull
     private String accountingVoucher;
-    private LocalDateTime invoiceDate;
+    @NotNull
+    private String invoiceDate;
     private Boolean flag;
-    @JsonBackReference(value = "payment-import_bill")
+    @NotNull
     private  Payment payment;
-    @JsonBackReference(value = "manufacturer-import_bill")
+    @NotNull
     private Manufacturer manufacturer;
-    @JsonBackReference(value = "employee-import_bill")
+    @NotNull
     private Employee employee;
+
 }

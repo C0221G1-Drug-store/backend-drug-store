@@ -1,17 +1,15 @@
 package com.backend.pharmacy_management.model.entity.drug;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="drug_image_detail")
@@ -21,11 +19,10 @@ public class DrugImageDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "drug_image_detail_id")
     private Long drugImageDetailId;
-    @Column(name = "drug_image_detail_url", columnDefinition = "BLOB")
+    @Column(name = "drug_image_detail_url")
     private String drugImageDetailUrl;
-    private Boolean flag;
     @ManyToOne
-    @JoinColumn(name = "drug_id", referencedColumnName = "drug_id")
-    @JsonBackReference(value = "drug_image_detail-drug")
+    @JoinColumn(name = "drug_id")
     private Drug drug;
+
 }
